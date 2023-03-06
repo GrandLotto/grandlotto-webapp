@@ -1,0 +1,25 @@
+import React from "react";
+import AddBankModal from "./AddBankModal";
+import "./alert.scss";
+import AlertModal from "./AlertModal";
+import ForgotPasswordModal from "./ForgotPasswordModal";
+import LoginModal from "./LoginModal";
+import LogoutModal from "./LogoutModal";
+import NotiicationModal from "./NotiicationModal";
+import RegisterModal from "./RegisterModal";
+
+const AllModal = () => {
+  return (
+    <>
+      <AlertModal />
+      <LogoutModal />
+      <LoginModal />
+      <RegisterModal />
+      <ForgotPasswordModal />
+      <AddBankModal />
+      <NotiicationModal />
+    </>
+  );
+};
+
+export default AllModal;

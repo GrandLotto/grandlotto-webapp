@@ -1,0 +1,246 @@
+@import "../../assets/css/colors.scss";
+
+.paymentGateWay {
+  width: 100%;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+
+.paymentGateWay h5 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #3d3c3c;
+  margin-bottom: 22px;
+}
+
+.paymentGateWayGrid {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 50px;
+}
+
+.paymentGateWayGridItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #c0bebe;
+  // border: 1px solid #03802f;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 400ms ease;
+}
+
+.paymentGateWayGridItem:hover {
+  background: #e9efec;
+  border: 1px solid #e2e2e2;
+}
+
+.paymentGateWayGridItem.selectedGateway {
+  background: #ffffff;
+  border: 2px solid #03802f;
+}
+
+.paymentGateWayGridItem.selectedGateway .selectedIcon {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+}
+
+.paymentGateWayGridItem.selectedGateway .selectedIcon i {
+  font-size: 19px;
+  color: #03802f;
+}
+
+.paymentGateWayGridItem img {
+  width: 50%;
+}
+
+.paymentGateWayGridItem h6 {
+  margin-top: 15px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #6b6969;
+  margin-bottom: 0px;
+}
+
+.showAccount {
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.showAccount i {
+  background: $primaryLightLight;
+  color: $primary;
+  padding: 25px;
+  border-radius: 50%;
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.showAccount h5 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: center;
+  color: #282828;
+  margin-bottom: 20px;
+}
+
+.showAccountBox {
+  display: inline-block;
+  margin-top: 30px;
+  border: 1.9px solid $primary;
+  padding: 30px 100px;
+  border-radius: 7px;
+}
+
+.showAccountBox h6 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 18px;
+  color: #282828;
+}
+
+.showAccountBox h3 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 30px;
+  color: $primary;
+  margin: 20px 0px 30px;
+}
+
+.showAccountBox p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 10px;
+  color: #282828;
+}
+
+@media screen and (max-width: 900px) {
+  // .paymentGateWayGrid {
+  //   flex-wrap: wrap;
+  // }
+
+  .paymentGateWayGrid {
+    column-gap: 20px;
+  }
+
+  .paymentGateWayGridItem {
+    padding: 15px;
+  }
+
+  .paymentGateWayGridItem.selectedGateway .selectedIcon {
+    top: 5px;
+  }
+
+  .paymentGateWayGridItem.selectedGateway .selectedIcon i {
+    font-size: 17px;
+  }
+
+  .paymentGateWayGridItem img {
+    width: 50%;
+  }
+
+  .paymentGateWayGridItem h6 {
+    font-size: 13px;
+    line-height: 17px;
+    margin-top: 9px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  // .paymentGateWayGrid {
+  //   flex-wrap: wrap;
+  // }
+
+  .grandlotto_card.payment_card {
+    padding: 10px 0px;
+  }
+
+  .paymentGateWay {
+    padding-left: 10px;
+    margin-top: 20px;
+  }
+
+  .paymentGateWay h5 {
+    padding-left: 10px;
+    font-size: 17px;
+  }
+
+  .paymentGateWayGrid {
+    overflow-x: scroll;
+    padding: 10px 50px 10px 0px;
+  }
+
+  .paymentGateWayGrid::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .paymentGateWayGridItem {
+    padding: 20px 50px;
+    height: 110px;
+  }
+
+  .paymentGateWayGridItem img {
+    width: 100px;
+  }
+
+  .paymentGateWayGridItem h6 {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 17px;
+  }
+
+  .grandlotto_card.payment_card .grandlotto_form {
+    padding: 10px 20px;
+  }
+
+  .showAccount i {
+    font-size: 30px;
+  }
+
+  .showAccount h5 {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .showAccountBox {
+    width: 100%;
+    display: block;
+    padding: 30px 10px;
+  }
+
+  .showAccountBox h6 {
+    font-size: 17px;
+    line-height: 21px;
+  }
+
+  .showAccountBox h3 {
+    font-size: 32px;
+    line-height: 30px;
+  }
+
+  .showAccountBox p {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .showAccount .grandLottoButton.cardButton {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+}
