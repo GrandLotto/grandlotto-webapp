@@ -3,10 +3,13 @@ import HomeWalletOverview from "../components/dashboard/HomeWalletOverview";
 import ProfileComplete from "../components/dashboard/ProfileComplete";
 import "../components/dashboard/dashboard.scss";
 import Transactions from "../components/transaction/Transactions";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import promo1 from "../assets/images/promo1.png";
 
 const Dashboard = () => {
+  const navigation = useNavigate();
+
   useEffect(() => {
     return () => {
       document.querySelector(".content-body") &&
@@ -50,7 +53,10 @@ const Dashboard = () => {
             </h5>
             <p>Extend your profile information to enable withdrawal of funds</p>
             <div>
-              <button className="grandLottoButton grandLottoButtonLightGreen">
+              <button
+                className="grandLottoButton grandLottoButtonLightGreen"
+                onClick={() => navigation("/account/profile")}
+              >
                 Edit profile
               </button>
             </div>

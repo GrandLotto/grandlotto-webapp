@@ -41,12 +41,17 @@
 //   border-top-right-radius: 5px;
 // }
 
+.smallLottoNumber,
 .selectDrawGame {
   // margin-bottom: 30px;
   display: none;
 }
 
 .threeColLeftWrapperClose {
+  display: none;
+}
+
+.buttonPlayLottoSmall {
   display: none;
 }
 
@@ -474,6 +479,7 @@
   font-size: 15px;
   line-height: 24px;
   color: #282828;
+  margin-bottom: 0px;
 }
 
 .allBetSlipItemHeader i {
@@ -748,9 +754,62 @@
     width: 100%;
   }
 
+  .smallLottoNumber {
+    display: block;
+    margin-top: 0px !important;
+    margin-bottom: 39px !important;
+  }
+
+  .threeColRightSelectedPicks {
+    background: lighten($color: $primaryDark, $amount: 6%);
+    margin-top: 0px !important;
+  }
+
+  .threeColRightSelectedPicks i {
+    background: lighten($color: $primaryDark, $amount: 6%);
+    color: #fff !important;
+  }
+
+  .threeColRightSelectedPicksBoxes {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr)) !important;
+    gap: 10px;
+  }
+
+  .threeColRightSelectedPicksBox {
+    width: 100%;
+  }
+
   .main_center_wrapper {
     border-radius: 0px;
     background: transparent !important;
+  }
+
+  .buttonPlayLottoFirst {
+    display: none !important;
+  }
+
+  .buttonPlayLottoSmall {
+    display: block !important;
+  }
+
+  .buttonPlayLottoSmall .symbolInput {
+    width: 100%;
+    background: transparent !important;
+    color: #fff !important;
+  }
+
+  .buttonPlayLottoSmall .symbolInput input {
+    color: #fff !important;
+  }
+
+  .buttonPlayLottoSmallStake {
+    color: #fff;
+  }
+
+  .buttonPlayLottoSmallStakeRight {
+    text-align: right;
   }
 }
 
@@ -759,11 +818,71 @@
     width: 100%;
     height: 100vh !important;
     overflow-y: scroll !important;
-    padding-bottom: 300px !important;
+    padding-bottom: 200px !important;
     margin-top: 0px;
     padding-top: 70px !important;
   }
+
+  .smallLottoNumber {
+    position: fixed;
+    top: 70px;
+    left: 0px;
+    width: 100%;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    z-index: 200;
+  }
+
+  .buttonPlayLotto {
+    margin-top: 10px !important;
+  }
+
+  // .buttonPlayLotto {
+  //   position: fixed;
+  //   bottom: 62px;
+  //   left: 0px;
+  //   width: 100%;
+  //   margin-top: 0px !important;
+  //   margin-bottom: 0px !important;
+  //   z-index: 200;
+  //   background: $primaryDark;
+  // }
+
+  // .buttonPlayLottoSmall {
+  //   padding: 10px 10px 15px;
+  // }
+
+  .main_center_wrapper_contentHeader {
+    margin-top: 65px;
+  }
+
+  .noBetSlip {
+    background: transparent !important;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    margin-top: -100px;
+    padding: 0px;
+    margin-left: -20px;
+  }
+
+  .noBetSlip p {
+    font-size: 18px !important;
+    color: #fff;
+  }
 }
+
+@media screen and (max-width: 590px) {
+  .smallLottoNumber {
+    top: 60px;
+  }
+}
+
 @media screen and (max-width: 550px) {
   .main_center_wrapper {
     padding: 0px 10px 20px 15px;
@@ -789,5 +908,27 @@
 
   .main_center_wrapper_content_top {
     margin-top: 20px !important;
+  }
+
+  .footer {
+    margin-top: 0px;
+    margin-bottom: 150px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .buttonPlayLottoSmallButton {
+    position: fixed;
+    bottom: 62px;
+    right: 7px;
+    // width: 100%;
+    // margin-top: 0px !important;
+    // margin-bottom: 0px !important;
+    z-index: 200;
+    // background: $primaryDark;
+  }
+
+  .buttonPlayLottoSmallButton div {
+    padding-bottom: 10px;
   }
 }

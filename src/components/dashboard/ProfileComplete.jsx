@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProfileComplete = () => {
+  const navigation = useNavigate();
+
   return (
     <div className="hideOnMobile">
       <div className="profileComplete">
@@ -9,7 +12,10 @@ const ProfileComplete = () => {
             <h5>Complete your profile</h5>
             <p>Extend your profile information to enable withdrawal of funds</p>
             <div>
-              <button className="grandLottoButton grandLottoButtonLightGreen">
+              <button
+                className="grandLottoButton grandLottoButtonLightGreen"
+                onClick={() => navigation("/account/profile")}
+              >
                 Edit profile
               </button>
             </div>

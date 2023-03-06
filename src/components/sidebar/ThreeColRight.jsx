@@ -3,6 +3,8 @@ import CurrencyInput from "react-currency-input-field";
 import { useDispatch, useSelector } from "react-redux";
 import { daysToExpire } from "../../global/customFunctions";
 import { setSelectedCoupons } from "../../store/betSlice/betSlice";
+import BetSlipsBox from "../blocks/BetSlipsBox";
+import LottoNumberBox from "../blocks/LottoNumberBox";
 import TopSearch from "../blocks/TopSearch";
 
 const ThreeColRight = () => {
@@ -66,55 +68,7 @@ const ThreeColRight = () => {
         <div className="headerTopMiddle">
           <TopSearch />
         </div>
-        <div className="threeColRightSelectedPicks">
-          <div className="d-flex justify-content-between align-items-center">
-            <div className="threeColRightSelectedPicksBoxes">
-              <div
-                className={`threeColRightSelectedPicksBox ${
-                  selectedCoupons?.[0] ? "boxSelected" : ""
-                }`}
-              >
-                {selectedCoupons?.[0]}
-              </div>
-              <div
-                className={`threeColRightSelectedPicksBox ${
-                  selectedCoupons?.[1] ? "boxSelected" : ""
-                }`}
-              >
-                {selectedCoupons?.[1]}
-              </div>
-              <div
-                className={`threeColRightSelectedPicksBox ${
-                  selectedCoupons?.[2] ? "boxSelected" : ""
-                }`}
-              >
-                {selectedCoupons?.[2]}
-              </div>
-              <div
-                className={`threeColRightSelectedPicksBox ${
-                  selectedCoupons?.[3] ? "boxSelected" : ""
-                }`}
-              >
-                {selectedCoupons?.[3]}
-              </div>
-              <div
-                className={`threeColRightSelectedPicksBox ${
-                  selectedCoupons?.[4] ? "boxSelected" : ""
-                }`}
-              >
-                {selectedCoupons?.[4]}
-              </div>
-              <div
-                className={`threeColRightSelectedPicksBox ${
-                  selectedCoupons?.[5] ? "boxSelected" : ""
-                }`}
-              >
-                {selectedCoupons?.[5]}
-              </div>
-            </div>
-            <i className="bx bx-trash" onClick={() => clearallCoupons()}></i>
-          </div>
-        </div>
+        <LottoNumberBox />
 
         <div className="countDownExpiry" id="countDownExpiry"></div>
         <div className="betSlips">
@@ -122,91 +76,12 @@ const ThreeColRight = () => {
             <h4>BetSlip(2)</h4>
           </div>
           <div className="betSlipsBody">
-            {betSlips && betSlips?.length ? (
-              <div className="allBetSlips">
-                <div className="allBetSlipItem">
-                  <div className="d-flex justify-content-between align-items-center allBetSlipItemHeader">
-                    <div className="d-flex align-items-center">
-                      <div className="betStatus"></div>
-                      <p>Ongoing</p>
-                    </div>
-                    <i className="bx bx-x" onClick={() => removeSlip()}></i>
-                  </div>
-
-                  <div className="allBetSlipItemBody">
-                    <div className="d-flex align-items-center allBetSlipItemBodyItem">
-                      <h5>Game Name: </h5>
-                      <h5>
-                        <b>ROYAL A1</b>
-                      </h5>
-                    </div>
-                    <div className="d-flex align-items-center allBetSlipItemBodyItem">
-                      <h5>Lines: </h5>
-                      <h5>
-                        <b>10</b>
-                      </h5>
-                    </div>
-                    <div className="d-flex align-items-center allBetSlipItemBodyItem">
-                      <h5>Type: </h5>
-                      <h5>
-                        <b>PERM 2</b>
-                      </h5>
-                    </div>
-                    <div className="d-flex align-items-center allBetSlipItemBodyItem">
-                      <h5>Stakes: </h5>
-                      <h5>
-                        <b>69,9,26,19,36</b>
-                      </h5>
-                    </div>
-                    <div className="d-flex align-items-center allBetSlipItemBodyItem">
-                      <h5>Amount per line: </h5>
-                      <h5>
-                        <b>₦0</b>
-                      </h5>
-                    </div>
-                    <div className="allBetSlipItemBodyItemButtons">
-                      {stakeAmounts?.map((item, index) => (
-                        <div
-                          key={index}
-                          className={`allBetSlipItemBodyItemButtonsItems ${
-                            selectedAmount === item?.amount
-                              ? "buttonSelected"
-                              : ""
-                          }`}
-                          onClick={() => setselectedAmount(item?.amount)}
-                        >
-                          {item?.amount}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="allBetSlipItemBodyItemAmount">
-                      <div className={`symbolInput`}>
-                        <span>₦</span>
-                        <CurrencyInput
-                          name="input-name"
-                          placeholder="Enter Amount "
-                          defaultValue={selectedAmount}
-                          decimalsLimit={2}
-                          contentEditable={true}
-                          value={selectedAmount}
-                          onValueChange={(value) => setselectedAmount(value)}
-                        />
-                      </div>
-
-                      {/* <input
-                      value={selectedAmount}
-                      type="text"
-                      placeholder="Enter Amount"
-                    /> */}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="noBetSlip">
-                <p>Your betslip is empty</p>
-              </div>
-            )}
+            {/* <BetSlipsBox
+              showAmount={true}
+              showInput={true}
+              selectedAmount={selectedAmount}
+              setselectedAmount={setselectedAmount}
+            /> */}
 
             <div className="betSlipsBottom">
               <div className="d-flex justify-content-between align-items-center">

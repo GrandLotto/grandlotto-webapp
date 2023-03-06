@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Logo from "../../assets/images/grandlotto.png";
 import person from "../../assets/images/person.png";
-import { setMobileMenu, setSideBarMenu } from "../../store/alert/alertSlice";
+import {
+  setMobileMenu,
+  setNotiicationModal,
+  setSideBarMenu,
+} from "../../store/alert/alertSlice";
+import HeaderDropDownBlock from "../blocks/HeaderDropDownBlock";
 import TopSearch from "../blocks/TopSearch";
 
 const HeaderTop = () => {
@@ -76,7 +81,13 @@ const HeaderTop = () => {
               <p style={{ textAlign: "left" }}>Balance</p>
               <h5>₦20,000.00</h5>
             </div>
-            <div className="topHeaderRightLoggedInNotification hideOnMobile">
+            <div
+              className="topHeaderRightLoggedInNotification hideOnMobile"
+              onClick={() => {
+                dispatch(setNotiicationModal(true));
+                //   dispatch(setSideBarMenu(false));
+              }}
+            >
               <i className="bx bx-bell"></i>
             </div>
 
@@ -87,42 +98,7 @@ const HeaderTop = () => {
               <img src={person} alt="grand-logo" />
               <i className="bx bx-chevron-down"></i>
             </div>
-            {showDropDown ? (
-              <div className="header_top_dropDown">
-                <div className="header_top_dropDown_card">
-                  <p>
-                    <Link to="/account/profile" className="has_link">
-                      View profile
-                    </Link>
-                  </p>
-                  <p>
-                    <a href="erwqfe" className="has_link">
-                      Deposit Funds
-                    </a>
-                  </p>
-                  <p>
-                    <a href="rfwrg" className="has_link">
-                      Transaction history
-                    </a>
-                  </p>
-                  <p>
-                    <a href="wg3gfg4" className="has_link">
-                      Bet history
-                    </a>
-                  </p>
-                  <p>
-                    <a href="w3tg54g" className="has_link">
-                      Draw Results
-                    </a>
-                  </p>
-                  {/* <p>
-                    <a href="tgw3t54tg" className="has_link">
-                      Logout
-                    </a>
-                  </p> */}
-                </div>
-              </div>
-            ) : null}
+            {showDropDown ? <HeaderDropDownBlock /> : null}
             <div className="hideOnMobile">
               <div
                 className="hamburgar "

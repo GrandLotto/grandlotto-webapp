@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { setSideBarMenu } from "../../store/alert/alertSlice";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import {
+  setBetSlipMobileModal,
+  setSideBarMenu,
+} from "../../store/alert/alertSlice";
 
 const MobileMenu = () => {
   const dispatch = useDispatch();
@@ -9,7 +12,11 @@ const MobileMenu = () => {
 
   return (
     <div className="mobile-menu">
-      <a onClick={() => dispatch(setSideBarMenu(!sideBarMenu))}>
+      <a
+        onClick={() => {
+          dispatch(setSideBarMenu(!sideBarMenu));
+        }}
+      >
         <div>
           <i className="bx bx-menu"></i>
         </div>
@@ -21,14 +28,13 @@ const MobileMenu = () => {
         </div>
         <span>Home</span>
       </NavLink>
-      <a>
+      <NavLink to="/betslip">
         <div className="has_count mb-0">
-          <small>90</small>
+          <small>2</small>
           <i className="bx bx-receipt"></i>
         </div>
-
         <span>Betslip</span>
-      </a>
+      </NavLink>
 
       <NavLink to="/account/profile">
         <div>

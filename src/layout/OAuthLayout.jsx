@@ -3,6 +3,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
+import BetSlipMobile from "../components/sidebar/BetSlipMobile";
 import MobileMenu from "../components/sidebar/MobileMenu";
 import SidebarMenuMobile from "../components/sidebar/SidebarMenuMobile";
 
@@ -16,6 +17,7 @@ const OAuthLayout = () => {
         <Footer />
       </div>
       <MobileMenu />
+      <BetSlipMobile />
     </div>
   );
 };

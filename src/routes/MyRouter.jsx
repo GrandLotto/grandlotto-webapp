@@ -4,6 +4,7 @@ import LoggedInLayout from "../layout/LoggedInLayout";
 import OAuthLayout from "../layout/OAuthLayout";
 import ThreeColLayout from "../layout/ThreeColLayout";
 import BetHistoryPage from "../pages/BetHistoryPage";
+import BetSlip from "../pages/BetSlip";
 import Dashboard from "../pages/Dashboard";
 import FundWalletPage from "../pages/FundWalletPage";
 import Home from "../pages/Home";
@@ -30,9 +31,11 @@ const MyRouter = () => {
           <Route path="/account/kyc-documentation" element={<KYCPage />} />
           <Route path="/account/withdraw-funds" element={<WithdrawalPage />} />
           <Route path="/account/settings" element={<SettingsPage />} />
+          <Route path="/account/betslip" element={<BetSlip />} />
         </Route>
         <Route element={<ThreeColLayout />}>
           <Route path="/lotto" element={<PlayLotto />} />
+          <Route path="/betslip" element={<BetSlip />} />
         </Route>
       </Routes>
     </Router>

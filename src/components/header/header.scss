@@ -182,8 +182,8 @@
 
 .header_top_dropDown_card p {
   cursor: pointer;
-  padding-right: 20px;
-  margin-bottom: 9px;
+  padding-right: 30px;
+  margin-bottom: 19px;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -191,6 +191,10 @@
   color: #000000;
   white-space: nowrap;
   // overflow: hidden;
+}
+
+.header_top_dropDown_card p:last-child {
+  margin-bottom: 7px;
 }
 
 .header_top_dropDown_card p .has_link {
@@ -308,6 +312,15 @@
 }
 
 @media screen and (max-width: 590px) {
+  .oauthMenu {
+    width: 100%;
+  }
+
+  .menu_wrapper_div,
+  .menu_wrapper_div.showMenu {
+    display: none !important;
+  }
+
   .topHeaderLogo img {
     width: 140px !important;
     margin-left: -10px;

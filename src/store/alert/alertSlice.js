@@ -21,6 +21,7 @@ const initialState = {
   selectDrawMenu: false,
   addBankModal: false,
   notiicationModal: false,
+  betSlipMobileModal: false,
 };
 
 const alertSlice = createSlice({
@@ -80,6 +81,10 @@ const alertSlice = createSlice({
     setSelectDrawMenu: (state, { payload }) => {
       state.selectDrawMenu = payload;
     },
+
+    setBetSlipMobileModal: (state, { payload }) => {
+      state.betSlipMobileModal = payload;
+    },
   },
 
   extraReducers: {
@@ -100,6 +105,7 @@ export const {
   setAddBankModal,
   setNotiicationModal,
   setSelectDrawMenu,
+  setBetSlipMobileModal,
 } = alertSlice.actions;
 
 export default alertSlice.reducer;

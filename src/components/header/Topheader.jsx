@@ -12,6 +12,7 @@ import {
   setLogoutModal,
   setSideBarMenu,
 } from "../../store/alert/alertSlice";
+import HeaderDropDownBlock from "../blocks/HeaderDropDownBlock";
 
 const Topheader = () => {
   const dispatch = useDispatch();
@@ -79,48 +80,7 @@ const Topheader = () => {
                 style={{ color: "#fff", display: "block" }}
               ></i>
             </div>
-            {showDropDown ? (
-              <div className="header_top_dropDown">
-                <div className="header_top_dropDown_card">
-                  <p>
-                    <Link to="/account/profile" className="has_link">
-                      View profile
-                    </Link>
-                  </p>
-                  <p>
-                    <Link to="/account/fund-wallet" className="has_link">
-                      Deposit Funds
-                    </Link>
-                  </p>
-                  <p>
-                    <Link to="/account/transactions" className="has_link">
-                      Transaction history
-                    </Link>
-                  </p>
-                  <p>
-                    <Link to="/account/bet-history" className="has_link">
-                      Bet history
-                    </Link>
-                  </p>
-
-                  <p>
-                    <a
-                      onClick={() =>
-                        dispatch(
-                          setLogoutModal({
-                            status: true,
-                            payload: null,
-                          })
-                        )
-                      }
-                      className="has_link"
-                    >
-                      Logout
-                    </a>
-                  </p>
-                </div>
-              </div>
-            ) : null}
+            {showDropDown ? <HeaderDropDownBlock /> : null}
           </div>
         ) : (
           <div className="topHeaderRightButtons ">

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   selectedCoupons: [],
+  betSlips: [],
 };
 
 const betSlice = createSlice({
@@ -10,6 +11,10 @@ const betSlice = createSlice({
   reducers: {
     setSelectedCoupons: (state, { payload }) => {
       state.selectedCoupons = payload;
+    },
+
+    setBetSlips: (state, { payload }) => {
+      state.betSlips = payload;
     },
   },
 
@@ -20,6 +25,6 @@ const betSlice = createSlice({
   },
 });
 
-export const { setSelectedCoupons } = betSlice.actions;
+export const { setSelectedCoupons, setBetSlips } = betSlice.actions;
 
 export default betSlice.reducer;

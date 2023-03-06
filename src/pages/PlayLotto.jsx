@@ -13,9 +13,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedCoupons } from "../store/betSlice/betSlice";
 import { setSelectDrawMenu } from "../store/alert/alertSlice";
 
+import LottoNumberBox from "../components/blocks/LottoNumberBox";
+import CurrencyInput from "react-currency-input-field";
+
 const PlayLotto = () => {
   const dispatch = useDispatch();
   const selectedCoupons = useSelector((state) => state.bets.selectedCoupons);
+
+  const [amount, setAmount] = useState(0);
 
   // const [selectedCoupons, setselectedCoupons] = useState([]);
   const [allCoupons] = useState(numbersFromOneTo90());
@@ -92,6 +97,9 @@ const PlayLotto = () => {
   return (
     <>
       <div className="main_center_wrapper_content">
+        <div className="smallLottoNumber mb-3">
+          <LottoNumberBox />
+        </div>
         <div className="d-flex justify-content-between align-items-center main_center_wrapper_contentHeader">
           <h5>Original Lotto 7/90</h5>
           <div className="d-flex align-items-center">
@@ -177,11 +185,49 @@ const PlayLotto = () => {
         <div className="d-flex justify-content-end align-items-end mt-5">
           <button
             type="button"
-            className="grandLottoButton cardButton"
+            className="grandLottoButton cardButton buttonPlayLottoFirst"
             disabled={!selectedCoupons || selectedCoupons?.length < 6}
           >
             Play
           </button>
+        </div>
+        <div className="mt-5 buttonPlayLotto">
+          <div className="buttonPlayLottoSmall">
+            <div className={`symbolInput`}>
+              <span>₦</span>
+              <CurrencyInput
+                name="input-name"
+                placeholder="Enter Amount "
+                defaultValue={amount}
+                decimalsLimit={2}
+                contentEditable={true}
+                value={amount}
+                onValueChange={(value) => setAmount(value)}
+              />
+            </div>
+
+            <div className="d-flex justify-content-between align-items-center mt-4 buttonPlayLottoSmallStake">
+              <div className="buttonPlayLottoSmallStakeLeft">
+                <p>Total stake:</p>
+                <p>₦0</p>
+              </div>
+              <div className="buttonPlayLottoSmallStakeRight">
+                <p>Total return:</p>
+                <p>₦0</p>
+              </div>
+            </div>
+            <div className="buttonPlayLottoSmallButton">
+              <div className="d-flex justify-content-end align-items-end mt-3">
+                <button
+                  type="button"
+                  className="grandLottoButton cardButton"
+                  disabled={!selectedCoupons || selectedCoupons?.length < 6}
+                >
+                  Play
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
