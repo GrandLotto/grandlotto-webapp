@@ -22,7 +22,6 @@ const ChangePassword = () => {
   const [confirmNewPasswordError, setConfirmNewPasswordError] = useState("");
 
   const resetFields = (code) => {
-    setIsLoading(false);
     setPin("");
     setPin2("");
     setEmptyFields(true);
@@ -71,10 +70,20 @@ const ChangePassword = () => {
   };
 
   const proceed = () => {
-    setIsLoading(true);
+    dispatch(
+      setPageLoading({
+        status: true,
+        message: "Please wait ...",
+      })
+    );
 
     setTimeout(() => {
-      setIsLoading(false);
+      dispatch(
+        setPageLoading({
+          status: false,
+          message: "",
+        })
+      );
 
       dispatch(
         setAlertPopUp({
@@ -95,8 +104,6 @@ const ChangePassword = () => {
       className="grandlotto_card payment_card"
       style={{ position: "relative" }}
     >
-      {isLoading && <ComponentLoading title="Please wait ..." />}
-
       <div className="grandlotto_form mt-5">
         <div className="row mb-2">
           <div className="col-md-4">

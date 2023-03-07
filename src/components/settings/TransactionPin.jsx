@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ComponentLoading from "../blocks/ComponentLoading";
-import { setAlertPopUp } from "../../store/alert/alertSlice";
+import { setAlertPopUp, setPageLoading } from "../../store/alert/alertSlice";
 import { useDispatch } from "react-redux";
 import PinCodeBlock from "../blocks/PinCodeBlock";
 
@@ -13,7 +13,6 @@ const TransactionPin = () => {
   const [resetEFields, setResetEFields] = useState(false);
 
   const resetFields = (code) => {
-    setIsLoading(false);
     setPin("");
     setPin2("");
     setEmptyFields(true);
@@ -55,10 +54,20 @@ const TransactionPin = () => {
   };
 
   const proceed = () => {
-    setIsLoading(true);
+    dispatch(
+      setPageLoading({
+        status: true,
+        message: "Please wait ...",
+      })
+    );
 
     setTimeout(() => {
-      setIsLoading(false);
+      dispatch(
+        setPageLoading({
+          status: false,
+          message: "",
+        })
+      );
 
       dispatch(
         setAlertPopUp({
@@ -79,8 +88,6 @@ const TransactionPin = () => {
       className="grandlotto_card payment_card"
       style={{ position: "relative" }}
     >
-      {isLoading && <ComponentLoading title="Please wait ..." />}
-
       <div className="grandlotto_form mt-5">
         <div
           style={{

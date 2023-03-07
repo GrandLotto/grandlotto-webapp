@@ -6,12 +6,14 @@ import ForgotPasswordModal from "./ForgotPasswordModal";
 import LoginModal from "./LoginModal";
 import LogoutModal from "./LogoutModal";
 import NotiicationModal from "./NotiicationModal";
+import PageLoading from "./PageLoading";
 import RegisterModal from "./RegisterModal";
 
 const AllModal = () => {
   return (
     <>
       <AlertModal />
+      <PageLoading />
       <LogoutModal />
       <LoginModal />
       <RegisterModal />

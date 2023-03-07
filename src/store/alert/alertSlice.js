@@ -22,6 +22,10 @@ const initialState = {
   addBankModal: false,
   notiicationModal: false,
   betSlipMobileModal: false,
+  pageLoading: {
+    status: false,
+    message: "",
+  },
 };
 
 const alertSlice = createSlice({
@@ -85,6 +89,10 @@ const alertSlice = createSlice({
     setBetSlipMobileModal: (state, { payload }) => {
       state.betSlipMobileModal = payload;
     },
+
+    setPageLoading: (state, { payload }) => {
+      state.pageLoading = payload;
+    },
   },
 
   extraReducers: {
@@ -106,6 +114,7 @@ export const {
   setNotiicationModal,
   setSelectDrawMenu,
   setBetSlipMobileModal,
+  setPageLoading,
 } = alertSlice.actions;
 
 export default alertSlice.reducer;

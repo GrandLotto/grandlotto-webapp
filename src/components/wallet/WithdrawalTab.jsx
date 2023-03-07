@@ -195,7 +195,7 @@ const WithdrawalTab = () => {
               </label>
 
               <PinCodeBlock
-                pinLength={6}
+                pinLength={4}
                 handleDone={handleDone}
                 resetEFields={resetEFields}
               />
