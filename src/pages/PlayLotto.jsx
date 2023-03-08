@@ -56,12 +56,12 @@ const PlayLotto = () => {
   };
 
   const randomPick = () => {
-    let firstNumber = generate(2) > "90" ? generate(1) : generate(2);
-    let secNumber = generate(1) <= 0 ? generate(2) : generate(1);
-    let thirdNumber = generate(2) > "90" ? generate(1) : generate(2);
-    let forthNumber = generate(1) <= 0 ? generate(2) : generate(1);
-    let fiftNumber = generate(1) <= 0 ? generate(2) : generate(1);
-    let sixNumber = generate(2) > "90" ? generate(1) : generate(2);
+    let firstNumber = Number(generate(2)) > 47 ? generate(1) : generate(2);
+    let secNumber = Number(generate(1)) == 0 ? 0 + 1 : generate(1);
+    let thirdNumber = Number(generate(2)) > 47 ? generate(1) : generate(2);
+    let forthNumber = Number(generate(1)) == 0 ? 1 + 2 : generate(1);
+    let fiftNumber = Number(generate(1)) == 0 ? 2 + 3 : generate(1);
+    let sixNumber = Number(generate(2)) > 47 ? generate(1) + 3 : generate(2);
 
     console.log(
       firstNumber,

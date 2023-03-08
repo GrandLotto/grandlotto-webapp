@@ -72,9 +72,9 @@ const ThreeColRight = () => {
 
         <div className="countDownExpiry" id="countDownExpiry"></div>
         <div className="betSlips">
-          <div className="betSlipsHeader">
+          {/* <div className="betSlipsHeader">
             <h4>BetSlip(2)</h4>
-          </div>
+          </div> */}
           <div className="betSlipsBody">
             {/* <BetSlipsBox
               showAmount={true}
@@ -83,7 +83,7 @@ const ThreeColRight = () => {
               setselectedAmount={setselectedAmount}
             /> */}
 
-            <div className="betSlipsBottom">
+            {/* <div className="betSlipsBottom">
               <div className="d-flex justify-content-between align-items-center">
                 <h5>Total Stake:</h5>
                 <h5>₦0</h5>
@@ -97,7 +97,7 @@ const ThreeColRight = () => {
                   Place Bet
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
