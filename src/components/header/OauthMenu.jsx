@@ -8,6 +8,7 @@ const OauthMenu = () => {
   const dispatch = useDispatch();
   const mobileMenu = useSelector((state) => state.alert.mobileMenu);
   const digitalDate = useSelector((state) => state.oauth.digitalDate);
+  const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
 
   const closeMenu = () => {
     dispatch(setMobileMenu(false));
@@ -34,12 +35,15 @@ const OauthMenu = () => {
           <NavLink to="/about" className="top_link">
             Pool
           </NavLink>
-          <NavLink to="/about" className="top_link">
+          <NavLink to="/results" className="top_link">
             Results
           </NavLink>
-          <NavLink to="/about" className="top_link">
-            Deposit Funds
-          </NavLink>
+          {isUserLoggedIn ? (
+            <NavLink to="/account/fund-wallet" className="top_link">
+              Deposit Funds
+            </NavLink>
+          ) : null}
+
           <NavLink to="/about" className="top_link">
             Redeem Winning
           </NavLink>

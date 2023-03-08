@@ -28,7 +28,7 @@ const LoginModal = () => {
 
   return (
     modal && (
-      <div className="alert-modal alertPOP" id="loginModal">
+      <div className="alert-modal alertPOP " id="loginModal">
         <div className="alert-modal-overlay" onClick={() => closeModal()}></div>
         <div className="alert-modal-card vivify popInBottom">
           <div className="close-alert-button">

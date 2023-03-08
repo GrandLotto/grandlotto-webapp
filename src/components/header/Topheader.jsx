@@ -45,9 +45,9 @@ const Topheader = () => {
 
   return (
     <div className="relative  topHeader">
-      <a className="topHeaderLogo">
+      <NavLink to="/" className="topHeaderLogo">
         <img src={Logo} alt="grand-logo" />
-      </a>
+      </NavLink>
       <div className="topHeaderRight ">
         <div className="topHeaderRightLeft d-flex align-items-center">
           <NavLink to="/about" className="top_link">

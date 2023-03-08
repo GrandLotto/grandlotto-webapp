@@ -21,9 +21,9 @@ const Sidebar = () => {
       >
         <div className="sidebar-top hideOnMobile">
           <div className="sidebar-logo">
-            <a className="topHeaderLogo">
+            <NavLink to="/account/dashboard" className="topHeaderLogo">
               <img src={Logo} alt="grand-logo" />
-            </a>
+            </NavLink>
 
             <div className="close-menu-button">
               <i

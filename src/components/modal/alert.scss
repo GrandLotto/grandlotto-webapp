@@ -473,6 +473,39 @@ button.white-button {
   margin-right: 16px;
 }
 
+@media screen and (max-width: 768px) {
+  .alertPOP.large_modal .alert-modal-card {
+    position: fixed !important;
+    bottom: 0px !important;
+    left: 0px !important;
+    width: 100% !important;
+    height: 86% !important;
+    padding: 0px !important;
+    // overflow-y: scroll;
+  }
+
+  .alertPOP.large_modal .alert-modal-card .grandlotto_form {
+    width: 100% !important;
+    height: 100vh !important;
+
+    overflow-y: scroll !important;
+    padding: 20px !important;
+    padding-bottom: 250px !important;
+  }
+}
+@media screen and (max-width: 650px) {
+  .alertPOP .alert-modal-card {
+    background: $primaryDark;
+    color: #fff;
+  }
+
+  .alert-modal .alert-modal-body h4,
+  .alert-modal-card .close-alert-button i,
+  .alert-modal .alert-modal-body .grandlotto_form label,
+  .alert-modal .alert-modal-body .grandlotto_form .form-group {
+    color: #fff !important;
+  }
+}
 @media screen and (max-width: 600px) {
   .select_modals_cards {
     position: fixed !important;
@@ -483,6 +516,8 @@ button.white-button {
     height: 100vh !important;
     overflow: hidden;
     padding-bottom: 10px !important;
+    box-shadow: none !important;
+    border: none !important;
   }
 
   .select_modals_cards {
@@ -587,5 +622,18 @@ button.white-button {
     font-size: 18px;
     width: 89%;
     margin: 4px auto 15px;
+  }
+
+  .alertPOP.large_modal .alert-modal-card .grandlotto_form::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .alertPOP.large_modal #closeAlertModal {
+    padding-top: 15px;
+    padding-right: 10px;
+  }
+
+  .alertPOP.large_modal .alert-modal-body h4 {
+    margin-top: -25px;
   }
 }

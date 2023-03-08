@@ -36,9 +36,9 @@ const HeaderDropDownBlock = () => {
           </Link>
         </p>
         <p>
-          <a href="w3tg54g" className="has_link">
+          <Link to="/results" className="has_link">
             Draw Results
-          </a>
+          </Link>
         </p>
         <p>
           <a

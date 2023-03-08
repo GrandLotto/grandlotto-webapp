@@ -9,7 +9,7 @@ const initialState = {
   token: localStorage.getItem("token") || "",
   darkMode: false,
   loginIdentity: null,
-  isUserLoggedIn: true,
+  isUserLoggedIn: false,
   // isUserLoggedIn: !!localStorage.getItem("userInfo"),
   pageLoading: {
     status: false,

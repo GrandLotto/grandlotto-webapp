@@ -55,6 +55,11 @@
   display: none;
 }
 
+.filter_button_header {
+  display: none !important;
+  padding-right: 15px;
+}
+
 .selectDrawGame button {
   padding-left: 20px;
   padding-right: 20px;
@@ -191,10 +196,19 @@
   width: 60%;
 }
 
+.twoColWrapper .main_center {
+  display: block;
+  width: 100%;
+}
+
 .main_center_wrapper {
   background: $primaryLight;
   padding: 30px 20px;
   border-radius: 5px;
+}
+
+.twoColWrapper .main_center_wrapper {
+  padding: 0px;
 }
 
 .main_center_wrapper_contentHeader h5 {
@@ -203,6 +217,93 @@
   font-size: 20px;
   line-height: 29px;
   color: #e7d232;
+}
+
+.twoColWrapper .main_center_wrapper_contentHeader {
+  padding: 30px 20px 20px;
+}
+
+.twoColWrapper .main_center_wrapper_contentHeader select {
+  background: #2b4434 !important;
+  color: #fff !important;
+}
+
+.lotto_results {
+  display: flex;
+}
+
+.lotto_results_left {
+  width: 25%;
+  background: #fff;
+}
+
+.lotto_results_left .open_body_contents {
+  cursor: pointer;
+}
+
+.lotto_results_left .open_body_contents:hover {
+  background: lighten($color: #56695c, $amount: 50%);
+}
+
+.lotto_results_left .open_body_contents.buttonActive:hover {
+  background: #56695c !important;
+}
+
+.lotto_results_right {
+  width: 100%;
+  background: #fff;
+  border-left: 1px solid #ced4dc;
+  color: #222;
+  padding: 30px 20px 20px;
+}
+
+.lotto_results_right .grandlotto_table th {
+  background: $primaryLight;
+  color: #fff;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.lotto_results_right .grandlotto_table th:last-child {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.lotto_results_right .grandlotto_table td {
+  border-bottom: 1px solid #ced4dc;
+  padding: 30px;
+}
+
+.lotto_results_right .grandlotto_table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.lotto_results_right .grandlotto_table td:first-child {
+  font-size: 17px;
+  vertical-align: middle;
+}
+
+.lotto_results_right .grandlotto_table td:last-child {
+  width: 50%;
+}
+
+.lotto_results_right_coupons {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+  gap: 10px;
+}
+
+.lotto_results_right_coupons_item {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  background: $primary;
+  text-align: center;
+  border-radius: 50%;
+  color: #fff;
 }
 
 .main_center_wrapper_middle div {
@@ -593,6 +694,19 @@
     grid-template-columns: repeat(auto-fill, minmax(2.5rem, 1fr));
     gap: 6px;
   }
+
+  .twoColWrapper .threeColRight {
+    width: 30%;
+  }
+
+  .lotto_results_right .grandlotto_table td {
+    border-bottom: 1px solid #ced4dc;
+    padding: 10px;
+  }
+
+  .lotto_results_right_coupons {
+    grid-template-columns: repeat(auto-fill, minmax(43px, 1fr));
+  }
 }
 
 @media screen and (max-width: 1250px) {
@@ -647,6 +761,34 @@
     font-size: 13px;
     line-height: 20px;
     color: #fff;
+  }
+
+  .twoColWrapper .main_center_wrapper_contentHeader {
+    padding: 15px;
+  }
+
+  .twoColWrapper .threeColRight {
+    width: 25%;
+  }
+
+  .lotto_results_right .grandlotto_table {
+    padding: 0px !important;
+  }
+
+  .lotto_results_right .grandlotto_table td:first-child {
+    font-size: 15px;
+  }
+
+  .lotto_results_right_coupons {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 10px;
+  }
+
+  .lotto_results_right_coupons_item {
+    height: 40px;
+    line-height: 40px;
   }
 }
 
@@ -732,6 +874,62 @@
   }
 }
 
+@media screen and (max-width: 1080px) {
+  .twoColWrapper .threeColRight {
+    display: none;
+  }
+
+  .filter_button_header {
+    display: flex !important;
+    padding-bottom: 20px;
+    justify-content: flex-start !important;
+    padding-left: 15px;
+  }
+
+  .lotto_results {
+    display: block;
+  }
+
+  .lotto_results_left {
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+    column-gap: 10px;
+    padding: 20px 10px 10px 20px;
+    // background: #fff;
+  }
+
+  .lotto_results_left .open_body_contents {
+    background: #fff !important;
+    border: 1px solid #ced4dc !important;
+    // box-shadow: rgba(68, 88, 144, 0.1) 0px 10px 10px 0px;
+    border-radius: 4px;
+    transition: all 800ms ease;
+    font-weight: bold;
+    padding: 7px 32px;
+    margin-right: 7px;
+    color: $primary !important;
+    margin-bottom: 20px;
+  }
+
+  .lotto_results_left .open_body_contents:hover {
+    background: #cef6d6 !important;
+    border: 1px solid $primary !important;
+  }
+
+  .lotto_results_left .open_body_contents.buttonActive {
+    background: #56695c !important;
+    color: #fff !important;
+  }
+
+  .lotto_results_left .open_body_contents img {
+    display: none;
+  }
+
+  .lotto_results_left .open_body_contents h5 {
+    white-space: nowrap;
+  }
+}
 @media screen and (max-width: 780px) {
   .threeColWrapper {
     display: block;
@@ -811,6 +1009,48 @@
   .buttonPlayLottoSmallStakeRight {
     text-align: right;
   }
+
+  .lotto_results_left {
+    background: transparent !important;
+    padding-bottom: 0px !important;
+  }
+
+  .lotto_results_left::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .lotto_results_left .open_body_contents {
+    margin-bottom: 10px;
+  }
+
+  .lotto_results_right {
+    background: transparent !important;
+    border-left: none;
+    color: #fff;
+    // padding: 30px 20px 20px;
+  }
+
+  .lotto_results_right h3 {
+    font-size: 17px;
+  }
+
+  .lotto_results_right .grandlotto_table {
+    background: transparent !important;
+    color: #fff !important;
+  }
+
+  .lotto_results_right .grandlotto_table td {
+    background: transparent !important;
+    color: #fff !important;
+  }
+
+  .filter_button_header {
+    justify-content: flex-end !important;
+  }
+
+  .filter_button_header {
+    padding-top: 0px;
+  }
 }
 
 @media screen and (max-width: 650px) {
@@ -875,11 +1115,63 @@
     font-size: 18px !important;
     color: #fff;
   }
+
+  .twoColWrapper .main_center_wrapper_contentHeader {
+    margin-top: 0px !important;
+  }
+
+  .lotto_results_right .grandlotto_table {
+    display: block !important;
+    color: #fff !important;
+  }
+
+  .lotto_results_right .grandlotto_table th {
+    border: none !important;
+  }
+
+  .lotto_results_right .grandlotto_table tbody tr {
+    display: block !important;
+    padding-bottom: 15px !important;
+    border-bottom: 1px solid #ced4dc;
+  }
+
+  .lotto_results_right .grandlotto_table tbody tr:first-child {
+    margin-top: 20px;
+  }
+
+  .lotto_results_right .grandlotto_table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .lotto_results_right .grandlotto_table th:first-child {
+    display: none !important;
+  }
+
+  .lotto_results_right .grandlotto_table td {
+    display: block !important;
+    border: none;
+    width: 100% !important;
+  }
+
+  .lotto_results_right .grandlotto_table th:last-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    padding: 15px 10px !important;
+  }
 }
 
 @media screen and (max-width: 590px) {
   .smallLottoNumber {
     top: 60px;
+  }
+
+  .lotto_results_right_coupons {
+    grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+  }
+
+  .lotto_results_right_coupons_item {
+    height: 45px;
+    line-height: 45px;
   }
 }
 
