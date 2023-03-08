@@ -50,18 +50,10 @@ const Topheader = () => {
       </NavLink>
       <div className="topHeaderRight ">
         <div className="topHeaderRightLeft d-flex align-items-center">
-          <NavLink to="/about" className="top_link">
-            How to play
-          </NavLink>
-          <NavLink to="/about" className="top_link">
-            Promotions
-          </NavLink>
-          <NavLink to="/about" className="top_link">
-            Contact Us
-          </NavLink>
-          <NavLink to="/about" className="top_link">
-            FirstBet
-          </NavLink>
+          <a className="top_link">How to play</a>
+          <a className="top_link">Promotions</a>
+          <a className="top_link">Contact Us</a>
+          <a className="top_link">FirstBet</a>
         </div>
 
         {isUserLoggedIn ? (

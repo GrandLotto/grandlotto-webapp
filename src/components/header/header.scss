@@ -85,6 +85,10 @@
   cursor: pointer;
 }
 
+.top_link {
+  cursor: pointer;
+}
+
 .oauthMenu .top_link.active,
 .oauthMenu .top_link:hover {
   color: $secondaryLight;
