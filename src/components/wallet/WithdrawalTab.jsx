@@ -50,7 +50,7 @@ const WithdrawalTab = () => {
         setEmptyFields(true);
         return false;
       }
-      if (pin !== "" && pin.length !== 7) {
+      if (pin !== "" && pin.length !== 5) {
         setEmptyFields(true);
         return false;
       }
