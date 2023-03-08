@@ -6,8 +6,14 @@ import franceLotto1 from "../../assets/images/france-lotto1.png";
 import franceLotto2 from "../../assets/images/france-lotto2.png";
 
 import "./banner.scss";
+import { useNavigate } from "react-router-dom";
+import { setRedeemWinningModal } from "../../store/alert/alertSlice";
+import { useDispatch } from "react-redux";
 
 const HomeBanner = () => {
+  const dispatch = useDispatch();
+  const navigation = useNavigate();
+
   return (
     <div className="homeBanner">
       <div className="homeBannerAbsolueImages">
@@ -19,10 +25,24 @@ const HomeBanner = () => {
         <h3>INSTANT PAYMENT, NO STORY!</h3>
 
         <div className="homeBannerWrraperButtons ">
-          <button className="grandLottoButton button-outline-trans">
+          <button
+            className="grandLottoButton button-outline-trans"
+            onClick={() => {
+              setTimeout(() => {
+                dispatch(setRedeemWinningModal(true));
+              }, 200);
+
+              navigation("/lotto");
+            }}
+          >
             Redeem Winning
           </button>
-          <button className="grandLottoButton">Play Now</button>
+          <button
+            className="grandLottoButton"
+            onClick={() => navigation("/lotto")}
+          >
+            Play Now
+          </button>
         </div>
         <div className="homeBannerWrraperImages">
           <div className="homeBannerWrraperImagesItem">

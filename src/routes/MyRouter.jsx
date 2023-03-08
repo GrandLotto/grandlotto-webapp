@@ -42,6 +42,9 @@ const MyRouter = () => {
         <Route element={<TwoColLayout />}>
           <Route path="/results" element={<Results />} />
         </Route>
+        {/* <Route element={<OAuthLayout2 />}>
+          <Route path="/redeem-winning" element={<RedeemWining />} />
+        </Route> */}
       </Routes>
     </Router>
   );

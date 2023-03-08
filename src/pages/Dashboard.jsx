@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import HomeWalletOverview from "../components/dashboard/HomeWalletOverview";
 import ProfileComplete from "../components/dashboard/ProfileComplete";
-import "../components/dashboard/dashboard.scss";
 import Transactions from "../components/transaction/Transactions";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 

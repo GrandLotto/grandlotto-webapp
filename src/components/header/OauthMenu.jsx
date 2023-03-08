@@ -2,7 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getAMPM } from "../../global/customFunctions";
-import { setMobileMenu } from "../../store/alert/alertSlice";
+import {
+  setMobileMenu,
+  setRedeemWinningModal,
+} from "../../store/alert/alertSlice";
 
 const OauthMenu = () => {
   const dispatch = useDispatch();
@@ -32,9 +35,8 @@ const OauthMenu = () => {
           <NavLink to="/lotto" className="top_link">
             Lotto
           </NavLink>
-          <NavLink to="/about" className="top_link">
-            Pool
-          </NavLink>
+          <a className="top_link">Pool</a>
+
           <NavLink to="/results" className="top_link">
             Results
           </NavLink>
@@ -44,9 +46,12 @@ const OauthMenu = () => {
             </NavLink>
           ) : null}
 
-          <NavLink to="/about" className="top_link">
+          <a
+            className="top_link"
+            onClick={() => dispatch(setRedeemWinningModal(true))}
+          >
             Redeem Winning
-          </NavLink>
+          </a>
         </div>
         <div className="oauthMenuRight">
           {/* <p>12:00:59 AM</p> */}

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "../components/wallet/fundwallet.scss";
 import FilterModals from "../components/modal/FilterModals";
 import HomeWalletOverview from "../components/dashboard/HomeWalletOverview";
 import WithdrawalTab from "../components/wallet/WithdrawalTab";

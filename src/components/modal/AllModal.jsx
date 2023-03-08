@@ -7,6 +7,7 @@ import LoginModal from "./LoginModal";
 import LogoutModal from "./LogoutModal";
 import NotiicationModal from "./NotiicationModal";
 import PageLoading from "./PageLoading";
+import RedeemWinningModal from "./RedeemWinningModal";
 import RegisterModal from "./RegisterModal";
 
 const AllModal = () => {
@@ -20,6 +21,7 @@ const AllModal = () => {
       <ForgotPasswordModal />
       <AddBankModal />
       <NotiicationModal />
+      <RedeemWinningModal />
     </>
   );
 };

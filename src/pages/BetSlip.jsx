@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import BetSlipsBox from "../components/blocks/BetSlipsBox";
-import "../components/dashboard/dashboard.scss";
 
 const BetSlip = () => {
   const [selectedAmount, setselectedAmount] = useState(0);

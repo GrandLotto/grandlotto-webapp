@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import BetHistory from "../components/bet/BetHistory";
-import "../components/dashboard/dashboard.scss";
 import FilterModals from "../components/modal/FilterModals";
 import Transactions from "../components/transaction/Transactions";
 

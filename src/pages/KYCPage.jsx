@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "../components/dashboard/dashboard.scss";
 import Dropzone from "react-dropzone";
 import ComponentLoading from "../components/blocks/ComponentLoading";
 

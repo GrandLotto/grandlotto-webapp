@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "../components/dashboard/dashboard.scss";
 import person from "../assets/images/person.png";
 
 const Profile = () => {

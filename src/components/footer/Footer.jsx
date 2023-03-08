@@ -33,17 +33,19 @@ const Footer = () => {
         </div>
         <div className="footerGridItems">
           <p>
+            Grandlotto provides online lotto systems, online gaming tools and
+            API for all businesses interested in leveraging our experience,
+            capacity and competence. Over the years, Grandlotto has built its
+            reputation as a force to reckon with in the gaming industry.
+          </p>
+          <p className="hideOnMobile">
             This website is operated by Grandlotto (A Subsidiary of Lotgrand
             Limited). Lotgrand Limited is a company registered in Nigeria
             (RC1222087), and with it’s administrative office at Brick House 17,
             Yinusa Adeniji Street off Toyin IKEJA, 100212, Lagos. Grandlotto as
             a brand was established by a group of visionaries and insightful
             people with ideas and mechanism for providing latest technologies to
-            continuously revolutionize the gaming industry. Grandlotto provides
-            online lotto systems, online gaming tools and API for all businesses
-            interested in leveraging our experience, capacity and competence.
-            Over the years, Grandlotto has built its reputation as a force to
-            reckon with in the gaming industry.
+            continuously revolutionize the gaming industry.
           </p>
         </div>
         <div className="footerGridItems">

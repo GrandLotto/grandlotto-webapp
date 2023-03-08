@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "../components/dashboard/dashboard.scss";
 import ChangePassword from "../components/settings/ChangePassword";
 import TransactionPin from "../components/settings/TransactionPin";
 import Transactions from "../components/transaction/Transactions";
