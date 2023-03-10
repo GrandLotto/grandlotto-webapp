@@ -4,14 +4,16 @@ import { getUserInfo } from "./actions";
 const initialState = {
   appScreenSize: "",
   siteName: "Grand Lotto",
-  user: localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : null,
+  // user: localStorage.getItem("user")
+  //   ? JSON.parse(localStorage.getItem("user"))
+  //   : null,
+  user: null,
   token: localStorage.getItem("appUserThemeSettingsCode") || "",
+  // token: localStorage.getItem("appUserThemeSettingsCode") || "",
   darkMode: false,
   loginIdentity: null,
-  // isUserLoggedIn: true,
-  isUserLoggedIn: !!localStorage.getItem("appUserThemeSettingsCode"),
+  isUserLoggedIn: false,
+  // isUserLoggedIn: !!localStorage.getItem("appUserThemeSettingsCode"),
   pageLoading: {
     status: false,
     message: "",
@@ -31,6 +33,9 @@ const authSlice = createSlice({
 
     setIsUserLoggedIn: (state, { payload }) => {
       state.isUserLoggedIn = payload;
+    },
+    setIsToken: (state, { payload }) => {
+      state.token = payload;
     },
 
     setUserInfo: (state, { payload }) => {
@@ -73,7 +78,12 @@ const authSlice = createSlice({
   },
 });
 
-export const { setDigitalDate, setIsUserLoggedIn, logout, setUserInfo } =
-  authSlice.actions;
+export const {
+  setDigitalDate,
+  setIsUserLoggedIn,
+  logout,
+  setUserInfo,
+  setIsToken,
+} = authSlice.actions;
 
 export default authSlice.reducer;

@@ -10,6 +10,7 @@ import {
 } from "../../store/alert/alertSlice";
 import { getUserInfo } from "../../store/authSlice/actions";
 import {
+  setIsToken,
   setIsUserLoggedIn,
   setUserInfo,
 } from "../../store/authSlice/authSlice";
@@ -170,6 +171,7 @@ const RegisterModal = () => {
             localStorage.setItem("appUserThemeSettingsCode", token);
             localStorage.setItem("appexrat", new Date(expireTo)?.getTime());
 
+            dispatch(setIsToken(token));
             dispatch(setUserInfo(data));
             dispatch(setIsUserLoggedIn(true));
 

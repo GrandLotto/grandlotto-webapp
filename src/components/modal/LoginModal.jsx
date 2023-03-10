@@ -10,6 +10,7 @@ import {
   setRegisterModal,
 } from "../../store/alert/alertSlice";
 import {
+  setIsToken,
   setIsUserLoggedIn,
   setUserInfo,
 } from "../../store/authSlice/authSlice";
@@ -109,6 +110,7 @@ const LoginModal = () => {
             localStorage.setItem("appUserThemeSettingsCode", token);
             localStorage.setItem("appexrat", new Date(expireTo)?.getTime());
 
+            dispatch(setIsToken(token));
             dispatch(setUserInfo(data));
             dispatch(setIsUserLoggedIn(true));
 

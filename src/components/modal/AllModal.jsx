@@ -1,6 +1,5 @@
 import React from "react";
 import AddBankModal from "./AddBankModal";
-import "./alert.scss";
 import AlertModal from "./AlertModal";
 import ForgotPasswordModal from "./ForgotPasswordModal";
 import FnputCodeModal from "./FnputCodeModal";
