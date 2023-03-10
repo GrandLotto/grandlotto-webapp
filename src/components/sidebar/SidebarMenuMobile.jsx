@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setLogoutModal,
   setNotiicationModal,
+  setRedeemWinningModal,
   setSideBarMenu,
 } from "../../store/alert/alertSlice";
 import TopSearch from "../blocks/TopSearch";
@@ -63,29 +64,32 @@ const SidebarMenuMobile = () => {
             </div>
           )}
 
-          <div className="sidebarMobleHeaderWalletButtons">
-            <div
-              className="sidebarMobleHeaderWalletButtonsItem"
-              onClick={() => navigation("/account/fund-wallet")}
-            >
-              <i className="bx bx-wallet-alt"></i>
-              <span>Fund wallet</span>
+          {isUserLoggedIn && (
+            <div className="sidebarMobleHeaderWalletButtons">
+              <div
+                className="sidebarMobleHeaderWalletButtonsItem"
+                onClick={() => navigation("/account/fund-wallet")}
+              >
+                <i className="bx bx-wallet-alt"></i>
+                <span>Fund wallet</span>
+              </div>
+              <div
+                className="sidebarMobleHeaderWalletButtonsItem"
+                onClick={() => navigation("/account/fund-wallet")}
+              >
+                <i className="bx bx-wallet-alt"></i>
+                <span>Transfer </span>
+              </div>
+              <div
+                className="sidebarMobleHeaderWalletButtonsItem"
+                onClick={() => navigation("/account/withdraw-funds")}
+              >
+                <i className="bx bx-wallet-alt"></i>
+                <span>Withdaw </span>
+              </div>
             </div>
-            <div
-              className="sidebarMobleHeaderWalletButtonsItem"
-              onClick={() => navigation("/account/fund-wallet")}
-            >
-              <i className="bx bx-wallet-alt"></i>
-              <span>Transfer </span>
-            </div>
-            <div
-              className="sidebarMobleHeaderWalletButtonsItem"
-              onClick={() => navigation("/account/withdraw-funds")}
-            >
-              <i className="bx bx-wallet-alt"></i>
-              <span>Withdaw </span>
-            </div>
-          </div>
+          )}
+
           {isUserLoggedIn ? (
             <div className="sidebarLinkMenus">
               <NavLink className="sidebarLinkMenusItem" to="/account/profile">
@@ -157,7 +161,8 @@ const SidebarMenuMobile = () => {
             <div className="sidebarLinkMenus">
               <div className="sidebarLinkMenusDiv">
                 <h3>Games</h3>
-                <NavLink className="sidebarLinkMenusItem" to="/account/profile">
+
+                <NavLink className="sidebarLinkMenusItem" to="/lotto">
                   <div className="sidebarLinkMenusItemLeft">
                     <img
                       src={fluent_lottery}
@@ -168,7 +173,18 @@ const SidebarMenuMobile = () => {
                   </div>
                   <i className="bx bx-chevron-right"></i>
                 </NavLink>
-                <NavLink
+                <a className="sidebarLinkMenusItem">
+                  <div className="sidebarLinkMenusItemLeft">
+                    <img
+                      src={ion_football}
+                      alt="grand-logo"
+                      style={{ width: 20 }}
+                    />
+                    <span>Pool</span>
+                  </div>
+                  <i className="bx bx-chevron-right"></i>
+                </a>
+                {/* <NavLink
                   className="sidebarLinkMenusItem"
                   to="/account/bet-history"
                 >
@@ -181,7 +197,7 @@ const SidebarMenuMobile = () => {
                     <span>Pool</span>
                   </div>
                   <i className="bx bx-chevron-right"></i>
-                </NavLink>
+                </NavLink> */}
               </div>
               <div className="sidebarLinkMenusDiv">
                 <h3>Quicklinks</h3>
@@ -192,20 +208,20 @@ const SidebarMenuMobile = () => {
                   </div>
                   <i className="bx bx-chevron-right"></i>
                 </NavLink>
-                <NavLink
+                <a
                   className="sidebarLinkMenusItem"
-                  to="/account/bet-history"
+                  onClick={() => {
+                    dispatch(setSideBarMenu(false));
+                    dispatch(setRedeemWinningModal(true));
+                  }}
                 >
                   <div className="sidebarLinkMenusItemLeft">
                     <i className="bx bx-money"></i>
                     <span>Redeem Winning</span>
                   </div>
                   <i className="bx bx-chevron-right"></i>
-                </NavLink>
-                <NavLink
-                  className="sidebarLinkMenusItem"
-                  to="/account/bet-history"
-                >
+                </a>
+                <a className="sidebarLinkMenusItem">
                   <div className="sidebarLinkMenusItemLeft">
                     <img
                       src={verifiedcheck}
@@ -215,11 +231,8 @@ const SidebarMenuMobile = () => {
                     <span>Promotions</span>
                   </div>
                   <i className="bx bx-chevron-right"></i>
-                </NavLink>
-                <NavLink
-                  className="sidebarLinkMenusItem"
-                  to="/account/bet-history"
-                >
+                </a>
+                <NavLink className="sidebarLinkMenusItem" to="/results">
                   <div className="sidebarLinkMenusItemLeft">
                     <img
                       src={carbon_result}
@@ -230,10 +243,7 @@ const SidebarMenuMobile = () => {
                   </div>
                   <i className="bx bx-chevron-right"></i>
                 </NavLink>
-                <NavLink
-                  className="sidebarLinkMenusItem"
-                  to="/account/bet-history"
-                >
+                <a className="sidebarLinkMenusItem">
                   <div className="sidebarLinkMenusItemLeft">
                     <img
                       src={healthicons}
@@ -243,10 +253,10 @@ const SidebarMenuMobile = () => {
                     <span>Contact us</span>
                   </div>
                   <i className="bx bx-chevron-right"></i>
-                </NavLink>
-                <NavLink
+                </a>
+                {/* <a
                   className="sidebarLinkMenusItem"
-                  to="/account/bet-history"
+                
                 >
                   <div className="sidebarLinkMenusItemLeft">
                     <img
@@ -257,7 +267,7 @@ const SidebarMenuMobile = () => {
                     <span>First bet</span>
                   </div>
                   <i className="bx bx-chevron-right"></i>
-                </NavLink>
+                </a> */}
               </div>
             </div>
           )}

@@ -4,6 +4,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   setBetSlipMobileModal,
   setLoginModal,
+  setMobileMenu,
   setSideBarMenu,
 } from "../../store/alert/alertSlice";
 
@@ -16,6 +17,7 @@ const MobileMenu = () => {
     <div className="mobile-menu">
       <a
         onClick={() => {
+          dispatch(setMobileMenu(false));
           dispatch(setSideBarMenu(!sideBarMenu));
         }}
       >
@@ -57,7 +59,7 @@ const MobileMenu = () => {
           <span>My Bets</span>
         </NavLink>
       ) : (
-        <NavLink to="/account/profile">
+        <NavLink to="/results">
           <div>
             <i className="bx bx-history"></i>
           </div>

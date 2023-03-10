@@ -5,11 +5,16 @@ import ComponentLoading from "../blocks/ComponentLoading";
 import { nigerianBanks } from "../../global/banks/banks";
 import { sortArrayByname } from "../../global/customFunctions";
 import { setAddBankModal, setAlertPopUp } from "../../store/alert/alertSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PinCodeBlock from "../blocks/PinCodeBlock";
 
 const WithdrawalTab = () => {
   const dispatch = useDispatch();
+
+  const userBankAccounts = useSelector(
+    (state) => state.wallet.userBankAccounts
+  );
+
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState(0);
@@ -130,10 +135,10 @@ const WithdrawalTab = () => {
                   >
                     <option value="">Select bank</option>
 
-                    {allBanks &&
-                      allBanks?.map((item, index) => (
+                    {userBankAccounts &&
+                      userBankAccounts?.map((item, index) => (
                         <option key={index} value={item}>
-                          {item?.name}
+                          {item?.bankName + " - " + item?.accountNo}
                         </option>
                       ))}
                   </select>

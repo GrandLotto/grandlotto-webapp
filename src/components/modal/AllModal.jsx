@@ -9,6 +9,7 @@ import NotiicationModal from "./NotiicationModal";
 import PageLoading from "./PageLoading";
 import RedeemWinningModal from "./RedeemWinningModal";
 import RegisterModal from "./RegisterModal";
+import AddPinModal from "./AddPinModal";
 
 const AllModal = () => {
   return (
@@ -19,6 +20,7 @@ const AllModal = () => {
       <LoginModal />
       <RegisterModal />
       <ForgotPasswordModal />
+      <AddPinModal />
       <AddBankModal />
       <NotiicationModal />
       <RedeemWinningModal />

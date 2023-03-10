@@ -48,7 +48,10 @@ const OauthMenu = () => {
 
           <a
             className="top_link"
-            onClick={() => dispatch(setRedeemWinningModal(true))}
+            onClick={() => {
+              dispatch(setMobileMenu(false));
+              dispatch(setRedeemWinningModal(true));
+            }}
           >
             Redeem Winning
           </a>

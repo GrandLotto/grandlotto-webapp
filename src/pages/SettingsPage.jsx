@@ -47,7 +47,7 @@ const SettingsPage = () => {
 
             <div className="tab-content padding-0 border-0">
               <div className="tab-pane active" id="Wallet-tab">
-                <div className="card">
+                <div className="card text-center">
                   <TransactionPin />
                 </div>
               </div>

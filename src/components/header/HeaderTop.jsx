@@ -57,8 +57,13 @@ const HeaderTop = () => {
     <div className="headerTop">
       <div className="headerTopFlex">
         <div className="headerTopLeft">
-          <h4 className="hideOnMobile">Welcome, David</h4>
-          <p className="hideOnMobile">ID: 3542453995</p>
+          <h4 className="hideOnMobile">
+            Welcome,{" "}
+            <span className="text headerTopLeftcapitalize">
+              {user?.firstName}
+            </span>
+          </h4>
+          <p className="hideOnMobile">ID: {user?.code}</p>
           {(sideBarMenu || currentLocation !== "/account/dashboard") && (
             <i
               className="bx bx-left-arrow-alt showOnMobile"

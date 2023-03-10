@@ -53,13 +53,15 @@ const PinCodeBlock = ({ handleDone, pinLength, resetEFields }) => {
         onChange={(e) => setVerifyCode1(e.target.value)}
         type="text"
         maxLength="1"
-        autoComplete="off"
+        role="presentation"
+        autoComplete="new-password"
       />
       <input
         value={verifyCode2}
         onChange={(e) => setVerifyCode2(e.target.value)}
         type="text"
-        autoComplete="off"
+        role="presentation"
+        autoComplete="new-password"
         maxLength="1"
       />
 
@@ -67,15 +69,17 @@ const PinCodeBlock = ({ handleDone, pinLength, resetEFields }) => {
         value={verifyCode3}
         onChange={(e) => setVerifyCode3(e.target.value)}
         type="text"
-        autoComplete="off"
+        role="presentation"
+        autoComplete="new-password"
         maxLength="1"
       />
       <input
         value={verifyCode4}
         onChange={(e) => setVerifyCode4(e.target.value)}
         type="text"
+        role="presentation"
         maxLength="1"
-        autoComplete="off"
+        autoComplete="new-password"
       />
       {pinLength === 6 && (
         <input
@@ -83,7 +87,8 @@ const PinCodeBlock = ({ handleDone, pinLength, resetEFields }) => {
           onChange={(e) => setVerifyCode5(e.target.value)}
           type="text"
           maxLength="1"
-          autoComplete="off"
+          role="presentation"
+          autoComplete="new-password"
         />
       )}
       {pinLength === 6 && (
@@ -91,8 +96,9 @@ const PinCodeBlock = ({ handleDone, pinLength, resetEFields }) => {
           value={verifyCode6}
           onChange={(e) => setVerifyCode6(e.target.value)}
           type="text"
+          role="presentation"
           maxLength="1"
-          autoComplete="false"
+          autoComplete="new-password"
         />
       )}
     </div>

@@ -403,6 +403,14 @@ p {
   color: #282828;
 }
 
+.site_sub_title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 29px;
+  color: #282828;
+}
+
 .page_flex h5 {
   font-style: normal;
   font-weight: 600;
@@ -552,6 +560,11 @@ p {
 
   .site_title {
     font-size: 17px;
+    line-height: 29px;
+  }
+
+  .site_sub_title {
+    font-size: 15px;
     line-height: 29px;
   }
 
@@ -765,6 +778,7 @@ p {
   }
 
   .pages_mobile_dark .site_title,
+  .pages_mobile_dark .site_sub_title,
   .pages_mobile_dark label {
     color: #fff !important;
   }

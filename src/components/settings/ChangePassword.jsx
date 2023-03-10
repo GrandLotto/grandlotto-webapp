@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import ComponentLoading from "../blocks/ComponentLoading";
-import { setAlertPopUp } from "../../store/alert/alertSlice";
-import { useDispatch } from "react-redux";
+import { setAlertPopUp, setPageLoading } from "../../store/alert/alertSlice";
+import { useDispatch, useSelector } from "react-redux";
 import PinCodeBlock from "../blocks/PinCodeBlock";
+import { handlePOSTRequest } from "../../rest/apiRest";
+import { CHANGE_PASSWORD_URL } from "../../config/urlConfigs";
+import { getUserInfo } from "../../store/authSlice/actions";
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.oauth.user);
+
   const [isLoading, setIsLoading] = useState(false);
   const [pin, setPin] = useState("");
   const [pin2, setPin2] = useState("");
   const [emptyFields, setEmptyFields] = useState(true);
-  const [resetEFields, setResetEFields] = useState(false);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -21,16 +26,26 @@ const ChangePassword = () => {
 
   const [confirmNewPasswordError, setConfirmNewPasswordError] = useState("");
 
-  const resetFields = (code) => {
-    setPin("");
-    setPin2("");
+  const resetFields = () => {
+    setOldPassword("");
+    setNewPassword("");
+    setConfirmNewPassword("");
+    setConfirmNewPasswordError("");
+    setShowOldPassword(false);
+    setShowNewPassword(false);
+    setShowConfirmNewPassword(false);
     setEmptyFields(true);
-    setResetEFields(true);
   };
 
   useEffect(() => {
     validateForm();
-  }, [oldPassword, emptyFields, newPassword, confirmNewPassword]);
+  }, [
+    oldPassword,
+    emptyFields,
+    newPassword,
+    confirmNewPassword,
+    confirmNewPasswordError,
+  ]);
 
   const validateForm = () => {
     if (!oldPassword) {
@@ -69,6 +84,36 @@ const ChangePassword = () => {
     setEmptyFields(false);
   };
 
+  // const proceed = () => {
+  //   dispatch(
+  //     setPageLoading({
+  //       status: true,
+  //       message: "Please wait ...",
+  //     })
+  //   );
+
+  //   setTimeout(() => {
+  //     dispatch(
+  //       setPageLoading({
+  //         status: false,
+  //         message: "",
+  //       })
+  //     );
+
+  //     dispatch(
+  //       setAlertPopUp({
+  //         status: true,
+  //         type: "SUCCESS",
+  //         title: "Successful",
+  //         desc: `successfully changed Password`,
+  //         payload: null,
+  //       })
+  //     );
+
+  //     resetFields();
+  //   }, 800);
+  // };
+
   const proceed = () => {
     dispatch(
       setPageLoading({
@@ -77,26 +122,67 @@ const ChangePassword = () => {
       })
     );
 
-    setTimeout(() => {
-      dispatch(
-        setPageLoading({
-          status: false,
-          message: "",
-        })
-      );
+    const payload = {
+      email: user?.email,
+      currentPassword: oldPassword,
+      newPassword: newPassword,
+      confirmNewPassword: newPassword,
+    };
 
-      dispatch(
-        setAlertPopUp({
-          status: true,
-          type: "SUCCESS",
-          title: "Successful",
-          desc: `successfully changed Password`,
-          payload: null,
-        })
-      );
+    handlePOSTRequest(CHANGE_PASSWORD_URL, payload)
+      .then((response) => {
+        dispatch(
+          setPageLoading({
+            status: false,
+            message: "",
+          })
+        );
+        // console.log(response);
+        if (response?.data?.success) {
+          dispatch(
+            setAlertPopUp({
+              status: true,
+              type: "SUCCESS",
+              title: " Successful",
+              // desc: response?.data?.message,
+              desc: "Successfully changed password",
+              payload: null,
+            })
+          );
 
-      resetFields();
-    }, 800);
+          dispatch(getUserInfo(user?.email));
+
+          resetFields();
+        } else {
+          dispatch(
+            setAlertPopUp({
+              status: true,
+              type: "ERROR",
+              title: "Error",
+              desc: response?.data?.message,
+              payload: null,
+            })
+          );
+        }
+      })
+      .catch((error) => {
+        dispatch(
+          setPageLoading({
+            status: false,
+            message: "",
+          })
+        );
+
+        dispatch(
+          setAlertPopUp({
+            status: true,
+            type: "ERROR",
+            title: "Error",
+            desc: "An error occurred, please try again",
+            payload: null,
+          })
+        );
+      });
   };
 
   return (
@@ -104,7 +190,8 @@ const ChangePassword = () => {
       className="grandlotto_card payment_card"
       style={{ position: "relative" }}
     >
-      <div className="grandlotto_form mt-5">
+      <div className="grandlotto_form mt-2">
+        <h5 className="site_sub_title mb-5">Change Password</h5>
         <div className="row mb-2">
           <div className="col-md-4">
             <div className="form-group " style={{ width: "100%" }}>

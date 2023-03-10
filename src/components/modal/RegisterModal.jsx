@@ -14,6 +14,7 @@ import {
   setIsUserLoggedIn,
   setUserInfo,
 } from "../../store/authSlice/authSlice";
+import { getUserAccount } from "../../store/wallet/actions";
 import ComponentLoading from "../blocks/ComponentLoading";
 import Reponsemessage from "../blocks/Reponsemessage";
 
@@ -138,8 +139,8 @@ const RegisterModal = () => {
       password: password,
       confirmPassword: confirmPassword,
       email: email,
-      roleName: null,
-      gender: "male",
+      roleName: "USER",
+      gender: "Male",
       firstName: firstName,
       lastName: lastName,
       referredBy: "",
@@ -149,55 +150,61 @@ const RegisterModal = () => {
         phone.slice(phone.length - 4),
     };
 
+    // console.log(JSON.stringify(payload));
+
     handlePOSTRequest(REGISTER_URL, payload)
       .then((response) => {
         setIsLoading(false);
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
-          if (response.data.data.emailConfirmed) {
-            const data = {
-              firstName: response.data.data?.firstName,
-              lastName: response.data.data?.lastName,
-              email: response.data.data?.email,
-              code: response.data.data?.code,
-              userName: response.data.data?.userName,
-              phoneNumber: response.data.data?.phoneNumber,
-              photo: response.data.data?.photo,
-              country: response.data.data?.country,
-            };
-            const token = response.data.data.token.token;
-            const expireTo = response.data.data.token.expireTo;
+          dispatch(
+            setAlertPopUp({
+              status: true,
+              type: "SUCCESS",
+              title: "Registration Successful",
+              desc: `Congratulations, your account has been successfully created`,
+              payload: null,
+            })
+          );
 
-            localStorage.setItem("appUserThemeSettingsCode", token);
-            localStorage.setItem("appexrat", new Date(expireTo)?.getTime());
+          setTimeout(() => {
+            dispatch(setLoginModal(true));
+          }, 2000);
 
-            dispatch(setIsToken(token));
-            dispatch(setUserInfo(data));
-            dispatch(setIsUserLoggedIn(true));
+          // if (response.data.data.emailConfirmed) {
+          //   // const data = {
+          //   //   firstName: response.data.data?.firstName,
+          //   //   lastName: response.data.data?.lastName,
+          //   //   email: response.data.data?.email,
+          //   //   code: response.data.data?.code,
+          //   //   userName: response.data.data?.userName,
+          //   //   phoneNumber: response.data.data?.phoneNumber,
+          //   //   photo: response.data.data?.photo,
+          //   //   country: response.data.data?.country,
+          //   // };
+          //   // const token = response.data.data.token.token;
+          //   // const expireTo = response.data.data.token.expireTo;
 
-            dispatch(getUserInfo(data?.email));
+          //   // localStorage.setItem("appUserThemeSettingsCode", token);
+          //   // localStorage.setItem("appexrat", new Date(expireTo)?.getTime());
 
-            dispatch(
-              setAlertPopUp({
-                status: true,
-                type: "SUCCESS",
-                title: "Registration Successful",
-                desc: `Congratulations, your account has been successfully created. Kindly
-                check your registered email for verification code.`,
-                payload: null,
-              })
-            );
-          } else {
-            dispatch(
-              setAlertPopUp({
-                status: true,
-                type: "ERROR",
-                title: "Login Error",
-                desc: `Kindly confirm your email`,
-                payload: null,
-              })
-            );
-          }
+          //   // dispatch(setIsToken(token));
+          //   // dispatch(setUserInfo(data));
+          //   // dispatch(setIsUserLoggedIn(true));
+          //   // dispatch(getUserAccount(data?.email));
+          //   // dispatch(getUserInfo(data?.email));
+
+          // } else {
+          //   dispatch(
+          //     setAlertPopUp({
+          //       status: true,
+          //       type: "ERROR",
+          //       title: "Login Error",
+          //       desc: `Kindly confirm your email`,
+          //       payload: null,
+          //     })
+          //   );
+          // }
 
           closeModal();
         } else {

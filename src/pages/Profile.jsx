@@ -53,7 +53,7 @@ const Profile = () => {
       setEmail(user?.email);
       setPhone(user?.phoneNumber);
       setGender(user?.gender);
-      setPhoto(user?.photo);
+      setPhoto(user?.photo || person);
       setDob(user?.dateOfBirth ? removeTimeZone(user?.dateOfBirth) : "");
     }
   }, [user]);
@@ -224,7 +224,7 @@ const Profile = () => {
                     objectFit: "cover",
                     borderRadius: "50%",
                   }}
-                  alt="grand-logo"
+                  alt={user?.firstName}
                 />
 
                 <input

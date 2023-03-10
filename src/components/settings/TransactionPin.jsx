@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import ComponentLoading from "../blocks/ComponentLoading";
 import { setAlertPopUp, setPageLoading } from "../../store/alert/alertSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PinCodeBlock from "../blocks/PinCodeBlock";
+import { handlePOSTRequest } from "../../rest/apiRest";
+import { CHANGE_TRANSACTION_PIN_URL } from "../../config/urlConfigs";
+import { getUserInfo } from "../../store/authSlice/actions";
 
 const TransactionPin = () => {
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.oauth.user);
+
   const [isLoading, setIsLoading] = useState(false);
   const [pin, setPin] = useState("");
   const [pin2, setPin2] = useState("");
@@ -53,6 +59,36 @@ const TransactionPin = () => {
     setPin2(code);
   };
 
+  // const proceed = () => {
+  //   dispatch(
+  //     setPageLoading({
+  //       status: true,
+  //       message: "Please wait ...",
+  //     })
+  //   );
+
+  //   setTimeout(() => {
+  //     dispatch(
+  //       setPageLoading({
+  //         status: false,
+  //         message: "",
+  //       })
+  //     );
+
+  //     dispatch(
+  //       setAlertPopUp({
+  //         status: true,
+  //         type: "SUCCESS",
+  //         title: "Successful",
+  //         desc: `Pin change was successful`,
+  //         payload: null,
+  //       })
+  //     );
+
+  //     resetFields();
+  //   }, 800);
+  // };
+
   const proceed = () => {
     dispatch(
       setPageLoading({
@@ -61,26 +97,70 @@ const TransactionPin = () => {
       })
     );
 
-    setTimeout(() => {
-      dispatch(
-        setPageLoading({
-          status: false,
-          message: "",
-        })
-      );
+    const payload = {
+      email: user?.email,
+      oldPIN: pin,
+      newPIN: pin2,
+      confirmNewPIN: pin2,
+    };
 
-      dispatch(
-        setAlertPopUp({
-          status: true,
-          type: "SUCCESS",
-          title: "Successful",
-          desc: `Pin change was successful`,
-          payload: null,
-        })
-      );
+    handlePOSTRequest(CHANGE_TRANSACTION_PIN_URL, payload)
+      .then((response) => {
+        dispatch(
+          setPageLoading({
+            status: false,
+            message: "",
+          })
+        );
+        // console.log(response);
+        if (response?.data?.success) {
+          dispatch(
+            setAlertPopUp({
+              status: true,
+              type: "SUCCESS",
+              title: " Successful",
+              // desc: response?.data?.message,
+              desc: "Transaction pin Updated",
+              payload: null,
+            })
+          );
 
-      resetFields();
-    }, 800);
+          dispatch(getUserInfo(user?.email));
+
+          closeModal();
+        } else {
+          dispatch(
+            setAlertPopUp({
+              status: true,
+              type: "ERROR",
+              title: "Error",
+              desc: response?.data?.message,
+              payload: null,
+            })
+          );
+
+          setResetEFields(true);
+        }
+      })
+      .catch((error) => {
+        dispatch(
+          setPageLoading({
+            status: false,
+            message: "",
+          })
+        );
+        setResetEFields(true);
+        dispatch(
+          setAlertPopUp({
+            status: true,
+            type: "ERROR",
+            title: "Error",
+            desc: "An error occurred, please try again",
+            payload: null,
+          })
+        );
+        console.log(error);
+      });
   };
 
   return (
@@ -89,6 +169,7 @@ const TransactionPin = () => {
       style={{ position: "relative" }}
     >
       <div className="grandlotto_form mt-5">
+        <h5 className="site_sub_title mb-5">Change Pin</h5>
         <div
           style={{
             width: "100%",
@@ -103,7 +184,7 @@ const TransactionPin = () => {
             style={{ width: "100%" }}
           >
             <label htmlFor="" className="mb-3">
-              Transaction pin
+              Old Transaction pin
             </label>
 
             <PinCodeBlock
@@ -114,7 +195,7 @@ const TransactionPin = () => {
           </div>
           <div className="form-group text-center" style={{ width: "100%" }}>
             <label htmlFor="" className="mb-3">
-              Confirm pin
+              New Transaction pin
             </label>
 
             <PinCodeBlock

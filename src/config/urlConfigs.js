@@ -7,6 +7,9 @@ const CHANGE_PASSWORD_URL = "/v1.0/OAuth/changePassword";
 const GET_USERINFO_URL = "/v1.0/OAuth/getUserInfo";
 const UPDATE_USERINFO_URL = "/v1.0/OAuth/updateUser";
 const GET_ACCOUNT_BALANCES_URL = "/v1.0/Wallet/GetAccountBalances";
+const GET_USER_BANK_ACCOUNTS_URL = "/v1.0/Payment/getUserAccount";
+const ADD_TRANSACTION_PIN_URL = "/v1.0/PIN/addTransactionPIN";
+const CHANGE_TRANSACTION_PIN_URL = "/v1.0/PIN/changePIN";
 
 export {
   LOGIN_URL,
@@ -18,4 +21,7 @@ export {
   GET_ACCOUNT_BALANCES_URL,
   UPDATE_USERINFO_URL,
   CONFIRM_EMAIL_URL,
+  ADD_TRANSACTION_PIN_URL,
+  CHANGE_TRANSACTION_PIN_URL,
+  GET_USER_BANK_ACCOUNTS_URL,
 };

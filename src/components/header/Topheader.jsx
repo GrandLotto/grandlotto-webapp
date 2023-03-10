@@ -103,7 +103,10 @@ const Topheader = () => {
 
         <div
           className="hamburgar"
-          onClick={() => dispatch(setMobileMenu(true))}
+          onClick={() => {
+            dispatch(setMobileMenu(true));
+            dispatch(setSideBarMenu(false));
+          }}
         >
           <i className="bx bx-menu"></i>
         </div>

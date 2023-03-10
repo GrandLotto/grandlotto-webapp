@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAccountBalances } from "./actions";
+import { getAccountBalances, getUserAccount } from "./actions";
 
 const initialState = {
   accountBalances: null,
+  userBankAccounts: null,
   loading: false,
   error: false,
 };
@@ -34,7 +35,6 @@ const walletSlice = createSlice({
         state.error = false;
         // console.log(action.payload.data);
       } else {
-        state.user = null;
         state.error = true;
         state.loading = false;
       }
@@ -43,6 +43,15 @@ const walletSlice = createSlice({
     [getAccountBalances.rejected]: (state) => {
       state.error = true;
       state.loading = false;
+    },
+
+    [getUserAccount.fulfilled]: (state, action) => {
+      // console.log("here");
+      // console.log(action.payload);
+      if (action.payload && action.payload.data) {
+        state.userBankAccounts = action.payload.data;
+        console.log("userBankAccounts", state.userBankAccounts);
+      }
     },
   },
 });

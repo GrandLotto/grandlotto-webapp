@@ -27,6 +27,7 @@ const initialState = {
   notiicationModal: false,
   betSlipMobileModal: false,
   redeemWinningModal: false,
+  addPinModal: false,
 
   inputCodeModal: {
     status: false,
@@ -111,6 +112,10 @@ const alertSlice = createSlice({
     setInputCodeModal: (state, { payload }) => {
       state.inputCodeModal = payload;
     },
+
+    setAddPinModal: (state, { payload }) => {
+      state.addPinModal = payload;
+    },
   },
 
   extraReducers: {
@@ -135,6 +140,7 @@ export const {
   setPageLoading,
   setRedeemWinningModal,
   setInputCodeModal,
+  setAddPinModal,
 } = alertSlice.actions;
 
 export default alertSlice.reducer;

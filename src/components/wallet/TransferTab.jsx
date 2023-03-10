@@ -69,7 +69,7 @@ const TransferTab = () => {
                 <h6>GTBank</h6>
                 <h3>0027254724</h3>
                 <p>Use this account for this transaction only.</p>
-                <p>
+                <p className="mt-2">
                   Expires in <Timer time={time * 60} />
                 </p>
               </div>
@@ -158,7 +158,7 @@ const TransferTab = () => {
                       className="grandLottoButton cardButton lengthyButton"
                       onClick={() => handlePay()}
                     >
-                      Pay
+                      Continue
                     </button>
                   </div>
                 </div>

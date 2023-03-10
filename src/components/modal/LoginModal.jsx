@@ -17,7 +17,7 @@ import {
 import { getUserInfo } from "../../store/authSlice/actions";
 import ComponentLoading from "../blocks/ComponentLoading";
 import Reponsemessage from "../blocks/Reponsemessage";
-import { getAccountBalances } from "../../store/wallet/actions";
+import { getAccountBalances, getUserAccount } from "../../store/wallet/actions";
 
 const LoginModal = () => {
   const dispatch = useDispatch();
@@ -116,6 +116,7 @@ const LoginModal = () => {
 
             dispatch(getUserInfo(data?.email));
             dispatch(getAccountBalances(data?.email));
+            dispatch(getUserAccount(data?.email));
           } else {
             dispatch(
               setAlertPopUp({

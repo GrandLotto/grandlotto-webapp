@@ -23,7 +23,12 @@ const Dashboard = () => {
         <div className="">
           <div className="d-flex justify-content-between pages_header hideOnMobile">
             <h5 className="site_title">Overview</h5>
-            <button className="grandLottoButton">Play Game</button>
+            <button
+              className="grandLottoButton"
+              onClick={() => navigation("/lotto")}
+            >
+              Play Game
+            </button>
           </div>
 
           <HomeWalletOverview />
@@ -32,10 +37,13 @@ const Dashboard = () => {
           <div className="mt-5 hideOnMobile">
             <div className="page_flex d-flex justify-content-between align-items-center mb-4">
               <h5>Transactions</h5>
-              <a className="d-flex align-items-center">
-                <span>See all</span>
-                <i className="bx bx-chevron-right"></i>
-              </a>
+              <Link
+                to="/account/transactions"
+                className="d-flex align-items-center"
+              >
+                <span className="text-dark">See all</span>
+                <i className="bx bx-chevron-right text-light"></i>
+              </Link>
             </div>
 
             <Transactions />
@@ -65,10 +73,14 @@ const Dashboard = () => {
           <div className="px-3 mt-5">
             <div className="page_flex d-flex justify-content-between align-items-center mb-4">
               <h5 className="text-light">Transactions</h5>
-              <a className="d-flex align-items-center">
+
+              <Link
+                to="/account/transactions"
+                className="d-flex align-items-center"
+              >
                 <span className="text-light">See all</span>
                 <i className="bx bx-chevron-right text-light"></i>
-              </a>
+              </Link>
             </div>
             <div className="transactionDark">
               <Transactions />

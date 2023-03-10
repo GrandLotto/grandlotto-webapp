@@ -3,13 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import AllModal from "./components/modal/AllModal";
 import { addZero } from "./global/customFunctions";
 import MyRouter from "./routes/MyRouter";
+import {
+  setAddPinModal,
+  setAlertPopUp,
+  setPageLoading,
+} from "./store/alert/alertSlice";
 import { getUserInfo } from "./store/authSlice/actions";
 import {
   logout,
   setDigitalDate,
   setUserInfo,
 } from "./store/authSlice/authSlice";
-import { getAccountBalances } from "./store/wallet/actions";
+import { getAccountBalances, getUserAccount } from "./store/wallet/actions";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,12 +30,39 @@ const App = () => {
       if (user) {
         dispatch(getUserInfo(user?.email));
         dispatch(getAccountBalances(user?.email));
+        dispatch(getUserAccount(user?.email));
       }
     })();
   }, []);
+  useEffect(() => {
+    (async () => {
+      if (user) {
+        if (!user?.transactionPIN) {
+          dispatch(setAddPinModal(true));
+        }
+      }
+    })();
+  }, [user]);
 
   useEffect(() => {
     digitalClock();
+
+    dispatch(
+      setPageLoading({
+        status: false,
+        message: "",
+      })
+    );
+
+    dispatch(
+      setAlertPopUp({
+        status: false,
+        type: "",
+        title: "",
+        desc: "",
+        payload: null,
+      })
+    );
   }, []);
 
   const digitalClock = () => {
