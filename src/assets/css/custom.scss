@@ -1,3 +1,7 @@
+p {
+  margin: 0px;
+}
+
 .instructionMessageInputCodes {
   width: 100%;
   /* display: flex;
@@ -33,6 +37,31 @@
   right: 10px;
   font-size: 22px;
   cursor: pointer;
+}
+
+.inputError {
+  text-align: left !important;
+  margin: 0px !important;
+  margin-top: 10px !important;
+  font-size: 14px !important;
+}
+
+.responseMessage {
+  display: inline-block;
+  background: rgb(255, 146, 164);
+  width: auto;
+  padding: 4px 60px;
+  // white-space: nowrap;
+  border-radius: 2px;
+}
+
+.responseMessage p {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100% !important;
+  margin: 0px !important;
+  color: #111 !important;
+  font-size: 13px !important;
 }
 
 @keyframes slideInRight {
@@ -498,6 +527,13 @@
     width: 40px;
     height: 34px;
     margin: 0px 4px;
+    background: darken($color: $primaryDark, $amount: 20%);
+    color: #fff !important;
+  }
+
+  .instructionMessageInputCodes input:focus {
+    background: darken($color: $primaryDark, $amount: 20%);
+    color: #fff !important;
   }
 }
 

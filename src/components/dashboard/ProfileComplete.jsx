@@ -11,7 +11,7 @@ const ProfileComplete = () => {
           <div className="profileCompleteFlexLeft">
             <h5>Complete your profile</h5>
             <p>Extend your profile information to enable withdrawal of funds</p>
-            <div>
+            <div className="mt-3">
               <button
                 className="grandLottoButton grandLottoButtonLightGreen"
                 onClick={() => navigation("/account/profile")}

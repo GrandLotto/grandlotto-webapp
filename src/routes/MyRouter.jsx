@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoggedInLayout from "../layout/LoggedInLayout";
+import MainLayout from "../layout/MainLayout";
 import OAuthLayout from "../layout/OAuthLayout";
 import ThreeColLayout from "../layout/ThreeColLayout";
 import TwoColLayout from "../layout/TwoColLayout";
@@ -15,36 +16,46 @@ import Profile from "../pages/Profile";
 import Results from "../pages/Results";
 import SettingsPage from "../pages/SettingsPage";
 import TransactionsPage from "../pages/TransactionsPage";
+import TransferPage from "../pages/TransferPage";
 import WithdrawalPage from "../pages/WithdrawalPage";
 
 const MyRouter = () => {
   return (
     <Router>
       <Routes>
-        <Route element={<OAuthLayout />}>
-          <Route path="/" exact element={<Home />} />
-        </Route>
-        <Route element={<LoggedInLayout />}>
-          <Route path="/account/dashboard" element={<Dashboard />} />
-          <Route path="/account/profile" element={<Profile />} />
-          <Route path="/account/fund-wallet" element={<FundWalletPage />} />
-          <Route path="/account/bet-history" element={<BetHistoryPage />} />
-          <Route path="/account/transactions" element={<TransactionsPage />} />
-          <Route path="/account/kyc-documentation" element={<KYCPage />} />
-          <Route path="/account/withdraw-funds" element={<WithdrawalPage />} />
-          <Route path="/account/settings" element={<SettingsPage />} />
-          <Route path="/account/betslip" element={<BetSlip />} />
-        </Route>
-        <Route element={<ThreeColLayout />}>
-          <Route path="/lotto" element={<PlayLotto />} />
-          <Route path="/betslip" element={<BetSlip />} />
-        </Route>
-        <Route element={<TwoColLayout />}>
-          <Route path="/results" element={<Results />} />
-        </Route>
-        {/* <Route element={<OAuthLayout2 />}>
+        <Route element={<MainLayout />}>
+          <Route element={<OAuthLayout />}>
+            <Route path="/" exact element={<Home />} />
+          </Route>
+          <Route element={<LoggedInLayout />}>
+            <Route path="/account/dashboard" element={<Dashboard />} />
+            <Route path="/account/profile" element={<Profile />} />
+            <Route path="/account/fund-wallet" element={<FundWalletPage />} />
+            <Route path="/account/transfer" element={<TransferPage />} />
+            <Route path="/account/bet-history" element={<BetHistoryPage />} />
+            <Route
+              path="/account/transactions"
+              element={<TransactionsPage />}
+            />
+            <Route path="/account/kyc-documentation" element={<KYCPage />} />
+            <Route
+              path="/account/withdraw-funds"
+              element={<WithdrawalPage />}
+            />
+            <Route path="/account/settings" element={<SettingsPage />} />
+            <Route path="/account/betslip" element={<BetSlip />} />
+          </Route>
+          <Route element={<ThreeColLayout />}>
+            <Route path="/lotto" element={<PlayLotto />} />
+            <Route path="/betslip" element={<BetSlip />} />
+          </Route>
+          <Route element={<TwoColLayout />}>
+            <Route path="/results" element={<Results />} />
+          </Route>
+          {/* <Route element={<OAuthLayout2 />}>
           <Route path="/redeem-winning" element={<RedeemWining />} />
         </Route> */}
+        </Route>
       </Routes>
     </Router>
   );

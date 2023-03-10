@@ -1,51 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Group from "../../assets/images/Group.png";
 import uil_money from "../../assets/images/uil_money.png";
 import ps_promo from "../../assets/images/ps_promo.png";
+import { useSelector } from "react-redux";
+import { addComma } from "../../global/customFunctions";
 
 const HomeWalletOverview = () => {
-  const wallet = [
-    {
-      id: 1,
-      img: Group,
-      title: "Wallet balance",
-      desc: "₦0.00",
-    },
-    {
-      id: 2,
-      img: uil_money,
-      title: "Withdrawable balance",
-      desc: "₦0.00",
-    },
-    {
-      id: 3,
-      img: ps_promo,
-      title: "Bonus balance",
-      desc: "₦0.00",
-    },
-  ];
+  const accountBalances = useSelector((state) => state.wallet.accountBalances);
 
-  const walletMobile = [
-    {
-      id: 1,
-      img: "bx bx-wallet-alt",
-      title: "Balance",
-      desc: "₦100.00",
-    },
-    {
-      id: 2,
-      img: "bx bx-money",
-      title: "Withdrawable",
-      desc: "₦600,000.00",
-    },
-    {
-      id: 3,
-      img: "bx bx-gift",
-      title: "Bonus ",
-      desc: "₦2,000,000.00",
-    },
-  ];
+  const [wallet, setWallet] = useState(null);
+  const [walletMobile, setWalletMobile] = useState(null);
+
+  useEffect(() => {
+    if (accountBalances) {
+      setWallet([
+        {
+          id: 1,
+          img: Group,
+          title: "Wallet balance",
+          desc: addComma(accountBalances?.totalBalance),
+        },
+        {
+          id: 2,
+          img: uil_money,
+          title: "Withdrawable balance",
+          desc: addComma(accountBalances?.winningBalance),
+        },
+        {
+          id: 3,
+          img: ps_promo,
+          title: "Bonus balance",
+          desc: addComma(accountBalances?.bonusAccount),
+        },
+      ]);
+      setWalletMobile([
+        {
+          id: 1,
+          img: "bx bx-wallet-alt",
+          title: "Balance",
+          desc: addComma(accountBalances?.totalBalance),
+        },
+        {
+          id: 2,
+          img: "bx bx-money",
+          title: "Withdrawable",
+          desc: addComma(accountBalances?.winningBalance),
+        },
+        {
+          id: 3,
+          img: "bx bx-gift",
+          title: "Bonus ",
+          desc: addComma(accountBalances?.bonusAccount),
+        },
+      ]);
+    }
+  }, [accountBalances]);
 
   return (
     <>
@@ -67,7 +77,7 @@ const HomeWalletOverview = () => {
         <div className="sidebarMobleHeaderWalletButtons">
           {walletMobile &&
             walletMobile?.map((item, index) => (
-              <div className="sidebarMobleHeaderWalletButtonsItem">
+              <div className="sidebarMobleHeaderWalletButtonsItem" key={index}>
                 <i className={item?.img}></i>
                 <h4 className="">{item?.title}</h4>
                 <p className="">{item?.desc}</p>

@@ -1,38 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FORGOT_PASSWORD_URL } from "../../config/urlConfigs";
-import { validEmail } from "../../global/customFunctions";
+import { CONFIRM_EMAIL_URL } from "../../config/urlConfigs";
 import { handlePOSTRequest } from "../../rest/apiRest";
 import {
   setForgotPasswordModal,
   setInputCodeModal,
   setLoginModal,
+  setAlertPopUp,
 } from "../../store/alert/alertSlice";
+
 import ComponentLoading from "../blocks/ComponentLoading";
+import PinCodeBlock from "../blocks/PinCodeBlock";
 import Reponsemessage from "../blocks/Reponsemessage";
 
-const ForgotPasswordModal = () => {
+const FnputCodeModal = () => {
   const dispatch = useDispatch();
 
-  const modal = useSelector((state) => state.alert.forgotPasswordModal);
+  const modal = useSelector((state) => state.alert.inputCodeModal);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
   const [responseError, setResponseError] = useState("");
   const [emptyFields, setEmptyFields] = useState(true);
+
+  const [pin, setPin] = useState("");
+  const [resetEFields, setResetEFields] = useState(false);
 
   const closeModal = () => {
     if (isLoading === true) {
       return;
     }
-    dispatch(setForgotPasswordModal(false));
+    dispatch(
+      setInputCodeModal({
+        status: false,
+        type: "",
+        title: "",
+        desc: "",
+        btnText: "",
+        payload: null,
+      })
+    );
 
     setIsLoading(false);
     setEmptyFields(true);
-    setEmail("");
-    setEmailError("");
+    setPin("");
     setResponseError("");
+  };
+
+  const handleDone = (code) => {
+    setPin(code);
   };
 
   const goToLogin = (e) => {
@@ -43,21 +58,17 @@ const ForgotPasswordModal = () => {
 
   useEffect(() => {
     validateForm();
-  }, [email, emptyFields]);
+  }, [pin, emptyFields]);
 
   const validateForm = () => {
-    if (!email) {
+    if (!pin) {
       setEmptyFields(true);
       return false;
     }
-
-    if (validEmail(email) === false) {
-      setEmailError("Invalid email address");
+    if (pin !== "" && pin.length !== 5) {
       setEmptyFields(true);
       return false;
     }
-
-    setEmailError("");
 
     setEmptyFields(false);
   };
@@ -66,30 +77,27 @@ const ForgotPasswordModal = () => {
     setIsLoading(true);
     setResponseError("");
 
-    const payload = { email: email };
+    const payload = { email: modal?.payload?.email, token: pin };
 
-    handlePOSTRequest(FORGOT_PASSWORD_URL, payload)
+    handlePOSTRequest(CONFIRM_EMAIL_URL, payload)
       .then((response) => {
         setIsLoading(false);
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
-          let newPayload = {
-            ...response?.data?.data,
-            email: email,
-          };
           dispatch(
-            setInputCodeModal({
+            setAlertPopUp({
               status: true,
-              type: "CONFIRM_EMAIL",
-              title: "Confirm Email",
-              desc: response?.data?.data?.message,
-              btnText: "Confirm Email",
-              payload: newPayload,
+              type: "SUCCESS",
+              title: " Successful",
+              desc: response?.data?.message,
+              payload: null,
             })
           );
+
           closeModal();
         } else {
           setResponseError(response?.data?.message);
+          setResetEFields(true);
         }
       })
       .catch((error) => {
@@ -100,7 +108,7 @@ const ForgotPasswordModal = () => {
   };
 
   return (
-    modal && (
+    modal?.status && (
       <div className="alert-modal alertPOP" id="loginModal">
         <div className="alert-modal-overlay" onClick={() => closeModal()}></div>
         <div className="alert-modal-card vivify popInBottom">
@@ -115,10 +123,8 @@ const ForgotPasswordModal = () => {
 
           <div className="alert-modal-body">
             <div className="text-center w-100">
-              <h4 className=" text-center">Forgot password</h4>
-              <p className="mt-3 p_para">
-                A recovery link will be sent to your phone
-              </p>
+              <h4 className=" text-center">{modal?.title}</h4>
+              <p className="mt-3 p_para">{modal?.desc}</p>
 
               {responseError ? (
                 <Reponsemessage
@@ -127,37 +133,15 @@ const ForgotPasswordModal = () => {
                 />
               ) : null}
             </div>
-            <form className="grandlotto_form mt-4" style={{ width: "100%" }}>
-              <div className="form-group" style={{ width: "100%" }}>
-                <label htmlFor="">Email</label>
-
-                <input
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  className="form-control py-3"
-                  placeholder="Email"
-                  type="text"
-                  style={{ width: "100%" }}
-                />
-
-                {emailError && (
-                  <p className="inputError text-danger">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="10"
-                      height="10"
-                      viewBox="0 0 20 20"
-                      role="presentation"
-                      focusable="false"
-                      tabIndex="-1"
-                      fill="red"
-                    >
-                      <path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 11c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1 4H9v-2h2v2z"></path>
-                    </svg>
-                    <span className="ml-2">{emailError}</span>
-                  </p>
-                )}
-              </div>
+            <form
+              className="grandlotto_form mt-4 text-center"
+              style={{ width: "100%" }}
+            >
+              <PinCodeBlock
+                pinLength={4}
+                handleDone={handleDone}
+                resetEFields={resetEFields}
+              />
 
               <br />
               <div
@@ -170,19 +154,8 @@ const ForgotPasswordModal = () => {
                   onClick={() => proceed()}
                   className="grandLottoButton"
                 >
-                  Continue
+                  {modal?.btnText}
                 </button>
-              </div>
-
-              <div className="form-group text-dark d-flex justify-content-center">
-                Forget it
-                <a
-                  href="true"
-                  onClick={(e) => goToLogin(e)}
-                  className="has_link ml-2"
-                >
-                  Login
-                </a>
               </div>
             </form>
           </div>
@@ -192,4 +165,4 @@ const ForgotPasswordModal = () => {
   );
 };
 
-export default ForgotPasswordModal;
+export default FnputCodeModal;

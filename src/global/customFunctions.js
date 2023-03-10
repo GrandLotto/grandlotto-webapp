@@ -117,6 +117,24 @@ export const validEmail = (email) => {
   return emailReg.test(email);
 };
 
+export const removeTimeZone = (datestring) => {
+  let finalDate = "";
+
+  if (datestring.split("+").length > 1) {
+    let b = datestring.split("T");
+    finalDate = b[0];
+  } else {
+    let b = datestring.split("T");
+
+    if (b.length > 1) {
+      b.pop();
+      finalDate = b.join("-");
+    }
+  }
+
+  return finalDate;
+};
+
 export const formatAMPM = (datepayload) => {
   var date = new Date(datepayload);
   var hours = date.getHours();
@@ -207,6 +225,17 @@ export const formateDateAndTimeByName = (newDate) => {
   } ${monthName} ${year}, ${strTime}`;
 
   return formatted;
+};
+
+export const getAge = (DOB) => {
+  var today = new Date();
+  var birthDate = new Date(DOB);
+  var age = today.getFullYear() - birthDate.getFullYear();
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
 };
 
 export const numbersFromOneTo90 = () => {

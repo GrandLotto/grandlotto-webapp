@@ -1,12 +1,33 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AllModal from "./components/modal/AllModal";
 import { addZero } from "./global/customFunctions";
 import MyRouter from "./routes/MyRouter";
-import { setDigitalDate } from "./store/authSlice/authSlice";
+import { getUserInfo } from "./store/authSlice/actions";
+import {
+  logout,
+  setDigitalDate,
+  setUserInfo,
+} from "./store/authSlice/authSlice";
+import { getAccountBalances } from "./store/wallet/actions";
 
 const App = () => {
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.oauth.user);
+
+  // useLayoutEffect(() => {
+  //   getUserInfoDetails()
+  // }, [])
+
+  useEffect(() => {
+    (async () => {
+      if (user) {
+        dispatch(getUserInfo(user?.email));
+        dispatch(getAccountBalances(user?.email));
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     digitalClock();
@@ -46,7 +67,6 @@ const App = () => {
   return (
     <>
       <MyRouter />
-      <AllModal />
     </>
   );
 };

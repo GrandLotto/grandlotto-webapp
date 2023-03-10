@@ -84,7 +84,7 @@ const FundWalletPage = () => {
                     data-toggle="tab"
                     href="#Debit-card-tab"
                   >
-                    Debit card
+                    By Debit card
                   </a>
                 </li>
                 <li className="nav-item">
@@ -93,14 +93,14 @@ const FundWalletPage = () => {
                     data-toggle="tab"
                     href="#Transfer-tab"
                   >
-                    Transfer
+                    By Transfer
                   </a>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <a className="nav-link" data-toggle="tab" href="#USSD-tab">
                     USSD
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
 

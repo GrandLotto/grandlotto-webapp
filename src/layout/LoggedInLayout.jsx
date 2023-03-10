@@ -1,18 +1,23 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useLayoutEffect } from "react";
+import { useSelector } from "react-redux";
+import { Navigate, Outlet } from "react-router-dom";
 import HeaderTop from "../components/header/HeaderTop";
 import BetSlipMobile from "../components/sidebar/BetSlipMobile";
 import MobileMenu from "../components/sidebar/MobileMenu";
 import Sidebar from "../components/sidebar/Sidebar";
 
 const LoggedInLayout = () => {
+  const isLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
+
+  useLayoutEffect(() => {}, [isLoggedIn]);
+
   return (
     <div className="app-wrapper">
       <Sidebar />
       <div className="content-body">
         <HeaderTop />
-        <Outlet />
+        {isLoggedIn ? <Outlet /> : <Navigate to="/" />}
       </div>
 
       <MobileMenu />

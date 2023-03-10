@@ -3,6 +3,7 @@ import AddBankModal from "./AddBankModal";
 import "./alert.scss";
 import AlertModal from "./AlertModal";
 import ForgotPasswordModal from "./ForgotPasswordModal";
+import FnputCodeModal from "./FnputCodeModal";
 import LoginModal from "./LoginModal";
 import LogoutModal from "./LogoutModal";
 import NotiicationModal from "./NotiicationModal";
@@ -22,6 +23,7 @@ const AllModal = () => {
       <AddBankModal />
       <NotiicationModal />
       <RedeemWinningModal />
+      <FnputCodeModal />
     </>
   );
 };

@@ -12,6 +12,10 @@ const initialState = {
     desc: "",
     payload: null,
   },
+  pageLoading: {
+    status: false,
+    message: "",
+  },
 
   loginModal: false,
   registerModal: false,
@@ -23,9 +27,14 @@ const initialState = {
   notiicationModal: false,
   betSlipMobileModal: false,
   redeemWinningModal: false,
-  pageLoading: {
+
+  inputCodeModal: {
     status: false,
-    message: "",
+    type: "",
+    title: "",
+    desc: "",
+    btnText: "",
+    payload: null,
   },
 };
 
@@ -98,6 +107,10 @@ const alertSlice = createSlice({
     setRedeemWinningModal: (state, { payload }) => {
       state.redeemWinningModal = payload;
     },
+
+    setInputCodeModal: (state, { payload }) => {
+      state.inputCodeModal = payload;
+    },
   },
 
   extraReducers: {
@@ -121,6 +134,7 @@ export const {
   setBetSlipMobileModal,
   setPageLoading,
   setRedeemWinningModal,
+  setInputCodeModal,
 } = alertSlice.actions;
 
 export default alertSlice.reducer;

@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogoutModal } from "../../store/alert/alertSlice";
+import { useNavigate } from "react-router-dom";
+import ComponentLoading from "../blocks/ComponentLoading";
+import { logout, setIsUserLoggedIn } from "../../store/authSlice/authSlice";
+
+import { persistor } from "../../store/store";
 
 const LogoutModal = () => {
-  const modal = useSelector((state) => state.alert.logoutModal);
   const dispatch = useDispatch();
+  const navigation = useNavigate();
+
+  const modal = useSelector((state) => state.alert.logoutModal);
+  const [isLoading, setIsLoading] = useState(false);
 
   const closeModal = () => {
     dispatch(
@@ -16,13 +24,26 @@ const LogoutModal = () => {
   };
 
   const handleLogout = () => {
-    closeModal();
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+      dispatch(setIsUserLoggedIn(false));
+      dispatch(logout());
+      persistor.pause();
+      persistor.flush().then(() => {
+        return persistor.purge();
+      });
+      // navigation("/");
+      closeModal();
+    }, 1500);
   };
   return (
     modal?.status && (
       <div className="alert-modal alertPOP overAll">
         <div className="alert-modal-overlay" onClick={closeModal}></div>
         <div className="alert-modal-card pages_mobile_dark vivify popInBottom">
+          {isLoading && <ComponentLoading title="Please wait ..." />}
           <div className="close-alert-button"></div>
 
           <div className="alert-modal-body">

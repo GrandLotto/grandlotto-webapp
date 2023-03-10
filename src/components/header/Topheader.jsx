@@ -4,7 +4,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import Logo from "../../assets/images/grandlotto.png";
 
-import person from "../../assets/images/person.png";
+import person from "../../assets/images/default.png";
 import {
   setLoginModal,
   setRegisterModal,
@@ -13,19 +13,20 @@ import {
   setSideBarMenu,
 } from "../../store/alert/alertSlice";
 import HeaderDropDownBlock from "../blocks/HeaderDropDownBlock";
+import HeaderTopBalance from "../blocks/HeaderTopBalance";
 
 const Topheader = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
   const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
+  const user = useSelector((state) => state.oauth.user);
 
   const [showDropDown, setshowDropDown] = useState(false);
 
   const toggleDropDown = (val) => {
     setTimeout(() => {
       val === false ? setshowDropDown(val) : setshowDropDown(!showDropDown);
-      console.log("here");
     }, 200);
   };
 
@@ -58,15 +59,24 @@ const Topheader = () => {
 
         {isUserLoggedIn ? (
           <div className="topHeaderRightLoggedIn">
-            <div className="topHeaderRightLoggedInBalance">
-              <p>Balance</p>
-              <h5>₦0.00</h5>
-            </div>
+            <HeaderTopBalance />
+
             <div
               className="topHeaderRightLoggedInImage"
               onClick={() => toggleDropDown(true)}
             >
-              <img src={person} alt="grand-logo" />
+              {user && user?.photo ? (
+                <img
+                  src={user?.photo}
+                  onError={(e) => {
+                    e.currentTarget.src = person;
+                  }}
+                  alt={user?.firstName}
+                />
+              ) : (
+                <img src={person} alt="grand-logo" />
+              )}
+
               <i
                 className="bx bx-chevron-down"
                 style={{ color: "#fff", display: "block" }}

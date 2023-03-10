@@ -1,12 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authSlice from "./authSlice/authSlice";
-import alertSlice from "./alert/alertSlice";
-import betSlice from "./betSlice/betSlice";
+
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+import thunk from "redux-thunk";
+import rootReducer from "./rootReducer";
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    oauth: authSlice,
-    alert: alertSlice,
-    bets: betSlice,
-  },
+  reducer: persistedReducer,
+  devTools: process.env.NODE_ENV !== "production",
+  middleware: [thunk],
 });
+
+export const persistor = persistStore(store);

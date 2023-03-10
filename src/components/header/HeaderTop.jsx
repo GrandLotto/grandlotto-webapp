@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Logo from "../../assets/images/grandlotto.png";
-import person from "../../assets/images/person.png";
+import person from "../../assets/images/default.png";
 import {
   setMobileMenu,
   setNotiicationModal,
   setSideBarMenu,
 } from "../../store/alert/alertSlice";
 import HeaderDropDownBlock from "../blocks/HeaderDropDownBlock";
+import HeaderTopBalance from "../blocks/HeaderTopBalance";
 import TopSearch from "../blocks/TopSearch";
 
 const HeaderTop = () => {
@@ -17,6 +18,7 @@ const HeaderTop = () => {
   const location = useLocation();
   const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
   const sideBarMenu = useSelector((state) => state.alert.sideBarMenu);
+  const user = useSelector((state) => state.oauth.user);
 
   const [showDropDown, setshowDropDown] = useState(false);
   const [currentLocation, setCurrentLocation] = useState("");
@@ -48,8 +50,6 @@ const HeaderTop = () => {
       dispatch(setSideBarMenu(false));
       dispatch(setMobileMenu(false));
       setCurrentLocation(location?.pathname);
-
-      console.log(currentLocation);
     }
   }, [location]);
 
@@ -77,10 +77,8 @@ const HeaderTop = () => {
         </div>
         <div className="headerTopRight">
           <div className="topHeaderRightLoggedIn">
-            <div className="topHeaderRightLoggedInBalance">
-              <p style={{ textAlign: "left" }}>Balance</p>
-              <h5>₦20,000.00</h5>
-            </div>
+            <HeaderTopBalance />
+
             <div
               className="topHeaderRightLoggedInNotification hideOnMobile"
               onClick={() => {
@@ -95,7 +93,17 @@ const HeaderTop = () => {
               className="topHeaderRightLoggedInImage hideOnMobile"
               onClick={() => toggleDropDown(true)}
             >
-              <img src={person} alt="grand-logo" />
+              {user && user?.photo ? (
+                <img
+                  src={user?.photo}
+                  onError={(e) => {
+                    e.currentTarget.src = person;
+                  }}
+                  alt={user?.firstName}
+                />
+              ) : (
+                <img src={person} alt="grand-logo" />
+              )}
               <i className="bx bx-chevron-down"></i>
             </div>
             {showDropDown ? <HeaderDropDownBlock /> : null}

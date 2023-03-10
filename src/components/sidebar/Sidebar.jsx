@@ -71,12 +71,12 @@ const Sidebar = () => {
                   <span>KYC documentation</span>
                 </NavLink>
               </li>
-              {/* <li className="sidebar_links">
+              <li className="sidebar_links">
                 <NavLink to="/account/transfer">
                   <i className="bx bx-transfer"></i>
                   <span>Fund Transfer</span>
                 </NavLink>
-              </li> */}
+              </li>
               <li className="sidebar_links">
                 <NavLink to="/account/withdraw-funds">
                   <i className="bx bx-import"></i>

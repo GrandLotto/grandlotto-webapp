@@ -103,7 +103,7 @@ const Results = () => {
 
   const isSelected = (item) => {
     let selected = selectedLotto?.id === item?.id;
-    console.log(!!selected);
+
     return !!selected;
   };
 

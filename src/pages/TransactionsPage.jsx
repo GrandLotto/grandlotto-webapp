@@ -94,7 +94,7 @@ const TransactionsPage = () => {
                     data-toggle="tab"
                     href="#Wallet-tab"
                   >
-                    Wallet
+                    Deposit
                   </a>
                 </li>
                 <li className="nav-item">
