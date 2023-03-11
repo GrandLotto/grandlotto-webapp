@@ -37,9 +37,11 @@ const App = () => {
   useEffect(() => {
     (async () => {
       if (user) {
-        if (!user?.transactionPIN) {
-          dispatch(setAddPinModal(true));
-        }
+        setTimeout(() => {
+          if (!user?.transactionPIN) {
+            dispatch(setAddPinModal(true));
+          }
+        }, 3000);
       }
     })();
   }, [user]);
