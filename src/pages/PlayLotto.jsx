@@ -181,7 +181,7 @@ const PlayLotto = () => {
             ))}
         </div>
 
-        <div className="d-flex justify-content-end align-items-end mt-5">
+        {/* <div className="d-flex justify-content-end align-items-end mt-5">
           <button
             type="button"
             className="grandLottoButton cardButton buttonPlayLottoFirst"
@@ -189,7 +189,7 @@ const PlayLotto = () => {
           >
             Play
           </button>
-        </div>
+        </div> */}
         <div className="mt-5 buttonPlayLotto">
           <div className="buttonPlayLottoSmall">
             <div className={`symbolInput`}>

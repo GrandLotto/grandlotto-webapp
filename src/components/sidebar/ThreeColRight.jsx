@@ -69,21 +69,21 @@ const ThreeColRight = () => {
           <TopSearch />
         </div>
         <LottoNumberBox />
-
-        <div className="countDownExpiry" id="countDownExpiry"></div>
         <div className="betSlips">
           {/* <div className="betSlipsHeader">
             <h4>BetSlip(2)</h4>
           </div> */}
-          <div className="betSlipsBody">
-            {/* <BetSlipsBox
-              showAmount={true}
-              showInput={true}
-              selectedAmount={selectedAmount}
-              setselectedAmount={setselectedAmount}
-            /> */}
 
-            {/* <div className="betSlipsBottom">
+          {selectedCoupons && selectedCoupons?.length ? (
+            <div className="betSlipsBody">
+              <BetSlipsBox
+                showAmount={true}
+                showInput={true}
+                selectedAmount={selectedAmount}
+                setselectedAmount={setselectedAmount}
+              />
+
+              {/* <div className="betSlipsBottom">
               <div className="d-flex justify-content-between align-items-center">
                 <h5>Total Stake:</h5>
                 <h5>₦0</h5>
@@ -98,8 +98,10 @@ const ThreeColRight = () => {
                 </button>
               </div>
             </div> */}
-          </div>
+            </div>
+          ) : null}
         </div>
+        <div className="countDownExpiry" id="countDownExpiry"></div>
       </div>
     </div>
   );

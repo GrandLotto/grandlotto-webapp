@@ -1,7 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 import "../../config/axios";
-import { GET_USERINFO_URL } from "../../config/urlConfigs";
+import {
+  GET_ACCEPTED_IDTYPE_URL,
+  GET_USERINFO_URL,
+} from "../../config/urlConfigs";
 import { logout } from "./authSlice";
 
 export const getUserInfo = createAsyncThunk(
@@ -21,5 +24,18 @@ export const getUserInfo = createAsyncThunk(
     } catch (error) {
       dispatch(logout());
     }
+  }
+);
+
+export const getacceptedid = createAsyncThunk(
+  "user/getacceptedid",
+  async (payload, { dispatch }) => {
+    try {
+      const result = axios.get(GET_ACCEPTED_IDTYPE_URL).then((response) => {
+        return response.data;
+      });
+
+      return result;
+    } catch (error) {}
   }
 );

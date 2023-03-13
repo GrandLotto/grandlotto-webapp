@@ -21,7 +21,7 @@ const DebitCard = () => {
       />
       <form className="grandlotto_form mt-5">
         <div className="row mb-3">
-          <div className="col-md-4 mb-3">
+          <div className="col-md-5 mx-auto mb-3">
             <div className="form-group" style={{ width: "100%" }}>
               <label htmlFor="">Enter amount</label>
               <div
@@ -49,7 +49,7 @@ const DebitCard = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4 mb-3">
+          {/* <div className="col-md-4 mb-3">
             <div className="form-group" style={{ width: "100%" }}>
               <label htmlFor="">Enter Promo Code (Optional)</label>
 
@@ -61,10 +61,10 @@ const DebitCard = () => {
                 style={{ width: "100%" }}
               />
             </div>
-          </div>
+          </div> */}
         </div>
-        <div className="row mt-2">
-          <div className="col-md-4">
+        <div className=" text-center mt-2">
+          <div className="d-flex justify-content-center  text-center">
             <button
               type="button"
               className="grandLottoButton cardButton lengthyButton"

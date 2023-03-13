@@ -240,7 +240,7 @@ export const getAge = (DOB) => {
 
 export const numbersFromOneTo90 = () => {
   let numbers = [];
-  for (let i = 1; i <= 47; i++) {
+  for (let i = 1; i <= 90; i++) {
     numbers.push(i);
   }
 
@@ -271,6 +271,7 @@ export const addZero = (i) => {
 
 export const daysToExpire = () => {
   if (document.getElementById("countDownExpiry")) {
+    let expireDiv = document.getElementById("countDownExpiry");
     let newDate = new Date(
       "Wed Mar 22 2023 22:48:41 GMT+0100 (West Africa Standard Time)"
     );
@@ -299,9 +300,8 @@ export const daysToExpire = () => {
 
       // Display the result in the element with id="demo"
 
-      document.getElementById(
-        "countDownExpiry"
-      ).innerHTML = `<div class="daysToExpire">
+      expireDiv
+        ? (expireDiv.innerHTML = `<div class="daysToExpire">
               <div class="daysToExpireItems">
                   <p>${days}</p>
                   <p>Days </p>
@@ -327,12 +327,13 @@ export const daysToExpire = () => {
                   <p>${addZero(seconds)} </p>
                   <p>Secs </p>
               </div>
-          </div>`;
+          </div>`)
+        : null;
 
       // If the count down is finished, write some text
       if (distance < 0) {
         clearInterval(x);
-        document.getElementById("countDownExpiry").innerHTML = "EXPIRED";
+        expireDiv ? (expireDiv.innerHTML = "EXPIRED") : null;
       }
     }, 1000);
   }

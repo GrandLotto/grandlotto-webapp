@@ -1,9 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAccountBalances, getUserAccount } from "./actions";
+import {
+  getacceptedpayment,
+  getAccountBalances,
+  getCountryBanks,
+  getUserAccount,
+} from "./actions";
 
 const initialState = {
   accountBalances: null,
   userBankAccounts: null,
+  acceptedpayment: null,
+  countryBanks: [],
   loading: false,
   error: false,
 };
@@ -18,6 +25,10 @@ const walletSlice = createSlice({
 
     setBetSlips: (state, { payload }) => {
       state.betSlips = payload;
+    },
+
+    setAccountBalances: (state, { payload }) => {
+      state.accountBalances = payload;
     },
   },
 
@@ -50,12 +61,31 @@ const walletSlice = createSlice({
       // console.log(action.payload);
       if (action.payload && action.payload.data) {
         state.userBankAccounts = action.payload.data;
-        console.log("userBankAccounts", state.userBankAccounts);
+        // console.log("userBankAccounts", state.userBankAccounts);
+      }
+    },
+
+    [getCountryBanks.fulfilled]: (state, action) => {
+      // console.log("here");
+      // console.log(action.payload);
+      if (action.payload && action.payload.data) {
+        state.countryBanks = action.payload.data;
+        // console.log("countryBanks", state.countryBanks);
+      }
+    },
+
+    [getacceptedpayment.fulfilled]: (state, action) => {
+      // console.log("here");
+      // console.log(action.payload);
+      if (action.payload && action.payload.data) {
+        state.acceptedpayment = action.payload.data;
+        console.log("acceptedpayment", state.acceptedpayment);
       }
     },
   },
 });
 
-export const { setSelectedCoupons, setBetSlips } = walletSlice.actions;
+export const { setSelectedCoupons, setBetSlips, setAccountBalances } =
+  walletSlice.actions;
 
 export default walletSlice.reducer;

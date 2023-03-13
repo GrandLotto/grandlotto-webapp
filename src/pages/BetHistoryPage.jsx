@@ -1,10 +1,50 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import BetHistory from "../components/bet/BetHistory";
 import FilterModals from "../components/modal/FilterModals";
 import Transactions from "../components/transaction/Transactions";
 
 const BetHistoryPage = () => {
   const [showFilter, setShowFilter] = useState(false);
+  const userOpenBets = useSelector((state) => state.bets.userOpenBets);
+  const userOpenBetsPage = useSelector((state) => state.bets.userOpenBetsPage);
+  const userOpenBetsTotalPages = useSelector(
+    (state) => state.bets.userOpenBetsTotalPages
+  );
+
+  const userClosedBets = useSelector((state) => state.bets.userClosedBets);
+  const userCloseBetsPage = useSelector(
+    (state) => state.bets.userCloseBetsPage
+  );
+  const userCloseBetsTotalPages = useSelector(
+    (state) => state.bets.userCloseBetsTotalPages
+  );
+
+  // console.log(userOpenBetsTotalPages);
+
+  const columns = [
+    {
+      name: "#",
+    },
+    // {
+    //   name: "Game ID",
+    // },
+    {
+      name: "Games Played",
+    },
+    {
+      name: "Games Type",
+    },
+    {
+      name: "Date/Time",
+    },
+    {
+      name: "Status",
+    },
+    {
+      name: "Amount",
+    },
+  ];
 
   useEffect(() => {
     return () => {
@@ -123,12 +163,24 @@ const BetHistoryPage = () => {
             <div className="tab-content padding-0 border-0">
               <div className="tab-pane active" id="Wallet-tab">
                 <div className="card">
-                  <BetHistory />
+                  <BetHistory
+                    columns={columns}
+                    data={userOpenBets}
+                    page={userOpenBetsPage}
+                    totalPages={userOpenBetsTotalPages}
+                    type="OPENBETS"
+                  />
                 </div>
               </div>
               <div className="tab-pane" id="Withdrawable-tab">
                 <div className="card">
-                  <BetHistory />
+                  <BetHistory
+                    columns={columns}
+                    data={userClosedBets}
+                    page={userCloseBetsPage}
+                    totalPages={userCloseBetsTotalPages}
+                    type="CLOSEBETS"
+                  />
                   {/* <div className="body">
                 <br />
                 <br />

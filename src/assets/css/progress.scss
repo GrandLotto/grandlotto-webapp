@@ -25,6 +25,10 @@
   font-size: 20px;
 }
 
+.radialProgressBar .overlay.overlaySuccess {
+  color: #067143;
+}
+
 .progress-0 {
   background-image: -webkit-linear-gradient(left, #e6e8fe 50%, transparent 50%),
     -webkit-linear-gradient(left, #0a1df0 50%, #e6e8fe 50%);
@@ -90,22 +94,22 @@
 }
 
 .progress-80 {
-  background-image: -webkit-linear-gradient(left, #0a1df0 50%, transparent 50%),
-    -webkit-linear-gradient(108deg, #0a1df0 50%, #e6e8fe 50%);
-  background-image: linear-gradient(90deg, #0a1df0 50%, transparent 50%),
-    linear-gradient(-18deg, #0a1df0 50%, #e6e8fe 50%);
+  background-image: -webkit-linear-gradient(left, #0af08c 50%, transparent 50%),
+    -webkit-linear-gradient(108deg, #0af08c 50%, #e6feed 50%);
+  background-image: linear-gradient(90deg, #0af08c 50%, transparent 50%),
+    linear-gradient(-18deg, #0af08c 50%, #e6feed 50%);
 }
 
 .progress-90 {
-  background-image: -webkit-linear-gradient(left, #0a1df0 50%, transparent 50%),
-    -webkit-linear-gradient(144deg, #0a1df0 50%, #e6e8fe 50%);
-  background-image: linear-gradient(90deg, #0a1df0 50%, transparent 50%),
-    linear-gradient(-54deg, #0a1df0 50%, #e6e8fe 50%);
+  background-image: -webkit-linear-gradient(left, #0af08c 50%, transparent 50%),
+    -webkit-linear-gradient(144deg, #0af08c 50%, #e6feed 50%);
+  background-image: linear-gradient(90deg, #0af08c 50%, transparent 50%),
+    linear-gradient(-54deg, #0af08c 50%, #e6feed 50%);
 }
 
 .progress-100 {
-  background-image: -webkit-linear-gradient(left, #0a1df0 50%, transparent 50%),
-    -webkit-linear-gradient(right, #0a1df0 50%, #e6e8fe 50%);
-  background-image: linear-gradient(90deg, #0a1df0 50%, transparent 50%),
-    linear-gradient(-90deg, #0a1df0 50%, #e6e8fe 50%);
+  background-image: -webkit-linear-gradient(left, #0af08c 50%, transparent 50%),
+    -webkit-linear-gradient(right, #0af08c 50%, #e6feed 50%);
+  background-image: linear-gradient(90deg, #0af08c 50%, transparent 50%),
+    linear-gradient(-90deg, #0af08c 50%, #e6feed 50%);
 }

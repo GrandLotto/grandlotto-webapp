@@ -386,6 +386,11 @@ const RegisterModal = () => {
                 </div>
               </div>
 
+              <p style={{ fontSize: 13, fontStyle: "italic" }}>
+                By creating an account, you agree to our Terms & Conditions and
+                confirm that you are at least 18 years old or over and all
+                information given is true.
+              </p>
               <br />
               <div
                 className="form-group text-center mb-4 mt-2 d-flex justify-content-center"

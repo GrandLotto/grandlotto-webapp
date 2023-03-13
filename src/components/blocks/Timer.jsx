@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-const Timer = ({ time }) => {
+const Timer = ({ time, setTime }) => {
   const [timeleft, setTimeleft] = useState(time);
-  const [displayTimer, setDisplayTimer] = useState(time);
+  const [displayTimer, setDisplayTimer] = useState(time + ": 00");
 
   useEffect(() => {
     let myInterval = null;
@@ -26,6 +26,7 @@ const Timer = ({ time }) => {
       if (--timer < 0) {
         timer = time;
         clearInterval(myInterval);
+        setTime(0);
       }
     }, 1000);
 

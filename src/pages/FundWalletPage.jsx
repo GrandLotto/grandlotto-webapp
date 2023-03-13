@@ -84,7 +84,7 @@ const FundWalletPage = () => {
                     data-toggle="tab"
                     href="#Debit-card-tab"
                   >
-                    By Debit card
+                    By payment gateways
                   </a>
                 </li>
                 <li className="nav-item">

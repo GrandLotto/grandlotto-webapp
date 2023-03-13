@@ -48,7 +48,7 @@ const BetSlipsBox = ({
 
   return (
     <>
-      {betSlips && betSlips?.length ? (
+      {/* {betSlips && betSlips?.length ? (
         <div className="allBetSlips">
           {betSlips?.map((item, index) => (
             <div className="allBetSlipItem" key={index}>
@@ -171,7 +171,73 @@ const BetSlipsBox = ({
             </div>
           )}
         </div>
-      )}
+      )} */}
+
+      <div className="allBetSlipItem">
+        <div className="allBetSlipItemBody mt-0">
+          {showAmount === true && (
+            <div className="allBetSlipItemBodyItemButtons mt-0">
+              {stakeAmounts?.map((item, index) => (
+                <div
+                  key={index}
+                  className={`allBetSlipItemBodyItemButtonsItems ${
+                    selectedAmount === item?.amount ? "buttonSelected" : ""
+                  }`}
+                  onClick={() => setselectedAmount(item?.amount)}
+                >
+                  {item?.amount}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {showInput === true && (
+            <div className="allBetSlipItemBodyItemAmount">
+              <div className={`symbolInput`}>
+                <span>₦</span>
+                <CurrencyInput
+                  name="input-name"
+                  placeholder="Enter Amount "
+                  defaultValue={selectedAmount}
+                  decimalsLimit={2}
+                  contentEditable={true}
+                  value={selectedAmount}
+                  onValueChange={(value) => setselectedAmount(value)}
+                />
+              </div>
+            </div>
+          )}
+          {showInput === false && (
+            <div
+              className="d-flex justify-content-end align-items-end mt-3 border-top pt-3"
+              style={{ flexDirection: "column" }}
+            >
+              <div className="d-flex justify-content-end align-items-end">
+                <h5>Stake Amount: </h5>
+                <h5>
+                  <b>₦500</b>
+                </h5>
+              </div>
+              <div className="d-flex justify-content-end align-items-end">
+                <h5>Possible Winning: </h5>
+                <h5>
+                  <b>₦10,000</b>
+                </h5>
+              </div>
+            </div>
+          )}
+
+          <div className="d-flex justify-content-center align-items-center mt-4">
+            <button
+              type="button"
+              className="grandLottoButton cardButton"
+              disabled={!selectedAmount}
+            >
+              Place Bet
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

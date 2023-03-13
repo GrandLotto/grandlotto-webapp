@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserInfo } from "./actions";
+import { getacceptedid, getUserInfo } from "./actions";
 
 const initialState = {
   appScreenSize: "",
@@ -21,6 +21,7 @@ const initialState = {
   loading: false,
   error: false,
   digitalDate: "00:00",
+  acceptedIDType: [],
 };
 
 const authSlice = createSlice({
@@ -74,6 +75,14 @@ const authSlice = createSlice({
     [getUserInfo.rejected]: (state) => {
       state.error = true;
       state.loading = false;
+    },
+
+    [getacceptedid.fulfilled]: (state, action) => {
+      // console.log(action.payload);
+      if (action.payload && action.payload.data) {
+        state.acceptedIDType = action.payload.data;
+        console.log("acceptedIDType", state.acceptedIDType);
+      }
     },
   },
 });

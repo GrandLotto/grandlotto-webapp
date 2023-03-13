@@ -1,8 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {
+  Getuseropengameplayed,
+  GetMoreuseropengameplayed,
+  Getuserclosedgameplayed,
+  GetMoreuserclosedgameplayed,
+} from "./actions";
 
 const initialState = {
   selectedCoupons: [],
-  betSlips: [],
+  betSlips: [1, 2],
+  userOpenBets: null,
+  userOpenBetsPage: 1,
+  userOpenBetsTotalPages: 3,
+  userClosedBets: null,
+  userCloseBetsPage: 1,
+  userCloseBetsTotalPages: 3,
 };
 
 const betSlice = createSlice({
@@ -19,9 +31,23 @@ const betSlice = createSlice({
   },
 
   extraReducers: {
-    // [getUserInfo.pending]: (state, action) => {
-    //   state.loading = true;
-    // },
+    [Getuseropengameplayed.fulfilled]: (state, action) => {
+      if (action.payload && action.payload.data) {
+        state.userOpenBets = action.payload.data?.data;
+        state.userOpenBetsPage = action.payload.data?.pageNumber;
+        state.userOpenBetsTotalPages = action.payload.data?.totalPages;
+        // console.log("userOpenBets", state.userOpenBets);
+      }
+    },
+
+    [Getuserclosedgameplayed.fulfilled]: (state, action) => {
+      if (action.payload && action.payload.data) {
+        state.userClosedBets = action.payload.data?.data;
+        state.userCloseBetsPage = action.payload.data?.pageNumber;
+        state.userCloseBetsTotalPages = action.payload.data?.totalPages;
+        // console.log("userClosedBets", state.userClosedBets);
+      }
+    },
   },
 });
 

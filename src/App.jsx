@@ -4,22 +4,34 @@ import AllModal from "./components/modal/AllModal";
 import { addZero } from "./global/customFunctions";
 import MyRouter from "./routes/MyRouter";
 import {
+  setAddBankModal,
   setAddPinModal,
   setAlertPopUp,
   setPageLoading,
 } from "./store/alert/alertSlice";
-import { getUserInfo } from "./store/authSlice/actions";
+import { getacceptedid, getUserInfo } from "./store/authSlice/actions";
 import {
   logout,
   setDigitalDate,
   setUserInfo,
 } from "./store/authSlice/authSlice";
-import { getAccountBalances, getUserAccount } from "./store/wallet/actions";
+import {
+  Getuserclosedgameplayed,
+  Getuseropengameplayed,
+} from "./store/betSlice/actions";
+import {
+  getacceptedpayment,
+  getAccountBalances,
+  getCountryBanks,
+  getUserAccount,
+} from "./store/wallet/actions";
 
 const App = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.oauth.user);
+  const acceptedpayment = useSelector((state) => state.wallet.acceptedpayment);
+  const countryBanks = useSelector((state) => state.wallet.countryBanks);
 
   // useLayoutEffect(() => {
   //   getUserInfoDetails()
@@ -31,6 +43,19 @@ const App = () => {
         dispatch(getUserInfo(user?.email));
         dispatch(getAccountBalances(user?.email));
         dispatch(getUserAccount(user?.email));
+        dispatch(Getuseropengameplayed(user?.email));
+        dispatch(Getuserclosedgameplayed(user?.email));
+
+        if (!acceptedpayment) {
+          dispatch(getacceptedpayment());
+          dispatch(getacceptedid());
+        }
+
+        // dispatch(getacceptedid());
+
+        if (!countryBanks) {
+          dispatch(getCountryBanks("NG"));
+        }
       }
     })();
   }, []);
@@ -38,9 +63,12 @@ const App = () => {
     (async () => {
       if (user) {
         setTimeout(() => {
-          if (!user?.transactionPIN) {
-            dispatch(setAddPinModal(true));
-          }
+          dispatch(setAddPinModal(false));
+          // if (!user?.transactionPIN) {
+          //   dispatch(setAddPinModal(true));
+          // } else {
+          //   dispatch(setAddPinModal(false));
+          // }
         }, 3000);
       }
     })();
@@ -65,6 +93,7 @@ const App = () => {
         payload: null,
       })
     );
+    dispatch(setAddBankModal(false));
   }, []);
 
   const digitalClock = () => {

@@ -17,7 +17,16 @@ import {
 import { getUserInfo } from "../../store/authSlice/actions";
 import ComponentLoading from "../blocks/ComponentLoading";
 import Reponsemessage from "../blocks/Reponsemessage";
-import { getAccountBalances, getUserAccount } from "../../store/wallet/actions";
+import {
+  getacceptedpayment,
+  getAccountBalances,
+  getCountryBanks,
+  getUserAccount,
+} from "../../store/wallet/actions";
+import {
+  Getuserclosedgameplayed,
+  Getuseropengameplayed,
+} from "../../store/betSlice/actions";
 
 const LoginModal = () => {
   const dispatch = useDispatch();
@@ -117,6 +126,10 @@ const LoginModal = () => {
             dispatch(getUserInfo(data?.email));
             dispatch(getAccountBalances(data?.email));
             dispatch(getUserAccount(data?.email));
+            dispatch(Getuseropengameplayed(data?.email));
+            dispatch(Getuserclosedgameplayed(data?.email));
+            dispatch(getCountryBanks("NG"));
+            dispatch(getacceptedpayment());
           } else {
             dispatch(
               setAlertPopUp({

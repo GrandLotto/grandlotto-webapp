@@ -84,15 +84,14 @@ const HeaderTop = () => {
           <div className="topHeaderRightLoggedIn">
             <HeaderTopBalance />
 
-            <div
+            {/* <div
               className="topHeaderRightLoggedInNotification hideOnMobile"
               onClick={() => {
                 dispatch(setNotiicationModal(true));
-                //   dispatch(setSideBarMenu(false));
               }}
             >
               <i className="bx bx-bell"></i>
-            </div>
+            </div> */}
 
             <div
               className="topHeaderRightLoggedInImage hideOnMobile"

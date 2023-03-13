@@ -1,32 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  formateDateAndTimeByName,
+  addComma,
+} from "../../global/customFunctions";
+import PaginationBlock from "../blocks/PaginationBlock";
 
-const BetHistory = () => {
-  let transactions = [
-    {
-      id: 1,
-      name: "book",
-    },
-    {
-      id: 2,
-      name: "book",
-    },
-    {
-      id: 3,
-      name: "book",
-    },
-    {
-      id: 1,
-      name: "book",
-    },
-    {
-      id: 2,
-      name: "book",
-    },
-    {
-      id: 3,
-      name: "book",
-    },
-  ];
+const BetHistory = ({ columns, page, totalPages, data, type }) => {
+  const navigation = useNavigate();
+  const handlePrev = () => {
+    console.log("1");
+  };
+
+  const handleNext = () => {};
   return (
     <>
       <div className="grandlotto_table">
@@ -34,25 +20,31 @@ const BetHistory = () => {
           <table className="table">
             <thead>
               <tr>
-                <th>Betslip ID</th>
-                <th>Bet details</th>
-                <th>Date/Time</th>
-                <th>Status</th>
-                <th>Stake</th>
-                <th>Returns</th>
+                {columns &&
+                  columns?.map((head, index) => (
+                    <th key={index}>{head?.name}</th>
+                  ))}
               </tr>
             </thead>
 
-            {transactions && transactions?.length ? (
+            {data && data?.length ? (
               <tbody>
-                <tr>
-                  <td>Lorem, ipsum.</td>
-                  <td>Lorem, ipsum.</td>
-                  <td>Lorem, ipsum.</td>
-                  <td>Lorem, ipsum.</td>
-                  <td>Lorem, ipsum.</td>
-                  <td>Lorem, ipsum.</td>
-                </tr>
+                {data.map((item, index) => (
+                  <tr key={index}>
+                    <td>{index < 10 ? "0" + (index + 1) : index}</td>
+                    {/* <td>{item?.id}</td> */}
+                    <td>{item?.numbersplayed}</td>
+                    <td>{item?.gameTypeName}</td>
+                    <td>{formateDateAndTimeByName(item?.datePlayed)}</td>
+                    <td>{item?.status}</td>
+                    <td>
+                      ₦{" "}
+                      {item?.ammountPlayed
+                        ? addComma(item?.ammountPlayed)
+                        : item?.ammountPlayed}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             ) : (
               <tbody>
@@ -80,7 +72,10 @@ const BetHistory = () => {
                             You don’t have any bet records
                           </h4>
 
-                          <button className="grandLottoButton">
+                          <button
+                            onClick={() => navigation("/lotto")}
+                            className="grandLottoButton"
+                          >
                             Play Game
                           </button>
                         </div>
@@ -99,8 +94,8 @@ const BetHistory = () => {
       </div>
 
       <div className="grandlotto_table_small lotto_card">
-        {transactions && transactions?.length ? (
-          transactions?.map((item, index) => (
+        {data && data?.length ? (
+          data?.map((item, index) => (
             <div className="grandlotto_table_small_flex " key={index}>
               <div className="d-flex justify-content-between border-bottom pb-2 mb-2">
                 <small>28/02/2022</small>
@@ -163,7 +158,12 @@ const BetHistory = () => {
                   You don’t have any bet records
                 </h4>
 
-                <button className="grandLottoButton">Play Game</button>
+                <button
+                  onClick={() => navigation("/lotto")}
+                  className="grandLottoButton"
+                >
+                  Play Game
+                </button>
               </div>
 
               <br />
@@ -173,6 +173,15 @@ const BetHistory = () => {
           </div>
         )}
       </div>
+
+      {data && data?.length ? (
+        <PaginationBlock
+          handlePrev={handlePrev}
+          handleNext={handleNext}
+          page={page}
+          totalPages={totalPages}
+        />
+      ) : null}
     </>
   );
 };

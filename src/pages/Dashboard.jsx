@@ -5,9 +5,11 @@ import Transactions from "../components/transaction/Transactions";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import promo1 from "../assets/images/promo1.png";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const navigation = useNavigate();
+  const user = useSelector((state) => state.oauth.user);
 
   useEffect(() => {
     return () => {
@@ -31,8 +33,8 @@ const Dashboard = () => {
             </button>
           </div>
 
-          <HomeWalletOverview />
-          <ProfileComplete />
+          <HomeWalletOverview user={user} />
+          <ProfileComplete user={user} />
 
           <div className="mt-5 hideOnMobile">
             <div className="page_flex d-flex justify-content-between align-items-center mb-4">
@@ -50,25 +52,30 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div
-          className="mt-3 px-3 text-light showOnMobile"
-          style={{ width: "100%", padding: "0px 20px!important" }}
-        >
-          <div className="px-3">
-            <h5 style={{ color: "#d7b703", fontWeight: 600 }}>
-              Complete your profile
-            </h5>
-            <p>Extend your profile information to enable withdrawal of funds</p>
-            <div className="mt-3">
-              <button
-                className="grandLottoButton grandLottoButtonLightGreen"
-                onClick={() => navigation("/account/profile")}
-              >
-                Edit profile
-              </button>
+        {user && user?.percentageCompleted != 100 ? (
+          <div
+            className="mt-3 px-3 text-light showOnMobile"
+            style={{ width: "100%", padding: "0px 20px!important" }}
+          >
+            <div className="px-3">
+              <h5 style={{ color: "#d7b703", fontWeight: 600 }}>
+                Complete your profile
+              </h5>
+              <p>
+                Extend your profile information to enable withdrawal of funds
+              </p>
+              <div className="mt-3">
+                <button
+                  className="grandLottoButton grandLottoButtonLightGreen"
+                  onClick={() => navigation("/account/profile")}
+                >
+                  Edit profile
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
+
         <div className="mt-5  text-light showOnMobile">
           <div className="px-3 mt-5">
             <div className="page_flex d-flex justify-content-between align-items-center mb-4">
