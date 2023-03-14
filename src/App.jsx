@@ -13,12 +13,14 @@ import { getacceptedid, getUserInfo } from "./store/authSlice/actions";
 import {
   logout,
   setDigitalDate,
+  setIsUserLoggedIn,
   setUserInfo,
 } from "./store/authSlice/authSlice";
 import {
   Getuserclosedgameplayed,
   Getuseropengameplayed,
 } from "./store/betSlice/actions";
+import { persistor } from "./store/store";
 import {
   getacceptedpayment,
   getAccountBalances,
@@ -32,10 +34,6 @@ const App = () => {
   const user = useSelector((state) => state.oauth.user);
   const acceptedpayment = useSelector((state) => state.wallet.acceptedpayment);
   const countryBanks = useSelector((state) => state.wallet.countryBanks);
-
-  // useLayoutEffect(() => {
-  //   getUserInfoDetails()
-  // }, [])
 
   useEffect(() => {
     (async () => {
@@ -69,7 +67,9 @@ const App = () => {
           // } else {
           //   dispatch(setAddPinModal(false));
           // }
-        }, 3000);
+        }, 500);
+
+        checkUserAuthentication();
       }
     })();
   }, [user]);
@@ -125,6 +125,35 @@ const App = () => {
       // console.log(currentClock);
       // this.$store.state.hourMinute = this.addZero(hour) + ":" + minutes;
     }, 1000);
+  };
+
+  const checkUserAuthentication = () => {
+    let expiring = localStorage.getItem("appexrat");
+    if (!expiring) {
+      logoutUser();
+      return;
+    }
+
+    if (isAuthenticated(expiring) === false) {
+      logoutUser();
+    }
+  };
+  const isAuthenticated = (expiresAt) => {
+    let expiringDate = expiresAt;
+    let newExpiry = new Date()?.getTime();
+
+    let newDate = newExpiry < expiringDate;
+
+    return !!newDate;
+  };
+
+  const logoutUser = () => {
+    dispatch(setIsUserLoggedIn(false));
+    dispatch(logout());
+    persistor.pause();
+    persistor.flush().then(() => {
+      return persistor.purge();
+    });
   };
 
   return (

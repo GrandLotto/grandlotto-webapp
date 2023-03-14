@@ -80,10 +80,10 @@ const ForgotPasswordModal = () => {
           dispatch(
             setInputCodeModal({
               status: true,
-              type: "CONFIRM_EMAIL",
-              title: "Confirm Email",
+              type: "RESET_PASSWORD",
+              title: "Reset Password",
               desc: response?.data?.data?.message,
-              btnText: "Confirm Email",
+              btnText: "Reset",
               payload: newPayload,
             })
           );

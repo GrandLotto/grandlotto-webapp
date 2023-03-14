@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CONFIRM_EMAIL_URL } from "../../config/urlConfigs";
+import { CONFIRM_EMAIL_URL, RESET_PASSWORD_URL } from "../../config/urlConfigs";
 import { handlePOSTRequest } from "../../rest/apiRest";
 import {
   setForgotPasswordModal,
@@ -21,6 +21,13 @@ const FnputCodeModal = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [responseError, setResponseError] = useState("");
   const [emptyFields, setEmptyFields] = useState(true);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
+
+  const [confirmNewPasswordError, setConfirmNewPasswordError] = useState("");
 
   const [pin, setPin] = useState("");
   const [resetEFields, setResetEFields] = useState(false);
@@ -44,6 +51,11 @@ const FnputCodeModal = () => {
     setEmptyFields(true);
     setPin("");
     setResponseError("");
+    setNewPassword("");
+    setConfirmNewPassword("");
+    setConfirmNewPasswordError("");
+    setShowNewPassword(false);
+    setShowConfirmNewPassword(false);
   };
 
   const handleDone = (code) => {
@@ -58,7 +70,7 @@ const FnputCodeModal = () => {
 
   useEffect(() => {
     validateForm();
-  }, [pin, emptyFields]);
+  }, [pin, newPassword, confirmNewPassword, emptyFields]);
 
   const validateForm = () => {
     if (!pin) {
@@ -70,6 +82,31 @@ const FnputCodeModal = () => {
       return false;
     }
 
+    if (!newPassword) {
+      setEmptyFields(true);
+      return false;
+    }
+    // if (newPassword !== "" && newPassword.length < 5) {
+    //   setEmptyFields(true);
+    //   return false;
+    // }
+    if (!confirmNewPassword) {
+      setEmptyFields(true);
+      return false;
+    }
+
+    // if (confirmNewPassword !== "" && confirmNewPassword.length < 5) {
+    //   setEmptyFields(true);
+    //   return false;
+    // }
+
+    if (confirmNewPassword !== "" && confirmNewPassword !== newPassword) {
+      setEmptyFields(true);
+      setConfirmNewPasswordError("Passwords do not match");
+      return false;
+    }
+
+    setConfirmNewPasswordError("");
     setEmptyFields(false);
   };
 
@@ -77,12 +114,17 @@ const FnputCodeModal = () => {
     setIsLoading(true);
     setResponseError("");
 
-    const payload = { email: modal?.payload?.email, token: pin };
+    const payload = {
+      email: modal?.payload?.email,
+      token: pin,
+      newPassword: newPassword,
+      confirmPassword: confirmNewPassword,
+    };
 
-    handlePOSTRequest(CONFIRM_EMAIL_URL, payload)
+    handlePOSTRequest(RESET_PASSWORD_URL, payload)
       .then((response) => {
         setIsLoading(false);
-        // console.log(response);
+        console.log(response);
         if (response?.data?.success) {
           dispatch(
             setAlertPopUp({
@@ -123,7 +165,9 @@ const FnputCodeModal = () => {
 
           <div className="alert-modal-body">
             <div className="text-center w-100">
-              <h4 className=" text-center">{modal?.title}</h4>
+              <h4 className=" text-center" style={{ marginTop: -15 }}>
+                {modal?.title}
+              </h4>
               <p className="mt-3 p_para">{modal?.desc}</p>
 
               {responseError ? (
@@ -134,7 +178,7 @@ const FnputCodeModal = () => {
               ) : null}
             </div>
             <form
-              className="grandlotto_form mt-4 text-center"
+              className="grandlotto_form mt-3 text-center"
               style={{ width: "100%" }}
             >
               <PinCodeBlock
@@ -142,6 +186,59 @@ const FnputCodeModal = () => {
                 handleDone={handleDone}
                 resetEFields={resetEFields}
               />
+
+              <div className="row mb-2 mt-5">
+                <div className="col-md-12">
+                  <div className="form-group " style={{ width: "100%" }}>
+                    <label htmlFor="">New password</label>
+                    <div className="password_input">
+                      <input
+                        type={showNewPassword ? "text" : "password"}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        value={newPassword}
+                        className="form-control largeInputFont py-3"
+                        style={{ width: "100%" }}
+                      />
+
+                      <i
+                        className={`showHide text-dark bx ${
+                          showNewPassword ? "bx-hide" : "bx-show"
+                        }  `}
+                        onClick={() => setShowNewPassword(!showNewPassword)}
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="form-group " style={{ width: "100%" }}>
+                    <label htmlFor="">Confirm New password</label>
+                    <div className="password_input">
+                      <input
+                        type={showConfirmNewPassword ? "text" : "password"}
+                        onChange={(e) => setConfirmNewPassword(e.target.value)}
+                        value={confirmNewPassword}
+                        className="form-control largeInputFont py-3"
+                        style={{ width: "100%" }}
+                      />
+
+                      <i
+                        className={`showHide text-dark bx ${
+                          showConfirmNewPassword ? "bx-hide" : "bx-show"
+                        }  `}
+                        onClick={() =>
+                          setShowConfirmNewPassword(!showConfirmNewPassword)
+                        }
+                      ></i>
+                    </div>
+
+                    {confirmNewPasswordError && (
+                      <p className="text-danger mt-2" style={{ fontSize: 14 }}>
+                        {confirmNewPasswordError}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
 
               <br />
               <div

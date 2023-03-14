@@ -40,6 +40,8 @@ const LoginModal = () => {
   const [responseError, setResponseError] = useState("");
   const [emptyFields, setEmptyFields] = useState(true);
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const closeModal = () => {
     if (isLoading === true) {
       return;
@@ -47,6 +49,7 @@ const LoginModal = () => {
     dispatch(setLoginModal(false));
     setIsLoading(false);
     setEmptyFields(true);
+    setShowPassword(false);
     setEmailPhone("");
     setPassword("");
     setEmailError("");
@@ -201,7 +204,7 @@ const LoginModal = () => {
                   value={emailPhone}
                   className="form-control py-3"
                   placeholder="Email"
-                  type="text"
+                  type="email"
                   style={{ width: "100%" }}
                 />
                 {emailError && (
@@ -236,14 +239,24 @@ const LoginModal = () => {
               </div>
               <div className="form-group mb-4" style={{ width: "100%" }}>
                 <label htmlFor="">Password</label>
-                <input
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  className="form-control py-3"
-                  placeholder="Password"
-                  type="password"
-                  style={{ width: "100%" }}
-                />
+
+                <div className="password_input">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    className="form-control py-3"
+                    style={{ width: "100%" }}
+                    placeholder="Password"
+                  />
+
+                  <i
+                    className={`showHide text-dark bx ${
+                      showPassword ? "bx-hide" : "bx-show"
+                    }  `}
+                    onClick={() => setShowPassword(!showPassword)}
+                  ></i>
+                </div>
               </div>
               <br />
               <div
