@@ -1,0 +1,20 @@
+useEffect(() => {
+  panRes = PanResponder.create({
+    onStartShouldSetPanResponder: () => {
+      resetTimmer();
+    },
+    onMoveShouldSetPanResponder: () => true,
+    onStartShouldSetPanResponderCapture: () => {
+      resetTimmer();
+
+      return false;
+    },
+    onMoveShouldSetPanResponderCapture: () => false,
+    onPanResponderTerminationRequest: () => true,
+    onShouldBlockNativeResponder: () => false,
+  });
+
+  activeTime = setTimeout(() => {
+    setActive(true);
+  }, timer);
+}, []);

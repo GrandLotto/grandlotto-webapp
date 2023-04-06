@@ -1,0 +1,191 @@
+import { createSlice } from "@reduxjs/toolkit";
+import { sortArrayBy } from "../../global/customFunctions";
+import {
+  Getuseropengameplayed,
+  Getuserclosedgameplayed,
+  getgames,
+  getgamestype,
+  getgamesplayingtype,
+  Getgameswininglogs,
+  getallexistinggames,
+} from "./actions";
+
+const initialState = {
+  games: null,
+  allexistinggames: null,
+  gameTypes: null,
+  gamePlayingTypes: null,
+  gameswininglogs: null,
+  selectedCoupons: [],
+  selectedPlayingType: undefined,
+  selectedGame: undefined,
+  selectedType: undefined,
+  betSlips: [1, 2],
+  userOpenBets: null,
+  userOpenBetsPage: 1,
+  userOpenBetsTotalPages: 3,
+  userClosedBets: null,
+  userCloseBetsPage: 1,
+  userCloseBetsTotalPages: 3,
+  selectedGametimer: null,
+  calculatedGames: null,
+  expiryDate: null,
+  betAmount: 0,
+};
+
+const betSlice = createSlice({
+  name: "bets",
+  initialState,
+  reducers: {
+    setSelectedCoupons: (state, { payload }) => {
+      state.selectedCoupons = payload;
+    },
+
+    setBetSlips: (state, { payload }) => {
+      state.betSlips = payload;
+    },
+
+    setSelectedPlayingType: (state, { payload }) => {
+      if (payload === undefined) {
+        if (state.gamePlayingTypes && state.gamePlayingTypes?.length) {
+          state.selectedPlayingType = state.gamePlayingTypes[0]?.name;
+        }
+      } else {
+        state.selectedPlayingType = payload;
+      }
+    },
+
+    setSelectedGame: (state, { payload }) => {
+      // state.selectedGame = payload;
+      if (payload === undefined) {
+        if (state.games && state.games?.length) {
+          // state.selectedGame = state.games[0];
+          state.selectedGame = null;
+        }
+      } else {
+        state.selectedGame = payload;
+      }
+    },
+
+    setSelectedType: (state, { payload }) => {
+      state.selectedType = payload;
+    },
+
+    setSelectedGametimer: (state, { payload }) => {
+      state.selectedGametimer = payload;
+    },
+
+    setBetAmount: (state, { payload }) => {
+      state.betAmount = payload;
+    },
+
+    setUserOpenBets: (state, { payload }) => {
+      state.userOpenBets = [...payload];
+    },
+
+    setUserOpenBetsCurrentPage: (state, { payload }) => {
+      state.userOpenBetsPage = payload;
+    },
+
+    setUserOpenBetsTotalPages: (state, { payload }) => {
+      state.userOpenBetsTotalPages = payload;
+    },
+
+    setUserClosedBets: (state, { payload }) => {
+      state.userClosedBets = [...payload];
+    },
+
+    setUserCloseBetsPage: (state, { payload }) => {
+      state.userCloseBetsPage = payload;
+    },
+
+    setUserCloseBetsTotalPages: (state, { payload }) => {
+      state.userCloseBetsTotalPages = payload;
+    },
+
+    setCalculatedGames: (state, { payload }) => {
+      state.calculatedGames = payload;
+    },
+
+    setExpiryDate: (state, { payload }) => {
+      state.expiryDate = payload;
+    },
+  },
+
+  extraReducers: (builder) => {
+    builder.addCase(Getuseropengameplayed.fulfilled, (state, { payload }) => {
+      if (payload && payload.data) {
+        state.userOpenBets = payload.data?.data;
+        state.userOpenBetsPage = payload.data?.pageNumber;
+        state.userOpenBetsTotalPages = payload.data?.totalPages;
+        // console.log("userOpenBets", state.userOpenBets);
+      } else {
+        state.userOpenBets = [];
+        state.userOpenBetsPage = 1;
+        state.userOpenBetsTotalPages = 2;
+      }
+    });
+
+    builder.addCase(Getuserclosedgameplayed.fulfilled, (state, { payload }) => {
+      if (payload && payload.data) {
+        state.userClosedBets = payload.data?.data;
+        state.userCloseBetsPage = payload.data?.pageNumber;
+        state.userCloseBetsTotalPages = payload.data?.totalPages;
+        // console.log("userClosedBets", state.userClosedBets);
+      } else {
+        state.userClosedBets = [];
+        state.userCloseBetsPage = 1;
+        state.userCloseBetsTotalPages = 2;
+      }
+    });
+
+    builder.addCase(Getgameswininglogs.fulfilled, (state, { payload }) => {
+      state.gameswininglogs = payload.data?.data;
+    });
+
+    builder.addCase(getgames.fulfilled, (state, { payload }) => {
+      state.games = sortArrayBy(payload.data, "dayAvailable");
+    });
+
+    builder.addCase(getallexistinggames.fulfilled, (state, { payload }) => {
+      state.allexistinggames = payload.data;
+      console.log("allexistinggames", state.allexistinggames);
+    });
+
+    builder.addCase(getgamestype.fulfilled, (state, { payload }) => {
+      if (payload && payload.data) {
+        state.gameTypes = payload.data;
+        state.selectedType = state.gameTypes[4];
+        // console.log("gameTypes", state.gameTypes);
+      }
+    });
+
+    builder.addCase(getgamesplayingtype.fulfilled, (state, { payload }) => {
+      if (payload && payload.data) {
+        state.gamePlayingTypes = payload.data;
+        state.selectedPlayingType = state.gamePlayingTypes[0]?.name;
+        // console.log("gamePlayingTypes", state.gamePlayingTypes);
+      }
+    });
+  },
+});
+
+export const {
+  setSelectedCoupons,
+  setBetSlips,
+  setSelectedPlayingType,
+  setSelectedGame,
+  setSelectedType,
+  setSelectedGametimer,
+  setBetAmount,
+  setUserOpenBets,
+  setUserOpenBetsCurrentPage,
+  setUserOpenBetsTotalPages,
+  setUserClosedBets,
+  setUserCloseBetsPage,
+  setUserCloseBetsTotalPages,
+  setCalculatedGames,
+  setExpiryDate,
+} = betSlice.actions;
+
+export default betSlice.reducer;
