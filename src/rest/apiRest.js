@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import "../config/axios";
 import { LOGIN_URL } from "../config/urlConfigs";
 
