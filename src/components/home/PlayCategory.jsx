@@ -19,7 +19,13 @@ const PlayCategory = () => {
           <div>
             <h5>Play Lotto</h5>
           </div>
-          <i className="bx bx-right-arrow-circle"></i>
+          {/* <i className="bx bx-right-arrow-circle"></i> */}
+
+          <div className="text-center mt-5">
+            <button type="button" className="grandLottoButton">
+              Play
+            </button>
+          </div>
         </div>
         <div
           className="playCategoryItem"
@@ -31,7 +37,13 @@ const PlayCategory = () => {
           <div>
             <h5>Pool</h5>
           </div>
-          <i className="bx bx-right-arrow-circle"></i>
+          {/* <i className="bx bx-right-arrow-circle"></i> */}
+
+          <div className="text-center mt-5 ">
+            <button type="button" className="grandLottoButton">
+              Play
+            </button>
+          </div>
         </div>
         <div
           className="playCategoryItem"
@@ -43,7 +55,13 @@ const PlayCategory = () => {
           <div>
             <h5>7/90</h5>
           </div>
-          <i className="bx bx-right-arrow-circle"></i>
+          {/* <i className="bx bx-right-arrow-circle"></i> */}
+
+          <div className="text-center mt-5">
+            <button type="button" className="grandLottoButton">
+              Play
+            </button>
+          </div>
         </div>
       </div>
     </div>

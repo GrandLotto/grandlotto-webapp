@@ -20,12 +20,15 @@ const RegisterModal = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [middleName, setMiddleName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
+
+  const [acceptTerms, setAcceptTerms] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -43,6 +46,7 @@ const RegisterModal = () => {
     setEmptyFields(true);
     setFirstName("");
     setLastName("");
+    setMiddleName("");
     setEmail("");
     setPhone("");
     setConfirmPassword("");
@@ -66,12 +70,14 @@ const RegisterModal = () => {
     email,
     firstName,
     lastName,
+    middleName,
     phone,
     password,
     confirmPassword,
     confirmPasswordError,
     emailError,
     emptyFields,
+    acceptTerms,
   ]);
 
   const validateForm = () => {
@@ -118,8 +124,12 @@ const RegisterModal = () => {
       setConfirmPasswordError("Password do not match");
       return false;
     }
-
     setConfirmPasswordError("");
+
+    if (!acceptTerms) {
+      setEmptyFields(true);
+      return false;
+    }
 
     setEmptyFields(false);
   };
@@ -241,7 +251,7 @@ const RegisterModal = () => {
               <div className="row">
                 <div className="col-md-6 mb-4">
                   <div className="form-group" style={{ width: "100%" }}>
-                    <label htmlFor="">First Name</label>
+                    <label htmlFor="">First Name (Legal name)</label>
 
                     <input
                       onChange={(e) => setFirstName(e.target.value)}
@@ -255,7 +265,7 @@ const RegisterModal = () => {
                 </div>
                 <div className="col-md-6 mb-4">
                   <div className="form-group" style={{ width: "100%" }}>
-                    <label htmlFor="">Last Name</label>
+                    <label htmlFor="">Last Name (Legal name)</label>
 
                     <input
                       onChange={(e) => setLastName(e.target.value)}
@@ -268,6 +278,35 @@ const RegisterModal = () => {
                   </div>
                 </div>
                 <div className="col-md-6 mb-4">
+                  <div className="form-group" style={{ width: "100%" }}>
+                    <label htmlFor="">Middle Name (Optional)</label>
+
+                    <input
+                      onChange={(e) => setMiddleName(e.target.value)}
+                      value={middleName}
+                      className="form-control py-3"
+                      placeholder="Middle Name"
+                      type="text"
+                      style={{ width: "100%" }}
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-6 mb-4">
+                  <div className="form-group" style={{ width: "100%" }}>
+                    <label htmlFor="">Phone Number</label>
+
+                    <input
+                      onChange={(e) => setPhone(e.target.value)}
+                      value={phone}
+                      className="form-control py-3"
+                      placeholder="Phone Number"
+                      type="text"
+                      style={{ width: "100%" }}
+                    />
+                  </div>
+                </div>
+                <div className="col-md-12 mb-4">
                   <div className="form-group" style={{ width: "100%" }}>
                     <label htmlFor="">Email</label>
 
@@ -297,20 +336,6 @@ const RegisterModal = () => {
                         <span className="ml-2">{emailError}</span>
                       </p>
                     )}
-                  </div>
-                </div>
-                <div className="col-md-6 mb-4">
-                  <div className="form-group" style={{ width: "100%" }}>
-                    <label htmlFor="">Phone Number</label>
-
-                    <input
-                      onChange={(e) => setPhone(e.target.value)}
-                      value={phone}
-                      className="form-control py-3"
-                      placeholder="Phone Number"
-                      type="text"
-                      style={{ width: "100%" }}
-                    />
                   </div>
                 </div>
                 <div className="col-md-6 mb-4">
@@ -379,12 +404,26 @@ const RegisterModal = () => {
                   </div>
                 </div>
               </div>
+              <div className="checkboxDiv">
+                <div
+                  className="form-check"
+                  style={{ fontSize: 13, fontStyle: "italic" }}
+                >
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    onChange={() => setAcceptTerms(!acceptTerms)}
+                    value={acceptTerms}
+                    id="flexCheckDefault"
+                  />
+                  <label className="form-check-label" for="flexCheckDefault">
+                    By creating an account, you agree to our Terms & Conditions
+                    and confirm that you are at least 18 years old or over and
+                    all information given is true.
+                  </label>
+                </div>
+              </div>
 
-              <p style={{ fontSize: 13, fontStyle: "italic" }}>
-                By creating an account, you agree to our Terms & Conditions and
-                confirm that you are at least 18 years old or over and all
-                information given is true.
-              </p>
               <br />
               <div
                 className="form-group text-center mb-4 mt-2 d-flex justify-content-center"

@@ -504,6 +504,57 @@ button.white-button {
   margin-right: 16px;
 }
 
+.alertPOP.large_modal .alert-modal-card {
+  // position: fixed !important;
+  // bottom: 50px !important;
+  // left: 0px !important;
+  // width: 50% !important;
+  height: 90% !important;
+  padding: 0px !important;
+  margin-top: 40px;
+  // margin-bottom: 40px;
+  overflow-y: hidden;
+  padding-top: 20px !important;
+}
+
+.alertPOP.large_modal.large_auto_height_modal .alert-modal-card {
+  height: auto !important;
+  // overflow-y: scroll;
+}
+
+.alertPOP.large_modal .alert-modal-card .grandlotto_form {
+  width: 100% !important;
+  height: 100vh !important;
+
+  overflow-y: scroll !important;
+  padding: 20px !important;
+  padding-bottom: 190px !important;
+}
+
+.alertPOP.large_modal.large_auto_height_modal
+  .alert-modal-card
+  .grandlotto_form {
+  height: auto !important;
+  padding-bottom: 30px !important;
+  // overflow-y: scroll;
+}
+
+.alertPOP.large_modal.large_auto_height_modal .alert-modal-body h4 {
+  font-size: 20px;
+  // overflow-y: scroll;
+}
+.alertPOP.large_modal.large_auto_height_modal .alert-modal-body p {
+  font-size: 15px;
+  // overflow-y: scroll;
+}
+
+.alertPOP.large_modal .alert-modal-card .close-alert-button {
+  text-align: right;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
 @media screen and (max-width: 768px) {
   .alertPOP.large_modal .alert-modal-card {
     position: fixed !important;
@@ -512,38 +563,13 @@ button.white-button {
     width: 100% !important;
     height: 86% !important;
     padding: 0px !important;
-    // overflow-y: scroll;
-  }
-
-  .alertPOP.large_modal.large_auto_height_modal .alert-modal-card {
-    height: auto !important;
+    margin-top: 0px;
+    padding-top: 20px !important;
     // overflow-y: scroll;
   }
 
   .alertPOP.large_modal .alert-modal-card .grandlotto_form {
-    width: 100% !important;
-    height: 100vh !important;
-
-    overflow-y: scroll !important;
-    padding: 20px !important;
     padding-bottom: 250px !important;
-  }
-
-  .alertPOP.large_modal.large_auto_height_modal
-    .alert-modal-card
-    .grandlotto_form {
-    height: auto !important;
-    padding-bottom: 30px !important;
-    // overflow-y: scroll;
-  }
-
-  .alertPOP.large_modal.large_auto_height_modal .alert-modal-body h4 {
-    font-size: 20px;
-    // overflow-y: scroll;
-  }
-  .alertPOP.large_modal.large_auto_height_modal .alert-modal-body p {
-    font-size: 15px;
-    // overflow-y: scroll;
   }
 }
 @media screen and (max-width: 650px) {
@@ -707,5 +733,17 @@ button.white-button {
   }
   #loginModal.alert-modal .alert-modal-body p {
     color: #fff;
+  }
+
+  .alertPOP.large_modal .alert-modal-card {
+    padding: 0px !important;
+    // overflow-y: scroll;
+  }
+
+  .alertPOP.large_modal .alert-modal-card .close-alert-button {
+    text-align: right;
+    position: relative;
+    right: unset;
+    top: unset;
   }
 }

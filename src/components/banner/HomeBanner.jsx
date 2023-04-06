@@ -1,7 +1,7 @@
 import React from "react";
-import Lotto from "../../assets/images/lotto.png";
-import pool from "../../assets/images/pool.png";
-import Seven790 from "../../assets/images/790.png";
+// import Lotto from "../../assets/images/lotto.png";
+// import pool from "../../assets/images/pool.png";
+// import Seven790 from "../../assets/images/790.png";
 import franceLotto1 from "../../assets/images/france-lotto1.png";
 import franceLotto2 from "../../assets/images/france-lotto2.png";
 
@@ -44,7 +44,7 @@ const HomeBanner = () => {
             Play Now
           </button>
         </div>
-        <div className="homeBannerWrraperImages">
+        {/* <div className="homeBannerWrraperImages">
           <div className="homeBannerWrraperImagesItem">
             <img src={Lotto} alt="grand-logo" />
             <p>Lotto</p>
@@ -57,7 +57,7 @@ const HomeBanner = () => {
             <img src={Seven790} alt="grand-logo" />
             <p>7/90</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
