@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import Group from "../../assets/images/Group.png";
-import uil_money from "../../assets/images/uil_money.png";
 import ps_promo from "../../assets/images/ps_promo.png";
 import { useSelector } from "react-redux";
 import { addComma } from "../../global/customFunctions";
@@ -10,7 +8,6 @@ const AdminWalletOverview = () => {
   const accountBalances = useSelector((state) => state.wallet.accountBalances);
 
   const [wallet, setWallet] = useState(null);
-  const [walletMobile, setWalletMobile] = useState(null);
 
   useEffect(() => {
     if (accountBalances) {

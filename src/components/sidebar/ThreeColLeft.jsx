@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import image2 from "../../assets/images/image2.png";
-import image3 from "../../assets/images/image3.png";
-import image4 from "../../assets/images/image4.png";
-import image5 from "../../assets/images/image5.png";
-import image6 from "../../assets/images/image6.png";
-import {
-  addZero,
-  formatAMPM,
-  groupBy,
-  groupBy2,
-} from "../../global/customFunctions";
+
+import { formatAMPM, groupBy2 } from "../../global/customFunctions";
 import { setSelectDrawMenu } from "../../store/alert/alertSlice";
 import {
   setCalculatedGames,
   setExpiryDate,
   setSelectedCoupons,
   setSelectedGame,
-  setSelectedGametimer,
   setSelectedPlayingType,
 } from "../../store/betSlice/betSlice";
 
@@ -31,174 +22,9 @@ const ThreeColLeft = () => {
     (state) => state.bets.selectedPlayingType
   );
 
-  const [selectedLotto, setSelectedLotto] = useState(null);
-
   const closeMenu = () => {
     dispatch(setSelectDrawMenu(false));
   };
-
-  // const betDates = [
-  //   {
-  //     name: "Wednesday, 2nd Feburary",
-  //     contents: [
-  //       {
-  //         title: "Metro",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image2,
-  //         active: true,
-  //       },
-  //       {
-  //         title: "Royal A1",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image3,
-  //         active: false,
-  //       },
-  //       {
-  //         title: "Mega 77",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image4,
-  //         active: false,
-  //       },
-  //       {
-  //         title: "Arena",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image5,
-  //         active: false,
-  //       },
-  //       {
-  //         title: "Fortune",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image6,
-  //         active: false,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     name: "Thursday, 3nd Feburary",
-  //     contents: [
-  //       {
-  //         title: "Metro",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image2,
-  //         active: true,
-  //       },
-  //       {
-  //         title: "Royal A1",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image3,
-  //         active: false,
-  //       },
-  //       {
-  //         title: "Mega 77",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image4,
-  //         active: false,
-  //       },
-  //       {
-  //         title: "Arena",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image5,
-  //         active: false,
-  //       },
-  //       {
-  //         title: "Fortune",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image6,
-  //         active: false,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     name: "Friday, 4th Feburary",
-  //     contents: [
-  //       {
-  //         title: "Metro",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image2,
-  //         active: true,
-  //       },
-  //       {
-  //         title: "Royal A1",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image3,
-  //         active: false,
-  //       },
-  //       {
-  //         title: "Mega 77",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image4,
-  //         active: false,
-  //       },
-  //       {
-  //         title: "Arena",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image5,
-  //         active: false,
-  //       },
-  //       {
-  //         title: "Fortune",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image6,
-  //         active: false,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     name: "Saturday, 5thFeburary",
-  //     contents: [
-  //       {
-  //         title: "Metro",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image2,
-  //         active: true,
-  //       },
-  //       {
-  //         title: "Royal A1",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image3,
-  //         active: false,
-  //       },
-  //       {
-  //         title: "Mega 77",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image4,
-  //         active: false,
-  //       },
-  //       {
-  //         title: "Arena",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image5,
-  //         active: false,
-  //       },
-  //       {
-  //         title: "Fortune",
-  //         desc: "",
-  //         closes: "8:30AM",
-  //         img: image6,
-  //         active: false,
-  //       },
-  //     ],
-  //   },
-  // ];
 
   const isSelected = (item) => {
     let selected = selectedGame?.id === item?.id;
@@ -302,7 +128,7 @@ const ThreeColLeft = () => {
 
                         <div
                           className={`open_body_contents ${
-                            isSelected(newItem) == true ? "buttonActive" : ""
+                            isSelected(newItem) === true ? "buttonActive" : ""
                           }`}
                           key={index2}
                           onClick={() => {

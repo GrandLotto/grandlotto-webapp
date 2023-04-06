@@ -37,12 +37,12 @@ const PaginationBlock = ({
   };
 
   useEffect(() => {
-    if (page == totalPages) {
+    if (page === totalPages) {
       setdisplableNext(true);
     } else {
       setdisplableNext(false);
     }
-    if (page == 1) {
+    if (page === 1) {
       setdisplablePrev(true);
     } else {
       setdisplablePrev(false);
@@ -68,7 +68,11 @@ const PaginationBlock = ({
             className={`page-item  ${displablePrev ? "disabled" : ""}`}
             onClick={() => previous()}
           >
-            <a className="page-link" href="#">
+            <a
+              className="page-link"
+              href="true"
+              onClick={(e) => e.preventDefault()}
+            >
               Previous
             </a>
           </li>
@@ -82,7 +86,11 @@ const PaginationBlock = ({
                 }   `}
                 onClick={() => fetchByPage(index + 1)}
               >
-                <a className="page-link" href="#">
+                <a
+                  className="page-link"
+                  href="true"
+                  onClick={(e) => e.preventDefault()}
+                >
                   {index + 1}
                   {/* {newPage} */}
                 </a>
@@ -93,7 +101,11 @@ const PaginationBlock = ({
             className={`page-item  ${displableNext ? "disabled" : ""}`}
             onClick={() => next()}
           >
-            <a className="page-link" href="#">
+            <a
+              className="page-link"
+              href="true"
+              onClick={(e) => e.preventDefault()}
+            >
               Next
             </a>
           </li>

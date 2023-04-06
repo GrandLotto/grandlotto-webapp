@@ -1,5 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import ComponentLoading from "../blocks/ComponentLoading";
 import { setAlertPopUp, setPageLoading } from "../../store/alert/alertSlice";
 import { useDispatch, useSelector } from "react-redux";
 import PinCodeBlock from "../blocks/PinCodeBlock";
@@ -12,7 +12,6 @@ const TransactionPin = () => {
 
   const user = useSelector((state) => state.oauth.user);
 
-  const [isLoading, setIsLoading] = useState(false);
   const [pin, setPin] = useState("");
   const [pin2, setPin2] = useState("");
   const [emptyFields, setEmptyFields] = useState(true);

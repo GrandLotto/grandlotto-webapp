@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { nigerianBanks } from "../../global/banks/banks";
-import { sortArrayByname } from "../../global/customFunctions";
 import { setNotiicationModal } from "../../store/alert/alertSlice";
 
 const NotiicationModal = () => {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.alert.notiicationModal);
-
-  const [allBanks] = useState(sortArrayByname(nigerianBanks()));
-  const [accountNumber, setAccountNumber] = useState("");
-  const [accountName, setAccountName] = useState("");
 
   const closeModal = () => {
     dispatch(setNotiicationModal(false));

@@ -1,13 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Logo from "../../assets/images/grandlotto.png";
 import person from "../../assets/images/default.png";
-import {
-  setMobileMenu,
-  setNotiicationModal,
-  setSideBarMenu,
-} from "../../store/alert/alertSlice";
+import { setMobileMenu, setSideBarMenu } from "../../store/alert/alertSlice";
 import HeaderDropDownBlock from "../blocks/HeaderDropDownBlock";
 import HeaderTopBalance from "../blocks/HeaderTopBalance";
 import TopSearch from "../blocks/TopSearch";
@@ -16,7 +13,7 @@ const HeaderTop = () => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const location = useLocation();
-  const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
+  // const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
   const sideBarMenu = useSelector((state) => state.alert.sideBarMenu);
   const user = useSelector((state) => state.oauth.user);
 
@@ -75,7 +72,11 @@ const HeaderTop = () => {
           <TopSearch />
 
           <div className="showOnMobile">
-            <a className="topHeaderLogo">
+            <a
+              href="true"
+              onClick={(e) => e.preventDefault()}
+              className="topHeaderLogo"
+            >
               <img src={Logo} alt="grand-logo" />
             </a>
           </div>

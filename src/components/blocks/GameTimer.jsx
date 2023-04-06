@@ -1,8 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { addZero } from "../../global/customFunctions";
 
 const GameTimer = ({ time, timeStarted }) => {
-  const [timeleft, setTimeleft] = useState(time);
   const [displayTimer, setDisplayTimer] = useState(null);
 
   useEffect(() => {

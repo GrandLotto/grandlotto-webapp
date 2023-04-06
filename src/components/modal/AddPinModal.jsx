@@ -1,15 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  ADD_TRANSACTION_PIN_URL,
-  CONFIRM_EMAIL_URL,
-} from "../../config/urlConfigs";
+import { ADD_TRANSACTION_PIN_URL } from "../../config/urlConfigs";
 import { handlePOSTRequest } from "../../rest/apiRest";
-import {
-  setLoginModal,
-  setAlertPopUp,
-  setAddPinModal,
-} from "../../store/alert/alertSlice";
+import { setAlertPopUp, setAddPinModal } from "../../store/alert/alertSlice";
 import { getUserInfo } from "../../store/authSlice/actions";
 
 import ComponentLoading from "../blocks/ComponentLoading";
@@ -43,12 +37,6 @@ const AddPinModal = () => {
 
   const handleDone = (code) => {
     setPin(code);
-  };
-
-  const goToLogin = (e) => {
-    e.preventDefault();
-    closeModal();
-    dispatch(setLoginModal(true));
   };
 
   useEffect(() => {

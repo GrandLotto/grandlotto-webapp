@@ -1,12 +1,12 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { setLogoutModal } from "../../store/alert/alertSlice";
 
 const HeaderDropDownBlock = () => {
   const dispatch = useDispatch();
 
-  const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
+  // const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
 
   return (
     <div className="header_top_dropDown">
@@ -47,14 +47,16 @@ const HeaderDropDownBlock = () => {
         </p>
         <p>
           <a
-            onClick={() =>
+            href="true"
+            onClick={(e) => {
+              e.preventDefault();
               dispatch(
                 setLogoutModal({
                   status: true,
                   payload: null,
                 })
-              )
-            }
+              );
+            }}
             className="has_link"
           >
             Logout

@@ -39,7 +39,7 @@ const AlertModalBet = () => {
     closeModal();
   };
   const handleClick = () => {
-    if (isCopying == true) {
+    if (isCopying === true) {
       return;
     }
 

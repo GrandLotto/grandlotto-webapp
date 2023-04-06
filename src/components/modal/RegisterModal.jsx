@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { REGISTER_URL } from "../../config/urlConfigs";
@@ -8,13 +9,6 @@ import {
   setLoginModal,
   setRegisterModal,
 } from "../../store/alert/alertSlice";
-import { getUserInfo } from "../../store/authSlice/actions";
-import {
-  setIsToken,
-  setIsUserLoggedIn,
-  setUserInfo,
-} from "../../store/authSlice/authSlice";
-import { getUserAccount } from "../../store/wallet/actions";
 import ComponentLoading from "../blocks/ComponentLoading";
 import Reponsemessage from "../blocks/Reponsemessage";
 

@@ -109,6 +109,15 @@ const LottoNumberBox = () => {
               {selectedCoupons?.[9]}
             </div>
           )}
+          {selectedType && selectedType?.maxNumbercount >= 11 && (
+            <div
+              className={`threeColRightSelectedPicksBox ${
+                selectedCoupons?.[10] ? "boxSelected" : ""
+              }`}
+            >
+              {selectedCoupons?.[10]}
+            </div>
+          )}
           {/* {selectedType && selectedType?.maxNumbercount >= 2 && ()} */}
         </div>
         <i className="bx bx-trash" onClick={() => clearallCoupons()}></i>

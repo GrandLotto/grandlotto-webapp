@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import "./sidebar.scss";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -8,14 +8,13 @@ import BetSlipsBox from "../blocks/BetSlipsBox";
 
 const BetSlipMobile = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigate();
 
   const [selectedAmount, setselectedAmount] = useState(0);
 
   const betSlipMobileModal = useSelector(
     (state) => state.alert.betSlipMobileModal
   );
-  const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
+  // const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
 
   return (
     <div className="betSlipMobile">

@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import CurrencyInput from "react-currency-input-field";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useSelector } from "react-redux";
+// import { useNavigate } from "react-router-dom";
 import { addComma } from "../../global/customFunctions";
-import { setBetSlips } from "../../store/betSlice/betSlice";
+// import { setBetSlips } from "../../store/betSlice/betSlice";
 import BetAmount from "./BetAmount";
 import BetPlayButton from "./BetPlayButton";
 import GameSummary from "./GameSummary";
@@ -14,73 +13,59 @@ const BetSlipsBox = ({
   setselectedAmount,
   selectedAmount,
 }) => {
-  const dispatch = useDispatch();
-  const navigation = useNavigate();
-  const betSlips = useSelector((state) => state.bets.betSlips);
-  const selectedType = useSelector((state) => state.bets.selectedType);
-  const selectedCoupons = useSelector((state) => state.bets.selectedCoupons);
+  // const dispatch = useDispatch();
+  // const betSlips = useSelector((state) => state.bets.betSlips);
+  // const selectedType = useSelector((state) => state.bets.selectedType);
+  // const selectedCoupons = useSelector((state) => state.bets.selectedCoupons);
   const betAmount = useSelector((state) => state.bets.betAmount);
   const calculatedGames = useSelector((state) => state.bets.calculatedGames);
 
-  const [contentEditable, setcontentEditable] = useState(true);
+  // const stakeAmounts = [
+  //   {
+  //     id: 1,
+  //     amount: 50,
+  //   },
+  //   {
+  //     id: 2,
+  //     amount: 100,
+  //   },
+  //   {
+  //     id: 3,
+  //     amount: 500,
+  //   },
+  //   {
+  //     id: 4,
+  //     amount: 1000,
+  //   },
+  //   {
+  //     id: 5,
+  //     amount: 2500,
+  //   },
+  //   {
+  //     id: 6,
+  //     amount: 5000,
+  //   },
+  // ];
 
-  const stakeAmounts = [
-    {
-      id: 1,
-      amount: 50,
-    },
-    {
-      id: 2,
-      amount: 100,
-    },
-    {
-      id: 3,
-      amount: 500,
-    },
-    {
-      id: 4,
-      amount: 1000,
-    },
-    {
-      id: 5,
-      amount: 2500,
-    },
-    {
-      id: 6,
-      amount: 5000,
-    },
-  ];
+  // const handleAmount = (value) => {
+  //   let minAmmount = selectedType?.minAmmount;
+  //   let maxAmmount = selectedType?.maxAmmount;
+  //   let newValue = Number(value);
+  //   if (newValue && newValue <= maxAmmount) {
+  //     console.log(newValue);
+  //     console.log(maxAmmount);
+  //     setselectedAmount(newValue);
+  //   } else {
+  //     if (!newValue) {
+  //       setselectedAmount(0);
+  //     }
+  //   }
 
-  const handleAmount = (value) => {
-    let minAmmount = selectedType?.minAmmount;
-    let maxAmmount = selectedType?.maxAmmount;
-    let newValue = Number(value);
-    if (newValue && newValue <= maxAmmount) {
-      console.log(newValue);
-      console.log(maxAmmount);
-      setselectedAmount(newValue);
-    } else {
-      if (!newValue) {
-        setselectedAmount(0);
-      }
-    }
-
-    // console.log(typeof newValue);
-    // console.log(typeof minAmmount);
-    // console.log(maxAmmount);
-    // if (newValue < maxAmmount) {
-    //   setselectedAmount(value);
-
-    //   console.log(true);
-    // }
-
-    // // console.log(value);
-    // console.log(selectedType);
-  };
-  const removeSlip = () => {
-    dispatch(setBetSlips([]));
-    setselectedAmount(0);
-  };
+  // };
+  // const removeSlip = () => {
+  //   dispatch(setBetSlips([]));
+  //   setselectedAmount(0);
+  // };
 
   // useEffect(() => {
   //   if (selectedType) {

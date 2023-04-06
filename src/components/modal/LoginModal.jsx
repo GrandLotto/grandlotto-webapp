@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LOGIN_URL } from "../../config/urlConfigs";
@@ -19,16 +20,6 @@ import {
 import { getUserInfo } from "../../store/authSlice/actions";
 import ComponentLoading from "../blocks/ComponentLoading";
 import Reponsemessage from "../blocks/Reponsemessage";
-import {
-  getacceptedpayment,
-  getAccountBalances,
-  getCountryBanks,
-  getUserAccount,
-} from "../../store/wallet/actions";
-import {
-  Getuserclosedgameplayed,
-  Getuseropengameplayed,
-} from "../../store/betSlice/actions";
 
 const LoginModal = () => {
   const dispatch = useDispatch();
@@ -129,7 +120,7 @@ const LoginModal = () => {
             dispatch(setIsUserLoggedIn(true));
 
             if (data?.roles?.length) {
-              if (isUserAnAdmin(data?.roles) == true) {
+              if (isUserAnAdmin(data?.roles) === true) {
                 dispatch(setIsAdmin(true));
               } else {
                 dispatch(setIsAdmin(false));
@@ -237,7 +228,11 @@ const LoginModal = () => {
                 style={{ marginTop: "-10px" }}
               >
                 <a
-                  onClick={(e) => handleForgotPassword(e)}
+                  href="true"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleForgotPassword(e);
+                  }}
                   className="has_link pointer"
                   style={{ cursor: "pointer" }}
                 >

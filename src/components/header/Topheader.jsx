@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import Logo from "../../assets/images/grandlotto.png";
 
@@ -9,7 +10,6 @@ import {
   setLoginModal,
   setRegisterModal,
   setMobileMenu,
-  setLogoutModal,
   setSideBarMenu,
   setComingSoonModal,
 } from "../../store/alert/alertSlice";
@@ -54,7 +54,9 @@ const Topheader = () => {
         <div className="topHeaderRightLeft d-flex align-items-center">
           <a
             className="top_link"
-            onClick={() => {
+            href="true"
+            onClick={(e) => {
+              e.preventDefault();
               dispatch(setComingSoonModal(true));
             }}
           >
@@ -62,7 +64,9 @@ const Topheader = () => {
           </a>
           <a
             className="top_link"
-            onClick={() => {
+            href="true"
+            onClick={(e) => {
+              e.preventDefault();
               dispatch(setComingSoonModal(true));
             }}
           >
@@ -70,7 +74,9 @@ const Topheader = () => {
           </a>
           <a
             className="top_link"
-            onClick={() => {
+            href="true"
+            onClick={(e) => {
+              e.preventDefault();
               dispatch(setComingSoonModal(true));
             }}
           >
@@ -78,7 +84,9 @@ const Topheader = () => {
           </a>
           <a
             className="top_link"
-            onClick={() => {
+            href="true"
+            onClick={(e) => {
+              e.preventDefault();
               dispatch(setComingSoonModal(true));
             }}
           >

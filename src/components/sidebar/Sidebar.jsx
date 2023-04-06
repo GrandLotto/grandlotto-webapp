@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./sidebar.scss";
 
 import Logo from "../../assets/images/grandlotto.png";
@@ -94,7 +94,7 @@ const Sidebar = () => {
 
               {user &&
                 user?.roles?.length &&
-                isUserAnAdmin(user?.roles) == true && (
+                isUserAnAdmin(user?.roles) === true && (
                   <div className="mt-3">
                     <li className="sidebar_links">
                       <p>Admin</p>
@@ -113,7 +113,11 @@ const Sidebar = () => {
                       </NavLink>
                     </li>
                     <li className="sidebar_links">
-                      <a className="sidebar_links_header">
+                      <a
+                        className="sidebar_links_header"
+                        href="true"
+                        onClick={(e) => e.preventDefault()}
+                      >
                         <div>
                           <i className="bx bx-layout"></i>
                           <span>games</span>
@@ -161,15 +165,17 @@ const Sidebar = () => {
           <ul>
             <li className="sidebar_links">
               <a
-                style={{ cursor: "pointer" }}
-                onClick={() =>
+                href="true"
+                onClick={(e) => {
+                  e.preventDefault();
                   dispatch(
                     setLogoutModal({
                       status: true,
                       payload: null,
                     })
-                  )
-                }
+                  );
+                }}
+                style={{ cursor: "pointer" }}
               >
                 <i className="bx bx-log-out"></i>
                 <span>Logout</span>

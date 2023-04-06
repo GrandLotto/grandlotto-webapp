@@ -17,16 +17,16 @@ const Footer = () => {
           <img src={Logo} alt="grand-logo" />
 
           <div className="footer_social">
-            <a href="">
+            <a href="true" onClick={(e) => e.preventDefault()}>
               <i className="bx bxl-facebook"></i>
             </a>
-            <a href="">
+            <a href="true" onClick={(e) => e.preventDefault()}>
               <i className="bx bxl-instagram"></i>
             </a>
-            <a href="">
+            <a href="true" onClick={(e) => e.preventDefault()}>
               <i className="bx bxl-twitter"></i>
             </a>
-            <a href="">
+            <a href="true" onClick={(e) => e.preventDefault()}>
               <i className="bx bxl-youtube"></i>
             </a>
           </div>

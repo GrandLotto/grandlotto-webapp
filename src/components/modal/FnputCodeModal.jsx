@@ -1,13 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CONFIRM_EMAIL_URL, RESET_PASSWORD_URL } from "../../config/urlConfigs";
+import { RESET_PASSWORD_URL } from "../../config/urlConfigs";
 import { handlePOSTRequest } from "../../rest/apiRest";
-import {
-  setForgotPasswordModal,
-  setInputCodeModal,
-  setLoginModal,
-  setAlertPopUp,
-} from "../../store/alert/alertSlice";
+import { setInputCodeModal, setAlertPopUp } from "../../store/alert/alertSlice";
 
 import ComponentLoading from "../blocks/ComponentLoading";
 import PinCodeBlock from "../blocks/PinCodeBlock";
@@ -60,12 +56,6 @@ const FnputCodeModal = () => {
 
   const handleDone = (code) => {
     setPin(code);
-  };
-
-  const goToLogin = (e) => {
-    e.preventDefault();
-    closeModal();
-    dispatch(setLoginModal(true));
   };
 
   useEffect(() => {

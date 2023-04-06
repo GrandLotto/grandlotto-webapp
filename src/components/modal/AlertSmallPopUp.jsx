@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAlertSmallPOPUP } from "../../store/alert/alertSlice";
@@ -29,7 +30,11 @@ const AlertSmallPopUp = () => {
       onClick={() => closeModal()}
     >
       <p style={{ display: "flex" }}>
-        <a className="button btn-square rounded is-small mr-3">
+        <a
+          className="button btn-square rounded is-small mr-3"
+          href="true"
+          onClick={(e) => e.preventDefault()}
+        >
           <i className="bx bxs-badge-check text-dark"></i>
         </a>
         {alertModal?.message}

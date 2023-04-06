@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 
 const Timer = ({ time, setTime }) => {
-  const [timeleft, setTimeleft] = useState(time);
   const [displayTimer, setDisplayTimer] = useState(time);
 
   useEffect(() => {

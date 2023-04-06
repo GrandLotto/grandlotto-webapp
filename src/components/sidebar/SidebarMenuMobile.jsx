@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./sidebar.scss";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,6 @@ import TopSearch from "../blocks/TopSearch";
 
 import fluent_lottery from "../../assets/images/fluent_lottery.png";
 import ion_football from "../../assets/images/ion_football.png";
-import cil_football from "../../assets/images/cil_football.png";
 import healthicons from "../../assets/images/healthicons.png";
 import carbon_result from "../../assets/images/carbon_result.png";
 import verifiedcheck from "../../assets/images/verifiedcheck.png";
@@ -144,8 +143,10 @@ const SidebarMenuMobile = () => {
                 <i className="bx bx-chevron-right"></i>
               </NavLink>
               <a
+                href="true"
                 className="sidebarLinkMenusItem"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   dispatch(setNotiicationModal(true));
                   //   dispatch(setSideBarMenu(false));
                 }}
@@ -173,7 +174,11 @@ const SidebarMenuMobile = () => {
                   </div>
                   <i className="bx bx-chevron-right"></i>
                 </NavLink>
-                <a className="sidebarLinkMenusItem">
+                <a
+                  className="sidebarLinkMenusItem"
+                  href="true"
+                  onClick={(e) => e.preventDefault()}
+                >
                   <div className="sidebarLinkMenusItemLeft">
                     <img
                       src={ion_football}
@@ -209,8 +214,10 @@ const SidebarMenuMobile = () => {
                   <i className="bx bx-chevron-right"></i>
                 </NavLink>
                 <a
+                  href="true"
                   className="sidebarLinkMenusItem"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     dispatch(setSideBarMenu(false));
                     dispatch(setRedeemWinningModal(true));
                   }}
@@ -221,7 +228,11 @@ const SidebarMenuMobile = () => {
                   </div>
                   <i className="bx bx-chevron-right"></i>
                 </a>
-                <a className="sidebarLinkMenusItem">
+                <a
+                  className="sidebarLinkMenusItem"
+                  href="true"
+                  onClick={(e) => e.preventDefault()}
+                >
                   <div className="sidebarLinkMenusItemLeft">
                     <img
                       src={verifiedcheck}
@@ -243,7 +254,11 @@ const SidebarMenuMobile = () => {
                   </div>
                   <i className="bx bx-chevron-right"></i>
                 </NavLink>
-                <a className="sidebarLinkMenusItem">
+                <a
+                  className="sidebarLinkMenusItem"
+                  href="true"
+                  onClick={(e) => e.preventDefault()}
+                >
                   <div className="sidebarLinkMenusItemLeft">
                     <img
                       src={healthicons}
@@ -273,15 +288,17 @@ const SidebarMenuMobile = () => {
           )}
 
           <a
-            className="sidebarLinkMenusItem"
-            onClick={() =>
+            href="true"
+            onClick={(e) => {
+              e.preventDefault();
               dispatch(
                 setLogoutModal({
                   status: true,
                   payload: null,
                 })
-              )
-            }
+              );
+            }}
+            className="sidebarLinkMenusItem"
           >
             <div className="sidebarLinkMenusItemLeft">
               <i className="bx bx-log-out"></i>

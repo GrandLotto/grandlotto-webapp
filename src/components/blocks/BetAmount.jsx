@@ -13,7 +13,7 @@ const BetAmount = () => {
   const selectedType = useSelector((state) => state.bets.selectedType);
 
   const handleAmount = (value) => {
-    let minAmmount = selectedType?.minAmmount;
+    // let minAmmount = selectedType?.minAmmount;
     let maxAmmount = selectedType?.maxAmmount;
     let newValue = Number(value);
 

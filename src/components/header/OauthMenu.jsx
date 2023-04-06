@@ -38,7 +38,9 @@ const OauthMenu = () => {
           </NavLink>
           <a
             className="top_link"
-            onClick={() => {
+            href="true"
+            onClick={(e) => {
+              e.preventDefault();
               dispatch(setComingSoonModal(true));
             }}
           >
@@ -56,7 +58,9 @@ const OauthMenu = () => {
 
           <a
             className="top_link"
-            onClick={() => {
+            href="true"
+            onClick={(e) => {
+              e.preventDefault();
               dispatch(setMobileMenu(false));
               dispatch(setRedeemWinningModal(true));
             }}

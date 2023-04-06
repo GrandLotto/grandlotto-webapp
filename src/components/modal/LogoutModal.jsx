@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogoutModal } from "../../store/alert/alertSlice";
-import { useNavigate } from "react-router-dom";
 import ComponentLoading from "../blocks/ComponentLoading";
 import {
   logout,
@@ -13,7 +12,6 @@ import { persistor } from "../../store/store";
 
 const LogoutModal = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigate();
 
   const modal = useSelector((state) => state.alert.logoutModal);
   const [isLoading, setIsLoading] = useState(false);

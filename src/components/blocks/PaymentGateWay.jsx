@@ -1,31 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
 import paystack from "../../assets/images/paystack.png";
 import Providus from "../../assets/images/Providus.png";
-import opay from "../../assets/images/opay.png";
 import { useSelector } from "react-redux";
 
 const PaymentGateWay = ({ selectedGateWay, handleSelectGateWay }) => {
   const acceptedpayment = useSelector((state) => state.wallet.acceptedpayment);
-  const user = useSelector((state) => state.oauth.user);
-
-  const gateways = [
-    {
-      id: 1,
-      name: "Paystack",
-      logo: paystack,
-    },
-    {
-      id: 2,
-      name: "Providus",
-      logo: Providus,
-    },
-    // {
-    //   id: 3,
-    //   name: "Opay",
-    //   logo: opay,
-    // },
-  ];
+  // const user = useSelector((state) => state.oauth.user);
 
   return (
     <div className="paymentGateWay text-left">

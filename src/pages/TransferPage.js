@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import TransferTab from "../components/wallet/TransferTab";
+// import TransferTab from "../components/wallet/TransferTab";
 
 const TransferPage = () => {
   useEffect(() => {
@@ -18,9 +18,7 @@ const TransferPage = () => {
           </div>
 
           <div className="mt-3">
-            <div className="card">
-              <TransferTab />
-            </div>
+            <div className="card">{/* <TransferTab /> */}</div>
           </div>
         </div>
       </div>

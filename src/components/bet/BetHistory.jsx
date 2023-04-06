@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   formateDateAndTimeByName,
@@ -89,10 +89,10 @@ const BetHistory = ({
                     </td>
                     <td>{formateDateAndTimeByName(item?.datePlayed)}</td>
                     <td>
-                      {item?.status?.toLowerCase() == "pending" && (
+                      {item?.status?.toLowerCase() === "pending" && (
                         <span
                           className={`has_status ${[
-                            item?.status?.toLowerCase() == "pending"
+                            item?.status?.toLowerCase() === "pending"
                               ? "isPending"
                               : "",
                           ]}`}
@@ -101,10 +101,10 @@ const BetHistory = ({
                         </span>
                       )}
 
-                      {item?.status?.toLowerCase() == "lost" && (
+                      {item?.status?.toLowerCase() === "lost" && (
                         <span
                           className={`has_status ${[
-                            item?.status?.toLowerCase() == "lost"
+                            item?.status?.toLowerCase() === "lost"
                               ? "isLost"
                               : "",
                           ]}`}
@@ -186,10 +186,10 @@ const BetHistory = ({
                   <h4 className="">
                     <b>Bet ID: {item?.gameTicket || item?.id}</b>
                   </h4>
-                  {item?.status?.toLowerCase() == "pending" && (
+                  {item?.status?.toLowerCase() === "pending" && (
                     <span
                       className={`has_status ${[
-                        item?.status?.toLowerCase() == "pending"
+                        item?.status?.toLowerCase() === "pending"
                           ? "isPending"
                           : "",
                       ]}`}
@@ -198,10 +198,10 @@ const BetHistory = ({
                     </span>
                   )}
 
-                  {item?.status?.toLowerCase() == "lost" && (
+                  {item?.status?.toLowerCase() === "lost" && (
                     <span
                       className={`has_status ${[
-                        item?.status?.toLowerCase() == "lost" ? "isLost" : "",
+                        item?.status?.toLowerCase() === "lost" ? "isLost" : "",
                       ]}`}
                     >
                       {item?.status}

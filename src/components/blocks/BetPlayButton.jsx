@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CALCULATE_WINNING_URL, PLAY_GAME_URL } from "../../config/urlConfigs";
@@ -13,7 +14,6 @@ import {
   setCalculatedGames,
   setExpiryDate,
   setSelectedCoupons,
-  setSelectedGame,
   setSelectedPlayingType,
   setSelectedType,
 } from "../../store/betSlice/betSlice";

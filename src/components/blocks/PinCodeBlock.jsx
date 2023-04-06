@@ -1,5 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { inputCodeNext } from "../../global/customFunctions";
 
 const PinCodeBlock = ({ handleDone, pinLength, resetEFields }) => {

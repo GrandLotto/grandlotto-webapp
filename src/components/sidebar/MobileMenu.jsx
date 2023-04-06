@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
-  setBetSlipMobileModal,
   setLoginModal,
   setMobileMenu,
   setSideBarMenu,
@@ -16,7 +15,9 @@ const MobileMenu = () => {
   return (
     <div className="mobile-menu">
       <a
-        onClick={() => {
+        href="true"
+        onClick={(e) => {
+          e.preventDefault();
           dispatch(setMobileMenu(false));
           dispatch(setSideBarMenu(!sideBarMenu));
         }}
@@ -82,7 +83,13 @@ const MobileMenu = () => {
           <span>Deposit</span>
         </NavLink>
       ) : (
-        <a onClick={() => dispatch(setLoginModal(true))}>
+        <a
+          href="true"
+          onClick={(e) => {
+            e.preventDefault();
+            dispatch(setLoginModal(true));
+          }}
+        >
           <div>
             <i className="bx bx-log-in"></i>
           </div>
