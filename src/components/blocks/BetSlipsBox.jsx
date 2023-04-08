@@ -1,11 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { addComma } from "../../global/customFunctions";
 // import { setBetSlips } from "../../store/betSlice/betSlice";
 import BetAmount from "./BetAmount";
 import BetPlayButton from "./BetPlayButton";
 import GameSummary from "./GameSummary";
+import { setBetAmount } from "../../store/betSlice/betSlice";
 
 const BetSlipsBox = ({
   showAmount = true,
@@ -13,39 +14,31 @@ const BetSlipsBox = ({
   setselectedAmount,
   selectedAmount,
 }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const betSlips = useSelector((state) => state.bets.betSlips);
   // const selectedType = useSelector((state) => state.bets.selectedType);
   // const selectedCoupons = useSelector((state) => state.bets.selectedCoupons);
   const betAmount = useSelector((state) => state.bets.betAmount);
   const calculatedGames = useSelector((state) => state.bets.calculatedGames);
 
-  // const stakeAmounts = [
-  //   {
-  //     id: 1,
-  //     amount: 50,
-  //   },
-  //   {
-  //     id: 2,
-  //     amount: 100,
-  //   },
-  //   {
-  //     id: 3,
-  //     amount: 500,
-  //   },
-  //   {
-  //     id: 4,
-  //     amount: 1000,
-  //   },
-  //   {
-  //     id: 5,
-  //     amount: 2500,
-  //   },
-  //   {
-  //     id: 6,
-  //     amount: 5000,
-  //   },
-  // ];
+  const stakeAmounts = [
+    {
+      id: 1,
+      amount: 50,
+    },
+    {
+      id: 2,
+      amount: 100,
+    },
+    {
+      id: 3,
+      amount: 200,
+    },
+    {
+      id: 3,
+      amount: 500,
+    },
+  ];
 
   // const handleAmount = (value) => {
   //   let minAmmount = selectedType?.minAmmount;
@@ -202,21 +195,19 @@ const BetSlipsBox = ({
 
       <div className="allBetSlipItem pt-1">
         <div className="allBetSlipItemBody mt-0">
-          {/* {showAmount === true && (
-            <div className="allBetSlipItemBodyItemButtons mt-0">
-              {stakeAmounts?.map((item, index) => (
-                <div
-                  key={index}
-                  className={`allBetSlipItemBodyItemButtonsItems ${
-                    selectedAmount === item?.amount ? "buttonSelected" : ""
-                  }`}
-                  onClick={() => setselectedAmount(item?.amount)}
-                >
-                  {item?.amount}
-                </div>
-              ))}
-            </div>
-          )} */}
+          <div className="allBetSlipItemBodyItemButtons mt-3">
+            {stakeAmounts?.map((item, index) => (
+              <div
+                key={index}
+                className={`allBetSlipItemBodyItemButtonsItems ${
+                  betAmount === item?.amount ? "buttonSelected" : ""
+                }`}
+                onClick={() => dispatch(setBetAmount(item?.amount))}
+              >
+                {item?.amount}
+              </div>
+            ))}
+          </div>
 
           {showInput === true && (
             <div className="allBetSlipItemBodyItemAmount">
@@ -244,7 +235,7 @@ const BetSlipsBox = ({
               style={{ flexDirection: "column" }}
             >
               <div className="d-flex justify-content-end align-items-end mb-2">
-                <h5>Stake Amount: </h5>
+                <h5>Total Stake: </h5>
                 <h5>
                   <b>
                     ₦
@@ -255,7 +246,7 @@ const BetSlipsBox = ({
                 </h5>
               </div>
               <div className="d-flex justify-content-end align-items-end">
-                <h5>Possible Winning: </h5>
+                <h5>Possible Win: </h5>
                 <h5>
                   <b>
                     ₦

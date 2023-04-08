@@ -149,13 +149,13 @@ const betSlice = createSlice({
 
     builder.addCase(getallexistinggames.fulfilled, (state, { payload }) => {
       state.allexistinggames = payload.data;
-      console.log("allexistinggames", state.allexistinggames);
+      // console.log("allexistinggames", state.allexistinggames);
     });
 
     builder.addCase(getgamestype.fulfilled, (state, { payload }) => {
       if (payload && payload.data) {
         state.gameTypes = payload.data;
-        state.selectedType = state.gameTypes[4];
+        state.selectedType = state.gameTypes[1];
         // console.log("gameTypes", state.gameTypes);
       }
     });

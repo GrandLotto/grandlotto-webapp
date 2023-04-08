@@ -7,6 +7,29 @@
   z-index: 220;
 }
 
+.header_fixed {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  box-shadow: 0 2px 2px -2px rgba(110, 110, 110, 0.2);
+  z-index: 400;
+  transition: all 200ms ease-in-out;
+  background: $primaryDark;
+}
+
+.header_fixed .topHeaderRightLeftNoScroll {
+  display: none !important;
+}
+
+.header_fixed .topHeaderRightLefthasScroll {
+  display: unset !important;
+}
+
+.topHeaderRightLefthasScroll {
+  display: none !important;
+}
+
 .topHeaderLogo img {
   width: 200px !important;
   cursor: pointer;
@@ -252,6 +275,11 @@
   }
 }
 
+@media screen and (max-width: 850px) {
+  .header_fixed .topHeaderRightLefthasScroll {
+    display: none !important;
+  }
+}
 @media screen and (max-width: 780px) {
   .oauthMenu {
     background: $primaryDark;

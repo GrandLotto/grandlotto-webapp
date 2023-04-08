@@ -14,6 +14,7 @@ import ComingSoonModal from "./ComingSoonModal";
 import AlertModalBet from "./AlertModalBet";
 import AlertSmallPopUp from "./AlertSmallPopUp";
 import SearchCouponCodeModal from "./SearchCouponCodeModal";
+import ConfirmModal from "./ConfirmModal";
 
 const AllModal = () => {
   return (
@@ -22,6 +23,7 @@ const AllModal = () => {
       <AlertSmallPopUp />
       <AlertModalBet />
       <PageLoading />
+      <ConfirmModal />
       <LogoutModal />
       <LoginModal />
       <RegisterModal />

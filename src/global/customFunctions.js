@@ -14,6 +14,16 @@ export const copyCode = (codeToCopy) => {
   return result;
 };
 
+export const addFixNav = () => {
+  $(window).scroll(function () {
+    var sticky = $("#topHeader"),
+      scroll = $(window).scrollTop();
+
+    if (scroll >= 100) sticky.addClass("header_fixed");
+    else sticky.removeClass("header_fixed");
+  });
+};
+
 export const tabDropDown = () => {
   $("#root").on("click", ".open_roles_grid_item_header", function () {
     // if ($(this).parent().hasClass("active")) {

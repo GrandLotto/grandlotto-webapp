@@ -355,7 +355,7 @@ const RegisterModal = () => {
                         className={`showHide bx ${
                           showPassword ? "bx-hide" : "bx-show"
                         }  `}
-                        style={{ color: "#222" }}
+                        style={{ color: "#fff" }}
                         onClick={() => setShowPassword(!showPassword)}
                       ></i>
                     </div>
@@ -377,7 +377,7 @@ const RegisterModal = () => {
                         className={`showHide bx ${
                           showConfirmPassword ? "bx-hide" : "bx-show"
                         }  `}
-                        style={{ color: "#222" }}
+                        style={{ color: "#fff" }}
                         onClick={() =>
                           setShowConfirmPassword(!showConfirmPassword)
                         }
@@ -416,7 +416,10 @@ const RegisterModal = () => {
                     value={acceptTerms}
                     id="flexCheckDefault"
                   />
-                  <label className="form-check-label" for="flexCheckDefault">
+                  <label
+                    className="form-check-label"
+                    htmlFor="flexCheckDefault"
+                  >
                     By creating an account, you agree to our Terms & Conditions
                     and confirm that you are at least 18 years old or over and
                     all information given is true.
@@ -439,7 +442,7 @@ const RegisterModal = () => {
                 </button>
               </div>
 
-              <div className="form-group text-dark d-flex justify-content-center">
+              <div className="form-group text-light d-flex justify-content-center">
                 Already have an account? {""}
                 <a
                   href="true"

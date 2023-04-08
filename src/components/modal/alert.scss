@@ -1,5 +1,22 @@
 @import "../../assets/css/colors.scss";
 
+.alert-modal .alert-modal-card input:-webkit-autofill,
+.alert-modal .alert-modal-card input:-webkit-autofill:hover,
+.alert-modal .alert-modal-card input:-webkit-autofill:focus,
+.alert-modal .alert-modal-card textarea:-webkit-autofill,
+.alert-modal .alert-modal-card textarea:-webkit-autofill:hover,
+.alert-modal .alert-modal-card textarea:-webkit-autofill:focus,
+.alert-modal .alert-modal-card select:-webkit-autofill,
+.alert-modal .alert-modal-card select:-webkit-autofill:hover,
+.alert-modal .alert-modal-card select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff !important;
+  -webkit-box-shadow: 0 0 0px 1000px darken($color: $primaryDark, $amount: 20%)
+    inset !important;
+  box-shadow: 0 0 0px 1000px darken($color: $primaryDark, $amount: 20%) inset !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+  color: #fff !important;
+}
+
 /* MODALS */
 .hideModal {
   display: none;
@@ -288,7 +305,9 @@
 
 .alert-modal-card {
   position: relative;
-  background: rgb(255, 255, 255);
+  background: $primaryDark;
+  // background: darken($color: $primaryDark, $amount: 20%);
+  color: #fff !important;
   width: 390px;
   height: auto;
   padding: 17px 19px;
@@ -296,11 +315,6 @@
   border-radius: 10px;
   box-shadow: 3px 6px 10px 0 rgb(0 102 245 / 7%);
   z-index: 9940;
-}
-
-body.dark-mode .alert-modal-card {
-  color: #fff;
-  background: var(--mainBodyDarkMode);
 }
 
 .alertPOP .alert-modal-card {
@@ -334,18 +348,9 @@ body.dark-mode .alert-modal-card {
 }
 
 .alert-modal-card .close-alert-button i {
-  color: #1e1d1d;
   font-size: 27px;
   cursor: pointer;
   padding: 2px;
-}
-
-body.dark-mode .alert-modal-card .close-alert-button i,
-body.dark-mode .alert-modal-card .close-alert-button h4 {
-  color: #fff;
-}
-body.dark-mode .alert-modal-card .close-alert-button {
-  border: none;
 }
 
 .alert-modal-body {
@@ -353,11 +358,6 @@ body.dark-mode .alert-modal-card .close-alert-button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-body.dark-mode .alert-modal-body {
-  color: #fff;
-  background: var(--mainBodyDarkMode);
 }
 
 .large_modal .alert-modal-card {
@@ -439,7 +439,7 @@ body.dark-mode .alert-modal-body {
   line-height: 26px;
   text-align: center;
   letter-spacing: -0.382609px;
-  color: #111;
+
   margin-bottom: 12px;
   font-family: "Open Sans", sans-serif;
 }
@@ -451,7 +451,6 @@ body.dark-mode .alert-modal-body {
   line-height: 26px;
   text-align: center;
   letter-spacing: -0.382609px;
-  color: #111;
   margin-bottom: 0px;
   font-family: "Open Sans", sans-serif;
 }
@@ -471,7 +470,6 @@ body.dark-mode .alert-modal-body {
   line-height: 20px;
   text-align: center;
   letter-spacing: -0.382609px;
-  color: #5f5f5f;
   width: 79%;
   margin: 4px auto 15px;
 }
@@ -485,6 +483,7 @@ body.dark-mode .alert-modal-body {
   padding: 10px 80px;
   font-weight: bold;
   font-size: 15px;
+  transition: all 300ms ease-in-out;
 }
 
 .alert-modal .alert-modal-body .alert-modal-button button.green-button {
@@ -494,7 +493,7 @@ body.dark-mode .alert-modal-body {
 }
 
 .alert-modal .alert-modal-body .alert-modal-button button:hover {
-  transform: scale(1.1);
+  transform: scale(0.9);
 }
 
 button.white-button {
@@ -531,6 +530,16 @@ button.white-button {
   padding-bottom: 190px !important;
 }
 
+.alertPOP.large_modal .alert-modal-card .grandlotto_form::-webkit-scrollbar {
+  width: 5px;
+}
+
+.alertPOP.large_modal.noscrollBar
+  .alert-modal-card
+  .grandlotto_form::-webkit-scrollbar {
+  width: 0px !important;
+}
+
 .alertPOP.large_modal.large_auto_height_modal
   .alert-modal-card
   .grandlotto_form {
@@ -553,6 +562,20 @@ button.white-button {
   position: absolute;
   right: 20px;
   top: 20px;
+}
+
+.alert-modal.alertPOP .grandlotto_form label {
+  color: #fff !important;
+}
+
+.alert-modal
+  .alert-modal-card
+  .alert-modal-body
+  .grandlotto_form
+  .form-group
+  .form-control {
+  background: darken($color: $primaryDark, $amount: 20%);
+  color: #fff !important;
 }
 
 @media screen and (max-width: 768px) {

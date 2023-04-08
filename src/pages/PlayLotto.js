@@ -80,6 +80,7 @@ const PlayLotto = () => {
   };
 
   const handleSelectItem = (item) => {
+    // console.log(item);
     if (selectedType) {
       handlePickItem(item);
     } else {
@@ -100,8 +101,41 @@ const PlayLotto = () => {
           dispatch(setSelectedCoupons(remove));
         }
       } else {
-        if (selectedCoupons?.length === maxNumbercount) {
+        // console.log("selectedCoupons?.length", selectedCoupons?.length);
+        // console.log("maxNumbercount", maxNumbercount);
+
+        if (selectedType?.type === "BANKER") {
           return;
+        }
+
+        if (selectedCoupons?.length >= maxNumbercount) {
+          let filteredWith = "NAP2";
+
+          if (selectedCoupons?.length === 2) {
+            filteredWith = "PERM2";
+          }
+
+          if (selectedCoupons?.length === 3) {
+            filteredWith = "PERM3";
+          }
+
+          if (selectedCoupons?.length === 4) {
+            filteredWith = "PERM4";
+          }
+
+          if (selectedCoupons?.length === 5) {
+            filteredWith = "PERM5";
+          }
+
+          let selectednewType = gameTypes?.find(
+            (gameT) => gameT?.type === filteredWith
+          );
+
+          if (selectednewType) {
+            if (maxNumbercount !== 10) {
+              dispatch(setSelectedType(selectednewType));
+            }
+          }
         }
 
         let newC = [...selectedCoupons, item];
@@ -115,12 +149,18 @@ const PlayLotto = () => {
   };
 
   const randomPick = () => {
-    dispatch(
-      setSelectedCoupons(
-        generateLottoNumbers(selectedType?.maxNumbercount, 1, 90)
-      )
-    );
+    let filteredWith = "NAP5";
+    dispatch(setSelectedCoupons(generateLottoNumbers(5, 1, 90)));
     dispatch(setCalculatedGames(null));
+    dispatch(setSelectedType(null));
+
+    let selectednewType = gameTypes?.find(
+      (gameT) => gameT?.type === filteredWith
+    );
+
+    if (selectednewType) {
+      dispatch(setSelectedType(selectednewType));
+    }
 
     // console.log(allNumbers);
   };
@@ -279,13 +319,13 @@ const PlayLotto = () => {
                     <GameSummary calculatedGames={calculatedGames} />
                   )}
 
-                  <div className="d-flex justify-content-between align-items-center mt-4 buttonPlayLottoSmallStake">
+                  <div className="d-flex justify-content-between align-items-center mt-3 buttonPlayLottoSmallStake">
                     <div className="buttonPlayLottoSmallStakeLeft">
                       <p>
                         Total stake{" "}
-                        {["PERM2", "PERM3", "PERM4", "PERM5"].includes(
+                        {/* {["PERM2", "PERM3", "PERM4", "PERM5"].includes(
                           calculatedGames?.gametype
-                        ) && "per line"}
+                        ) && "per line"} */}
                         :
                       </p>
                       <p>
@@ -298,7 +338,7 @@ const PlayLotto = () => {
                       </p>
                     </div>
                     <div className="buttonPlayLottoSmallStakeRight">
-                      <p>Total return:</p>
+                      <p>Possible Win:</p>
                       <p>
                         <b>
                           ₦

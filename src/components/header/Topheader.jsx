@@ -12,6 +12,7 @@ import {
   setMobileMenu,
   setSideBarMenu,
   setComingSoonModal,
+  setRedeemWinningModal,
 } from "../../store/alert/alertSlice";
 import HeaderDropDownBlock from "../blocks/HeaderDropDownBlock";
 import HeaderTopBalance from "../blocks/HeaderTopBalance";
@@ -46,12 +47,12 @@ const Topheader = () => {
   }, [location]);
 
   return (
-    <div className="relative  topHeader">
+    <div className="relative  topHeader" id="topHeader">
       <NavLink to="/" className="topHeaderLogo">
         <img src={Logo} alt="grand-logo" />
       </NavLink>
       <div className="topHeaderRight ">
-        <div className="topHeaderRightLeft d-flex align-items-center">
+        <div className="topHeaderRightLeft d-flex align-items-center topHeaderRightLeftNoScroll">
           <a
             className="top_link"
             href="true"
@@ -91,6 +92,45 @@ const Topheader = () => {
             }}
           >
             FirstBet
+          </a>
+        </div>
+        <div className="topHeaderRightLeft d-flex align-items-center topHeaderRightLefthasScroll">
+          <NavLink to="/" className="top_link">
+            Home
+          </NavLink>
+          <NavLink to="/lotto" className="top_link">
+            Lotto
+          </NavLink>
+          <a
+            className="top_link"
+            href="true"
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(setComingSoonModal(true));
+            }}
+          >
+            Pool
+          </a>
+
+          <NavLink to="/results" className="top_link">
+            Results
+          </NavLink>
+          {isUserLoggedIn ? (
+            <NavLink to="/account/fund-wallet" className="top_link">
+              Deposit Funds
+            </NavLink>
+          ) : null}
+
+          <a
+            className="top_link"
+            href="true"
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(setMobileMenu(false));
+              dispatch(setRedeemWinningModal(true));
+            }}
+          >
+            Check Winning
           </a>
         </div>
 

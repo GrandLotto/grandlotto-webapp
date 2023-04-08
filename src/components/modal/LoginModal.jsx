@@ -253,7 +253,7 @@ const LoginModal = () => {
                   />
 
                   <i
-                    className={`showHide text-dark bx ${
+                    className={`showHide text-light bx ${
                       showPassword ? "bx-hide" : "bx-show"
                     }  `}
                     onClick={() => setShowPassword(!showPassword)}
@@ -275,7 +275,7 @@ const LoginModal = () => {
                 </button>
               </div>
 
-              <div className="form-group text-dark d-flex justify-content-center">
+              <div className="form-group text-light d-flex justify-content-center">
                 Don’t an account? {""}
                 <a
                   href="true"

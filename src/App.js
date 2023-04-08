@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AllApiCalls from "./global/AllApiCalls";
-import { isUserAnAdmin } from "./global/customFunctions";
+import { addFixNav, isUserAnAdmin } from "./global/customFunctions";
 import DigitalClock from "./global/DigitalClock";
 import MyRouter from "./routes/MyRouter";
 import {
@@ -10,7 +10,12 @@ import {
   setAlertBetModal,
   setAlertPopUp,
   setComingSoonModal,
+  setConfirmModal,
+  setLoginModal,
   setPageLoading,
+  setRedeemWinningModal,
+  setRegisterModal,
+  setSearchCouponCodeModal,
 } from "./store/alert/alertSlice";
 import {
   logout,
@@ -74,6 +79,7 @@ const App = () => {
   }, [user]);
 
   useEffect(() => {
+    addFixNav();
     dispatch(
       setPageLoading({
         status: false,
@@ -104,6 +110,25 @@ const App = () => {
         buttonURL: "",
       })
     );
+    dispatch(
+      setSearchCouponCodeModal({
+        status: false,
+        type: "",
+        payload: null,
+      })
+    );
+
+    dispatch(
+      setConfirmModal({
+        status: false,
+        type: "",
+        title: "",
+        desc: "",
+        hasMesage: false,
+        payload: null,
+        buttonText: "",
+      })
+    );
     dispatch(setAddBankModal(false));
     dispatch(setComingSoonModal(false));
     dispatch(Getgameswininglogs());
@@ -114,6 +139,9 @@ const App = () => {
     dispatch(setSelectedGametimer(null));
     dispatch(setCalculatedGames(null));
     dispatch(setExpiryDate(null));
+    dispatch(setLoginModal(false));
+    dispatch(setRegisterModal(false));
+    dispatch(setRedeemWinningModal(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

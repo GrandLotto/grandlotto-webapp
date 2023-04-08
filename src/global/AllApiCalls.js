@@ -31,7 +31,7 @@ const AllApiCalls = () => {
   useEffect(() => {
     if (refreshing === true) {
       if (user) {
-        console.log(user);
+        // console.log(user);
         dispatch(getUserInfo(user?.email));
         dispatch(getAccountBalances(user?.email));
         dispatch(getUserAccount(user?.email));

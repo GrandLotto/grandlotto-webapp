@@ -28,6 +28,16 @@ const initialState = {
     buttonURL: "",
   },
 
+  confirmModal: {
+    status: false,
+    type: "",
+    title: "",
+    desc: "",
+    hasMesage: false,
+    payload: null,
+    buttonText: "",
+  },
+
   pageLoading: {
     status: false,
     message: "",
@@ -112,6 +122,10 @@ const alertSlice = createSlice({
     setAlertBetModal: (state, { payload }) => {
       state.alertBetModal = payload;
     },
+
+    setConfirmModal: (state, { payload }) => {
+      state.confirmModal = payload;
+    },
     setLogoutModal: (state, { payload }) => {
       state.logoutModal = {
         status: payload.status,
@@ -161,6 +175,7 @@ const alertSlice = createSlice({
 export const {
   setAlertPopUp,
   setAlertBetModal,
+  setConfirmModal,
   setLoginModal,
   setLogoutModal,
   setRegisterModal,

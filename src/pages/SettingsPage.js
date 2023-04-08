@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import ChangePassword from "../components/settings/ChangePassword";
 import TransactionPin from "../components/settings/TransactionPin";
+import Accounts from "../components/settings/Accounts";
 
 const SettingsPage = () => {
   useEffect(() => {
@@ -39,6 +40,11 @@ const SettingsPage = () => {
                     Change Passwords
                   </a>
                 </li>
+                <li className="nav-item">
+                  <a className="nav-link" data-toggle="tab" href="#account-tab">
+                    Account
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -51,6 +57,11 @@ const SettingsPage = () => {
               <div className="tab-pane" id="Withdrawable-tab">
                 <div className="card">
                   <ChangePassword />
+                </div>
+              </div>
+              <div className="tab-pane" id="account-tab">
+                <div className="card">
+                  <Accounts />
                 </div>
               </div>
             </div>

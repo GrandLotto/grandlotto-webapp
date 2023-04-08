@@ -175,7 +175,7 @@ const ForgotPasswordModal = () => {
                 </button>
               </div>
 
-              <div className="form-group text-dark d-flex justify-content-center">
+              <div className="form-group text-light d-flex justify-content-center">
                 Forget it
                 <a
                   href="true"

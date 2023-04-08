@@ -1,12 +1,15 @@
 import React from "react";
 import { addComma } from "../../global/customFunctions";
+import { useSelector } from "react-redux";
 
 const GameSummary = ({ calculatedGames }) => {
+  const betAmount = useSelector((state) => state.bets.betAmount);
+
   return (
     <div className="allBetSlipItem p-0">
       <div className="allBetSlipItemBody">
         <div className="d-flex align-items-center justify-content-between allBetSlipItemBodyItem">
-          <h5>Game Name: </h5>
+          <h5>Game: </h5>
           <h5>
             <b>{calculatedGames?.gameName}</b>
           </h5>
@@ -46,12 +49,7 @@ const GameSummary = ({ calculatedGames }) => {
           <div className="d-flex align-items-center justify-content-between allBetSlipItemBodyItem">
             <h5>Amount per line: </h5>
             <h5>
-              <b>
-                ₦
-                {calculatedGames?.ammountTopay
-                  ? addComma(calculatedGames?.ammountTopay)
-                  : 0}{" "}
-              </b>
+              <b>₦{betAmount ? addComma(betAmount) : 0} </b>
             </h5>
           </div>
         )}

@@ -9,7 +9,7 @@ import {
 const LottoNumberBox = () => {
   const dispatch = useDispatch();
   const selectedCoupons = useSelector((state) => state.bets.selectedCoupons);
-  const selectedType = useSelector((state) => state.bets.selectedType);
+  // const selectedType = useSelector((state) => state.bets.selectedType);
 
   const clearallCoupons = () => {
     dispatch(setSelectedCoupons([]));
@@ -19,16 +19,34 @@ const LottoNumberBox = () => {
 
   return (
     <div className="threeColRightSelectedPicks">
-      <div className="d-flex justify-content-between align-items-start">
-        <div className="threeColRightSelectedPicksBoxes">
-          <div
+      {selectedCoupons && selectedCoupons?.length ? (
+        <div className="d-flex justify-content-between align-items-start">
+          <div className="threeColRightSelectedPicksBoxes">
+            {selectedCoupons?.map((item, index) => (
+              <div
+                key={index}
+                className={`threeColRightSelectedPicksBox boxSelected`}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+          <i className="bx bx-trash" onClick={() => clearallCoupons()}></i>
+        </div>
+      ) : (
+        <div className="d-block selectLottoNumb text-center">
+          <p>Select numbers</p>
+        </div>
+      )}
+
+      {/* <div
             className={`threeColRightSelectedPicksBox ${
               selectedCoupons?.[0] ? "boxSelected" : ""
             }`}
           >
             {selectedCoupons?.[0]}
-          </div>
-          {selectedType && selectedType?.maxNumbercount >= 2 && (
+          </div> */}
+      {/* {selectedType && selectedType?.maxNumbercount >= 2 && (
             <div
               className={`threeColRightSelectedPicksBox ${
                 selectedCoupons?.[1] ? "boxSelected" : ""
@@ -117,11 +135,8 @@ const LottoNumberBox = () => {
             >
               {selectedCoupons?.[10]}
             </div>
-          )}
-          {/* {selectedType && selectedType?.maxNumbercount >= 2 && ()} */}
-        </div>
-        <i className="bx bx-trash" onClick={() => clearallCoupons()}></i>
-      </div>
+          )} */}
+      {/* {selectedType && selectedType?.maxNumbercount >= 2 && ()} */}
     </div>
   );
 };

@@ -21,7 +21,7 @@ const SearchCouponCodeModal = () => {
   return (
     modal?.status && (
       <div
-        className="alert-modal alertPOP large_modal large_auto_height_modal"
+        className="alert-modal alertPOP large_modal large_auto_height_modal noscrollBar"
         id="signupModal"
       >
         <div className="alert-modal-overlay" onClick={() => closeModal()}></div>

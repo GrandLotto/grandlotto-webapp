@@ -650,14 +650,16 @@
 
 .allBetSlipItemBodyItemButtons {
   margin-top: 22px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(2.5rem, 1fr));
+  // display: grid;
+  // grid-template-columns: repeat(auto-fill, minmax(2.5rem, 1fr));
+  display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .allBetSlipItemBodyItemButtonsItems {
-  width: 100%;
+  // width: 100%;
+  width: 2.5rem;
   padding: 10px 0px;
   background: #dfe6dc;
   border-radius: 5px;
@@ -733,7 +735,7 @@
   }
 
   .allBetSlipItemBodyItemButtons {
-    grid-template-columns: repeat(auto-fill, minmax(2.5rem, 1fr));
+    // grid-template-columns: repeat(auto-fill, minmax(2.5rem, 1fr));
     gap: 6px;
   }
 
@@ -1110,6 +1112,7 @@
     color: #fff !important;
   }
 
+  .selectLottoNumb,
   .allBetSlipItemBody h5 {
     color: #fff !important;
   }

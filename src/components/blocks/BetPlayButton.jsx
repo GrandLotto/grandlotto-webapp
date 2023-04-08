@@ -39,21 +39,29 @@ const BetPlayButton = () => {
 
   useEffect(() => {
     validateButton();
-  }, [selectedCoupons, selectedType, betAmount]);
+  }, [selectedCoupons, selectedType, betAmount, calculatedGames]);
 
   const validateButton = () => {
     if (selectedCoupons && selectedType) {
-      if (selectedCoupons?.length !== selectedType?.maxNumbercount) {
-        setIsDisabled(true);
-        return;
-      }
+      // if (selectedCoupons?.length !== selectedType?.maxNumbercount) {
+      //   setIsDisabled(true);
+      //   return;
+      // }
 
-      if (!betAmount) {
-        setIsDisabled(true);
-        return;
-      }
+      // if (!betAmount) {
+      //   setIsDisabled(true);
+      //   return;
+      // }
 
-      if (betAmount < 100) {
+      // if (betAmount < 100) {
+      //   setIsDisabled(true);
+      //   return;
+      // }
+
+      // console.log("isDisabled", isDisabled);
+      // console.log("calculatedGames", calculatedGames);
+
+      if (!calculatedGames) {
         setIsDisabled(true);
         return;
       }
@@ -230,7 +238,8 @@ const BetPlayButton = () => {
       disabled={isDisabled}
       onClick={() => handlePayGame()}
     >
-      {calculatedGames ? "Place Bet" : "Continue"}{" "}
+      {/* {calculatedGames ? "Place Bet" : "Continue"}{" "} */}
+      Place Bet
       {isCalculatingGames && (
         <span
           className="spinner spinner-border"

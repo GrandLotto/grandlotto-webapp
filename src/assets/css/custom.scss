@@ -46,6 +46,11 @@ p {
   font-size: 14px !important;
 }
 
+.inputError.inputErrorSmall {
+  font-size: 12px !important;
+  text-align: left;
+}
+
 .responseMessage {
   display: inline-block;
   background: rgb(255, 146, 164);
@@ -325,11 +330,6 @@ p {
   color: rgb(142, 141, 141);
 }
 
-.grandLottoButton:disabled:hover {
-  background: #aaecc2;
-  transform: scale(1);
-}
-
 .grandLottoButton.cardButton {
   padding-left: 55px;
   padding-right: 55px;
@@ -338,7 +338,12 @@ p {
 
 .grandLottoButton:hover {
   background: lighten($color: $primary, $amount: 10%);
-  transform: scale(1.1);
+  transform: scale(1.05);
+}
+
+.grandLottoButton:disabled:hover {
+  background: #aaecc2;
+  // transform: scale(1);
 }
 
 .grandLottoButton.button-outline-light {
@@ -491,7 +496,7 @@ p {
   font-weight: 600;
   font-size: 16px;
   line-height: 15px;
-  color: #282828;
+  color: #fff;
 }
 
 .grandlotto_table_small_flex h5 {
@@ -499,7 +504,7 @@ p {
   font-weight: 600;
   font-size: 16px;
   line-height: 15px;
-  color: #282828;
+  color: #fff;
 }
 
 .grandlotto_table_small_flex p {
@@ -507,7 +512,7 @@ p {
   font-weight: 400;
   font-size: 12px;
   line-height: 10px;
-  color: #282828;
+  color: #fff;
 }
 
 .page-link {
