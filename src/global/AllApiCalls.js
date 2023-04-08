@@ -9,15 +9,19 @@ import {
   Getgameswininglogs,
   Getuserclosedgameplayed,
   Getuseropengameplayed,
+  getWinningLogs,
 } from "../store/betSlice/actions";
 import {
   getacceptedpayment,
   getAccountBalances,
+  getAllDepositlogs,
+  getAllWithdrawfundrequest,
   getCountryBanks,
   getDepositlogs,
   getUserAccount,
   getWithdrawfundrequest,
 } from "../store/wallet/actions";
+import { isUserAnAdmin } from "./customFunctions";
 
 const AllApiCalls = () => {
   const dispatch = useDispatch();
@@ -71,6 +75,40 @@ const AllApiCalls = () => {
             endTime: null,
           })
         );
+
+        if (
+          user &&
+          user?.roles?.length &&
+          isUserAnAdmin(user?.roles) === true
+        ) {
+          dispatch(
+            getWinningLogs({
+              email: user?.email,
+              pageNumber: 1,
+              pageSize: 10,
+              startime: null,
+              endTime: null,
+            })
+          );
+          dispatch(
+            getAllWithdrawfundrequest({
+              email: user?.email,
+              pageNumber: 1,
+              pageSize: 10,
+              startime: null,
+              endTime: null,
+            })
+          );
+          dispatch(
+            getAllDepositlogs({
+              email: user?.email,
+              pageNumber: 1,
+              pageSize: 10,
+              startime: null,
+              endTime: null,
+            })
+          );
+        }
 
         dispatch(getacceptedid());
         dispatch(getacceptedpayment());

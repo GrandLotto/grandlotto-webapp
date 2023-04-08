@@ -1,16 +1,13 @@
 import React from "react";
-// import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
-  formateDateAndTimeByName,
   addComma,
-  formatAMPM,
-  formateDateByName,
+  formateDateAndTimeByName,
 } from "../../global/customFunctions";
 import ComponentLoading from "../blocks/ComponentLoading";
 import PaginationBlock from "../blocks/PaginationBlock";
 
-const BetHistory = ({
+const GameTypeTable = ({
   columns,
   page,
   totalPages,
@@ -20,10 +17,15 @@ const BetHistory = ({
   PrevP,
   isLoading,
   fetchByPage,
+  hasPagination = true,
+  columnSpan = "6",
+  noDataText = "No data found",
+  onEdit,
+  onDelete,
 }) => {
-  const navigation = useNavigate();
+  // const navigation = useNavigate();
   const handlePrev = () => {
-    if (type === "OPENBETS") {
+    if (type === "WITHDRAWAL") {
       PrevP(type);
 
       return;
@@ -31,13 +33,13 @@ const BetHistory = ({
   };
 
   const handleNext = () => {
-    if (type === "OPENBETS") {
+    if (type === "WITHDRAWAL") {
       nextP(type);
 
       return;
     }
 
-    if (type === "CLOSEBETS") {
+    if (type === "DEPOSIT") {
       nextP(type);
 
       return;
@@ -45,19 +47,18 @@ const BetHistory = ({
   };
 
   const handleFetchByPage = (newPage) => {
-    if (type === "OPENBETS") {
+    if (type === "WITHDRAWAL") {
       fetchByPage(type, newPage);
 
       return;
     }
 
-    if (type === "CLOSEBETS") {
+    if (type === "DEPOSIT") {
       fetchByPage(type, newPage);
 
       return;
     }
   };
-
   return (
     <>
       {isLoading && <ComponentLoading inner={true} title="Please wait ..." />}
@@ -77,47 +78,32 @@ const BetHistory = ({
               <tbody>
                 {data.map((item, index) => (
                   <tr key={index}>
-                    {/* <td>{index < 10 ? "0" + (index + 1) : index}</td> */}
-                    <td>{item?.gameTicket || item?.id}</td>
-                    <td>{item?.numbersplayed}</td>
-                    <td>{item?.gameTypeName}</td>
+                    <td>{item?.type}</td>
                     <td>
-                      ₦{" "}
-                      {item?.ammountPlayed
-                        ? addComma(item?.ammountPlayed)
-                        : item?.ammountPlayed}
+                      ₦ {item?.minAmmount ? addComma(item?.minAmmount) : 0}
                     </td>
-                    <td>{formateDateAndTimeByName(item?.datePlayed)}</td>
                     <td>
-                      {item?.status?.toLowerCase() === "pending" && (
-                        <span
-                          className={`has_status ${[
-                            item?.status?.toLowerCase() === "pending"
-                              ? "isPending"
-                              : "",
-                          ]}`}
-                        >
-                          {item?.status}
-                        </span>
-                      )}
+                      ₦ {item?.maxAmmount ? addComma(item?.maxAmmount) : 0}
+                    </td>
+                    {/* <td>{item?.accountNumber}</td> */}
+                    <td>{formateDateAndTimeByName(item?.createdOn)}</td>
+                    <td>{item?.creditLine}</td>
+                    <td>{item?.maxNumbercount}</td>
 
-                      {item?.status?.toLowerCase() === "lost" && (
-                        <span
-                          className={`has_status ${[
-                            item?.status?.toLowerCase() === "lost"
-                              ? "isLost"
-                              : "",
-                          ]}`}
-                        >
-                          {item?.status}
-                        </span>
-                      )}
-                    </td>
                     <td>
-                      ₦{" "}
-                      {item?.potentialwinningAmount
-                        ? addComma(item?.potentialwinningAmount)
-                        : item?.potentialwinningAmount}
+                      <div
+                        className="d-flex butnFlex "
+                        style={{ columnGap: 10 }}
+                      >
+                        <i
+                          className="bx bx-pencil editBtnn"
+                          onClick={() => onEdit(item)}
+                        ></i>
+                        <i
+                          className="bx bx-trash-alt deleteBtnn"
+                          onClick={() => onDelete(item)}
+                        ></i>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -125,7 +111,7 @@ const BetHistory = ({
             ) : (
               <tbody>
                 <tr>
-                  <td colSpan="9">
+                  <td colSpan={columnSpan}>
                     <div
                       style={{
                         display: "flex",
@@ -145,18 +131,8 @@ const BetHistory = ({
                             className="mb-4"
                             style={{ fontSize: "18px", fontWeight: 500 }}
                           >
-                            {type === "ADMIN"
-                              ? "No bet records"
-                              : "You don’t have any bet records"}
+                            {noDataText}
                           </h4>
-                          {type !== "ADMIN" && (
-                            <button
-                              onClick={() => navigation("/lotto")}
-                              className="grandLottoButton"
-                            >
-                              Play Game
-                            </button>
-                          )}
                         </div>
 
                         <br />
@@ -172,77 +148,66 @@ const BetHistory = ({
         </div>
       </div>
 
-      <div className="grandlotto_table_small lotto_card">
-        {isLoading && <ComponentLoading title="Please wait ..." />}
+      <div className="grandlotto_table_small">
         {data && data?.length ? (
           data?.map((item, index) => (
             <div className="grandlotto_table_small_flex " key={index}>
               <div className="d-flex justify-content-between border-bottom pb-2 mb-2">
-                <small>{formateDateByName(item?.datePlayed)}</small>
-                <small>{formatAMPM(item?.datePlayed)}</small>
+                <small>{formateDateAndTimeByName(item?.createdOn)}</small>
               </div>
               <div className="grandlotto_table_small_flex_top">
                 <div className="d-flex justify-content-between">
+                  <h4 className="">Game Type</h4>
                   <h4 className="">
-                    <b>Bet ID: {item?.gameTicket || item?.id}</b>
+                    <b>{item?.type}</b>
                   </h4>
-                  {item?.status?.toLowerCase() === "pending" && (
-                    <span
-                      className={`has_status ${[
-                        item?.status?.toLowerCase() === "pending"
-                          ? "isPending"
-                          : "",
-                      ]}`}
-                    >
-                      {item?.status}
-                    </span>
-                  )}
+                </div>
 
-                  {item?.status?.toLowerCase() === "lost" && (
-                    <span
-                      className={`has_status ${[
-                        item?.status?.toLowerCase() === "lost" ? "isLost" : "",
-                      ]}`}
-                    >
-                      {item?.status}
-                    </span>
-                  )}
-                </div>
                 <div className="d-flex justify-content-between">
-                  <h4 className="">Game</h4>
-                  <h4 className="">
-                    <b>{item?.gameName}</b>
-                  </h4>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <h4 className="">Details</h4>
-                  <h4 className="">
-                    <b>
-                      {item?.gameTypeName}: {item?.numbersplayed}
-                    </b>
-                  </h4>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <h4 className="">Stake</h4>
+                  <h4 className="">Min</h4>
                   <h4 className="">
                     <b>
                       ₦{" "}
-                      {item?.ammountPlayed
-                        ? addComma(item?.ammountPlayed)
-                        : item?.ammountPlayed}
+                      {item?.minAmmount
+                        ? addComma(item?.minAmmount)
+                        : item?.minAmmount}
                     </b>
                   </h4>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <h4 className="">Pot. Winning</h4>
+                  <h4 className="">Max</h4>
                   <h4 className="">
                     <b>
                       ₦{" "}
-                      {item?.potentialwinningAmount
-                        ? addComma(item?.potentialwinningAmount)
-                        : item?.potentialwinningAmount}
+                      {item?.maxAmmount
+                        ? addComma(item?.maxAmmount)
+                        : item?.maxAmmount}
                     </b>
                   </h4>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <h4 className="">Credit Line</h4>
+                  <h4 className="">
+                    <b>{item?.creditLine}</b>
+                  </h4>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <h4 className="">Credit Line</h4>
+                  <h4 className="">
+                    <b>{item?.maxNumbercount}</b>
+                  </h4>
+                </div>
+                <div className="d-flex justify-content-end">
+                  <div className="d-flex butnFlex " style={{ columnGap: 10 }}>
+                    <i
+                      className="bx bx-pencil editBtnn"
+                      onClick={() => onEdit(item)}
+                    ></i>
+                    <i
+                      className="bx bx-trash-alt deleteBtnn"
+                      onClick={() => onDelete(item)}
+                    ></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -267,19 +232,8 @@ const BetHistory = ({
                   className="mb-4"
                   style={{ fontSize: "18px", fontWeight: 500 }}
                 >
-                  {type === "ADMIN"
-                    ? "No bet records"
-                    : "You don’t have any bet records"}
+                  {noDataText}
                 </h4>
-
-                {type !== "ADMIN" && (
-                  <button
-                    onClick={() => navigation("/lotto")}
-                    className="grandLottoButton"
-                  >
-                    Play Game
-                  </button>
-                )}
               </div>
 
               <br />
@@ -290,7 +244,7 @@ const BetHistory = ({
         )}
       </div>
 
-      {data && data?.length ? (
+      {data && data?.length && hasPagination ? (
         <PaginationBlock
           handlePrev={handlePrev}
           handleNext={handleNext}
@@ -303,4 +257,4 @@ const BetHistory = ({
   );
 };
 
-export default BetHistory;
+export default GameTypeTable;

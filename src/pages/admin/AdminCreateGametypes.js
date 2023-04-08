@@ -1,8 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
-import UsersTable from "../../components/users/UsersTable";
+import { useDispatch, useSelector } from "react-redux";
+import GameTypeTable from "../../components/bet/GameTypeTable";
+import { setCreategameTypeModal } from "../../store/alert/alertSlice";
 
 const AdminCreateGametypes = () => {
+  const dispatch = useDispatch();
+  const gameTypes = useSelector((state) => state.bets.gameTypes);
+
+  const [data, setData] = useState([]);
+
   const columns = [
     {
       name: "Type",
@@ -29,6 +36,24 @@ const AdminCreateGametypes = () => {
     },
   ];
 
+  const handleEdit = (item) => {
+    console.log(item);
+    dispatch(
+      setCreategameTypeModal({
+        status: true,
+        type: "EDIT",
+        payload: item,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (gameTypes) {
+      // console.log(gameTypes);
+      setData(gameTypes);
+    }
+  }, [gameTypes]);
+
   useEffect(() => {
     return () => {
       document.querySelector(".content-body") &&
@@ -47,22 +72,38 @@ const AdminCreateGametypes = () => {
             className="d-flex align-items-center mb-4"
             style={{ columnGap: 10 }}
           >
-            <button className="grandLottoButton filterButton">Create</button>
+            <button
+              onClick={() =>
+                dispatch(
+                  setCreategameTypeModal({
+                    status: true,
+                    type: "ADD",
+                    payload: null,
+                  })
+                )
+              }
+              className="grandLottoButton filterButton"
+            >
+              Create
+            </button>
           </div>
         </div>
 
         <div className="mt-5 w_inner">
           <div className="card mb-4">
-            <UsersTable
+            <GameTypeTable
               columns={columns}
-              data={[]}
+              data={data}
               page={1}
               totalPages={2}
               type="ADMIN"
               isLoading={false}
+              hasPagination={false}
               nextP={() => {}}
               PrevP={() => {}}
               fetchByPage={() => {}}
+              onEdit={handleEdit}
+              onDelete={() => {}}
               columnSpan={10}
               noDataText="No game type"
             />

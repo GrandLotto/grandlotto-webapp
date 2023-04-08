@@ -1,35 +1,57 @@
-import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-import UsersTable from "../../components/users/UsersTable";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCreateGameModal } from "../../store/alert/alertSlice";
+import GameTable from "../../components/bet/GameTable";
 
 const AdminCreateGames = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const games = useSelector((state) => state.bets.games);
+
+  const [data, setData] = useState([]);
 
   const columns = [
     {
-      name: "Type",
+      name: "Name",
     },
     {
-      name: "Min",
+      name: "Day Available",
     },
     {
-      name: "Max",
+      name: "Status",
     },
 
     {
-      name: "Created on",
+      name: "is Available",
     },
     {
-      name: "Credit Line",
+      name: "Start",
     },
     {
-      name: "Max Number Count",
+      name: "End",
     },
 
     {
       name: "Action",
     },
   ];
+
+  const handleEdit = (item) => {
+    // console.log(item);
+    dispatch(
+      setCreateGameModal({
+        status: true,
+        type: "EDIT",
+        payload: item,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (games) {
+      // console.log(games);
+      setData(games);
+    }
+  }, [games]);
 
   useEffect(() => {
     return () => {
@@ -49,110 +71,42 @@ const AdminCreateGames = () => {
             className="d-flex align-items-center mb-4"
             style={{ columnGap: 10 }}
           >
-            <button className="grandLottoButton filterButton">Create</button>
+            <button
+              onClick={() =>
+                dispatch(
+                  setCreateGameModal({
+                    status: true,
+                    type: "ADD",
+                    payload: null,
+                  })
+                )
+              }
+              className="grandLottoButton filterButton"
+            >
+              Create
+            </button>
           </div>
         </div>
 
         <div className="mt-5 w_inner">
           <div className="card mb-4">
-            <UsersTable
+            <GameTable
               columns={columns}
-              data={[]}
+              data={data}
               page={1}
               totalPages={2}
               type="ADMIN"
               isLoading={false}
+              hasPagination={false}
               nextP={() => {}}
               PrevP={() => {}}
               fetchByPage={() => {}}
+              onEdit={handleEdit}
+              onDelete={() => {}}
               columnSpan={10}
               noDataText="No game created"
             />
           </div>
-
-          {/* <div className="card mb-4">
-            <div className="grandlotto_card">
-              <form className="grandlotto_form mt-4">
-                <div className="row">
-                  <div className="col-md-4 mb-4">
-                    <div className="form-group">
-                      <label htmlFor="">Type</label>
-                      <input
-                        className="form-control largeInputFont py-3"
-                        placeholder="Game type"
-                        type="text"
-                        style={{ width: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-4">
-                    <div className="form-group">
-                      <label htmlFor="">Min Amount</label>
-                      <div className={`symbolInput`}>
-                        <span>₦</span>
-                        <CurrencyInput
-                          name="input-name"
-                          placeholder="Enter Amount "
-                          defaultValue={amount}
-                          decimalsLimit={2}
-                          onValueChange={(value) => setAmount(value)}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-4">
-                    <div className="form-group">
-                      <label htmlFor="">Max Amount</label>
-                      <div className={`symbolInput`}>
-                        <span>₦</span>
-                        <CurrencyInput
-                          name="input-name"
-                          placeholder="Enter Amount "
-                          defaultValue={amount}
-                          decimalsLimit={2}
-                          onValueChange={(value) => setAmount(value)}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-4">
-                    <div className="form-group">
-                      <label htmlFor="">Credit Line</label>
-                      <input
-                        className="form-control largeInputFont py-3"
-                        placeholder="Credit Line"
-                        type="text"
-                        style={{ width: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-4">
-                    <div className="form-group">
-                      <label htmlFor="">Max Number count</label>
-                      <input
-                        className="form-control largeInputFont py-3"
-                        placeholder="Max Number count"
-                        type="text"
-                        style={{ width: "100%" }}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-4 text-right mb-3">
-                  <div className="text-right">
-                    <button
-                      disabled={emptyFields}
-                      type="button"
-                      className="grandLottoButton cardButton"
-                      onClick={() => proceed()}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>

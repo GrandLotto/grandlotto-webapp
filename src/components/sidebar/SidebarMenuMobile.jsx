@@ -16,11 +16,13 @@ import ion_football from "../../assets/images/ion_football.png";
 import healthicons from "../../assets/images/healthicons.png";
 import carbon_result from "../../assets/images/carbon_result.png";
 import verifiedcheck from "../../assets/images/verifiedcheck.png";
+import { addComma, isUserAnAdmin } from "../../global/customFunctions";
 
 const SidebarMenuMobile = () => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
-
+  const user = useSelector((state) => state.oauth.user);
+  const accountBalances = useSelector((state) => state.wallet.accountBalances);
   const sideBarMenu = useSelector((state) => state.alert.sideBarMenu);
   const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
 
@@ -42,16 +44,31 @@ const SidebarMenuMobile = () => {
               </div>
               <div className="sidebarMobleHeaderTopBalance">
                 <h4 className="">Wallet Balance</h4>
-                <p className="">₦20,000.00</p>
+                <p className="">
+                  ₦
+                  {accountBalances?.totalBalance
+                    ? addComma(accountBalances?.totalBalance)
+                    : accountBalances?.totalBalance}
+                </p>
               </div>
               <div className="sidebarMobleHeaderBottomBalance">
                 <div className="sidebarMobleHeaderBottomBalanceItem">
                   <h4 className="">Withdrawable</h4>
-                  <p className="">₦20,000.00</p>
+                  <p className="">
+                    ₦
+                    {accountBalances?.winningBalance
+                      ? addComma(accountBalances?.winningBalance)
+                      : accountBalances?.winningBalance}
+                  </p>
                 </div>
                 <div className="sidebarMobleHeaderBottomBalanceItem">
                   <h4 className="">Bonus </h4>
-                  <p className="">₦20,000.00</p>
+                  <p className="">
+                    ₦
+                    {accountBalances?.bonusAccount
+                      ? addComma(accountBalances?.bonusAccount)
+                      : accountBalances?.bonusAccount}
+                  </p>
                 </div>
               </div>
             </>
@@ -157,6 +174,85 @@ const SidebarMenuMobile = () => {
                 </div>
                 <i className="bx bx-chevron-right"></i>
               </a>
+
+              {user &&
+                user?.roles?.length &&
+                isUserAnAdmin(user?.roles) === true && (
+                  <div className="sidebarLinkMenusDiv">
+                    <h3>Admin</h3>
+
+                    <NavLink
+                      className="sidebarLinkMenusItem"
+                      to="/admin/dashboard"
+                    >
+                      <div className="sidebarLinkMenusItemLeft">
+                        <i className="bx bx-layout"></i>
+                        <span>Admin Dashboard</span>
+                      </div>
+                      <i className="bx bx-chevron-right"></i>
+                    </NavLink>
+                    <NavLink
+                      className="sidebarLinkMenusItem"
+                      to="/admin/transactions"
+                    >
+                      <div className="sidebarLinkMenusItemLeft">
+                        <i className="bx bx-layout"></i>
+                        <span>All Transactions</span>
+                      </div>
+                      <i className="bx bx-chevron-right"></i>
+                    </NavLink>
+                    <NavLink
+                      className="sidebarLinkMenusItem"
+                      to="/admin/games/create-games-types"
+                    >
+                      <div className="sidebarLinkMenusItemLeft">
+                        <i className="bx bx-layout"></i>
+                        <span>Games types</span>
+                      </div>
+                      <i className="bx bx-chevron-right"></i>
+                    </NavLink>
+                    <NavLink
+                      className="sidebarLinkMenusItem"
+                      to="/admin/games/create-games"
+                    >
+                      <div className="sidebarLinkMenusItemLeft">
+                        <i className="bx bx-layout"></i>
+                        <span>Create games</span>
+                      </div>
+                      <i className="bx bx-chevron-right"></i>
+                    </NavLink>
+                    <NavLink
+                      className="sidebarLinkMenusItem"
+                      to="/admin/games/winnings"
+                    >
+                      <div className="sidebarLinkMenusItemLeft">
+                        <i className="bx bx-layout"></i>
+                        <span>Winnings</span>
+                      </div>
+                      <i className="bx bx-chevron-right"></i>
+                    </NavLink>
+                    <NavLink
+                      className="sidebarLinkMenusItem"
+                      to="/admin/verify-kyc"
+                    >
+                      <div className="sidebarLinkMenusItemLeft">
+                        <i className="bx bx-layout"></i>
+                        <span>Verify KYC</span>
+                      </div>
+                      <i className="bx bx-chevron-right"></i>
+                    </NavLink>
+                    <NavLink
+                      className="sidebarLinkMenusItem"
+                      to="/admin/user-controls"
+                    >
+                      <div className="sidebarLinkMenusItemLeft">
+                        <i className="bx bx-layout"></i>
+                        <span>User Accessibility</span>
+                      </div>
+                      <i className="bx bx-chevron-right"></i>
+                    </NavLink>
+                  </div>
+                )}
             </div>
           ) : (
             <div className="sidebarLinkMenus">
@@ -286,7 +382,6 @@ const SidebarMenuMobile = () => {
               </div>
             </div>
           )}
-
           <a
             href="true"
             onClick={(e) => {
@@ -298,7 +393,7 @@ const SidebarMenuMobile = () => {
                 })
               );
             }}
-            className="sidebarLinkMenusItem"
+            className="sidebarLinkMenusItem mt-2"
           >
             <div className="sidebarLinkMenusItemLeft">
               <i className="bx bx-log-out"></i>

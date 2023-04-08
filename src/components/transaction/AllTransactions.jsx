@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
   addComma,
   formateDateAndTimeByName,
@@ -7,7 +7,7 @@ import {
 import ComponentLoading from "../blocks/ComponentLoading";
 import PaginationBlock from "../blocks/PaginationBlock";
 
-const Transactions = ({
+const AllTransactions = ({
   columns,
   page,
   totalPages,
@@ -19,8 +19,8 @@ const Transactions = ({
   fetchByPage,
   hasPagination = true,
   columnSpan = "6",
+  noDataText = "No transaction",
 }) => {
-  const navigation = useNavigate();
   const handlePrev = () => {
     if (type === "WITHDRAWAL") {
       PrevP(type);
@@ -30,31 +30,11 @@ const Transactions = ({
   };
 
   const handleNext = () => {
-    if (type === "WITHDRAWAL") {
-      nextP(type);
-
-      return;
-    }
-
-    if (type === "DEPOSIT") {
-      nextP(type);
-
-      return;
-    }
+    nextP(type);
   };
 
   const handleFetchByPage = (newPage) => {
-    if (type === "WITHDRAWAL") {
-      fetchByPage(type, newPage);
-
-      return;
-    }
-
-    if (type === "DEPOSIT") {
-      fetchByPage(type, newPage);
-
-      return;
-    }
+    fetchByPage(type, newPage);
   };
   return (
     <>
@@ -82,7 +62,9 @@ const Transactions = ({
                         ? item?.bankName + " (" + item?.accountNumber + ")"
                         : item?.channel}
                     </td>
-                    {/* <td>{item?.accountNumber}</td> */}
+
+                    <td>{item?.email}</td>
+
                     <td>
                       {formateDateAndTimeByName(
                         item?.dateRequested || item?.datePaid
@@ -108,7 +90,14 @@ const Transactions = ({
                         </span>
                       )}
                     </td>
-                    <td>₦ {item?.amount ? addComma(item?.amount) : 0}</td>
+                    <td>
+                      ₦{" "}
+                      {item?.amount
+                        ? addComma(item?.amount)
+                        : item?.ammountPaid
+                        ? addComma(item?.ammountPaid)
+                        : 0}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -135,22 +124,8 @@ const Transactions = ({
                             className="mb-4"
                             style={{ fontSize: "18px", fontWeight: 500 }}
                           >
-                            No
-                            {type === "DEPOSIT" ? " deposit " : ""}
-                            {type === "WITHDRAWAL" ? " withdrawal " : ""}
-                            {type === "ALL" ? " transaction " : ""}
-                            {type === "ADMIN" ? " transaction " : ""}
-                            history
+                            {noDataText}
                           </h4>
-
-                          {type === "DEPOSIT" && type !== "ADMIN" && (
-                            <button
-                              onClick={() => navigation("/lotto")}
-                              className="grandLottoButton"
-                            >
-                              Deposit Funds
-                            </button>
-                          )}
                         </div>
 
                         <br />
@@ -188,14 +163,22 @@ const Transactions = ({
                       Request ID: {item?.requestNumber || item?.id}
                     </h4>
                     <p className="">
-                      {formateDateAndTimeByName(item?.dateRequested)}
+                      {formateDateAndTimeByName(
+                        item?.dateRequested || item?.datePaid
+                      )}
                     </p>
+                    <p className="mt-2">{item?.email}</p>
                   </div>
                 </div>
               </div>
               <div className="grandlotto_table_small_flex_right">
                 <h4 className="text-right">
-                  ₦{item?.amount ? addComma(item?.amount) : 0}
+                  ₦{" "}
+                  {item?.amount
+                    ? addComma(item?.amount)
+                    : item?.ammountPaid
+                    ? addComma(item?.ammountPaid)
+                    : 0}
                 </h4>
                 {type === "WITHDRAWAL" ? (
                   <p className="text-right">
@@ -232,19 +215,8 @@ const Transactions = ({
                   className="mb-4"
                   style={{ fontSize: "18px", fontWeight: 500 }}
                 >
-                  {type !== "ADMIN"
-                    ? "No transaction history"
-                    : "You don’t have any transaction history"}
+                  {noDataText}
                 </h4>
-
-                {type === "DEPOSIT" && type !== "ADMIN" && (
-                  <button
-                    onClick={() => navigation("/lotto")}
-                    className="grandLottoButton"
-                  >
-                    Deposit Funds
-                  </button>
-                )}
               </div>
 
               <br />
@@ -268,4 +240,4 @@ const Transactions = ({
   );
 };
 
-export default Transactions;
+export default AllTransactions;

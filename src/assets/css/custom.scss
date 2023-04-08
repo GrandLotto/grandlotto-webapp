@@ -301,8 +301,26 @@ p {
   color: #3a0202 !important;
 }
 
+.has_status.isCancled {
+  background: #faf7f7 !important;
+  color: #3a0202 !important;
+}
+
 .backButton {
   cursor: pointer;
+}
+
+.butnFlex i {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.butnFlex i.editBtnn {
+  color: rgb(194, 95, 3);
+}
+
+.butnFlex i.deleteBtnn {
+  color: rgb(246, 7, 7);
 }
 
 .grandLottoButton {
@@ -461,7 +479,7 @@ p {
 
 .grandlotto_form .form-control.largeInputFont {
   // font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .grandlotto_table_small {

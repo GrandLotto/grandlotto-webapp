@@ -71,7 +71,7 @@
   width: 100% !important;
   height: 100% !important;
   overflow: hidden;
-  z-index: 201 !important;
+  z-index: 401 !important;
   transition: 800ms ease;
 }
 
@@ -88,7 +88,7 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  z-index: 202 !important;
+  z-index: 402 !important;
   transition: 800ms ease;
   cursor: pointer;
 }
@@ -103,7 +103,7 @@
   display: block;
   /* border-radius: 30px; */
   box-shadow: 3px 6px 10px 0 rgb(0 102 245 / 7%);
-  z-index: 401 !important;
+  z-index: 501 !important;
   animation-name: slideInRight;
   animation-duration: 0.8s;
   animation-fill-mode: both;
@@ -435,7 +435,7 @@
 .alert-modal .alert-modal-body h4 {
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 26px;
   text-align: center;
   letter-spacing: -0.382609px;
@@ -573,7 +573,19 @@ button.white-button {
   .alert-modal-body
   .grandlotto_form
   .form-group
-  .form-control {
+  .form-control,
+.alert-modal
+  .alert-modal-card
+  .alert-modal-body
+  .grandlotto_form
+  .form-group
+  .symbolInput,
+.alert-modal
+  .alert-modal-card
+  .alert-modal-body
+  .grandlotto_form
+  .form-group
+  input {
   background: darken($color: $primaryDark, $amount: 20%);
   color: #fff !important;
 }
@@ -609,7 +621,7 @@ button.white-button {
   }
 
   .select_modals_cards {
-    padding-top: 60px;
+    padding-top: 0px;
   }
 }
 @media screen and (max-width: 600px) {
@@ -729,7 +741,7 @@ button.white-button {
   }
 
   .alert-modal .alert-modal-body h4 {
-    font-size: 25px;
+    font-size: 20px;
   }
 
   .alert-modal .alert-modal-body p {

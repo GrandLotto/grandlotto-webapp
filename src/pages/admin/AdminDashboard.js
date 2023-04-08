@@ -1,32 +1,30 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import Transactions from "../../components/transaction/Transactions";
 import { Link } from "react-router-dom";
 
 import promo1 from "../../assets/images/promo4.png";
 import { useSelector } from "react-redux";
 import AdminWalletOverview from "../../components/dashboard/AdminWalletOverview";
-import BetHistory from "../../components/bet/BetHistory";
+import AllWinningTable from "../../components/bet/AllWinningTable";
+import AllTransactions from "../../components/transaction/AllTransactions";
 
 const AdminDashboard = () => {
   const user = useSelector((state) => state.oauth.user);
-  const userWithdrawal = useSelector((state) => state.wallet.userWithdrawal);
-  const userDeposits = useSelector((state) => state.wallet.userDeposits);
+  const allWithdrawal = useSelector((state) => state.wallet.allWithdrawal);
+  const allDeposits = useSelector((state) => state.wallet.allDeposits);
+  const allWinningLogs = useSelector((state) => state.bets.allWinningLogs);
 
   const [allTransactions, setAllTransactions] = useState([]);
 
   const columns = [
-    // {
-    //   name: "#",
-    // },
     {
       name: "Request ID",
     },
     {
-      name: "Bank name",
+      name: "Account",
     },
     {
-      name: "Account number",
+      name: "User",
     },
     {
       name: "Date/Time",
@@ -41,39 +39,42 @@ const AdminDashboard = () => {
 
   const columns2 = [
     {
-      name: "Game ID",
+      name: "#",
+    },
+
+    {
+      name: "customer",
+    },
+
+    {
+      name: "Game played",
     },
     {
-      name: "Games Played",
-    },
-    {
-      name: "User",
+      name: "Game Number",
     },
     {
       name: "Stake",
     },
     {
-      name: "Date/Time",
+      name: "Winning Amount",
     },
     {
-      name: "Status",
+      name: "Winning Date",
     },
 
     {
-      name: "winning Amount",
+      name: "Action",
     },
   ];
 
   const emptyFunction = () => {};
 
   useEffect(() => {
-    if (userWithdrawal && userDeposits) {
-      if (allTransactions?.length <= 0) {
-        let newTrans = [...userWithdrawal, ...userDeposits];
-        setAllTransactions(newTrans);
-      }
+    if (allWithdrawal && allDeposits) {
+      let newTrans = [...allWithdrawal, ...allDeposits];
+      setAllTransactions(newTrans);
     }
-  }, [userWithdrawal, userDeposits]);
+  }, [allWithdrawal, allDeposits]);
 
   useEffect(() => {
     return () => {
@@ -97,24 +98,27 @@ const AdminDashboard = () => {
             <div className="page_flex d-flex justify-content-between align-items-center mb-4">
               <h5>Winnings</h5>
               <Link
-                to="/admin/transactions"
+                to="/admin/games/winnings"
                 className="d-flex align-items-center"
               >
                 <span className="text-dark">See all</span>
                 <i className="bx bx-chevron-right text-light"></i>
               </Link>
             </div>
-
-            <BetHistory
+            <AllWinningTable
               columns={columns2}
-              data={[]}
+              data={allWinningLogs?.slice(0, 7)}
               page={1}
               totalPages={3}
               type="ADMIN"
               isLoading={false}
+              hasPagination={false}
               nextP={() => {}}
               PrevP={() => {}}
               fetchByPage={() => {}}
+              columnSpan={10}
+              noDataText="No winnings"
+              onDelete={() => {}}
             />
           </div>
           <div className="mt-5 hideOnMobile">
@@ -129,17 +133,19 @@ const AdminDashboard = () => {
               </Link>
             </div>
 
-            <Transactions
+            <AllTransactions
               columns={columns}
               data={allTransactions?.slice(0, 5)}
               page={1}
               totalPages={2}
               hasPagination={false}
-              type="ADMIN"
+              type="ALL"
               isLoading={false}
               nextP={emptyFunction}
               PrevP={emptyFunction}
               fetchByPage={emptyFunction}
+              columnSpan={10}
+              noDataText="No deposit history"
             />
           </div>
         </div>
@@ -150,7 +156,7 @@ const AdminDashboard = () => {
               <h5 className="text-light">Winnings</h5>
 
               <Link
-                to="/admin/transactions"
+                to="/admin/games/winnings"
                 className="d-flex align-items-center"
               >
                 <span className="text-light">See all</span>
@@ -158,16 +164,20 @@ const AdminDashboard = () => {
               </Link>
             </div>
             <div className="transactionDark">
-              <BetHistory
+              <AllWinningTable
                 columns={columns2}
-                data={[]}
+                data={allWinningLogs?.slice(0, 7)}
                 page={1}
                 totalPages={3}
                 type="ADMIN"
                 isLoading={false}
+                hasPagination={false}
                 nextP={() => {}}
                 PrevP={() => {}}
                 fetchByPage={() => {}}
+                columnSpan={10}
+                noDataText="No winnings"
+                onDelete={() => {}}
               />
             </div>
           </div>
@@ -186,7 +196,7 @@ const AdminDashboard = () => {
               </Link>
             </div>
             <div className="transactionDark">
-              <Transactions
+              <AllTransactions
                 columns={columns}
                 data={allTransactions?.slice(0, 5)}
                 page={1}
@@ -197,6 +207,8 @@ const AdminDashboard = () => {
                 nextP={emptyFunction}
                 PrevP={emptyFunction}
                 fetchByPage={emptyFunction}
+                columnSpan={10}
+                noDataText="No deposit history"
               />
             </div>
           </div>

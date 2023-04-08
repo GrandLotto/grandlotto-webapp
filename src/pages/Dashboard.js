@@ -24,10 +24,7 @@ const Dashboard = () => {
       name: "Request ID",
     },
     {
-      name: "Bank name",
-    },
-    {
-      name: "Account number",
+      name: "Account",
     },
     {
       name: "Date/Time",
@@ -45,7 +42,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (userWithdrawal && userDeposits) {
       if (allTransactions?.length <= 0) {
-        let newTrans = [...userWithdrawal, ...userDeposits];
+        let newTrans = [...userWithdrawal];
         setAllTransactions(newTrans);
       }
     }

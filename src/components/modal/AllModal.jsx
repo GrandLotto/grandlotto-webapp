@@ -15,6 +15,8 @@ import AlertModalBet from "./AlertModalBet";
 import AlertSmallPopUp from "./AlertSmallPopUp";
 import SearchCouponCodeModal from "./SearchCouponCodeModal";
 import ConfirmModal from "./ConfirmModal";
+import CreategameTypeModal from "./CreategameTypeModal";
+import CreateGameModal from "./CreateGameModal";
 
 const AllModal = () => {
   return (
@@ -35,6 +37,8 @@ const AllModal = () => {
       <SearchCouponCodeModal />
       <FnputCodeModal />
       <ComingSoonModal />
+      <CreategameTypeModal />
+      <CreateGameModal />
     </>
   );
 };

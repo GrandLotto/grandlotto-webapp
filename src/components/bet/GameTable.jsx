@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
   addComma,
   formateDateAndTimeByName,
@@ -7,7 +7,7 @@ import {
 import ComponentLoading from "../blocks/ComponentLoading";
 import PaginationBlock from "../blocks/PaginationBlock";
 
-const Transactions = ({
+const GameTable = ({
   columns,
   page,
   totalPages,
@@ -19,8 +19,11 @@ const Transactions = ({
   fetchByPage,
   hasPagination = true,
   columnSpan = "6",
+  noDataText = "No data found",
+  onEdit,
+  onDelete,
 }) => {
-  const navigation = useNavigate();
+  // const navigation = useNavigate();
   const handlePrev = () => {
     if (type === "WITHDRAWAL") {
       PrevP(type);
@@ -75,40 +78,41 @@ const Transactions = ({
               <tbody>
                 {data.map((item, index) => (
                   <tr key={index}>
-                    {/* <td>{index < 10 ? "0" + (index + 1) : index}</td> */}
-                    <td>{item?.requestNumber || item?.id}</td>
+                    <td>{item?.name}</td>
+                    <td>{item?.dayAvailable}</td>
                     <td>
-                      {item?.bankName
-                        ? item?.bankName + " (" + item?.accountNumber + ")"
-                        : item?.channel}
-                    </td>
-                    {/* <td>{item?.accountNumber}</td> */}
-                    <td>
-                      {formateDateAndTimeByName(
-                        item?.dateRequested || item?.datePaid
-                      )}
-                    </td>
-                    <td>
-                      {(item?.status?.toLowerCase() === "pending" ||
-                        item?.status?.toLowerCase() === "processing") && (
-                        <span className="has_status isPending">
+                      {item?.status?.toLowerCase() === "open" && (
+                        <span className={`has_status isPending`}>
                           {item?.status}
                         </span>
                       )}
+                      {item?.status?.toLowerCase() === "close" && (
+                        <span className={`has_status isCancled`}>
+                          {item?.status}
+                        </span>
+                      )}
+                    </td>
+                    <td>{item?.isAvailableToplay ? "Yes" : "No"}</td>
 
-                      {item?.status?.toLowerCase() === "lost" && (
-                        <span
-                          className={`has_status ${[
-                            item?.status?.toLowerCase() === "lost"
-                              ? "isLost"
-                              : "",
-                          ]}`}
-                        >
-                          {item?.status}
-                        </span>
-                      )}
+                    {/* <td>{item?.accountNumber}</td> */}
+                    <td>{formateDateAndTimeByName(item?.startTime)}</td>
+                    <td>{formateDateAndTimeByName(item?.endTime)}</td>
+
+                    <td>
+                      <div
+                        className="d-flex butnFlex "
+                        style={{ columnGap: 10 }}
+                      >
+                        <i
+                          className="bx bx-pencil editBtnn"
+                          onClick={() => onEdit(item)}
+                        ></i>
+                        <i
+                          className="bx bx-trash-alt deleteBtnn"
+                          onClick={() => onDelete(item)}
+                        ></i>
+                      </div>
                     </td>
-                    <td>₦ {item?.amount ? addComma(item?.amount) : 0}</td>
                   </tr>
                 ))}
               </tbody>
@@ -135,22 +139,8 @@ const Transactions = ({
                             className="mb-4"
                             style={{ fontSize: "18px", fontWeight: 500 }}
                           >
-                            No
-                            {type === "DEPOSIT" ? " deposit " : ""}
-                            {type === "WITHDRAWAL" ? " withdrawal " : ""}
-                            {type === "ALL" ? " transaction " : ""}
-                            {type === "ADMIN" ? " transaction " : ""}
-                            history
+                            {noDataText}
                           </h4>
-
-                          {type === "DEPOSIT" && type !== "ADMIN" && (
-                            <button
-                              onClick={() => navigation("/lotto")}
-                              className="grandLottoButton"
-                            >
-                              Deposit Funds
-                            </button>
-                          )}
                         </div>
 
                         <br />
@@ -166,49 +156,67 @@ const Transactions = ({
         </div>
       </div>
 
-      <div className="grandlotto_table_small border-top">
+      <div className="grandlotto_table_small">
         {data && data?.length ? (
           data?.map((item, index) => (
-            <div
-              className="grandlotto_table_small_flex d-flex justify-content-between"
-              key={index}
-            >
-              <div className="grandlotto_table_small_flex_left">
-                <div className="d-flex">
-                  {(item?.status?.toLowerCase() === "pending" ||
-                    item?.status?.toLowerCase() === "processing") && (
-                    <div className="fullStop pending"></div>
-                  )}
+            <div className="grandlotto_table_small_flex " key={index}>
+              <div className="d-flex justify-content-between border-bottom pb-2 mb-2">
+                <small>{formateDateAndTimeByName(item?.createdOn)}</small>
+              </div>
+              <div className="grandlotto_table_small_flex_top">
+                <div className="d-flex justify-content-between">
+                  <h4 className="">Game Type</h4>
+                  <h4 className="">
+                    <b>{item?.type}</b>
+                  </h4>
+                </div>
 
-                  {item?.status?.toLowerCase() === "lost" && (
-                    <div className="fullStop error"></div>
-                  )}
-                  <div>
-                    <h4 className="">
-                      Request ID: {item?.requestNumber || item?.id}
-                    </h4>
-                    <p className="">
-                      {formateDateAndTimeByName(item?.dateRequested)}
-                    </p>
+                <div className="d-flex justify-content-between">
+                  <h4 className="">Min</h4>
+                  <h4 className="">
+                    <b>
+                      ₦{" "}
+                      {item?.minAmmount
+                        ? addComma(item?.minAmmount)
+                        : item?.minAmmount}
+                    </b>
+                  </h4>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <h4 className="">Max</h4>
+                  <h4 className="">
+                    <b>
+                      ₦{" "}
+                      {item?.maxAmmount
+                        ? addComma(item?.maxAmmount)
+                        : item?.maxAmmount}
+                    </b>
+                  </h4>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <h4 className="">Credit Line</h4>
+                  <h4 className="">
+                    <b>{item?.creditLine}</b>
+                  </h4>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <h4 className="">Credit Line</h4>
+                  <h4 className="">
+                    <b>{item?.maxNumbercount}</b>
+                  </h4>
+                </div>
+                <div className="d-flex justify-content-end">
+                  <div className="d-flex butnFlex " style={{ columnGap: 10 }}>
+                    <i
+                      className="bx bx-pencil editBtnn"
+                      onClick={() => onEdit(item)}
+                    ></i>
+                    <i
+                      className="bx bx-trash-alt deleteBtnn"
+                      onClick={() => onDelete(item)}
+                    ></i>
                   </div>
                 </div>
-              </div>
-              <div className="grandlotto_table_small_flex_right">
-                <h4 className="text-right">
-                  ₦{item?.amount ? addComma(item?.amount) : 0}
-                </h4>
-                {type === "WITHDRAWAL" ? (
-                  <p className="text-right">
-                    <span className="d-block">{item?.bankName}</span>
-                    <span className="d-block mt-2">
-                      ({item?.accountNumber})
-                    </span>
-                  </p>
-                ) : (
-                  <p className="text-right">
-                    <span className="d-block">{item?.channel}</span>
-                  </p>
-                )}
               </div>
             </div>
           ))
@@ -232,19 +240,8 @@ const Transactions = ({
                   className="mb-4"
                   style={{ fontSize: "18px", fontWeight: 500 }}
                 >
-                  {type !== "ADMIN"
-                    ? "No transaction history"
-                    : "You don’t have any transaction history"}
+                  {noDataText}
                 </h4>
-
-                {type === "DEPOSIT" && type !== "ADMIN" && (
-                  <button
-                    onClick={() => navigation("/lotto")}
-                    className="grandLottoButton"
-                  >
-                    Deposit Funds
-                  </button>
-                )}
               </div>
 
               <br />
@@ -268,4 +265,4 @@ const Transactions = ({
   );
 };
 
-export default Transactions;
+export default GameTable;

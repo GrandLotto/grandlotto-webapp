@@ -38,6 +38,18 @@ const initialState = {
     buttonText: "",
   },
 
+  creategameTypeModal: {
+    status: false,
+    type: "",
+    payload: null,
+  },
+
+  createGameModal: {
+    status: false,
+    type: "",
+    payload: null,
+  },
+
   pageLoading: {
     status: false,
     message: "",
@@ -126,6 +138,15 @@ const alertSlice = createSlice({
     setConfirmModal: (state, { payload }) => {
       state.confirmModal = payload;
     },
+
+    setCreategameTypeModal: (state, { payload }) => {
+      state.creategameTypeModal = payload;
+    },
+
+    setCreateGameModal: (state, { payload }) => {
+      state.createGameModal = payload;
+    },
+
     setLogoutModal: (state, { payload }) => {
       state.logoutModal = {
         status: payload.status,
@@ -193,6 +214,8 @@ export const {
   setComingSoonModal,
   setAlertSmallPOPUP,
   setSearchCouponCodeModal,
+  setCreategameTypeModal,
+  setCreateGameModal,
 } = alertSlice.actions;
 
 export default alertSlice.reducer;

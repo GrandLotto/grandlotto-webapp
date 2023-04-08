@@ -68,7 +68,7 @@ const BetHistoryPage = () => {
     },
 
     {
-      name: "Potential winning",
+      name: "Pot. winning",
     },
   ];
 

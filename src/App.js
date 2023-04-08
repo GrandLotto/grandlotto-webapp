@@ -11,6 +11,8 @@ import {
   setAlertPopUp,
   setComingSoonModal,
   setConfirmModal,
+  setCreateGameModal,
+  setCreategameTypeModal,
   setLoginModal,
   setPageLoading,
   setRedeemWinningModal,
@@ -127,6 +129,20 @@ const App = () => {
         hasMesage: false,
         payload: null,
         buttonText: "",
+      })
+    );
+    dispatch(
+      setCreategameTypeModal({
+        status: false,
+        type: "",
+        payload: null,
+      })
+    );
+    dispatch(
+      setCreateGameModal({
+        status: false,
+        type: "",
+        payload: null,
       })
     );
     dispatch(setAddBankModal(false));

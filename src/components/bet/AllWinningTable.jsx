@@ -1,6 +1,5 @@
 import React from "react";
 // import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import {
   formateDateAndTimeByName,
   addComma,
@@ -10,7 +9,7 @@ import {
 import ComponentLoading from "../blocks/ComponentLoading";
 import PaginationBlock from "../blocks/PaginationBlock";
 
-const BetHistory = ({
+const AllWinningTable = ({
   columns,
   page,
   totalPages,
@@ -20,42 +19,21 @@ const BetHistory = ({
   PrevP,
   isLoading,
   fetchByPage,
+  hasPagination = true,
+  columnSpan = "6",
+  noDataText = "No user found",
+  onDelete,
 }) => {
-  const navigation = useNavigate();
   const handlePrev = () => {
-    if (type === "OPENBETS") {
-      PrevP(type);
-
-      return;
-    }
+    PrevP(type);
   };
 
   const handleNext = () => {
-    if (type === "OPENBETS") {
-      nextP(type);
-
-      return;
-    }
-
-    if (type === "CLOSEBETS") {
-      nextP(type);
-
-      return;
-    }
+    nextP(type);
   };
 
   const handleFetchByPage = (newPage) => {
-    if (type === "OPENBETS") {
-      fetchByPage(type, newPage);
-
-      return;
-    }
-
-    if (type === "CLOSEBETS") {
-      fetchByPage(type, newPage);
-
-      return;
-    }
+    fetchByPage(type, newPage);
   };
 
   return (
@@ -77,47 +55,34 @@ const BetHistory = ({
               <tbody>
                 {data.map((item, index) => (
                   <tr key={index}>
-                    {/* <td>{index < 10 ? "0" + (index + 1) : index}</td> */}
-                    <td>{item?.gameTicket || item?.id}</td>
-                    <td>{item?.numbersplayed}</td>
-                    <td>{item?.gameTypeName}</td>
+                    <td>{index < 10 ? "0" + (index + 1) : index}</td>
+
+                    <td>{item?.email + " (" + item?.customerCode + ")"}</td>
+                    <td>{item?.gamePlayed}</td>
+                    <td>{item?.numberPlayed}</td>
                     <td>
                       ₦{" "}
                       {item?.ammountPlayed
                         ? addComma(item?.ammountPlayed)
                         : item?.ammountPlayed}
                     </td>
-                    <td>{formateDateAndTimeByName(item?.datePlayed)}</td>
-                    <td>
-                      {item?.status?.toLowerCase() === "pending" && (
-                        <span
-                          className={`has_status ${[
-                            item?.status?.toLowerCase() === "pending"
-                              ? "isPending"
-                              : "",
-                          ]}`}
-                        >
-                          {item?.status}
-                        </span>
-                      )}
-
-                      {item?.status?.toLowerCase() === "lost" && (
-                        <span
-                          className={`has_status ${[
-                            item?.status?.toLowerCase() === "lost"
-                              ? "isLost"
-                              : "",
-                          ]}`}
-                        >
-                          {item?.status}
-                        </span>
-                      )}
-                    </td>
                     <td>
                       ₦{" "}
-                      {item?.potentialwinningAmount
-                        ? addComma(item?.potentialwinningAmount)
-                        : item?.potentialwinningAmount}
+                      {item?.ammountWon
+                        ? addComma(item?.ammountWon)
+                        : item?.ammountWon}
+                    </td>
+                    <td>{formateDateAndTimeByName(item?.winningDate)}</td>
+                    <td>
+                      <div
+                        className="d-flex butnFlex "
+                        style={{ columnGap: 10 }}
+                      >
+                        <i
+                          className="bx bx-trash-alt deleteBtnn"
+                          onClick={() => onDelete(item)}
+                        ></i>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -125,7 +90,7 @@ const BetHistory = ({
             ) : (
               <tbody>
                 <tr>
-                  <td colSpan="9">
+                  <td colSpan={columnSpan}>
                     <div
                       style={{
                         display: "flex",
@@ -145,18 +110,8 @@ const BetHistory = ({
                             className="mb-4"
                             style={{ fontSize: "18px", fontWeight: 500 }}
                           >
-                            {type === "ADMIN"
-                              ? "No bet records"
-                              : "You don’t have any bet records"}
+                            {noDataText}
                           </h4>
-                          {type !== "ADMIN" && (
-                            <button
-                              onClick={() => navigation("/lotto")}
-                              className="grandLottoButton"
-                            >
-                              Play Game
-                            </button>
-                          )}
                         </div>
 
                         <br />
@@ -178,48 +133,27 @@ const BetHistory = ({
           data?.map((item, index) => (
             <div className="grandlotto_table_small_flex " key={index}>
               <div className="d-flex justify-content-between border-bottom pb-2 mb-2">
-                <small>{formateDateByName(item?.datePlayed)}</small>
-                <small>{formatAMPM(item?.datePlayed)}</small>
+                <small>{formateDateByName(item?.winningDate)}</small>
+                <small>{formatAMPM(item?.winningDate)}</small>
               </div>
               <div className="grandlotto_table_small_flex_top">
                 <div className="d-flex justify-content-between">
                   <h4 className="">
                     <b>Bet ID: {item?.gameTicket || item?.id}</b>
                   </h4>
-                  {item?.status?.toLowerCase() === "pending" && (
-                    <span
-                      className={`has_status ${[
-                        item?.status?.toLowerCase() === "pending"
-                          ? "isPending"
-                          : "",
-                      ]}`}
-                    >
-                      {item?.status}
-                    </span>
-                  )}
 
-                  {item?.status?.toLowerCase() === "lost" && (
-                    <span
-                      className={`has_status ${[
-                        item?.status?.toLowerCase() === "lost" ? "isLost" : "",
-                      ]}`}
-                    >
-                      {item?.status}
-                    </span>
-                  )}
+                  <span className={`has_status`}>Won</span>
                 </div>
                 <div className="d-flex justify-content-between">
                   <h4 className="">Game</h4>
                   <h4 className="">
-                    <b>{item?.gameName}</b>
+                    <b>{item?.gamePlayed}</b>
                   </h4>
                 </div>
                 <div className="d-flex justify-content-between">
                   <h4 className="">Details</h4>
                   <h4 className="">
-                    <b>
-                      {item?.gameTypeName}: {item?.numbersplayed}
-                    </b>
+                    <b>{item?.numberPlayed}</b>
                   </h4>
                 </div>
                 <div className="d-flex justify-content-between">
@@ -234,13 +168,13 @@ const BetHistory = ({
                   </h4>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <h4 className="">Pot. Winning</h4>
+                  <h4 className="">Winning</h4>
                   <h4 className="">
                     <b>
                       ₦{" "}
-                      {item?.potentialwinningAmount
-                        ? addComma(item?.potentialwinningAmount)
-                        : item?.potentialwinningAmount}
+                      {item?.ammountWon
+                        ? addComma(item?.ammountWon)
+                        : item?.ammountWon}
                     </b>
                   </h4>
                 </div>
@@ -267,19 +201,8 @@ const BetHistory = ({
                   className="mb-4"
                   style={{ fontSize: "18px", fontWeight: 500 }}
                 >
-                  {type === "ADMIN"
-                    ? "No bet records"
-                    : "You don’t have any bet records"}
+                  {noDataText}
                 </h4>
-
-                {type !== "ADMIN" && (
-                  <button
-                    onClick={() => navigation("/lotto")}
-                    className="grandLottoButton"
-                  >
-                    Play Game
-                  </button>
-                )}
               </div>
 
               <br />
@@ -290,7 +213,7 @@ const BetHistory = ({
         )}
       </div>
 
-      {data && data?.length ? (
+      {data && data?.length && hasPagination ? (
         <PaginationBlock
           handlePrev={handlePrev}
           handleNext={handleNext}
@@ -303,4 +226,4 @@ const BetHistory = ({
   );
 };
 
-export default BetHistory;
+export default AllWinningTable;

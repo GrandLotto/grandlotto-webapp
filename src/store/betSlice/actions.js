@@ -8,6 +8,7 @@ import {
   GET_GAMES_TYPES_URL,
   GET_GAMES_URL,
   GET_GAMES_WININNG_LOGS_URL,
+  GET_GAME_WINNING_LOG_URL,
   GET_OPEN_GAMES_URL,
 } from "../../config/urlConfigs";
 
@@ -117,6 +118,27 @@ export const Getuserclosedgameplayed = createAsyncThunk(
     try {
       const result = axios
         .post(GET_CLOSED_GAMES_URL, newPayload)
+        .then((response) => {
+          return response.data;
+        });
+
+      return result;
+    } catch (error) {}
+  }
+);
+
+export const getWinningLogs = createAsyncThunk(
+  "bets/getWinningLogs",
+  async (payload, { getState, dispatch }) => {
+    const newPayload = {
+      pageNumber: 1,
+      pageSize: 10,
+      startime: payload?.startime,
+      endTime: payload?.endTime,
+    };
+    try {
+      const result = axios
+        .post(GET_GAME_WINNING_LOG_URL, newPayload)
         .then((response) => {
           return response.data;
         });
