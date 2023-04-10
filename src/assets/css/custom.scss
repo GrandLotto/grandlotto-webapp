@@ -800,6 +800,29 @@ p {
 }
 
 @media screen and (max-width: 650px) {
+  .pages_mobile_dark .grandlotto_form input:-webkit-autofill,
+  .pages_mobile_dark .grandlotto_form input:-webkit-autofill:hover,
+  .pages_mobile_dark .grandlotto_form input:-webkit-autofill:focus,
+  .pages_mobile_dark .grandlotto_form textarea:-webkit-autofill,
+  .pages_mobile_dark .grandlotto_form textarea:-webkit-autofill:hover,
+  .pages_mobile_dark .grandlotto_form textarea:-webkit-autofill:focus,
+  .pages_mobile_dark .grandlotto_form select:-webkit-autofill,
+  .pages_mobile_dark .grandlotto_form select:-webkit-autofill:hover,
+  .pages_mobile_dark .grandlotto_form select:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff !important;
+    -webkit-box-shadow: 0 0 0px 1000px
+      darken($color: $primaryDark, $amount: 20%) inset !important;
+    box-shadow: 0 0 0px 1000px darken($color: $primaryDark, $amount: 20%) inset !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+    color: #fff !important;
+  }
+
+  .pages_mobile_dark .grandlotto_form input:disabled,
+  .pages_mobile_dark .grandlotto_form textarea:disabled,
+  .pages_mobile_dark .grandlotto_form select:disabled {
+    background: darken($color: $primaryDark, $amount: 20%) !important;
+  }
+
   .content-body {
     background: $primaryDark;
   }
