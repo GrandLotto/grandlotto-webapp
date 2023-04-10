@@ -25,6 +25,11 @@ const GameTimer = ({ time, timeStarted }) => {
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+        // console.log("days", days);
+        // console.log("hours", hours);
+        // console.log("minutes", minutes);
+        // console.log("seconds", seconds);
+
         setDisplayTimer(
           addZero(days) +
             " : " +
@@ -37,6 +42,7 @@ const GameTimer = ({ time, timeStarted }) => {
 
         if (distance < 0) {
           clearInterval(myInterval);
+          console.log("expired");
         }
       }, 1000);
     }

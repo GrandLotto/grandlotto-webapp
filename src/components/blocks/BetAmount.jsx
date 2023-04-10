@@ -63,8 +63,6 @@ const BetAmount = () => {
     // setIsCalculatingGames(true);
     // setIsDisabled(true);
 
-    console.log("here");
-
     const payload = {
       email: user?.email,
       gameId: selectedGame?.id,

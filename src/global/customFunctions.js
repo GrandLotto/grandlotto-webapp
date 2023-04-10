@@ -14,6 +14,10 @@ export const copyCode = (codeToCopy) => {
   return result;
 };
 
+export const bodyScrollTop = () => {
+  window.scrollTo(0, 0);
+};
+
 export const addFixNav = () => {
   $(window).scroll(function () {
     var sticky = $("#topHeader"),
@@ -143,6 +147,20 @@ export const accordionTab = () => {
       }
     }; //closing to the acc onclick function
   } //closing to the for loop.
+};
+
+export const checkIfGameHasExpired = (gameTime) => {
+  let hasExpired = true;
+  let newDateTime = new Date(gameTime).getTime();
+  let todaysTime = new Date().getTime();
+
+  if (newDateTime > todaysTime) {
+    hasExpired = false;
+  } else {
+    hasExpired = true;
+  }
+
+  return hasExpired;
 };
 
 export const removeDashFromString = (str) => {

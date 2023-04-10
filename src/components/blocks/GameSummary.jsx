@@ -32,7 +32,7 @@ const GameSummary = ({ calculatedGames }) => {
           calculatedGames?.gametype
         ) && (
           <div className="d-flex align-items-center justify-content-between allBetSlipItemBodyItem">
-            <h5>Stakes: </h5>
+            <h5>Stake: </h5>
             <h5>
               <b>
                 {calculatedGames?.ammountTopay

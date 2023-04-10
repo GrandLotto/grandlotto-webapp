@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 
 import {
   accordionTab,
+  bodyScrollTop,
   formateDateAndTimeByName,
 } from "../global/customFunctions";
 
@@ -10,8 +11,10 @@ import { useSelector } from "react-redux";
 import FilterModals from "../components/modal/FilterModals";
 import { handlePOSTRequest } from "../rest/apiRest";
 import { GET_GAME_WINNING_NUMBERS_URL } from "../config/urlConfigs";
+import { useLocation } from "react-router-dom";
 
 const Results = () => {
+  let location = useLocation();
   // const dispatch = useDispatch();
   const allexistinggames = useSelector((state) => state.bets.allexistinggames);
   const [showFilter, setShowFilter] = useState(false);
@@ -86,6 +89,10 @@ const Results = () => {
       handleGetResult();
     }
   }, [startDate, endDate]);
+
+  useLayoutEffect(() => {
+    bodyScrollTop();
+  }, [location]);
 
   return (
     <>

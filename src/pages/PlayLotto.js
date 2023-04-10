@@ -1,15 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 
 import {
   accordionTab,
   addComma,
+  bodyScrollTop,
   generateLottoNumbers,
   numbersFromOneTo90,
 } from "../global/customFunctions";
 
 import greenball from "../assets/images/greenball.png";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import {
   setBetAmount,
   setCalculatedGames,
@@ -27,6 +29,7 @@ import GameSummary from "../components/blocks/GameSummary";
 
 const PlayLotto = () => {
   const dispatch = useDispatch();
+  let location = useLocation();
   const selectedCoupons = useSelector((state) => state.bets.selectedCoupons);
   const betAmount = useSelector((state) => state.bets.betAmount);
   const gameTypes = useSelector((state) => state.bets.gameTypes);
@@ -193,12 +196,9 @@ const PlayLotto = () => {
     }
   }, [selectedType]);
 
-  useEffect(() => {
-    return () => {
-      document.querySelector(".oauth-wrapper") &&
-        document.querySelector(".oauth-wrapper").scrollTo(0, 0);
-    };
-  }, []);
+  useLayoutEffect(() => {
+    bodyScrollTop();
+  }, [location]);
 
   return (
     <>

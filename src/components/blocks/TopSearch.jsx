@@ -75,7 +75,7 @@ const TopSearch = () => {
           onChange={(e) => setTicketID(e.target.value)}
           value={ticketID}
           type="text"
-          placeholder="Search for coupon code"
+          placeholder="Search for ticket"
         />
         <span className="searchIconn" onClick={() => checkWinning()}>
           {isLoading ? (

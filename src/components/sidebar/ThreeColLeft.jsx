@@ -2,8 +2,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { formatAMPM, groupBy2 } from "../../global/customFunctions";
-import { setSelectDrawMenu } from "../../store/alert/alertSlice";
+import {
+  checkIfGameHasExpired,
+  formatAMPM,
+  groupBy2,
+} from "../../global/customFunctions";
+import {
+  setAlertSmallPOPUP,
+  setSelectDrawMenu,
+} from "../../store/alert/alertSlice";
 import {
   setCalculatedGames,
   setExpiryDate,
@@ -39,6 +46,28 @@ const ThreeColLeft = () => {
         dispatch(setExpiryDate(item?.startTime));
       }
     }, 500);
+  };
+
+  const handlePlayGame = (item) => {
+    if (selectedGame) {
+      if (selectedGame?.id === item?.id) {
+        return;
+      }
+    }
+    if (checkIfGameHasExpired(item?.startTime) === false) {
+      console.log("selectedGame", item);
+      dispatch(setSelectedGame(item));
+      dispatch(setCalculatedGames(null));
+      handleTimer(item);
+      dispatch(setSelectedCoupons([]));
+    } else {
+      dispatch(
+        setAlertSmallPOPUP({
+          status: true,
+          message: "Game Expired",
+        })
+      );
+    }
   };
 
   useEffect(() => {
@@ -102,58 +131,33 @@ const ThreeColLeft = () => {
                   <div className={`open_roles_grid_item_body `}>
                     {item?.games &&
                       item?.games?.map((newItem, index2) => (
-                        // <div
-                        //   className={`open_body_contents ${
-                        //     newItem?.active ? "buttonActive" : ""
-                        //   }`}
-                        //   key={index2}
-                        // >
-                        //   <div className="d-flex justify-content-between align-items-center">
-                        //     <div className="open_body_contents_left">
-                        //       <div className="d-flex justify-content-between align-items-center">
-                        //         <img
-                        //           src={newItem?.img}
-                        //           style={{ width: 56 }}
-                        //           alt="grand-logo"
-                        //         />
-                        //         <h5>{newItem?.title}</h5>
-                        //       </div>
-                        //     </div>
-                        //     <div className="open_body_contents_right">
-                        //       <p>BETTING CLOSES</p>
-                        //       <h5>{newItem?.closes}</h5>
-                        //     </div>
-                        //   </div>
-                        // </div>
-
                         <div
                           className={`open_body_contents ${
                             isSelected(newItem) === true ? "buttonActive" : ""
                           }`}
                           key={index2}
                           onClick={() => {
-                            dispatch(setSelectedGame(newItem));
-                            dispatch(setCalculatedGames(null));
-                            handleTimer(newItem);
-                            dispatch(setSelectedCoupons([]));
-
-                            //  setSelectedLotto(newItem)
+                            handlePlayGame(newItem);
                           }}
                         >
                           <div className="d-flex justify-content-between align-items-center">
                             <div className="open_body_contents_left">
                               <div className="d-flex justify-content-between align-items-center">
-                                {/* <img
-                                        src={newItem?.img}
-                                        style={{ width: 56 }}
-                                        alt="grand-logo"
-                                      /> */}
                                 <h5>{newItem?.name}</h5>
                               </div>
                             </div>
                             <div className="open_body_contents_right">
                               <p>BETTING CLOSES</p>
-                              <h5>{formatAMPM(newItem?.endTime)}</h5>
+                              {checkIfGameHasExpired(newItem?.startTime) ===
+                              true ? (
+                                <h5>
+                                  <span className="badge badge-danger">
+                                    Expired
+                                  </span>
+                                </h5>
+                              ) : (
+                                <h5>{formatAMPM(newItem?.startTime)}</h5>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -163,37 +167,6 @@ const ThreeColLeft = () => {
               ))}
           </div>
         </div>
-
-        {/* <div className="open_roles">
-          <div className="open_roles_grid_item_body2">
-            {games &&
-              games?.map((newItem, index2) => (
-                <div
-                  className={`open_body_contents ${
-                    isSelected(newItem) == true ? "buttonActive" : ""
-                  }`}
-                  key={index2}
-                  onClick={() => {
-                    dispatch(setSelectedGame(newItem));
-            
-                  }}
-                >
-                  <div className="d-flex justify-content-between align-items-center">
-                    <div className="open_body_contents_left">
-                      <div className="d-flex justify-content-between align-items-center">
-                        
-                        <h5>{newItem?.name}</h5>
-                      </div>
-                    </div>
-                    <div className="open_body_contents_right">
-                      <p>BETTING CLOSES</p>
-                      <h5>{formatAMPM(newItem?.endTime)}</h5>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div>
-        </div> */}
       </div>
     </div>
   );
