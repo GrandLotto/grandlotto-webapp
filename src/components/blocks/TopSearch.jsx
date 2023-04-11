@@ -3,7 +3,6 @@ import { GET_GAMES_BY_TICKETID_URL } from "../../config/urlConfigs";
 import { handleGETRequest } from "../../rest/apiRest";
 import { setSearchCouponCodeModal } from "../../store/alert/alertSlice";
 import { useDispatch } from "react-redux";
-import Reponsemessage from "./Reponsemessage";
 
 const TopSearch = () => {
   const dispatch = useDispatch();

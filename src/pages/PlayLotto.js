@@ -152,7 +152,7 @@ const PlayLotto = () => {
   };
 
   const randomPick = () => {
-    let filteredWith = "NAP5";
+    let filteredWith = "PERM2";
     dispatch(setSelectedCoupons(generateLottoNumbers(5, 1, 90)));
     dispatch(setCalculatedGames(null));
     dispatch(setSelectedType(null));

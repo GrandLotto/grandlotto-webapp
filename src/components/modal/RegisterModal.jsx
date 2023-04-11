@@ -144,7 +144,7 @@ const RegisterModal = () => {
       confirmPassword: confirmPassword,
       email: email,
       roleName: "USER",
-      gender: "Male",
+
       firstName: firstName,
       lastName: lastName,
       referredBy: "",
@@ -152,6 +152,7 @@ const RegisterModal = () => {
         firstName.substring(0, 3) +
         lastName.substring(0, 3) +
         phone.slice(phone.length - 4),
+      eighteenYrsPlus: acceptTerms,
     };
 
     // console.log(JSON.stringify(payload));
