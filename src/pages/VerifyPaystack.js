@@ -23,6 +23,8 @@ const VerifyPaystack = () => {
       if (ref) {
         console.log(ref);
         confirmPayment();
+      } else {
+        navigate("/");
       }
     }
   };
