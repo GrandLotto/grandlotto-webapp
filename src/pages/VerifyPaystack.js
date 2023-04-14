@@ -43,6 +43,7 @@ const VerifyPaystack = () => {
           //   let requestData = response?.data?.data;
           //   console.log(requestData);
 
+          sessionStorage.setItem("paystatus", "idlog");
           navigate("/payment-response", {
             ref: ref,
             status: "success",

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import ConfirmBlock from "../components/blocks/ConfirmBlock";
 import { useSearchParams } from "react-router-dom";
 import useNavigateSearch from "../global/customHooks/useNavigateSearch";
@@ -8,8 +8,10 @@ const PaymentResponsePage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigateSearch();
 
+  const [paymentSttats, setpaymentSttats] = useState(false);
+
   let ref = searchParams.get("ref");
-  let status = searchParams.get("status");
+  //   let status = searchParams.get("status");
   let message = searchParams.get("message");
 
   useEffect(() => {
@@ -17,6 +19,23 @@ const PaymentResponsePage = () => {
       navigate("/");
     }
   }, [ref]);
+
+  useLayoutEffect(() => {
+    let payStatys = sessionStorage.getItem("paystatus");
+
+    if (payStatys) {
+      setpaymentSttats(true);
+    } else {
+      setpaymentSttats(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      setpaymentSttats(false);
+      sessionStorage.removeItem("paystatus");
+    };
+  }, []);
 
   const handleNavigation = () => {
     navigate("/account/dashboard");
@@ -26,11 +45,9 @@ const PaymentResponsePage = () => {
     <div className="lottoHeightWeight">
       <div>
         <ConfirmBlock
-          status={status === "success" ? true : false}
+          status={paymentSttats ? true : false}
           title={
-            status === "success"
-              ? "Payment successful"
-              : "Payment not successful"
+            paymentSttats ? "Payment successful" : "Payment not successful"
           }
           des={message}
         />
