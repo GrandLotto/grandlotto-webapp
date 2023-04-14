@@ -423,6 +423,41 @@ const Fundwallet = () => {
             {step === 2 && (
               <div className="animated preFadeInRight fadeInRight">
                 <div className="row mb-3">
+                  <div className="col-md-12">
+                    {selectedGateWay &&
+                      selectedGateWay?.name === "Paystack" && (
+                        <div
+                          className=""
+                          style={{ marginTop: -15, marginBottom: 69 }}
+                        >
+                          <p
+                            className="inputError "
+                            style={{ color: "#ce6b02" }}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="10"
+                              height="10"
+                              viewBox="0 0 20 20"
+                              role="presentation"
+                              focusable="false"
+                              tabIndex="-1"
+                              fill="#ce6b02"
+                            >
+                              <path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 11c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1 4H9v-2h2v2z"></path>
+                            </svg>
+
+                            <span
+                              style={{ fontSize: 13 }}
+                              className="ml-2  pr-2"
+                            >
+                              NOTE: You will be redirected to complete this
+                              payment
+                            </span>
+                          </p>
+                        </div>
+                      )}
+                  </div>
                   <div className="col-md-5 mx-auto mb-3">
                     <div className="form-group" style={{ width: "100%" }}>
                       <label htmlFor="">Enter amount</label>

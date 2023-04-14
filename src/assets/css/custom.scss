@@ -835,6 +835,10 @@ p {
     background: darken($color: $primaryDark, $amount: 20%) !important;
   }
 
+  .componentLoading.inner {
+    position: fixed !important;
+  }
+
   .content-body {
     background: $primaryDark;
   }
