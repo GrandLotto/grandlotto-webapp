@@ -26,6 +26,8 @@ import SettingsPage from "../pages/SettingsPage";
 import TransactionsPage from "../pages/TransactionsPage";
 import TransferPage from "../pages/TransferPage";
 import WithdrawalPage from "../pages/WithdrawalPage";
+import VerifyPaystack from "../pages/VerifyPaystack";
+import PaymentResponsePage from "../pages/PaymentResponsePage";
 
 const MyRouter = () => {
   return (
@@ -87,6 +89,9 @@ const MyRouter = () => {
           <Route element={<TwoColLayout />}>
             <Route path="/results" element={<Results />} />
           </Route>
+          <Route path="/verify-paystack" element={<VerifyPaystack />} />
+          <Route path="/payment-response" element={<PaymentResponsePage />} />
+
           {/* <Route element={<OAuthLayout2 />}>
           <Route path="/redeem-winning" element={<RedeemWining />} />
         </Route> */}

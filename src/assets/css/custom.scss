@@ -668,6 +668,18 @@ p {
   color: #282828;
 }
 
+.lottoHeightWeight {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: #fff !important;
+  z-index: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #111;
+  text-align: center;
+}
 .grandlotto_card,
 .grandlotto_table {
   background: #fff;
