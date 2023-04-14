@@ -14,6 +14,7 @@ import {
 } from "../../config/urlConfigs";
 import { addComma } from "../../global/customFunctions";
 import { setAlertPopUp } from "../../store/alert/alertSlice";
+import { setRefreshing } from "../../store/authSlice/authSlice";
 
 const Fundwallet = () => {
   const dispatch = useDispatch();
@@ -297,7 +298,7 @@ const Fundwallet = () => {
                 payload: null,
               })
             );
-
+            dispatch(setRefreshing(true));
             resetFields();
           } else {
             dispatch(
@@ -476,10 +477,14 @@ const Fundwallet = () => {
                       >
                         <button
                           type="button"
-                          onClick={() => handlePaid()}
+                          onClick={() => {
+                            handleCancel();
+
+                            dispatch(setRefreshing(true));
+                          }}
                           className="grandLottoButton cardButton"
                         >
-                          I have paid
+                          Close
                         </button>
                       </div>
                     </div>
