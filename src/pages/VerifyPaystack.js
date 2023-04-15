@@ -10,7 +10,7 @@ const VerifyPaystack = () => {
   const navigate = useNavigateSearch();
 
   let ref = searchParams.get("ref");
-
+  let reference = searchParams.get("reference");
   let initialized = false;
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const VerifyPaystack = () => {
   const checkRef = () => {
     if (!initialized) {
       initialized = true;
-      if (ref) {
+      if (ref || reference) {
         console.log(ref);
         confirmPayment();
       } else {
@@ -33,33 +33,35 @@ const VerifyPaystack = () => {
     let URL = VERIFY_PAYSTACK_PAYMENT_URL;
 
     let payload = {
-      requestId: ref,
+      requestId: reference || ref,
     };
 
     handlePOSTRequest(URL, payload)
       .then((response) => {
         // console.log(response);
-        if (response?.data?.success) {
-          //   let requestData = response?.data?.data;
-          //   console.log(requestData);
+        setTimeout(() => {
+          if (response?.data?.success) {
+            //   let requestData = response?.data?.data;
+            //   console.log(requestData);
 
-          sessionStorage.setItem("paystatus", "idlog");
-          navigate("/payment-response", {
-            ref: ref,
-            status: "success",
-            message: response?.data?.message,
-          });
-        } else {
-          navigate("/payment-response", {
-            ref: ref,
-            status: "error",
-            message: response?.data?.message,
-          });
-        }
+            sessionStorage.setItem("paystatus", "idlog");
+            navigate("/payment-response", {
+              ref: reference || ref,
+              status: "success",
+              message: response?.data?.message,
+            });
+          } else {
+            navigate("/payment-response", {
+              ref: reference || ref,
+              status: "error",
+              message: response?.data?.message,
+            });
+          }
+        }, 4000);
       })
       .catch((error) => {
         navigate("/payment-response", {
-          ref: ref,
+          ref: reference || ref,
           status: "error",
           message: "Transaction error",
         });
