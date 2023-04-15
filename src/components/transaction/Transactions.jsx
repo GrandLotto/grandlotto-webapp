@@ -76,7 +76,9 @@ const Transactions = ({
                 {data.map((item, index) => (
                   <tr key={index}>
                     {/* <td>{index < 10 ? "0" + (index + 1) : index}</td> */}
-                    <td>{item?.requestNumber || item?.id}</td>
+                    <td>
+                      {item?.requestNumber || item?.requestId || item?.id}
+                    </td>
                     <td>
                       {item?.bankName
                         ? item?.bankName + " (" + item?.accountNumber + ")"
@@ -97,18 +99,27 @@ const Transactions = ({
                       )}
 
                       {item?.status?.toLowerCase() === "lost" && (
-                        <span
-                          className={`has_status ${[
-                            item?.status?.toLowerCase() === "lost"
-                              ? "isLost"
-                              : "",
-                          ]}`}
-                        >
+                        <span className={`has_status isLost`}>
                           {item?.status}
                         </span>
                       )}
+
+                      {!["pending", "processing", "lost"].includes(
+                        item?.status?.toLowerCase()
+                      ) && (
+                        <span className="has_status">
+                          {item?.status || "Success"}
+                        </span>
+                      )}
                     </td>
-                    <td>₦ {item?.amount ? addComma(item?.amount) : 0}</td>
+                    <td>
+                      ₦{" "}
+                      {item?.amount
+                        ? addComma(item?.amount)
+                        : item?.ammountPaid
+                        ? addComma(item?.ammountPaid)
+                        : item?.ammountPaid}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -185,7 +196,8 @@ const Transactions = ({
                   )}
                   <div>
                     <h4 className="">
-                      Request ID: {item?.requestNumber || item?.id}
+                      Request ID:{" "}
+                      {item?.requestNumber || item?.requestId || item?.id}
                     </h4>
                     <p className="">
                       {formateDateAndTimeByName(item?.dateRequested)}
@@ -195,7 +207,12 @@ const Transactions = ({
               </div>
               <div className="grandlotto_table_small_flex_right">
                 <h4 className="text-right">
-                  ₦{item?.amount ? addComma(item?.amount) : 0}
+                  ₦
+                  {item?.amount
+                    ? addComma(item?.amount)
+                    : item?.ammountPaid
+                    ? addComma(item?.ammountPaid)
+                    : item?.ammountPaid}
                 </h4>
                 {type === "WITHDRAWAL" ? (
                   <p className="text-right">
