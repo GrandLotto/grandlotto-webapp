@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
 import GameTypeTable from "../../components/bet/GameTypeTable";
-import { setCreategameTypeModal } from "../../store/alert/alertSlice";
+import {
+  setConfirmModal,
+  setCreategameTypeModal,
+} from "../../store/alert/alertSlice";
 
 const AdminCreateGametypes = () => {
   const dispatch = useDispatch();
@@ -43,6 +46,21 @@ const AdminCreateGametypes = () => {
         status: true,
         type: "EDIT",
         payload: item,
+      })
+    );
+  };
+
+  const handleDelete = (item) => {
+    console.log(item);
+    dispatch(
+      setConfirmModal({
+        status: true,
+        type: "DELETE_GAME_TYPE",
+        title: "Delete Gametype",
+        desc: "Are you sure you want to proceed?",
+        hasMesage: false,
+        payload: item,
+        buttonText: "Delete",
       })
     );
   };
@@ -103,7 +121,7 @@ const AdminCreateGametypes = () => {
               PrevP={() => {}}
               fetchByPage={() => {}}
               onEdit={handleEdit}
-              onDelete={() => {}}
+              onDelete={handleDelete}
               columnSpan={10}
               noDataText="No game type"
             />

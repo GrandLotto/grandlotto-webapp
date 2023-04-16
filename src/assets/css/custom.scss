@@ -306,6 +306,11 @@ p {
   color: #3a0202 !important;
 }
 
+select.hasCapitalized,
+.hasCapitalized {
+  text-transform: capitalize !important;
+}
+
 .backButton {
   cursor: pointer;
 }

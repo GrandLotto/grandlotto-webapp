@@ -1,8 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CREATE_GAME_TYPE_URL } from "../../config/urlConfigs";
-import { handlePOSTRequest } from "../../rest/apiRest";
+import {
+  CREATE_GAME_TYPE_URL,
+  UPDATE_GAME_TYPE_URL,
+} from "../../config/urlConfigs";
+import { handlePOSTRequest, handlePUTRequest } from "../../rest/apiRest";
 import {
   setAlertPopUp,
   setCreategameTypeModal,
@@ -105,36 +108,71 @@ const CreategameTypeModal = () => {
       minAmmount: amount,
       maxAmmount: amount2,
       creditLine: creditLine,
+      maxNumbercount: gameMaxNumberCount,
     };
+
+    let URL =
+      modal?.type === "EDIT"
+        ? UPDATE_GAME_TYPE_URL + `?Id=${modal?.payload?.id}`
+        : CREATE_GAME_TYPE_URL;
 
     // console.log(JSON.stringify(payload));
 
-    handlePOSTRequest(CREATE_GAME_TYPE_URL, payload)
-      .then((response) => {
-        setIsLoading(false);
-        // console.log(response);
-        if (response?.data?.success) {
-          dispatch(
-            setAlertPopUp({
-              status: true,
-              type: "SUCCESS",
-              title: "Game Type Created Successful",
-              desc: response?.data?.message,
-              payload: null,
-            })
-          );
-          dispatch(setRefreshing(true));
+    if (modal?.type === "EDIT") {
+      handlePUTRequest(URL, payload)
+        .then((response) => {
+          setIsLoading(false);
+          // console.log(response);
+          if (response?.data?.success) {
+            dispatch(
+              setAlertPopUp({
+                status: true,
+                type: "SUCCESS",
+                title: "Game Type Updated Successful",
+                desc: response?.data?.message,
+                payload: null,
+              })
+            );
+            dispatch(setRefreshing(true));
 
-          closeModal();
-        } else {
-          setResponseError(response?.data?.message);
-        }
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        setResponseError("An error occurred, please try again");
-        console.log(error);
-      });
+            closeModal();
+          } else {
+            setResponseError(response?.data?.message);
+          }
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          setResponseError("An error occurred, please try again");
+          console.log(error);
+        });
+    } else {
+      handlePOSTRequest(URL, payload)
+        .then((response) => {
+          setIsLoading(false);
+          // console.log(response);
+          if (response?.data?.success) {
+            dispatch(
+              setAlertPopUp({
+                status: true,
+                type: "SUCCESS",
+                title: "Game Type Created Successful",
+                desc: response?.data?.message,
+                payload: null,
+              })
+            );
+            dispatch(setRefreshing(true));
+
+            closeModal();
+          } else {
+            setResponseError(response?.data?.message);
+          }
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          setResponseError("An error occurred, please try again");
+          console.log(error);
+        });
+    }
   };
 
   return (

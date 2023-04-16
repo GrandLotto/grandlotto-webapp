@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CREATE_GAME_URL } from "../../config/urlConfigs";
-import { handlePOSTRequest } from "../../rest/apiRest";
+import { CREATE_GAME_URL, UPDATE_GAME_URL } from "../../config/urlConfigs";
+import { handlePOSTRequest, handlePUTRequest } from "../../rest/apiRest";
 import {
   setAlertPopUp,
   setCreateGameModal,
@@ -51,13 +51,13 @@ const CreateGameModal = () => {
   };
 
   const dayOfTheWeek = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
+    "MONDAY",
+    "TUESDAY",
+    "WEDNESDAY",
+    "THURSDAY",
+    "FRIDAY",
+    "SATURDAY",
+    "SUNDAY",
   ];
 
   useEffect(() => {
@@ -65,9 +65,10 @@ const CreateGameModal = () => {
       if (modal?.payload) {
         setGameName(modal?.payload?.name);
         setIsAvailableToplay(modal?.payload?.isAvailableToplay);
-        setStatus(modal?.payload?.status?.toLowerCase());
-        setStartTime(new Date(modal?.payload?.startTime));
-        setEndTime(new Date(modal?.payload?.endTime));
+        setSelectedDay(modal?.payload?.dayAvailable);
+        setStatus(modal?.payload?.status);
+        setStartTime(modal?.payload?.startTime);
+        setEndTime(modal?.payload?.endTime);
         validateForm();
       }
     }
@@ -130,34 +131,68 @@ const CreateGameModal = () => {
       endTime: endTime,
     };
 
+    let URL =
+      modal?.type === "EDIT"
+        ? UPDATE_GAME_URL + `?Id=${modal?.payload?.id}`
+        : CREATE_GAME_URL;
+
     // console.log(JSON.stringify(payload));
 
-    handlePOSTRequest(CREATE_GAME_URL, payload)
-      .then((response) => {
-        setIsLoading(false);
-        // console.log(response);
-        if (response?.data?.success) {
-          dispatch(
-            setAlertPopUp({
-              status: true,
-              type: "SUCCESS",
-              title: "Game Created Successful",
-              desc: response?.data?.message,
-              payload: null,
-            })
-          );
-          dispatch(setRefreshing(true));
+    if (modal?.type === "EDIT") {
+      handlePUTRequest(URL, payload)
+        .then((response) => {
+          setIsLoading(false);
+          // console.log(response);
+          if (response?.data?.success) {
+            dispatch(
+              setAlertPopUp({
+                status: true,
+                type: "SUCCESS",
+                title: "Game Updated Successful",
+                desc: response?.data?.message,
+                payload: null,
+              })
+            );
+            dispatch(setRefreshing(true));
 
-          closeModal();
-        } else {
-          setResponseError(response?.data?.message);
-        }
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        setResponseError("An error occurred, please try again");
-        console.log(error);
-      });
+            closeModal();
+          } else {
+            setResponseError(response?.data?.message);
+          }
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          setResponseError("An error occurred, please try again");
+          console.log(error);
+        });
+    } else {
+      handlePOSTRequest(CREATE_GAME_URL, payload)
+        .then((response) => {
+          setIsLoading(false);
+          // console.log(response);
+          if (response?.data?.success) {
+            dispatch(
+              setAlertPopUp({
+                status: true,
+                type: "SUCCESS",
+                title: "Game Created Successful",
+                desc: response?.data?.message,
+                payload: null,
+              })
+            );
+            dispatch(setRefreshing(true));
+
+            closeModal();
+          } else {
+            setResponseError(response?.data?.message);
+          }
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          setResponseError("An error occurred, please try again");
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -211,7 +246,7 @@ const CreateGameModal = () => {
                     <label htmlFor="">Day to play</label>
                     <select
                       style={{ width: "100%" }}
-                      className="form-control"
+                      className="form-control hasCapitalized"
                       onChange={(e) => {
                         if (e.target.value) {
                           setSelectedDay(e.target.value);
@@ -235,7 +270,7 @@ const CreateGameModal = () => {
                     <label htmlFor="">Status</label>
                     <select
                       style={{ width: "100%" }}
-                      className="form-control"
+                      className="form-control hasCapitalized"
                       onChange={(e) => {
                         if (e.target.value) {
                           setStatus(e.target.value);
@@ -247,7 +282,7 @@ const CreateGameModal = () => {
                         Select status
                       </option>
 
-                      {["Open", "Close"]?.map((item, index) => (
+                      {["OPEN", "CLOSE"]?.map((item, index) => (
                         <option key={index} value={item}>
                           {item}
                         </option>

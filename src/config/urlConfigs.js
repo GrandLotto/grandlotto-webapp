@@ -43,8 +43,12 @@ const CALCULATE_WINNING_URL = "/v1.0/Game/CalulatePotentialwinning";
 const EXISTING_GAME_URL = "/v1.0/Game/getallexistinggames";
 const GET_GAME_WINNING_NUMBERS_URL = "/v1.0/Game/GetgamewiningNumbers";
 const CREATE_GAME_TYPE_URL = "/v1.0/Game/creategamestype";
+const UPDATE_GAME_TYPE_URL = "/v1.0/Game/updategametype";
 const CREATE_GAME_URL = "/v1.0/Game/creategames";
+const UPDATE_GAME_URL = "/v1.0/Game/updategame";
 const GET_GAME_WINNING_LOG_URL = "/v1.0/Game/Getgameswininglogs";
+const DELETE_GAMETYPE_URL = "/v1.0/Game/deletegametype";
+const DELETE_GAME_URL = "/v1.0/Game/deletegame";
 
 // OTHERS
 const ADD_TRANSACTION_PIN_URL = "/v1.0/PIN/addTransactionPIN";
@@ -92,4 +96,8 @@ export {
   CREATE_GAME_TYPE_URL,
   CREATE_GAME_URL,
   GET_GAME_WINNING_LOG_URL,
+  UPDATE_GAME_TYPE_URL,
+  DELETE_GAMETYPE_URL,
+  UPDATE_GAME_URL,
+  DELETE_GAME_URL,
 };

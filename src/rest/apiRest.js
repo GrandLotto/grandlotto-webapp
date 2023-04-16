@@ -39,6 +39,32 @@ const handlePOSTRequest = async (url, payload) => {
   return response;
 };
 
+const handlePUTRequest = async (url, payload) => {
+  const response = await axios
+    .put(url, payload)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      handleError(error);
+    });
+
+  return response;
+};
+
+const handleDELETERequest = async (URL) => {
+  const reponse = await axios
+    .delete(URL)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      handleError(error);
+    });
+
+  return reponse;
+};
+
 const handleError = (error) => {
   if (error.response) {
     return {
@@ -58,4 +84,10 @@ const handleError = (error) => {
   }
 };
 
-export { loginUser, handleGETRequest, handlePOSTRequest };
+export {
+  loginUser,
+  handleGETRequest,
+  handlePOSTRequest,
+  handlePUTRequest,
+  handleDELETERequest,
+};
