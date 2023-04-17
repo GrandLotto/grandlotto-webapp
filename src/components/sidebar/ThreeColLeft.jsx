@@ -88,40 +88,44 @@ const ThreeColLeft = () => {
         <div className="threeColLeftWrapperClose" onClick={() => closeMenu()}>
           <i className="bx bx-x "></i>
         </div>
+        {games && games?.length ? (
+          <>
+            <div className="betSlips">
+              <div className="betSlipsMash mb-3">
+                <label htmlFor=" ">Playing type</label>
+                <select
+                  style={{ width: "100%" }}
+                  className="form-control largeInputFont"
+                  onChange={(e) => {
+                    dispatch(setSelectedPlayingType(e.target.value));
+                    dispatch(setCalculatedGames(null));
 
-        <div className="betSlips">
-          <div className="betSlipsMash mb-3">
-            <label htmlFor=" ">Playing type</label>
-            <select
-              style={{ width: "100%" }}
-              className="form-control largeInputFont"
-              onChange={(e) => {
-                dispatch(setSelectedPlayingType(e.target.value));
-                dispatch(setCalculatedGames(null));
+                    //  setSelectedLotto(newItem)
+                  }}
+                  value={selectedPlayingType}
+                >
+                  <option value="">Select...</option>
+                  {gamePlayingTypes && gamePlayingTypes?.length
+                    ? gamePlayingTypes?.map((item, index) => (
+                        <option key={index} value={item?.name}>
+                          {item?.name}
+                        </option>
+                      ))
+                    : null}
+                </select>
+              </div>
 
-                //  setSelectedLotto(newItem)
-              }}
-              value={selectedPlayingType}
-            >
-              <option value="">Select...</option>
-              {gamePlayingTypes && gamePlayingTypes?.length
-                ? gamePlayingTypes?.map((item, index) => (
-                    <option key={index} value={item?.name}>
-                      {item?.name}
-                    </option>
-                  ))
-                : null}
-            </select>
-          </div>
-          <div className="betSlipsHeader">
-            <h4>Select a draw</h4>
-          </div>
-          <div className="betSlipsBody"></div>
-        </div>
+              <div className="betSlipsHeader">
+                <h4>Select a draw</h4>
+              </div>
+              <div className="betSlipsBody"></div>
+            </div>
+          </>
+        ) : null}
 
         <div className="open_roles">
           <div className="open_roles_grid">
-            {games &&
+            {games && games?.length ? (
               groupBy2(games)?.map((item, index) => (
                 <div className="open_roles_grid_item" key={index}>
                   <div className={`open_roles_grid_item_header `}>
@@ -164,7 +168,14 @@ const ThreeColLeft = () => {
                       ))}
                   </div>
                 </div>
-              ))}
+              ))
+            ) : (
+              <>
+                <div className="d-block selectLottoNumb mt-5 text-center">
+                  <p>No avaialable game</p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

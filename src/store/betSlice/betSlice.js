@@ -130,6 +130,7 @@ const betSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(Getuseropengameplayed.fulfilled, (state, { payload }) => {
+      state.userOpenBets = null;
       if (payload && payload.data) {
         state.userOpenBets = payload.data?.data;
         state.userOpenBetsPage = payload.data?.pageNumber;
@@ -143,6 +144,7 @@ const betSlice = createSlice({
     });
 
     builder.addCase(Getuserclosedgameplayed.fulfilled, (state, { payload }) => {
+      state.userClosedBets = null;
       if (payload && payload.data) {
         state.userClosedBets = payload.data?.data;
         state.userCloseBetsPage = payload.data?.pageNumber;
@@ -156,6 +158,7 @@ const betSlice = createSlice({
     });
 
     builder.addCase(getWinningLogs.fulfilled, (state, { payload }) => {
+      state.allWinningLogs = null;
       if (payload && payload.data) {
         state.allWinningLogs = payload.data?.data;
         state.allWinningLogsPage = payload.data?.pageNumber;
@@ -169,19 +172,39 @@ const betSlice = createSlice({
     });
 
     builder.addCase(Getgameswininglogs.fulfilled, (state, { payload }) => {
-      state.gameswininglogs = payload.data?.data;
+      state.gameswininglogs = null;
+
+      if (payload.data) {
+        state.gameswininglogs = payload.data?.data;
+      } else {
+        state.gameswininglogs = [];
+      }
     });
 
     builder.addCase(getgames.fulfilled, (state, { payload }) => {
-      state.games = sortArrayBy(payload.data, "dayAvailable");
+      state.games = null;
+
+      if (payload.data) {
+        state.games = sortArrayBy(payload.data, "dayAvailable");
+      } else {
+        state.games = [];
+      }
     });
 
     builder.addCase(getallexistinggames.fulfilled, (state, { payload }) => {
-      state.allexistinggames = payload.data;
       // console.log("allexistinggames", state.allexistinggames);
+
+      state.allexistinggames = null;
+
+      if (payload.data) {
+        state.allexistinggames = payload.data;
+      } else {
+        state.allexistinggames = [];
+      }
     });
 
     builder.addCase(getgamestype.fulfilled, (state, { payload }) => {
+      state.gameTypes = null;
       if (payload && payload.data) {
         state.gameTypes = payload.data;
         state.selectedType = state.gameTypes[1];
@@ -190,6 +213,7 @@ const betSlice = createSlice({
     });
 
     builder.addCase(getgamesplayingtype.fulfilled, (state, { payload }) => {
+      state.gamePlayingTypes = null;
       if (payload && payload.data) {
         state.gamePlayingTypes = payload.data;
         state.selectedPlayingType = state.gamePlayingTypes[0]?.name;
