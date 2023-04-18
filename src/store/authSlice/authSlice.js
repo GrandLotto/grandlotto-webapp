@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getacceptedid, getUserInfo } from "./actions";
+import { getacceptedid, getUserInfo, getuserlist } from "./actions";
 
 const initialState = {
   appScreenSize: "",
@@ -24,6 +24,9 @@ const initialState = {
   refreshing: false,
   digitalDate: "00:00",
   acceptedIDType: null,
+  allUsers: null,
+  allUsersPage: 1,
+  allUsersTotalPages: 3,
 };
 
 const authSlice = createSlice({
@@ -51,6 +54,18 @@ const authSlice = createSlice({
 
     setIsAdmin: (state, { payload }) => {
       state.isAdmin = payload;
+    },
+
+    setAllUsers: (state, { payload }) => {
+      state.allUsers = [...payload];
+    },
+
+    setAllUsersPage: (state, { payload }) => {
+      state.allUsersPage = payload;
+    },
+
+    setAllUsersTotalPages: (state, { payload }) => {
+      state.allUsersTotalPages = payload;
     },
 
     logout: (state) => {
@@ -83,10 +98,25 @@ const authSlice = createSlice({
       state.error = true;
       state.loading = false;
     });
+
     builder.addCase(getacceptedid.fulfilled, (state, { payload }) => {
       if (payload && payload.data) {
         state.acceptedIDType = payload.data;
         // console.log("acceptedIDType", state.acceptedIDType);
+      }
+    });
+
+    builder.addCase(getuserlist.fulfilled, (state, { payload }) => {
+      state.allUsers = null;
+      if (payload && payload.data) {
+        state.allUsers = payload.data?.data;
+        state.allUsersPage = payload.data?.pageNumber;
+        state.allUsersTotalPages = payload.data?.totalPages;
+        // console.log("allUsers", state.allUsers);
+      } else {
+        state.allUsers = [];
+        state.allUsersPage = 1;
+        state.allUsersTotalPages = 2;
       }
     });
   },
@@ -100,6 +130,9 @@ export const {
   setIsToken,
   setRefreshing,
   setIsAdmin,
+  setAllUsers,
+  setAllUsersPage,
+  setAllUsersTotalPages,
 } = authSlice.actions;
 
 export default authSlice.reducer;

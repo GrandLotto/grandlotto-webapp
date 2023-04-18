@@ -149,6 +149,7 @@ const App = () => {
     dispatch(setComingSoonModal(false));
     dispatch(Getgameswininglogs());
     dispatch(getgames());
+
     dispatch(getallexistinggames());
     dispatch(getgamestype());
     dispatch(getgamesplayingtype());

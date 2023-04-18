@@ -3,6 +3,7 @@ import axios from "axios";
 import "../../config/axios";
 import {
   EXISTING_GAME_URL,
+  GET_ALL_GAMES_URL,
   GET_CLOSED_GAMES_URL,
   GET_GAMES_PLAYING_TYPES_URL,
   GET_GAMES_TYPES_URL,
@@ -17,6 +18,19 @@ export const getgames = createAsyncThunk(
   async (payload, { getState, dispatch }) => {
     try {
       const result = axios.get(GET_GAMES_URL).then((response) => {
+        return response.data;
+      });
+
+      return result;
+    } catch (error) {}
+  }
+);
+
+export const getAllgames = createAsyncThunk(
+  "bets/getAllgames",
+  async (payload, { getState, dispatch }) => {
+    try {
+      const result = axios.get(GET_ALL_GAMES_URL).then((response) => {
         return response.data;
       });
 

@@ -8,6 +8,7 @@ const CHANGE_PASSWORD_URL = "/v1.0/OAuth/changePassword";
 const GET_USERINFO_URL = "/v1.0/OAuth/getUserInfo";
 const UPDATE_USERINFO_URL = "/v1.0/OAuth/updateUser";
 const UPDATE_USERIDENTITY_URL = "/v1.0/OAuth/AddUserIdenity";
+const GET_ALL_USERS_URL = "/v1.0/OAuth/getuserlist";
 
 // WALLET
 const GET_ACCOUNT_BALANCES_URL = "/v1.0/Wallet/GetAccountBalances";
@@ -34,6 +35,7 @@ const VERIFY_PAYSTACK_PAYMENT_URL = "/v1.0/Payment/verifypaystackpayment";
 const GET_OPEN_GAMES_URL = "/v1.0/Game/Getuseropengameplayed";
 const GET_CLOSED_GAMES_URL = "/v1.0/Game/Getuserclosedgameplayed";
 const GET_GAMES_URL = "/v1.0/Game/getgames";
+const GET_ALL_GAMES_URL = "/v1.0/Game/getalgamesforadmin";
 const PLAY_GAME_URL = "/v1.0/Game/playgames";
 const GET_GAMES_TYPES_URL = "/v1.0/Game/getgamestype";
 const GET_GAMES_PLAYING_TYPES_URL = "/v1.0/Game/getgamesplayingtype";
@@ -77,6 +79,7 @@ export {
   UPDATE_USERIDENTITY_URL,
   CREATE_DYNAMIC_ACCOUNT_URL,
   GET_GAMES_URL,
+  GET_ALL_GAMES_URL,
   GET_GAMES_TYPES_URL,
   GET_GAMES_PLAYING_TYPES_URL,
   GET_GAMES_BY_TICKETID_URL,
@@ -100,4 +103,5 @@ export {
   DELETE_GAMETYPE_URL,
   UPDATE_GAME_URL,
   DELETE_GAME_URL,
+  GET_ALL_USERS_URL,
 };

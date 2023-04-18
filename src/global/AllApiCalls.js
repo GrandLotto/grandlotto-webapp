@@ -1,8 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getacceptedid, getUserInfo } from "../store/authSlice/actions";
+import {
+  getacceptedid,
+  getUserInfo,
+  getuserlist,
+} from "../store/authSlice/actions";
 import { setRefreshing } from "../store/authSlice/authSlice";
 import {
+  getAllgames,
   getgames,
   getgamesplayingtype,
   getgamestype,
@@ -108,6 +113,8 @@ const AllApiCalls = () => {
               endTime: null,
             })
           );
+          dispatch(getAllgames());
+          dispatch(getuserlist());
         }
 
         dispatch(getacceptedid());

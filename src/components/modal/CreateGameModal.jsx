@@ -48,6 +48,7 @@ const CreateGameModal = () => {
     setStartTime(new Date());
     setEndTime(new Date());
     setEmptyFields(true);
+    setResponseError("");
   };
 
   const dayOfTheWeek = [
@@ -120,9 +121,30 @@ const CreateGameModal = () => {
   };
 
   const proceed = () => {
-    setIsLoading(true);
     setResponseError("");
+    let selectedStartTime = new Date(startTime)?.getTime();
+    let selectedEndTime = new Date(endTime)?.getTime();
+    let timeNow = new Date()?.getTime();
 
+    if (selectedStartTime < timeNow) {
+      setResponseError("Start time should be a future time");
+
+      return;
+    }
+
+    if (selectedEndTime < timeNow) {
+      setResponseError("End time should be a future time");
+
+      return;
+    }
+
+    if (selectedStartTime > selectedEndTime) {
+      setResponseError("End time should be a greater than start time");
+
+      return;
+    }
+
+    setIsLoading(true);
     const payload = {
       // email: user?.email,
       name: gameName,

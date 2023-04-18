@@ -20,6 +20,8 @@ const UsersTable = ({
   hasPagination = true,
   columnSpan = "6",
   noDataText = "No user found",
+  onEdit,
+  onDelete,
 }) => {
   // const navigation = useNavigate();
   const handlePrev = () => {
@@ -31,32 +33,13 @@ const UsersTable = ({
   };
 
   const handleNext = () => {
-    if (type === "WITHDRAWAL") {
-      nextP(type);
-
-      return;
-    }
-
-    if (type === "DEPOSIT") {
-      nextP(type);
-
-      return;
-    }
+    nextP(type);
   };
 
   const handleFetchByPage = (newPage) => {
-    if (type === "WITHDRAWAL") {
-      fetchByPage(type, newPage);
-
-      return;
-    }
-
-    if (type === "DEPOSIT") {
-      fetchByPage(type, newPage);
-
-      return;
-    }
+    fetchByPage(type, newPage);
   };
+
   return (
     <>
       {isLoading && <ComponentLoading inner={true} title="Please wait ..." />}
@@ -78,38 +61,52 @@ const UsersTable = ({
                   <tr key={index}>
                     {/* <td>{index < 10 ? "0" + (index + 1) : index}</td> */}
                     <td>{item?.requestNumber || item?.id}</td>
-                    <td>
-                      {type === "WITHDRAWAL"
-                        ? item?.bankName + " (" + item?.accountNumber + ")"
-                        : item?.channel}
-                    </td>
-                    {/* <td>{item?.accountNumber}</td> */}
-                    <td>
-                      {formateDateAndTimeByName(
-                        item?.dateRequested || item?.datePaid
-                      )}
-                    </td>
-                    <td>
-                      {(item?.status?.toLowerCase() === "pending" ||
-                        item?.status?.toLowerCase() === "processing") && (
-                        <span className="has_status isPending">
-                          {item?.status}
-                        </span>
-                      )}
+                    <td>{item?.firstName + " " + item?.lastName}</td>
+                    <td>{item?.email}</td>
 
-                      {item?.status?.toLowerCase() === "lost" && (
-                        <span
-                          className={`has_status ${[
-                            item?.status?.toLowerCase() === "lost"
-                              ? "isLost"
-                              : "",
-                          ]}`}
-                        >
-                          {item?.status}
+                    <td>
+                      {["active"].includes(
+                        item?.accountStatus?.toLowerCase()
+                      ) && (
+                        <span className="has_status">
+                          {item?.accountStatus}
+                        </span>
+                      )}
+                      {["inactive"].includes(
+                        item?.accountStatus?.toLowerCase()
+                      ) && (
+                        <span className="has_status isLost">
+                          {item?.accountStatus}
                         </span>
                       )}
                     </td>
-                    <td>₦ {item?.amount ? addComma(item?.amount) : 0}</td>
+                    <td>{formateDateAndTimeByName(item?.lastLogin)}</td>
+                    <td>
+                      <div
+                        className="d-flex butnFlex "
+                        style={{ columnGap: 10 }}
+                      >
+                        {["active"].includes(
+                          item?.accountStatus?.toLowerCase()
+                        ) ? (
+                          <button
+                            onClick={() => onDelete(item)}
+                            className="bg-danger text-light px-4 "
+                            style={{ borderRadius: 10 }}
+                          >
+                            De-activate
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => onDelete(item)}
+                            className="bg-success text-light px-4 "
+                            style={{ borderRadius: 10 }}
+                          >
+                            Activate
+                          </button>
+                        )}
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>

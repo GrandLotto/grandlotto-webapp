@@ -9,9 +9,11 @@ import {
   Getgameswininglogs,
   getallexistinggames,
   getWinningLogs,
+  getAllgames,
 } from "./actions";
 
 const initialState = {
+  allgames: null,
   games: null,
   allexistinggames: null,
   gameTypes: null,
@@ -188,6 +190,16 @@ const betSlice = createSlice({
         state.games = sortArrayBy(payload.data, "dayAvailable");
       } else {
         state.games = [];
+      }
+    });
+
+    builder.addCase(getAllgames.fulfilled, (state, { payload }) => {
+      state.allgames = null;
+
+      if (payload.data) {
+        state.allgames = payload.data;
+      } else {
+        state.allgames = [];
       }
     });
 

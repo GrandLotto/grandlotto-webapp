@@ -81,14 +81,27 @@ const GameTable = ({
                     <td>{item?.name}</td>
                     <td>{item?.dayAvailable}</td>
                     <td>
-                      {item?.status?.toLowerCase() === "open" && (
+                      {/* {item?.status?.toLowerCase() === "open" && (
                         <span className={`has_status isPending`}>
                           {item?.status}
                         </span>
-                      )}
-                      {item?.status?.toLowerCase() === "close" && (
+                      )} */}
+                      {item?.status?.toLowerCase() === "closed" && (
                         <span className={`has_status isCancled`}>
                           {item?.status}
+                        </span>
+                      )}
+
+                      {!["open", "closed", "lost"].includes(
+                        item?.status?.toLowerCase()
+                      ) && (
+                        <span className="has_status isPending">
+                          {item?.status || "Null"}
+                        </span>
+                      )}
+                      {["open"].includes(item?.status?.toLowerCase()) && (
+                        <span className="has_status">
+                          {item?.status || "Null"}
                         </span>
                       )}
                     </td>

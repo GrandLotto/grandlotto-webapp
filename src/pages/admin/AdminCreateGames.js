@@ -8,7 +8,7 @@ import GameTable from "../../components/bet/GameTable";
 
 const AdminCreateGames = () => {
   const dispatch = useDispatch();
-  const games = useSelector((state) => state.bets.games);
+  const games = useSelector((state) => state.bets.allgames);
 
   const [data, setData] = useState([]);
 
