@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getacceptedid,
+  getkycpendingusers,
   getUserInfo,
   getuserlist,
 } from "../store/authSlice/actions";
@@ -115,6 +116,7 @@ const AllApiCalls = () => {
           );
           dispatch(getAllgames());
           dispatch(getuserlist());
+          dispatch(getkycpendingusers());
         }
 
         dispatch(getacceptedid());

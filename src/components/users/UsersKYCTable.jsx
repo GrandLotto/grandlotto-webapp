@@ -1,15 +1,10 @@
 import React from "react";
-// import { useSelector } from "react-redux";
-import {
-  formateDateAndTimeByName,
-  addComma,
-  formatAMPM,
-  formateDateByName,
-} from "../../global/customFunctions";
+// import { useNavigate } from "react-router-dom";
+import { formateDateAndTimeByName } from "../../global/customFunctions";
 import ComponentLoading from "../blocks/ComponentLoading";
 import PaginationBlock from "../blocks/PaginationBlock";
 
-const AllWinningTable = ({
+const UsersKYCTable = ({
   columns,
   page,
   totalPages,
@@ -22,10 +17,16 @@ const AllWinningTable = ({
   hasPagination = true,
   columnSpan = "6",
   noDataText = "No user found",
+  onEdit,
   onDelete,
 }) => {
+  // const navigation = useNavigate();
   const handlePrev = () => {
-    PrevP(type);
+    if (type === "WITHDRAWAL") {
+      PrevP(type);
+
+      return;
+    }
   };
 
   const handleNext = () => {
@@ -56,34 +57,51 @@ const AllWinningTable = ({
                 {data.map((item, index) => (
                   <tr key={index}>
                     <td>{index < 10 ? "0" + (index + 1) : index}</td>
+                    {/* <td>{item?.requestNumber || item?.id}</td> */}
+                    <td>{item?.firstName + " " + item?.lastName}</td>
+                    <td>{item?.email}</td>
+                    <td>null</td>
 
-                    <td>{item?.email + " (" + item?.customerCode + ")"}</td>
-                    <td>{item?.gamePlayed}</td>
-                    <td>{item?.numberPlayed}</td>
-                    <td>
-                      ₦{" "}
-                      {item?.ammountPlayed
-                        ? addComma(item?.ammountPlayed)
-                        : item?.ammountPlayed}
-                    </td>
-                    <td>
-                      ₦{" "}
-                      {item?.ammountWon
-                        ? addComma(item?.ammountWon)
-                        : item?.ammountWon}
-                    </td>
-                    <td>{formateDateAndTimeByName(item?.winningDate)}</td>
                     {/* <td>
+                      {["active"].includes(
+                        item?.accountStatus?.toLowerCase()
+                      ) && (
+                        <span className="has_status">
+                          {item?.accountStatus}
+                        </span>
+                      )}
+                      {["inactive"].includes(
+                        item?.accountStatus?.toLowerCase()
+                      ) && (
+                        <span className="has_status isLost">
+                          {item?.accountStatus}
+                        </span>
+                      )}
+                    </td> */}
+                    <td>{formateDateAndTimeByName(item?.lastLogin)}</td>
+
+                    <td>
                       <div
                         className="d-flex butnFlex "
                         style={{ columnGap: 10 }}
                       >
-                        <i
-                          className="bx bx-trash-alt deleteBtnn"
+                        <button
+                          onClick={() => onEdit(item)}
+                          className="bg-success text-light px-4 "
+                          style={{ borderRadius: 10 }}
+                        >
+                          Approve
+                        </button>
+
+                        <button
                           onClick={() => onDelete(item)}
-                        ></i>
+                          className="bg-danger text-light px-4 "
+                          style={{ borderRadius: 10 }}
+                        >
+                          Decline
+                        </button>
                       </div>
-                    </td> */}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -127,56 +145,59 @@ const AllWinningTable = ({
         </div>
       </div>
 
-      <div className="grandlotto_table_small lotto_card">
-        {isLoading && <ComponentLoading title="Please wait ..." />}
+      <div className="grandlotto_table_small border-top">
         {data && data?.length ? (
           data?.map((item, index) => (
             <div className="grandlotto_table_small_flex " key={index}>
               <div className="d-flex justify-content-between border-bottom pb-2 mb-2">
-                <small>{formateDateByName(item?.winningDate)}</small>
-                <small>{formatAMPM(item?.winningDate)}</small>
+                <small>{formateDateAndTimeByName(item?.lastLogin)}</small>
               </div>
               <div className="grandlotto_table_small_flex_top">
                 <div className="d-flex justify-content-between">
+                  <h4 className="">Name</h4>
                   <h4 className="">
-                    <b>Bet ID: {item?.gameTicket || item?.id}</b>
+                    <b>{item?.firstName + " " + item?.lastName}</b>
                   </h4>
+                </div>
 
-                  <span className={`has_status`}>Won</span>
+                <div className="d-flex justify-content-between">
+                  <h4 className="">Email</h4>
+                  <h4 className="">{item?.email}</h4>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <h4 className="">Game</h4>
+                  <h4 className="">Doc URL</h4>
+                  <h4 className="">null</h4>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <h4 className="">Document Type</h4>
                   <h4 className="">
-                    <b>{item?.gamePlayed}</b>
+                    <b>null</b>
                   </h4>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <h4 className="">Details</h4>
+                  <h4 className="">ID Number</h4>
                   <h4 className="">
-                    <b>{item?.numberPlayed}</b>
+                    <b>null</b>
                   </h4>
                 </div>
-                <div className="d-flex justify-content-between">
-                  <h4 className="">Stake</h4>
-                  <h4 className="">
-                    <b>
-                      ₦{" "}
-                      {item?.ammountPlayed
-                        ? addComma(item?.ammountPlayed)
-                        : item?.ammountPlayed}
-                    </b>
-                  </h4>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <h4 className="">Winning</h4>
-                  <h4 className="">
-                    <b>
-                      ₦{" "}
-                      {item?.ammountWon
-                        ? addComma(item?.ammountWon)
-                        : item?.ammountWon}
-                    </b>
-                  </h4>
+                <div className="d-flex justify-content-center mt-4">
+                  <div className="d-flex butnFlex " style={{ columnGap: 10 }}>
+                    <button
+                      onClick={() => onEdit(item)}
+                      className="bg-success text-light px-4 "
+                      style={{ borderRadius: 10 }}
+                    >
+                      Approve
+                    </button>
+
+                    <button
+                      onClick={() => onDelete(item)}
+                      className="bg-danger text-light px-4 "
+                      style={{ borderRadius: 10 }}
+                    >
+                      Decline
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -226,4 +247,4 @@ const AllWinningTable = ({
   );
 };
 
-export default AllWinningTable;
+export default UsersKYCTable;

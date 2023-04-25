@@ -5,6 +5,7 @@ import {
   GET_ACCEPTED_IDTYPE_URL,
   GET_ALL_USERS_URL,
   GET_USERINFO_URL,
+  PENDING_KYC_USERS_URL,
 } from "../../config/urlConfigs";
 import { logout } from "./authSlice";
 
@@ -51,6 +52,25 @@ export const getuserlist = createAsyncThunk(
     try {
       const result = axios
         .post(GET_ALL_USERS_URL, newPayload)
+        .then((response) => {
+          return response.data;
+        });
+
+      return result;
+    } catch (error) {}
+  }
+);
+
+export const getkycpendingusers = createAsyncThunk(
+  "user/getkycpendingusers",
+  async (payload, { getState, dispatch }) => {
+    const newPayload = {
+      pageNumber: 1,
+      pageSize: 10,
+    };
+    try {
+      const result = axios
+        .post(PENDING_KYC_USERS_URL, newPayload)
         .then((response) => {
           return response.data;
         });

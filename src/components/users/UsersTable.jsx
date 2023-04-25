@@ -1,9 +1,6 @@
 import React from "react";
 // import { useNavigate } from "react-router-dom";
-import {
-  addComma,
-  formateDateAndTimeByName,
-} from "../../global/customFunctions";
+import { formateDateAndTimeByName } from "../../global/customFunctions";
 import ComponentLoading from "../blocks/ComponentLoading";
 import PaginationBlock from "../blocks/PaginationBlock";
 
@@ -94,7 +91,7 @@ const UsersTable = ({
                             className="bg-danger text-light px-4 "
                             style={{ borderRadius: 10 }}
                           >
-                            De-activate
+                            Deactivate
                           </button>
                         ) : (
                           <button
@@ -153,38 +150,61 @@ const UsersTable = ({
       <div className="grandlotto_table_small border-top">
         {data && data?.length ? (
           data?.map((item, index) => (
-            <div
-              className="grandlotto_table_small_flex d-flex justify-content-between"
-              key={index}
-            >
-              <div className="grandlotto_table_small_flex_left">
-                <div className="d-flex">
-                  {(item?.status?.toLowerCase() === "pending" ||
-                    item?.status?.toLowerCase() === "processing") && (
-                    <div className="fullStop pending"></div>
-                  )}
+            <div className="grandlotto_table_small_flex " key={index}>
+              <div className="d-flex justify-content-between border-bottom pb-2 mb-2">
+                <small>{formateDateAndTimeByName(item?.lastLogin)}</small>
+              </div>
+              <div className="grandlotto_table_small_flex_top">
+                <div className="d-flex justify-content-between">
+                  <h4 className="">Name</h4>
+                  <h4 className="">
+                    <b>{item?.firstName + " " + item?.lastName}</b>
+                  </h4>
+                </div>
 
-                  {item?.status?.toLowerCase() === "lost" && (
-                    <div className="fullStop error"></div>
-                  )}
-                  <div>
-                    <h4 className="">
-                      Request ID: {item?.requestNumber || item?.id}
-                    </h4>
-                    <p className="">
-                      {formateDateAndTimeByName(item?.dateRequested)}
-                    </p>
+                <div className="d-flex justify-content-between">
+                  <h4 className="">Email</h4>
+                  <h4 className="">{item?.email}</h4>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <h4 className="">Status</h4>
+                  <h4 className="">
+                    {["active"].includes(
+                      item?.accountStatus?.toLowerCase()
+                    ) && (
+                      <span className="has_status">{item?.accountStatus}</span>
+                    )}
+                    {["inactive"].includes(
+                      item?.accountStatus?.toLowerCase()
+                    ) && (
+                      <span className="has_status isLost">
+                        {item?.accountStatus}
+                      </span>
+                    )}
+                  </h4>
+                </div>
+
+                <div className="d-flex justify-content-center mt-4">
+                  <div className="d-flex butnFlex " style={{ columnGap: 10 }}>
+                    {["active"].includes(item?.accountStatus?.toLowerCase()) ? (
+                      <button
+                        onClick={() => onDelete(item)}
+                        className="bg-danger text-light px-4 border"
+                        style={{ borderRadius: 10, fontSize: 14 }}
+                      >
+                        Deactivate
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => onDelete(item)}
+                        className="bg-success text-light px-4 border "
+                        style={{ borderRadius: 10, fontSize: 14 }}
+                      >
+                        Activate
+                      </button>
+                    )}
                   </div>
                 </div>
-              </div>
-              <div className="grandlotto_table_small_flex_right">
-                <h4 className="">
-                  ₦{item?.amount ? addComma(item?.amount) : 0}
-                </h4>
-                <p className="">
-                  <span className="d-block">{item?.bankName}</span>
-                  <span className="d-block mt-2">({item?.accountNumber})</span>
-                </p>
               </div>
             </div>
           ))

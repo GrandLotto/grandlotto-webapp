@@ -98,13 +98,13 @@ const Transactions = ({
                         </span>
                       )}
 
-                      {item?.status?.toLowerCase() === "lost" && (
+                      {item?.status?.toLowerCase() === "failed" && (
                         <span className={`has_status isLost`}>
                           {item?.status}
                         </span>
                       )}
 
-                      {!["pending", "processing", "lost"].includes(
+                      {!["pending", "processing", "failed"].includes(
                         item?.status?.toLowerCase()
                       ) && (
                         <span className="has_status">

@@ -3,14 +3,21 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { setAlertPopUp, setConfirmModal } from "../../store/alert/alertSlice";
-import { DELETE_GAMETYPE_URL, DELETE_GAME_URL } from "../../config/urlConfigs";
+import {
+  DELETE_GAMETYPE_URL,
+  DELETE_GAME_URL,
+  DISABLE_USERS_URL,
+  ENABLE_USERS_URL,
+} from "../../config/urlConfigs";
 import { handleDELETERequest } from "../../rest/apiRest";
 import ComponentLoading from "../blocks/ComponentLoading";
 import { setRefreshing } from "../../store/authSlice/authSlice";
 import Reponsemessage from "../blocks/Reponsemessage";
+import { handlePOSTRequest } from "../../rest/apiRest";
 
 const ConfirmModal = () => {
   const modal = useSelector((state) => state.alert.confirmModal);
+  // const user = useSelector((state) => state.oauth.user);
   const dispatch = useDispatch();
   // const navigation = useNavigate();
 
@@ -73,6 +80,30 @@ const ConfirmModal = () => {
       );
       return;
     }
+    if (modal.type === "ACTIVATE_USER") {
+      let newPayload = {
+        email: modal?.payload?.email,
+        enable: true,
+      };
+      handlePOST(
+        ENABLE_USERS_URL,
+        newPayload,
+        `${modal?.payload?.firstName}'s Account has been activated`
+      );
+      return;
+    }
+    if (modal.type === "DEACTIVATE_USER") {
+      let newPayload = {
+        email: modal?.payload?.email,
+        disable: true,
+      };
+      handlePOST(
+        DISABLE_USERS_URL,
+        newPayload,
+        `${modal?.payload?.firstName}'s Account has been deactivated`
+      );
+      return;
+    }
   };
 
   const handleDELETE = (URL, responseMessage) => {
@@ -83,6 +114,39 @@ const ConfirmModal = () => {
         .then((response) => {
           setIsLoading(false);
           // console.log(response);
+          if (response?.data?.success) {
+            dispatch(
+              setAlertPopUp({
+                status: true,
+                type: "SUCCESS",
+                title: responseMessage,
+                desc: response?.data?.message,
+                payload: null,
+              })
+            );
+            dispatch(setRefreshing(true));
+
+            closeModal();
+          } else {
+            setResponseError(response?.data?.message);
+          }
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          setResponseError("An error occurred, please try again");
+          console.log(error);
+        });
+    }, 4000);
+  };
+
+  const handlePOST = (URL, data, responseMessage) => {
+    setIsLoading(true);
+
+    setTimeout(() => {
+      handlePOSTRequest(URL, data)
+        .then((response) => {
+          setIsLoading(false);
+          console.log(response);
           if (response?.data?.success) {
             dispatch(
               setAlertPopUp({
@@ -135,15 +199,23 @@ const ConfirmModal = () => {
                   <label>
                     {modal.desc} <span style={{ color: "red" }}>*</span>
                   </label>
+                  <textarea
+                    onChange={(e) => setInputt(e.target.value)}
+                    className="form-control py-2"
+                    style={{ width: "100%", height: 100 }}
+                    placeholder="Reason/Message"
+                    cols="30"
+                    rows="10"
+                  ></textarea>
 
-                  <input
+                  {/* <input
                     type="text"
                     onChange={(e) => setInputt(e.target.value)}
                     value={inputt}
-                    placeholder="Message"
+                    placeholder="Reason/Message"
                     className="form-control py-3"
                     style={{ width: "100%" }}
-                  />
+                  /> */}
                 </div>
               </form>
             ) : (

@@ -9,6 +9,9 @@ const GET_USERINFO_URL = "/v1.0/OAuth/getUserInfo";
 const UPDATE_USERINFO_URL = "/v1.0/OAuth/updateUser";
 const UPDATE_USERIDENTITY_URL = "/v1.0/OAuth/AddUserIdenity";
 const GET_ALL_USERS_URL = "/v1.0/OAuth/getuserlist";
+const ENABLE_USERS_URL = "/v1.0/OAuth/enableuser";
+const DISABLE_USERS_URL = "/v1.0/OAuth/disableuser";
+const PENDING_KYC_USERS_URL = "/v1.0/OAuth/getkycpendingusers";
 
 // WALLET
 const GET_ACCOUNT_BALANCES_URL = "/v1.0/Wallet/GetAccountBalances";
@@ -104,4 +107,7 @@ export {
   UPDATE_GAME_URL,
   DELETE_GAME_URL,
   GET_ALL_USERS_URL,
+  ENABLE_USERS_URL,
+  DISABLE_USERS_URL,
+  PENDING_KYC_USERS_URL,
 };

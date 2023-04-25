@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getacceptedid, getUserInfo, getuserlist } from "./actions";
+import {
+  getacceptedid,
+  getkycpendingusers,
+  getUserInfo,
+  getuserlist,
+} from "./actions";
 
 const initialState = {
   appScreenSize: "",
@@ -27,6 +32,9 @@ const initialState = {
   allUsers: null,
   allUsersPage: 1,
   allUsersTotalPages: 3,
+  pendingKYCusers: null,
+  pendingKYCusersPage: 1,
+  pendingKYCusersTotalPages: 3,
 };
 
 const authSlice = createSlice({
@@ -66,6 +74,18 @@ const authSlice = createSlice({
 
     setAllUsersTotalPages: (state, { payload }) => {
       state.allUsersTotalPages = payload;
+    },
+
+    setPendingKYCusers: (state, { payload }) => {
+      state.pendingKYCusers = [...payload];
+    },
+
+    setPendingKYCusersPage: (state, { payload }) => {
+      state.pendingKYCusersPage = payload;
+    },
+
+    setPendingKYCusersTotalPages: (state, { payload }) => {
+      state.pendingKYCusersTotalPages = payload;
     },
 
     logout: (state) => {
@@ -119,6 +139,19 @@ const authSlice = createSlice({
         state.allUsersTotalPages = 2;
       }
     });
+    builder.addCase(getkycpendingusers.fulfilled, (state, { payload }) => {
+      state.pendingKYCusers = null;
+      if (payload && payload.data) {
+        state.pendingKYCusers = payload.data?.data;
+        state.pendingKYCusersPage = payload.data?.pageNumber;
+        state.pendingKYCusersTotalPages = payload.data?.totalPages;
+        console.log("pendingKYCusers", state.pendingKYCusers);
+      } else {
+        state.pendingKYCusers = [];
+        state.pendingKYCusersPage = 1;
+        state.pendingKYCusersTotalPages = 2;
+      }
+    });
   },
 });
 
@@ -133,6 +166,9 @@ export const {
   setAllUsers,
   setAllUsersPage,
   setAllUsersTotalPages,
+  setPendingKYCusers,
+  setPendingKYCusersPage,
+  setPendingKYCusersTotalPages,
 } = authSlice.actions;
 
 export default authSlice.reducer;

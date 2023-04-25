@@ -29,8 +29,8 @@ const AdminUserAccountPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [clearSeasrchFilter, setClearSeasrchFilter] = useState(false);
 
-  console.log("allUsersPage", allUsersPage);
-  console.log("allUsersTotalPages", allUsersTotalPages);
+  // console.log("allUsersPage", allUsersPage);
+  // console.log("allUsersTotalPages", allUsersTotalPages);
 
   const columns = [
     {

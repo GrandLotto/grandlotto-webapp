@@ -57,9 +57,9 @@ const AdminGameWinning = () => {
       name: "Winning Date",
     },
 
-    {
-      name: "Action",
-    },
+    // {
+    //   name: "Action",
+    // },
   ];
 
   const fetchByPage = (type, page) => {

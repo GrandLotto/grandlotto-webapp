@@ -1,9 +1,6 @@
 import React from "react";
 // import { useNavigate } from "react-router-dom";
-import {
-  addComma,
-  formateDateAndTimeByName,
-} from "../../global/customFunctions";
+import { formateDateAndTimeByName } from "../../global/customFunctions";
 import ComponentLoading from "../blocks/ComponentLoading";
 import PaginationBlock from "../blocks/PaginationBlock";
 
@@ -174,48 +171,63 @@ const GameTable = ({
           data?.map((item, index) => (
             <div className="grandlotto_table_small_flex " key={index}>
               <div className="d-flex justify-content-between border-bottom pb-2 mb-2">
-                <small>{formateDateAndTimeByName(item?.createdOn)}</small>
+                {/* <small>{formateDateAndTimeByName(item?.createdOn)}</small> */}
               </div>
               <div className="grandlotto_table_small_flex_top">
                 <div className="d-flex justify-content-between">
-                  <h4 className="">Game Type</h4>
+                  <h4 className="">Game</h4>
                   <h4 className="">
-                    <b>{item?.type}</b>
+                    <b>{item?.name}</b>
                   </h4>
                 </div>
 
                 <div className="d-flex justify-content-between">
-                  <h4 className="">Min</h4>
+                  <h4 className="">Day Available</h4>
+                  <h4 className="">
+                    <b>{item?.dayAvailable}</b>
+                  </h4>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <h4 className="">Status</h4>
                   <h4 className="">
                     <b>
-                      ₦{" "}
-                      {item?.minAmmount
-                        ? addComma(item?.minAmmount)
-                        : item?.minAmmount}
+                      {item?.status?.toLowerCase() === "closed" && (
+                        <span className={`has_status isCancled`}>
+                          {item?.status}
+                        </span>
+                      )}
+
+                      {!["open", "closed", "lost"].includes(
+                        item?.status?.toLowerCase()
+                      ) && (
+                        <span className="has_status isPending">
+                          {item?.status || "Null"}
+                        </span>
+                      )}
+                      {["open"].includes(item?.status?.toLowerCase()) && (
+                        <span className="has_status">
+                          {item?.status || "Null"}
+                        </span>
+                      )}
                     </b>
                   </h4>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <h4 className="">Max</h4>
+                  <h4 className="">is Available</h4>
                   <h4 className="">
-                    <b>
-                      ₦{" "}
-                      {item?.maxAmmount
-                        ? addComma(item?.maxAmmount)
-                        : item?.maxAmmount}
-                    </b>
+                    <b>{item?.isAvailableToplay ? "Yes" : "No"}</b>
                   </h4>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <h4 className="">Credit Line</h4>
+                  <h4 className="">Start</h4>
                   <h4 className="">
-                    <b>{item?.creditLine}</b>
+                    <b>{formateDateAndTimeByName(item?.startTime)}</b>
                   </h4>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <h4 className="">Credit Line</h4>
+                  <h4 className="">End</h4>
                   <h4 className="">
-                    <b>{item?.maxNumbercount}</b>
+                    <b>{formateDateAndTimeByName(item?.endTime)}</b>
                   </h4>
                 </div>
                 <div className="d-flex justify-content-end">
