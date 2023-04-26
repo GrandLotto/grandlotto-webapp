@@ -62,9 +62,9 @@ const AdminDashboard = () => {
       name: "Winning Date",
     },
 
-    {
-      name: "Action",
-    },
+    // {
+    //   name: "Action",
+    // },
   ];
 
   const emptyFunction = () => {};
