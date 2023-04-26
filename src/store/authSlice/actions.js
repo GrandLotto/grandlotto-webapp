@@ -3,6 +3,7 @@ import axios from "axios";
 import "../../config/axios";
 import {
   GET_ACCEPTED_IDTYPE_URL,
+  GET_ALL_ROLES_URL,
   GET_ALL_USERS_URL,
   GET_USERINFO_URL,
   PENDING_KYC_USERS_URL,
@@ -74,6 +75,19 @@ export const getkycpendingusers = createAsyncThunk(
         .then((response) => {
           return response.data;
         });
+
+      return result;
+    } catch (error) {}
+  }
+);
+
+export const getAllroles = createAsyncThunk(
+  "user/getallroles",
+  async (payload, { getState, dispatch }) => {
+    try {
+      const result = axios.get(GET_ALL_ROLES_URL).then((response) => {
+        return response.data;
+      });
 
       return result;
     } catch (error) {}

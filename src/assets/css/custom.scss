@@ -301,6 +301,11 @@ p {
   color: #3a0202 !important;
 }
 
+.has_status.isDeclined {
+  background: #da2929 !important;
+  color: #fafafa !important;
+}
+
 .has_status.isCancled {
   background: #faf7f7 !important;
   color: #3a0202 !important;

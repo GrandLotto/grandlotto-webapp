@@ -54,7 +54,7 @@ const LogoutModal = () => {
 
             <div
               className={`alert-modal-icon `}
-              style={{ padding: 0, background: "transparent", color: "#222" }}
+              style={{ padding: 0, background: "transparent", color: "#fff" }}
             >
               <i className="bx bx-log-out"></i>
             </div>

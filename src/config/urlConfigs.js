@@ -12,6 +12,10 @@ const GET_ALL_USERS_URL = "/v1.0/OAuth/getuserlist";
 const ENABLE_USERS_URL = "/v1.0/OAuth/enableuser";
 const DISABLE_USERS_URL = "/v1.0/OAuth/disableuser";
 const PENDING_KYC_USERS_URL = "/v1.0/OAuth/getkycpendingusers";
+const APPROVE_USER_KYC_URL = "/v1.0/OAuth/approvekyc";
+const DECLINE_USER_KYC_URL = "/v1.0/OAuth/declinekyc";
+const GET_ALL_ROLES_URL = "/v1.0/OAuth/getallroles";
+const ADD_USER_TO_ROLES_URL = "/v1.0/OAuth/addusertorole";
 
 // WALLET
 const GET_ACCOUNT_BALANCES_URL = "/v1.0/Wallet/GetAccountBalances";
@@ -110,4 +114,8 @@ export {
   ENABLE_USERS_URL,
   DISABLE_USERS_URL,
   PENDING_KYC_USERS_URL,
+  APPROVE_USER_KYC_URL,
+  DECLINE_USER_KYC_URL,
+  GET_ALL_ROLES_URL,
+  ADD_USER_TO_ROLES_URL,
 };

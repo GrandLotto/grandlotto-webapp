@@ -151,6 +151,7 @@ const CreateGameModal = () => {
       daytoplay: selectedDay,
       startTime: startTime,
       endTime: endTime,
+      status: status,
     };
 
     let URL =

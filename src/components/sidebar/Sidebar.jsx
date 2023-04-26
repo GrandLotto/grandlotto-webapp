@@ -153,7 +153,7 @@ const Sidebar = () => {
                     <li className="sidebar_links">
                       <NavLink to="/admin/user-controls">
                         <i className="bx bx-layout"></i>
-                        <span>User Accessibility</span>
+                        <span>User Controls</span>
                       </NavLink>
                     </li>
                   </div>

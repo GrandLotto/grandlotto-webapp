@@ -71,22 +71,27 @@ const AllTransactions = ({
                       )}
                     </td>
                     <td>
-                      {(item?.status?.toLowerCase() === "pending" ||
-                        item?.status?.toLowerCase() === "processing") && (
+                      {["pending", "processing"].includes(
+                        item?.status?.toLowerCase()
+                      ) && (
                         <span className="has_status isPending">
-                          {item?.status}
+                          {item?.status || "none"}
+                        </span>
+                      )}
+                      {["lost"].includes(item?.status?.toLowerCase()) && (
+                        <span className="has_status isLost">
+                          {item?.status || "none"}
                         </span>
                       )}
 
-                      {item?.status?.toLowerCase() === "lost" && (
-                        <span
-                          className={`has_status ${[
-                            item?.status?.toLowerCase() === "lost"
-                              ? "isLost"
-                              : "",
-                          ]}`}
-                        >
-                          {item?.status}
+                      {["success"].includes(item?.status?.toLowerCase()) && (
+                        <span className="has_status ">
+                          {item?.status || "none"}
+                        </span>
+                      )}
+                      {[null].includes(item?.status) && (
+                        <span className="has_status isPending">
+                          {item?.status || "Processing"}
                         </span>
                       )}
                     </td>
@@ -150,14 +155,20 @@ const AllTransactions = ({
             >
               <div className="grandlotto_table_small_flex_left">
                 <div className="d-flex">
-                  {(item?.status?.toLowerCase() === "pending" ||
-                    item?.status?.toLowerCase() === "processing") && (
+                  {["pending", "processing"].includes(
+                    item?.status?.toLowerCase()
+                  ) && <div className="fullStop pending"></div>}
+                  {["lost"].includes(item?.status?.toLowerCase()) && (
+                    <div className="fullStop error"></div>
+                  )}
+
+                  {["success"].includes(item?.status?.toLowerCase()) && (
+                    <div className="fullStop"></div>
+                  )}
+                  {[null].includes(item?.status) && (
                     <div className="fullStop pending"></div>
                   )}
 
-                  {item?.status?.toLowerCase() === "lost" && (
-                    <div className="fullStop error"></div>
-                  )}
                   <div>
                     <h4 className="">
                       Request ID: {item?.requestNumber || item?.id}

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { setAlertPopUp, setConfirmModal } from "../../store/alert/alertSlice";
 import {
+  APPROVE_USER_KYC_URL,
+  DECLINE_USER_KYC_URL,
   DELETE_GAMETYPE_URL,
   DELETE_GAME_URL,
   DISABLE_USERS_URL,
@@ -56,11 +58,11 @@ const ConfirmModal = () => {
     if (modal?.hasMesage === true) {
       if (!inputt) {
         setEmptyFields(true);
-        return false;
+        return;
       }
-    } else {
-      setEmptyFields(false);
     }
+
+    setEmptyFields(false);
 
     setEmptyFields(false);
   };
@@ -101,6 +103,31 @@ const ConfirmModal = () => {
         DISABLE_USERS_URL,
         newPayload,
         `${modal?.payload?.firstName}'s Account has been deactivated`
+      );
+      return;
+    }
+    if (modal.type === "APPROVE_KYC") {
+      let newPayload = {
+        email: modal?.payload?.email,
+        approve: "APPROVED",
+      };
+      handlePOST(
+        APPROVE_USER_KYC_URL,
+        newPayload,
+        `${modal?.payload?.firstName}'s KYC has been approved`
+      );
+      return;
+    }
+    if (modal.type === "DECLINE_KYC") {
+      let newPayload = {
+        email: modal?.payload?.email,
+        decline: "DECLINE",
+        reason: inputt,
+      };
+      handlePOST(
+        DECLINE_USER_KYC_URL,
+        newPayload,
+        `${modal?.payload?.firstName}'s KYC has been declined`
       );
       return;
     }

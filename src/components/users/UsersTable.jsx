@@ -72,7 +72,7 @@ const UsersTable = ({
                       {["inactive"].includes(
                         item?.accountStatus?.toLowerCase()
                       ) && (
-                        <span className="has_status isLost">
+                        <span className="has_status isDeclined">
                           {item?.accountStatus}
                         </span>
                       )}
@@ -177,7 +177,7 @@ const UsersTable = ({
                     {["inactive"].includes(
                       item?.accountStatus?.toLowerCase()
                     ) && (
-                      <span className="has_status isLost">
+                      <span className="has_status isDeclined">
                         {item?.accountStatus}
                       </span>
                     )}

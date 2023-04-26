@@ -8,6 +8,7 @@ import { UPDATE_USERIDENTITY_URL } from "../config/urlConfigs";
 import { handlePOSTRequest } from "../rest/apiRest";
 import { setAlertPopUp, setPageLoading } from "../store/alert/alertSlice";
 import { getUserInfo } from "../store/authSlice/actions";
+import { setRefreshing } from "../store/authSlice/authSlice";
 
 const KYCPage = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const KYCPage = () => {
   const [selectedIDType, setSelectedIDType] = useState("");
   const [idNumber, setIdNumber] = useState("");
   const [emptyFields, setEmptyFields] = useState(true);
+  const [reSubmit, setReSubmit] = useState(false);
 
   const resetFields = () => {
     setfocusedDiv(false);
@@ -28,6 +30,7 @@ const KYCPage = () => {
     setSelectedIDType("");
     setIdNumber("");
     setEmptyFields(true);
+    setReSubmit(false);
   };
 
   const handleFileDroped = (file) => {
@@ -79,6 +82,10 @@ const KYCPage = () => {
     setEmptyFields(false);
   };
 
+  const seSubmitKyc = () => {
+    setReSubmit(true);
+  };
+
   const proceed = () => {
     dispatch(
       setPageLoading({
@@ -90,9 +97,11 @@ const KYCPage = () => {
     var fd = new FormData();
 
     fd.append("Email", user?.email);
-    fd.append("Idname", selectedIDType?.name);
+    fd.append("Idname", selectedIDType);
     fd.append("IdNumber", idNumber);
     fd.append("Idfile", selectedFile);
+
+    // console.log(selectedFile);
 
     handlePOSTRequest(UPDATE_USERIDENTITY_URL, fd)
       .then((response) => {
@@ -102,8 +111,9 @@ const KYCPage = () => {
             message: "",
           })
         );
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
+          dispatch(setRefreshing(true));
           dispatch(
             setAlertPopUp({
               status: true,
@@ -160,7 +170,7 @@ const KYCPage = () => {
       {isLoading && <ComponentLoading title="Please wait ..." />}
       <div className="pages_mobile_dark">
         <div className="card border-0">
-          {user?.kycverification == null && (
+          {(user?.kycverification == null || reSubmit === true) && (
             <div className="card-body mt-2">
               <h5 className="site_title">KYC Update</h5>
 
@@ -292,7 +302,8 @@ const KYCPage = () => {
           )}
 
           {user?.kycverification &&
-            user?.kycverification?.toLowerCase() === "pending" && (
+            user?.kycverification?.toLowerCase() === "pending" &&
+            reSubmit === false && (
               <div className="card-body mt-2">
                 <h5 className="site_title">KYC Update</h5>
                 <br />
@@ -316,7 +327,8 @@ const KYCPage = () => {
             )}
 
           {user?.kycverification &&
-            user?.kycverification?.toLowerCase() === "completed" && (
+            user?.kycverification?.toLowerCase() === "approved" &&
+            reSubmit === false && (
               <div className="card-body mt-2">
                 <h5 className="site_title">KYC Update</h5>
                 <br />
@@ -324,13 +336,46 @@ const KYCPage = () => {
                 <div className="text-center mb-5 mt-5">
                   <ConfirmBlock
                     title={"KYC Verified"}
-                    des={"Congratulations, your kyc verification is successful"}
+                    des={
+                      "Congratulations!! your kyc verification has successfully been approved"
+                    }
                     status={true}
                   />
                   <br />
                   <br />
 
                   <div className="d-flex align-items-center justify-content-center mt-5 mb-3"></div>
+
+                  <br />
+                </div>
+              </div>
+            )}
+
+          {user?.kycverification &&
+            user?.kycverification?.toLowerCase() === "declined" &&
+            reSubmit === false && (
+              <div className="card-body mt-2">
+                <h5 className="site_title">KYC Update</h5>
+                <br />
+                <br />
+                <div className="text-center mb-5 mt-5">
+                  <ConfirmBlock
+                    title={"KYC Declined"}
+                    des={user?.kycDeclineReason || "Please submit your kyc"}
+                    status={false}
+                  />
+                  <br />
+                  <br />
+
+                  <div className="d-flex align-items-center justify-content-center mb-3">
+                    <button
+                      className=" grandLottoButton button-outline-light border text-dark"
+                      style={{ marginRight: "10px" }}
+                      onClick={() => seSubmitKyc()}
+                    >
+                      Resubmit kyc
+                    </button>
+                  </div>
 
                   <br />
                 </div>

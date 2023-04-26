@@ -58,48 +58,88 @@ const UsersKYCTable = ({
                   <tr key={index}>
                     <td>{index < 10 ? "0" + (index + 1) : index}</td>
                     {/* <td>{item?.requestNumber || item?.id}</td> */}
-                    <td>{item?.firstName + " " + item?.lastName}</td>
-                    <td>{item?.email}</td>
-                    <td>null</td>
+                    <td>
+                      {item?.firstName + " " + item?.lastName} ({item?.email})
+                    </td>
 
-                    {/* <td>
-                      {["active"].includes(
-                        item?.accountStatus?.toLowerCase()
+                    <td>
+                      {item?.idCardName
+                        ? item?.idCardName + " (" + item?.idNumber + ")"
+                        : "null"}
+                    </td>
+                    <td>
+                      {item?.idCard ? (
+                        <a href={item?.idCard} target="_blank" rel="noreferrer">
+                          {item?.idCard?.slice(0, 15) + "..."}
+                        </a>
+                      ) : (
+                        "null"
+                      )}
+                    </td>
+
+                    <td>
+                      {["APPROVED"].includes(
+                        item?.kycverification?.toUpperCase()
                       ) && (
                         <span className="has_status">
-                          {item?.accountStatus}
+                          {item?.kycverification}
                         </span>
                       )}
-                      {["inactive"].includes(
-                        item?.accountStatus?.toLowerCase()
+                      {["DECLINED"].includes(
+                        item?.kycverification?.toUpperCase()
                       ) && (
-                        <span className="has_status isLost">
-                          {item?.accountStatus}
+                        <span className="has_status isDeclined">
+                          {item?.kycverification}
                         </span>
                       )}
-                    </td> */}
-                    <td>{formateDateAndTimeByName(item?.lastLogin)}</td>
+                      {(["PENDING"].includes(
+                        item?.kycverification?.toUpperCase()
+                      ) ||
+                        !["DECLINED", "APPROVED"].includes(
+                          item?.kycverification?.toUpperCase()
+                        )) && (
+                        <span className="has_status isPending">
+                          {item?.kycverification || "PENDING"}
+                        </span>
+                      )}
+                    </td>
+                    <td>
+                      {item?.dateKycSubmitted
+                        ? formateDateAndTimeByName(item?.dateKycSubmitted)
+                        : formateDateAndTimeByName(item?.lastLogin)}
+                    </td>
 
                     <td>
                       <div
                         className="d-flex butnFlex "
                         style={{ columnGap: 10 }}
                       >
-                        <button
-                          onClick={() => onEdit(item)}
-                          className="bg-success text-light px-4 "
-                          style={{ borderRadius: 10 }}
-                        >
-                          Approve
-                        </button>
+                        {(["PENDING"].includes(
+                          item?.kycverification?.toUpperCase()
+                        ) ||
+                          !["APPROVED"].includes(
+                            item?.kycverification?.toUpperCase()
+                          )) && (
+                          <button
+                            onClick={() => onEdit(item)}
+                            className="bg-success text-light px-4 "
+                            style={{ borderRadius: 10 }}
+                          >
+                            Approve
+                          </button>
+                        )}
 
-                        <button
-                          onClick={() => onDelete(item)}
-                          className="bg-danger text-light px-4 "
-                          style={{ borderRadius: 10 }}
-                        >
-                          Decline
-                        </button>
+                        {!["DECLINED", "APPROVED"].includes(
+                          item?.kycverification?.toUpperCase()
+                        ) && (
+                          <button
+                            onClick={() => onDelete(item)}
+                            className="bg-danger text-light px-4 "
+                            style={{ borderRadius: 10 }}
+                          >
+                            Decline
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>
@@ -165,38 +205,86 @@ const UsersKYCTable = ({
                   <h4 className="">{item?.email}</h4>
                 </div>
                 <div className="d-flex justify-content-between">
+                  <h4 className="">Status</h4>
+                  <h4 className="">
+                    {["APPROVED"].includes(
+                      item?.kycverification?.toUpperCase()
+                    ) && (
+                      <span className="has_status">
+                        {item?.kycverification}
+                      </span>
+                    )}
+                    {["DECLINED"].includes(
+                      item?.kycverification?.toUpperCase()
+                    ) && (
+                      <span className="has_status isDeclined">
+                        {item?.kycverification}
+                      </span>
+                    )}
+                    {(["PENDING"].includes(
+                      item?.kycverification?.toUpperCase()
+                    ) ||
+                      !["DECLINED", "APPROVED"].includes(
+                        item?.kycverification?.toUpperCase()
+                      )) && (
+                      <span className="has_status isPending">
+                        {item?.kycverification || "PENDING"}
+                      </span>
+                    )}
+                  </h4>
+                </div>
+                <div className="d-flex justify-content-between">
                   <h4 className="">Doc URL</h4>
-                  <h4 className="">null</h4>
+                  <h4 className="">
+                    {item?.idCard ? (
+                      <a href={item?.idCard} target="_blank" rel="noreferrer">
+                        {item?.idCard?.slice(0, 15) + "..."}
+                      </a>
+                    ) : (
+                      <b>None</b>
+                    )}
+                  </h4>
                 </div>
                 <div className="d-flex justify-content-between">
                   <h4 className="">Document Type</h4>
                   <h4 className="">
-                    <b>null</b>
+                    <b>{item?.idCardName || "None"}</b>
                   </h4>
                 </div>
                 <div className="d-flex justify-content-between">
                   <h4 className="">ID Number</h4>
                   <h4 className="">
-                    <b>null</b>
+                    <b>{item?.idNumber || "None"}</b>
                   </h4>
                 </div>
                 <div className="d-flex justify-content-center mt-4">
                   <div className="d-flex butnFlex " style={{ columnGap: 10 }}>
-                    <button
-                      onClick={() => onEdit(item)}
-                      className="bg-success text-light px-4 "
-                      style={{ borderRadius: 10 }}
-                    >
-                      Approve
-                    </button>
+                    {(["PENDING"].includes(
+                      item?.kycverification?.toUpperCase()
+                    ) ||
+                      !["APPROVED"].includes(
+                        item?.kycverification?.toUpperCase()
+                      )) && (
+                      <button
+                        onClick={() => onEdit(item)}
+                        className="bg-success text-light px-4 "
+                        style={{ borderRadius: 10 }}
+                      >
+                        Approve
+                      </button>
+                    )}
 
-                    <button
-                      onClick={() => onDelete(item)}
-                      className="bg-danger text-light px-4 "
-                      style={{ borderRadius: 10 }}
-                    >
-                      Decline
-                    </button>
+                    {!["DECLINED", "APPROVED"].includes(
+                      item?.kycverification?.toUpperCase()
+                    ) && (
+                      <button
+                        onClick={() => onDelete(item)}
+                        className="bg-danger text-light px-4 "
+                        style={{ borderRadius: 10 }}
+                      >
+                        Decline
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

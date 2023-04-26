@@ -16,6 +16,8 @@ import {
   setConfirmModal,
 } from "../../store/alert/alertSlice";
 
+import ChangeUserRole from "../../components/users/ChangeUserRole";
+
 const AdminUserAccountPage = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.oauth.user);
@@ -215,11 +217,11 @@ const AdminUserAccountPage = () => {
                   </a>
                 </li>
 
-                {/* <li className="nav-item">
+                <li className="nav-item">
                   <a className="nav-link" data-toggle="tab" href="#Bonus-tab">
-                    Search users
+                    Change Roles
                   </a>
-                </li> */}
+                </li>
               </ul>
             </div>
 
@@ -244,23 +246,7 @@ const AdminUserAccountPage = () => {
                 </div>
               </div>
               <div className="tab-pane" id="Bonus-tab">
-                <div className="card mb-4">
-                  <form className="grandlotto_form mt-5">
-                    <div className="row">
-                      <div className="col-md-6 mx-auto">
-                        <div className="form-group">
-                          <label htmlFor="">User Email</label>
-                          <input
-                            className="form-control py-3"
-                            placeholder="Email for search"
-                            type="text"
-                            style={{ width: "100%" }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+                <ChangeUserRole />
               </div>
             </div>
           </div>

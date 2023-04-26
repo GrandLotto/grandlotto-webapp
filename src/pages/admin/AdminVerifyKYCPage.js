@@ -42,14 +42,14 @@ const AdminVerifyKYCPage = () => {
       name: "Name",
     },
     {
-      name: "Email",
+      name: "ID Type #",
     },
     {
       name: "Doc URL",
     },
-    // {
-    //   name: "Status",
-    // },
+    {
+      name: "Status",
+    },
     {
       name: "Date/Time",
     },

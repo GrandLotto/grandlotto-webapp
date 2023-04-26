@@ -91,24 +91,27 @@ const Transactions = ({
                       )}
                     </td>
                     <td>
-                      {(item?.status?.toLowerCase() === "pending" ||
-                        item?.status?.toLowerCase() === "processing") && (
-                        <span className="has_status isPending">
-                          {item?.status}
-                        </span>
-                      )}
-
-                      {item?.status?.toLowerCase() === "failed" && (
-                        <span className={`has_status isLost`}>
-                          {item?.status}
-                        </span>
-                      )}
-
-                      {!["pending", "processing", "failed"].includes(
+                      {["pending", "processing"].includes(
                         item?.status?.toLowerCase()
                       ) && (
-                        <span className="has_status">
-                          {item?.status || "Success"}
+                        <span className="has_status isPending">
+                          {item?.status || "none"}
+                        </span>
+                      )}
+                      {["lost"].includes(item?.status?.toLowerCase()) && (
+                        <span className="has_status isLost">
+                          {item?.status || "none"}
+                        </span>
+                      )}
+
+                      {["success"].includes(item?.status?.toLowerCase()) && (
+                        <span className="has_status ">
+                          {item?.status || "none"}
+                        </span>
+                      )}
+                      {[null].includes(item?.status) && (
+                        <span className="has_status isPending">
+                          {item?.status || "Processing"}
                         </span>
                       )}
                     </td>
@@ -186,13 +189,18 @@ const Transactions = ({
             >
               <div className="grandlotto_table_small_flex_left">
                 <div className="d-flex">
-                  {(item?.status?.toLowerCase() === "pending" ||
-                    item?.status?.toLowerCase() === "processing") && (
-                    <div className="fullStop pending"></div>
+                  {["pending", "processing"].includes(
+                    item?.status?.toLowerCase()
+                  ) && <div className="fullStop pending"></div>}
+                  {["lost"].includes(item?.status?.toLowerCase()) && (
+                    <div className="fullStop error"></div>
                   )}
 
-                  {item?.status?.toLowerCase() === "lost" && (
-                    <div className="fullStop error"></div>
+                  {["success"].includes(item?.status?.toLowerCase()) && (
+                    <div className="fullStop"></div>
+                  )}
+                  {[null].includes(item?.status) && (
+                    <div className="fullStop pending"></div>
                   )}
                   <div>
                     <h4 className="">

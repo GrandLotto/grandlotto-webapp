@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getacceptedid,
+  getAllroles,
   getkycpendingusers,
   getUserInfo,
   getuserlist,
@@ -117,6 +118,7 @@ const AllApiCalls = () => {
           dispatch(getAllgames());
           dispatch(getuserlist());
           dispatch(getkycpendingusers());
+          dispatch(getAllroles());
         }
 
         dispatch(getacceptedid());

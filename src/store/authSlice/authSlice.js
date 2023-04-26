@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getacceptedid,
+  getAllroles,
   getkycpendingusers,
   getUserInfo,
   getuserlist,
@@ -35,6 +36,7 @@ const initialState = {
   pendingKYCusers: null,
   pendingKYCusersPage: 1,
   pendingKYCusersTotalPages: 3,
+  allRoles: null,
 };
 
 const authSlice = createSlice({
@@ -139,6 +141,7 @@ const authSlice = createSlice({
         state.allUsersTotalPages = 2;
       }
     });
+
     builder.addCase(getkycpendingusers.fulfilled, (state, { payload }) => {
       state.pendingKYCusers = null;
       if (payload && payload.data) {
@@ -150,6 +153,15 @@ const authSlice = createSlice({
         state.pendingKYCusers = [];
         state.pendingKYCusersPage = 1;
         state.pendingKYCusersTotalPages = 2;
+      }
+    });
+
+    builder.addCase(getAllroles.fulfilled, (state, { payload }) => {
+      console.log("getAllroles", payload);
+      if (payload) {
+        state.allRoles = payload;
+      } else {
+        state.allRoles = [];
       }
     });
   },

@@ -247,7 +247,7 @@ const SidebarMenuMobile = () => {
                     >
                       <div className="sidebarLinkMenusItemLeft">
                         <i className="bx bx-layout"></i>
-                        <span>User Accessibility</span>
+                        <span>User Controls</span>
                       </div>
                       <i className="bx bx-chevron-right"></i>
                     </NavLink>
