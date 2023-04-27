@@ -19,7 +19,7 @@ const CreateGameModal = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [gameName, setGameName] = useState("");
-  const [selectedDay, setSelectedDay] = useState("");
+  // const [selectedDay, setSelectedDay] = useState("");
   const [status, setStatus] = useState("");
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
@@ -42,7 +42,7 @@ const CreateGameModal = () => {
     setIsLoading(false);
     setGameName("");
     setStartTime("");
-    setSelectedDay("");
+    // setSelectedDay("");
     setStatus("");
     setIsAvailableToplay(true);
     setStartTime(new Date());
@@ -52,13 +52,13 @@ const CreateGameModal = () => {
   };
 
   const dayOfTheWeek = [
+    "SUNDAY",
     "MONDAY",
     "TUESDAY",
     "WEDNESDAY",
     "THURSDAY",
     "FRIDAY",
     "SATURDAY",
-    "SUNDAY",
   ];
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const CreateGameModal = () => {
       if (modal?.payload) {
         setGameName(modal?.payload?.name);
         setIsAvailableToplay(modal?.payload?.isAvailableToplay);
-        setSelectedDay(modal?.payload?.dayAvailable);
+        // setSelectedDay(modal?.payload?.dayAvailable);
         setStatus(modal?.payload?.status);
         setStartTime(modal?.payload?.startTime);
         setEndTime(modal?.payload?.endTime);
@@ -77,15 +77,7 @@ const CreateGameModal = () => {
 
   useEffect(() => {
     validateForm();
-  }, [
-    gameName,
-    selectedDay,
-    status,
-    endTime,
-    startTime,
-    isAvailableToplay,
-    emptyFields,
-  ]);
+  }, [gameName, status, endTime, startTime, isAvailableToplay, emptyFields]);
 
   const validateForm = () => {
     if (!gameName) {
@@ -93,10 +85,10 @@ const CreateGameModal = () => {
       return false;
     }
 
-    if (!selectedDay) {
-      setEmptyFields(true);
-      return false;
-    }
+    // if (!selectedDay) {
+    //   setEmptyFields(true);
+    //   return false;
+    // }
 
     if (!status) {
       setEmptyFields(true);
@@ -144,15 +136,20 @@ const CreateGameModal = () => {
       return;
     }
 
+    let currentDate = new Date(startTime);
+    let newDatwToPlay = dayOfTheWeek[currentDate.getDay()];
+
     setIsLoading(true);
     const payload = {
       // email: user?.email,
       name: gameName,
-      daytoplay: selectedDay,
+      daytoplay: newDatwToPlay,
       startTime: startTime,
       endTime: endTime,
       status: status,
     };
+
+    // console.log("payload", payload);
 
     let URL =
       modal?.type === "EDIT"
@@ -266,55 +263,6 @@ const CreateGameModal = () => {
                 </div>
                 <div className="col-md-6 mb-3">
                   <div className="form-group">
-                    <label htmlFor="">Day to play</label>
-                    <select
-                      style={{ width: "100%" }}
-                      className="form-control hasCapitalized"
-                      onChange={(e) => {
-                        if (e.target.value) {
-                          setSelectedDay(e.target.value);
-                        }
-                      }}
-                      value={selectedDay}
-                    >
-                      <option value="">Select day</option>
-
-                      {dayOfTheWeek &&
-                        dayOfTheWeek?.map((item, index) => (
-                          <option key={index} value={item}>
-                            {item}
-                          </option>
-                        ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="col-md-6 mb-3">
-                  <div className="form-group">
-                    <label htmlFor="">Status</label>
-                    <select
-                      style={{ width: "100%" }}
-                      className="form-control hasCapitalized"
-                      onChange={(e) => {
-                        if (e.target.value) {
-                          setStatus(e.target.value);
-                        }
-                      }}
-                      value={status}
-                    >
-                      <option value="" disabled>
-                        Select status
-                      </option>
-
-                      {["OPEN", "CLOSE"]?.map((item, index) => (
-                        <option key={index} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="col-md-6 mb-3">
-                  <div className="form-group">
                     <label htmlFor="">Start time</label>
                     <input
                       onChange={(e) => setStartTime(e.target.value)}
@@ -339,7 +287,56 @@ const CreateGameModal = () => {
                     />
                   </div>
                 </div>
+                {/* <div className="col-md-6 mb-3">
+                  <div className="form-group">
+                    <label htmlFor="">Day to play</label>
+                    <select
+                      style={{ width: "100%" }}
+                      className="form-control hasCapitalized"
+                      onChange={(e) => {
+                        if (e.target.value) {
+                          setSelectedDay(e.target.value);
+                        }
+                      }}
+                      value={selectedDay}
+                    >
+                      <option value="">Select day</option>
 
+                      {dayOfTheWeek &&
+                        dayOfTheWeek?.map((item, index) => (
+                          <option key={index} value={item}>
+                            {item}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                </div> */}
+
+                <div className="col-md-12 mb-3">
+                  <div className="form-group">
+                    <label htmlFor="">Status</label>
+                    <select
+                      style={{ width: "100%" }}
+                      className="form-control hasCapitalized"
+                      onChange={(e) => {
+                        if (e.target.value) {
+                          setStatus(e.target.value);
+                        }
+                      }}
+                      value={status}
+                    >
+                      <option value="" disabled>
+                        Select status
+                      </option>
+
+                      {["OPEN", "CLOSE"]?.map((item, index) => (
+                        <option key={index} value={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
                 <div className="col-md-6 mb-3">
                   <div className="form-group">
                     <label htmlFor=""></label>

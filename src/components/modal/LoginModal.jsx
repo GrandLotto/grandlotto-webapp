@@ -145,7 +145,9 @@ const LoginModal = () => {
 
           closeModal();
         } else {
-          setResponseError(response?.data?.message);
+          setResponseError(
+            response?.data?.message || "An error occurred, please try again"
+          );
         }
       })
       .catch((error) => {
