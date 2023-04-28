@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getAMPM } from "../../global/customFunctions";
 import {
   setComingSoonModal,
   setMobileMenu,
@@ -12,7 +11,7 @@ import ClockTimer from "../blocks/ClockTimer";
 const OauthMenu = () => {
   const dispatch = useDispatch();
   const mobileMenu = useSelector((state) => state.alert.mobileMenu);
-  const digitalDate = useSelector((state) => state.oauth.digitalDate);
+  // const digitalDate = useSelector((state) => state.oauth.digitalDate);
   const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
 
   const closeMenu = () => {
