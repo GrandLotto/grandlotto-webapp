@@ -55,7 +55,10 @@ const GameTimer = ({ time, timeStarted }) => {
   }, []);
   return (
     timeStarted && (
-      <div className="daysToExpireItems largeOne">{displayTimer}</div>
+      <>
+        <div className="daysToExpireItems">Day : hour : min : sec</div>
+        <div className="daysToExpireItems largeOne">{displayTimer}</div>
+      </>
     )
   );
 };
