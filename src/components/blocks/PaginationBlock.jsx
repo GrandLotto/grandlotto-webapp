@@ -31,7 +31,7 @@ const PaginationBlock = ({
     if (page === newPage) {
       return;
     }
-    console.log(newPage);
+    // console.log(newPage);
 
     handleFetchByPage(newPage);
   };

@@ -28,6 +28,7 @@ import TransferPage from "../pages/TransferPage";
 import WithdrawalPage from "../pages/WithdrawalPage";
 import VerifyPaystack from "../pages/VerifyPaystack";
 import PaymentResponsePage from "../pages/PaymentResponsePage";
+import AdminValidateGames from "../pages/admin/AdminValidateGames";
 
 const MyRouter = () => {
   return (
@@ -60,6 +61,10 @@ const MyRouter = () => {
               <Route
                 path="/admin/games/create-games"
                 element={<AdminCreateGames />}
+              />
+              <Route
+                path="/admin/games/validate-games"
+                element={<AdminValidateGames />}
               />
               <Route
                 path="/admin/games/winnings"

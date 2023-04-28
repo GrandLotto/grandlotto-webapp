@@ -154,7 +154,7 @@ const Profile = () => {
             message: "",
           })
         );
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           dispatch(
             setAlertPopUp({

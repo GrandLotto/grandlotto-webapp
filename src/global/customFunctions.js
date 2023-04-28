@@ -589,7 +589,7 @@ export const isTomorrow = (date) => {
   tomorrow.setDate(tomorrow.getDate() + 1);
 
   // 👇️ Tomorrow's date
-  console.log(tomorrow);
+  // console.log(tomorrow);
 
   if (tomorrow.toDateString() === date.toDateString()) {
     return true;
@@ -617,4 +617,21 @@ export const getDayByName = (date) => {
     : dayOfTheWeek[currentDate.getDay()];
 
   return newDatwToPlay;
+};
+
+export const formateWinningMachineNumbers = (numbers) => {
+  let convertToStrings = String(numbers.match(/.{1,2}/g));
+  let convertToArray = convertToStrings.split(",");
+  let filterOutEmptyString = convertToArray.filter((item) => item !== " ");
+  let mapArrayRemoveFirstZero = filterOutEmptyString?.map((num) =>
+    parseInt(num, 10)
+  );
+  let convertBackToString = String(mapArrayRemoveFirstZero);
+  // console.log("convertToStrings", convertToStrings);
+  // console.log("convertToArray", convertToArray);
+  // console.log("filterOutEmptyString", filterOutEmptyString);
+  // console.log("mapArrayRemoveFirstZero", mapArrayRemoveFirstZero);
+  // console.log("convertBackToString", convertBackToString);
+
+  return convertBackToString;
 };

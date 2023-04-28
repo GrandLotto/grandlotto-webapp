@@ -95,7 +95,7 @@ const ChangeUserRole = () => {
           })
         );
 
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           setuserDetails(response?.data?.data);
         } else {
@@ -129,7 +129,7 @@ const ChangeUserRole = () => {
       role: selectedRole,
     };
 
-    console.log(payload);
+    // console.log(payload);
 
     handlePOSTRequest(ADD_USER_TO_ROLES_URL, payload)
       .then((response) => {
@@ -140,7 +140,7 @@ const ChangeUserRole = () => {
           })
         );
 
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           dispatch(setRefreshing(true));
           dispatch(

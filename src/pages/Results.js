@@ -63,16 +63,16 @@ const Results = () => {
     };
     setIsLoading(true);
 
-    console.log(payload);
+    // console.log(payload);
 
     handlePOSTRequest(GET_GAME_WINNING_NUMBERS_URL, payload)
       .then((response) => {
         setIsLoading(false);
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           let requestData = response?.data?.data?.data;
           setAllResults(requestData);
-          console.log(requestData);
+          // console.log(requestData);
         } else {
           setAllResults([]);
         }

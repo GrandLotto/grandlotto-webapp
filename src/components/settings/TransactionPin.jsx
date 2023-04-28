@@ -158,7 +158,7 @@ const TransactionPin = () => {
             payload: null,
           })
         );
-        console.log(error);
+        // console.log(error);
       });
   };
 

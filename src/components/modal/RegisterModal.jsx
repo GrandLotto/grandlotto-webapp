@@ -220,7 +220,7 @@ const RegisterModal = () => {
       .catch((error) => {
         setIsLoading(false);
         setResponseError("An error occurred, please try again");
-        console.log(error);
+        // console.log(error);
       });
   };
 

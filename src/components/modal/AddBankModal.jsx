@@ -57,7 +57,7 @@ const AddBankModal = () => {
       return;
     }
 
-    console.log(accountNumber.length);
+    // console.log(accountNumber.length);
 
     if (accountNumber.length !== 10) {
       return;
@@ -71,7 +71,7 @@ const AddBankModal = () => {
     setIsLoading(true);
     setAccountNameError("");
 
-    console.log(selectedBank);
+    // console.log(selectedBank);
 
     const payload = {
       email: user?.email,
@@ -82,7 +82,7 @@ const AddBankModal = () => {
     handlePOSTRequest(VERIFY_ACCOUNT_NUMBER_URL, payload)
       .then((response) => {
         setIsLoading(false);
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           setAccountName(response?.data?.data?.accountName);
         } else {
@@ -120,7 +120,7 @@ const AddBankModal = () => {
           })
         );
 
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           dispatch(
             setAlertPopUp({
@@ -225,7 +225,7 @@ const AddBankModal = () => {
                       onChange={(e) => {
                         setSelectedBank(e.target.value);
 
-                        console.log(e.target.value);
+                        // console.log(e.target.value);
                         handleAccountLookUp();
                       }}
                     >

@@ -25,13 +25,13 @@ const TopSearch = () => {
 
     let URL = GET_GAMES_BY_TICKETID_URL;
 
-    console.log(URL);
+    // console.log(URL);
 
     handleGETRequest(URL + `?TicketId=${ticketID}`)
       .then((response) => {
         setIsLoading(false);
 
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           dispatch(
             setSearchCouponCodeModal({

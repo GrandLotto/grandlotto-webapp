@@ -183,7 +183,7 @@ const CreateGameModal = () => {
         .catch((error) => {
           setIsLoading(false);
           setResponseError("An error occurred, please try again");
-          console.log(error);
+          // console.log(error);
         });
     } else {
       handlePOSTRequest(CREATE_GAME_URL, payload)
@@ -210,7 +210,7 @@ const CreateGameModal = () => {
         .catch((error) => {
           setIsLoading(false);
           setResponseError("An error occurred, please try again");
-          console.log(error);
+          // console.log(error);
         });
     }
   };

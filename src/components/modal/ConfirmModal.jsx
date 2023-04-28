@@ -161,7 +161,7 @@ const ConfirmModal = () => {
         .catch((error) => {
           setIsLoading(false);
           setResponseError("An error occurred, please try again");
-          console.log(error);
+          // console.log(error);
         });
     }, 4000);
   };
@@ -173,7 +173,7 @@ const ConfirmModal = () => {
       handlePOSTRequest(URL, data)
         .then((response) => {
           setIsLoading(false);
-          console.log(response);
+          // console.log(response);
           if (response?.data?.success) {
             dispatch(
               setAlertPopUp({
@@ -194,7 +194,7 @@ const ConfirmModal = () => {
         .catch((error) => {
           setIsLoading(false);
           setResponseError("An error occurred, please try again");
-          console.log(error);
+          // console.log(error);
         });
     }, 4000);
   };

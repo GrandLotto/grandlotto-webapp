@@ -56,7 +56,7 @@ const ThreeColLeft = () => {
       }
     }
     if (checkIfGameHasExpired(item?.startTime) === false) {
-      console.log("selectedGame", item);
+      // console.log("selectedGame", item);
       dispatch(setSelectedGame(item));
       dispatch(setCalculatedGames(null));
       handleTimer(item);
@@ -71,11 +71,11 @@ const ThreeColLeft = () => {
     }
   };
 
-  useEffect(() => {
-    if (games) {
-      console.log("games", groupBy2(games, "dayAvailable"));
-    }
-  }, [games]);
+  // useEffect(() => {
+  //   if (games) {
+  //     console.log("games", groupBy2(games, "dayAvailable"));
+  //   }
+  // }, [games]);
 
   useEffect(() => {
     if (selectedGame && selectedPlayingType) {

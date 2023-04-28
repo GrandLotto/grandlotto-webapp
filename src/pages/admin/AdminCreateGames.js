@@ -39,7 +39,7 @@ const AdminCreateGames = () => {
   ];
 
   const handleEdit = (item) => {
-    console.log(item);
+    // console.log(item);
     dispatch(
       setCreateGameModal({
         status: true,
@@ -50,7 +50,7 @@ const AdminCreateGames = () => {
   };
 
   const handleDelete = (item) => {
-    console.log(item);
+    // console.log(item);
     dispatch(
       setConfirmModal({
         status: true,

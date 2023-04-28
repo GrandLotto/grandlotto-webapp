@@ -21,7 +21,7 @@ const Fundwallet = () => {
   const user = useSelector((state) => state.oauth.user);
 
   const [providusAccount, setProvidusAccount] = useState(null);
-  const [paystackAccount, setPaystackAccount] = useState(null);
+  // const [paystackAccount, setPaystackAccount] = useState(null);
   const [selectedGateWay, setselectedGateWay] = useState(null);
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +33,7 @@ const Fundwallet = () => {
 
   const resetFields = () => {
     setProvidusAccount(null);
-    setPaystackAccount(null);
+    // setPaystackAccount(null);
     setselectedGateWay(null);
     setStep(1);
     setIsLoading(false);
@@ -75,7 +75,7 @@ const Fundwallet = () => {
     // }
 
     if (step === 2) {
-      console.log(amount);
+      // console.log(amount);
       if (!amount || amount <= 0) {
         setEmptyFields(true);
         return false;
@@ -90,7 +90,7 @@ const Fundwallet = () => {
     setTimeout(() => {
       setIsLoading(false);
       if (item) {
-        console.log(item);
+        // console.log(item);
         setselectedGateWay(item);
 
         validateForm();
@@ -118,7 +118,7 @@ const Fundwallet = () => {
 
   const handleCancel = () => {
     setProvidusAccount(null);
-    setPaystackAccount(null);
+    // setPaystackAccount(null);
     setTime(30);
     setAmount(0);
     setStep(1);
@@ -190,7 +190,7 @@ const Fundwallet = () => {
       .then((response) => {
         setIsLoading(false);
 
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           setProvidusAccount(response?.data?.data);
           setTime(30);
@@ -231,22 +231,22 @@ const Fundwallet = () => {
       amount: String(+amount * 100),
     };
 
-    console.log(payload);
+    // console.log(payload);
 
     handlePOSTRequest(INITIATE_PAYSTACK_PAYMENT_URL, payload)
       .then((response) => {
         setIsLoading(false);
 
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
-          setPaystackAccount(response?.data?.data);
+          // setPaystackAccount(response?.data?.data);
           setStep(3);
           window.open(
             response?.data?.data?.datareturn?.authorization_url,
             "_blank"
           );
         } else {
-          setPaystackAccount(null);
+          // setPaystackAccount(null);
           dispatch(
             setAlertPopUp({
               status: true,
@@ -286,8 +286,8 @@ const Fundwallet = () => {
         .then((response) => {
           setIsLoading(false);
 
-          console.log(response);
-          console.log(paystackAccount);
+          // console.log(response);
+          // console.log(paystackAccount);
           if (response?.data?.success) {
             dispatch(
               setAlertPopUp({
@@ -334,7 +334,7 @@ const Fundwallet = () => {
         .then((response) => {
           setIsLoading(false);
 
-          console.log(response);
+          // console.log(response);
           if (response?.data?.success) {
             dispatch(
               setAlertPopUp({
@@ -346,8 +346,8 @@ const Fundwallet = () => {
               })
             );
 
-            let requestData = response?.data?.data;
-            console.log(requestData);
+            // let requestData = response?.data?.data;
+            // console.log(requestData);
 
             // dispatch(
             //   setAlertBetModal({

@@ -2,7 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { inputCodeNext } from "../../global/customFunctions";
 
-const PinCodeBlock = ({ handleDone, pinLength, resetEFields }) => {
+const PinCodeBlock = ({
+  handleDone,
+  pinLength,
+  resetEFields,
+  maxLength = 1,
+}) => {
   useEffect(() => {
     inputCodeNext();
   });
@@ -52,7 +57,7 @@ const PinCodeBlock = ({ handleDone, pinLength, resetEFields }) => {
         value={verifyCode1}
         onChange={(e) => setVerifyCode1(e.target.value)}
         type="text"
-        maxLength="1"
+        maxLength={maxLength}
         role="presentation"
         autoComplete="new-password"
       />
@@ -62,7 +67,7 @@ const PinCodeBlock = ({ handleDone, pinLength, resetEFields }) => {
         type="text"
         role="presentation"
         autoComplete="new-password"
-        maxLength="1"
+        maxLength={maxLength}
       />
 
       <input
@@ -71,22 +76,22 @@ const PinCodeBlock = ({ handleDone, pinLength, resetEFields }) => {
         type="text"
         role="presentation"
         autoComplete="new-password"
-        maxLength="1"
+        maxLength={maxLength}
       />
       <input
         value={verifyCode4}
         onChange={(e) => setVerifyCode4(e.target.value)}
         type="text"
         role="presentation"
-        maxLength="1"
+        maxLength={maxLength}
         autoComplete="new-password"
       />
-      {pinLength === 6 && (
+      {pinLength >= 5 && (
         <input
           value={verifyCode5}
           onChange={(e) => setVerifyCode5(e.target.value)}
           type="text"
-          maxLength="1"
+          maxLength={maxLength}
           role="presentation"
           autoComplete="new-password"
         />
@@ -97,7 +102,7 @@ const PinCodeBlock = ({ handleDone, pinLength, resetEFields }) => {
           onChange={(e) => setVerifyCode6(e.target.value)}
           type="text"
           role="presentation"
-          maxLength="1"
+          maxLength={maxLength}
           autoComplete="new-password"
         />
       )}

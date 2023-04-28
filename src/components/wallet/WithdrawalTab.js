@@ -49,7 +49,7 @@ const WithdrawalTab = () => {
     if (bank) {
       let newBank = JSON.parse(bank);
       setSelectedBank(newBank);
-      console.log(JSON.parse(bank));
+      // console.log(JSON.parse(bank));
     }
   };
 
@@ -137,8 +137,8 @@ const WithdrawalTab = () => {
       })
     );
     let newbank = JSON.parse(selectedBank);
-    console.log(selectedBank);
-    console.log(newbank);
+    // console.log(selectedBank);
+    // console.log(newbank);
 
     let payload = {
       email: user?.email,
@@ -149,7 +149,7 @@ const WithdrawalTab = () => {
       wallet: "WINNING",
     };
 
-    console.log(JSON.stringify(payload));
+    // console.log(JSON.stringify(payload));
 
     handlePOSTRequest(WITHDRAW_FUNDS_URL, payload)
       .then((response) => {
@@ -159,7 +159,7 @@ const WithdrawalTab = () => {
             message: "",
           })
         );
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           dispatch(
             setAlertPopUp({

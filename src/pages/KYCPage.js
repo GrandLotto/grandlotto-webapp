@@ -35,7 +35,7 @@ const KYCPage = () => {
 
   const handleFileDroped = (file) => {
     setIsLoading(true);
-    console.log("file", file);
+    // console.log("file", file);
     setTimeout(() => {
       setIsLoading(false);
       setfocusedDiv(false);

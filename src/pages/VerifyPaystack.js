@@ -21,7 +21,7 @@ const VerifyPaystack = () => {
     if (!initialized) {
       initialized = true;
       if (ref || reference) {
-        console.log(ref);
+        // console.log(ref);
         confirmPayment();
       } else {
         navigate("/");

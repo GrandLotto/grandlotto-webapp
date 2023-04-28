@@ -112,7 +112,7 @@ const BetPlayButton = () => {
         // console.log(response);
         if (response?.data?.success) {
           let requestData = response?.data?.data;
-          console.log(requestData);
+          // console.log(requestData);
           dispatch(setCalculatedGames(requestData));
         } else {
           dispatch(
@@ -133,7 +133,7 @@ const BetPlayButton = () => {
       .catch((error) => {
         setIsCalculatingGames(false);
         setIsDisabled(false);
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -163,7 +163,7 @@ const BetPlayButton = () => {
       )?.id,
     };
 
-    console.log(payload);
+    // console.log(payload);
 
     handlePOSTRequest(PLAY_GAME_URL, payload)
       .then((response) => {
@@ -173,7 +173,7 @@ const BetPlayButton = () => {
             message: "",
           })
         );
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           let requestData = response?.data?.data;
 
@@ -227,7 +227,7 @@ const BetPlayButton = () => {
             payload: null,
           })
         );
-        console.log(error);
+        // console.log(error);
       });
   };
 

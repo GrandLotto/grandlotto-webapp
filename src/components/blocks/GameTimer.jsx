@@ -42,7 +42,7 @@ const GameTimer = ({ time, timeStarted }) => {
 
         if (distance < 0) {
           clearInterval(myInterval);
-          console.log("expired");
+          // console.log("expired");
         }
       }, 1000);
     }

@@ -114,7 +114,7 @@ const FnputCodeModal = () => {
     handlePOSTRequest(RESET_PASSWORD_URL, payload)
       .then((response) => {
         setIsLoading(false);
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           dispatch(
             setAlertPopUp({
@@ -135,7 +135,7 @@ const FnputCodeModal = () => {
       .catch((error) => {
         setIsLoading(false);
         setResponseError("An error occurred, please try again");
-        console.log(error);
+        // console.log(error);
       });
   };
 

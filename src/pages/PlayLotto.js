@@ -56,7 +56,7 @@ const PlayLotto = () => {
       let findType = gameTypes?.find((item) => item?.type === pay);
 
       if (findType) {
-        console.log(findType);
+        // console.log(findType);
 
         dispatch(setSelectedType(findType));
         dispatch(setSelectedCoupons([]));

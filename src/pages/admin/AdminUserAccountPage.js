@@ -141,7 +141,7 @@ const AdminUserAccountPage = () => {
             payload: null,
           })
         );
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -164,7 +164,7 @@ const AdminUserAccountPage = () => {
   }, [clearSeasrchFilter]);
 
   const handleEdit = (item) => {
-    console.log(item);
+    // console.log(item);
   };
 
   const handleDelete = (item) => {

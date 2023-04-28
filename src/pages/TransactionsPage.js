@@ -155,12 +155,12 @@ const TransactionsPage = () => {
   const fetchMore = (type, url, payload) => {
     setIsLoading(true);
 
-    console.log(payload);
+    // console.log(payload);
 
     handlePOSTRequest(url, payload)
       .then((response) => {
         setIsLoading(false);
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           let requestData = response?.data?.data;
 
@@ -210,7 +210,7 @@ const TransactionsPage = () => {
             payload: null,
           })
         );
-        console.log(error);
+        // console.log(error);
       });
   };
 

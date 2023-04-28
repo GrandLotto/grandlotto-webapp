@@ -144,7 +144,7 @@ const AdminVerifyKYCPage = () => {
             payload: null,
           })
         );
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -167,7 +167,7 @@ const AdminVerifyKYCPage = () => {
   }, [clearSeasrchFilter]);
 
   const handleEdit = (item) => {
-    console.log(item);
+    // console.log(item);
     dispatch(
       setConfirmModal({
         status: true,
@@ -182,7 +182,7 @@ const AdminVerifyKYCPage = () => {
   };
 
   const handleDelete = (item) => {
-    console.log(item);
+    // console.log(item);
     dispatch(
       setConfirmModal({
         status: true,

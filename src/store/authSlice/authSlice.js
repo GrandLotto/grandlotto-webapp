@@ -148,7 +148,7 @@ const authSlice = createSlice({
         state.pendingKYCusers = payload.data?.data;
         state.pendingKYCusersPage = payload.data?.pageNumber;
         state.pendingKYCusersTotalPages = payload.data?.totalPages;
-        console.log("pendingKYCusers", state.pendingKYCusers);
+        // console.log("pendingKYCusers", state.pendingKYCusers);
       } else {
         state.pendingKYCusers = [];
         state.pendingKYCusersPage = 1;
@@ -157,7 +157,7 @@ const authSlice = createSlice({
     });
 
     builder.addCase(getAllroles.fulfilled, (state, { payload }) => {
-      console.log("getAllroles", payload);
+      // console.log("getAllroles", payload);
       if (payload) {
         state.allRoles = payload;
       } else {

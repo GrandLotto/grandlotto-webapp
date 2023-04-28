@@ -47,6 +47,7 @@ const PLAY_GAME_URL = "/v1.0/Game/playgames";
 const GET_GAMES_TYPES_URL = "/v1.0/Game/getgamestype";
 const GET_GAMES_PLAYING_TYPES_URL = "/v1.0/Game/getgamesplayingtype";
 const GET_GAMES_BY_TICKETID_URL = "/v1.0/Game/GetGamesbyTicketId";
+const VALIDATE_GAMES_URL = "/v1.0/Game/validategames";
 const GET_GAMES_WININNG_LOGS_URL = "/v1.0/Game/Getgameswininglogs";
 const CALCULATE_WINNING_URL = "/v1.0/Game/CalulatePotentialwinning";
 const EXISTING_GAME_URL = "/v1.0/Game/getallexistinggames";
@@ -118,4 +119,5 @@ export {
   DECLINE_USER_KYC_URL,
   GET_ALL_ROLES_URL,
   ADD_USER_TO_ROLES_URL,
+  VALIDATE_GAMES_URL,
 };

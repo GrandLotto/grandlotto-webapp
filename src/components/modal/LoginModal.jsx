@@ -96,7 +96,7 @@ const LoginModal = () => {
     handlePOSTRequest(LOGIN_URL, payload)
       .then((response) => {
         setIsLoading(false);
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           if (response.data.data.emailConfirmed) {
             const data = {
@@ -153,7 +153,7 @@ const LoginModal = () => {
       .catch((error) => {
         setIsLoading(false);
         setResponseError("An error occurred, please try again");
-        console.log(error);
+        // console.log(error);
       });
 
     setTimeout(() => {
