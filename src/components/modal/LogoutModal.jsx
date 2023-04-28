@@ -9,6 +9,7 @@ import {
 } from "../../store/authSlice/authSlice";
 
 import { persistor } from "../../store/store";
+import { setAccountBalances } from "../../store/wallet/walletSlice";
 
 const LogoutModal = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const LogoutModal = () => {
       setIsLoading(false);
       dispatch(setIsUserLoggedIn(false));
       dispatch(setIsAdmin(false));
+      dispatch(setAccountBalances(null));
       dispatch(logout());
       persistor.pause();
       persistor.flush().then(() => {
