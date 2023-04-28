@@ -223,6 +223,16 @@ const SidebarMenuMobile = () => {
                     </NavLink>
                     <NavLink
                       className="sidebarLinkMenusItem"
+                      to="/admin/games/validate-games"
+                    >
+                      <div className="sidebarLinkMenusItemLeft">
+                        <i className="bx bx-layout"></i>
+                        <span>Validate games</span>
+                      </div>
+                      <i className="bx bx-chevron-right"></i>
+                    </NavLink>
+                    <NavLink
+                      className="sidebarLinkMenusItem"
                       to="/admin/games/winnings"
                     >
                       <div className="sidebarLinkMenusItemLeft">
