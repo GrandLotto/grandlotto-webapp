@@ -51,8 +51,10 @@ const ConfirmModal = () => {
   };
 
   useEffect(() => {
-    validateForm();
-  }, [inputt, emptyFields]);
+    if (modal?.status === true) {
+      validateForm();
+    }
+  }, [modal, inputt, emptyFields]);
 
   const validateForm = () => {
     if (modal?.hasMesage === true) {
@@ -104,6 +106,14 @@ const ConfirmModal = () => {
         newPayload,
         `${modal?.payload?.firstName}'s Account has been deactivated`
       );
+      return;
+    }
+    if (modal.type === "DELETE_ACCOUNT") {
+      let newPayload = {
+        email: modal?.payload?.email,
+        disable: true,
+      };
+      handlePOST(DISABLE_USERS_URL, newPayload, `My Account has been disabled`);
       return;
     }
     if (modal.type === "APPROVE_KYC") {

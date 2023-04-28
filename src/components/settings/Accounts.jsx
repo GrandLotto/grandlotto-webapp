@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setConfirmModal } from "../../store/alert/alertSlice";
 
 const Accounts = () => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.oauth.user);
 
   const proceed = () => {
     dispatch(
@@ -14,7 +15,9 @@ const Accounts = () => {
         title: "Delete Account",
         desc: "Why do you want to delete your account?",
         hasMesage: true,
-        payload: null,
+        payload: {
+          email: user?.email,
+        },
         buttonText: "",
       })
     );

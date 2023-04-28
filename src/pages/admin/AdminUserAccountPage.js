@@ -168,7 +168,7 @@ const AdminUserAccountPage = () => {
   };
 
   const handleDelete = (item) => {
-    console.log(item);
+    // console.log(item);
 
     dispatch(
       setConfirmModal({

@@ -46,11 +46,24 @@ const App = () => {
   useEffect(() => {
     (async () => {
       if (user) {
-        dispatch(setRefreshing(true));
+        if (user?.isDisable === true) {
+          logoutUser();
+        } else {
+          dispatch(setRefreshing(true));
+        }
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    if (user) {
+      if (user?.isDisable === true) {
+        logoutUser();
+      }
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
   useEffect(() => {
     (async () => {
       if (user) {

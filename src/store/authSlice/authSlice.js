@@ -104,6 +104,7 @@ const authSlice = createSlice({
     builder.addCase(getUserInfo.pending, (state, { payload }) => {
       state.loading = true;
     });
+
     builder.addCase(getUserInfo.fulfilled, (state, { payload }) => {
       if (payload && payload.data) {
         state.loading = false;
