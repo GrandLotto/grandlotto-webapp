@@ -391,7 +391,7 @@ export const groupBy = (arr, key) => {
 
 export const groupBy2 = (arr) => {
   const groups = arr.reduce((groups, game) => {
-    const date = game.dayAvailable;
+    const date = game.startTime;
     if (!groups[date]) {
       groups[date] = [];
     }
@@ -559,7 +559,7 @@ export const sortArrayByname = (array) => {
 
 export const sortArrayBy2 = (array, key) => {
   return array.slice().sort(function (a, b) {
-    return a[key] > b[key] ? -1 : 1;
+    return b[key] > a[key] ? -1 : 1;
   });
 };
 
@@ -572,4 +572,49 @@ export const sortArrayBy = (array, key) => {
 export const isUserAnAdmin = (array) => {
   let admin = array.includes("Admin");
   return !!admin;
+};
+
+export const isToday = (date) => {
+  const today = new Date();
+
+  if (today.toDateString() === date.toDateString()) {
+    return true;
+  }
+
+  return false;
+};
+
+export const isTomorrow = (date) => {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  // 👇️ Tomorrow's date
+  console.log(tomorrow);
+
+  if (tomorrow.toDateString() === date.toDateString()) {
+    return true;
+  }
+
+  return false;
+};
+
+export const getDayByName = (date) => {
+  const dayOfTheWeek = [
+    "SUNDAY",
+    "MONDAY",
+    "TUESDAY",
+    "WEDNESDAY",
+    "THURSDAY",
+    "FRIDAY",
+    "SATURDAY",
+  ];
+
+  let currentDate = new Date(date);
+  let newDatwToPlay = isToday(new Date(date))
+    ? "TODAY"
+    : isTomorrow(new Date(date))
+    ? "TOMORROW"
+    : dayOfTheWeek[currentDate.getDay()];
+
+  return newDatwToPlay;
 };

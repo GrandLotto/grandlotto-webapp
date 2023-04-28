@@ -53,7 +53,11 @@ const GameTimer = ({ time, timeStarted }) => {
       clearInterval(myInterval);
     };
   }, []);
-  return timeStarted && <div className="daysToExpireItems">{displayTimer}</div>;
+  return (
+    timeStarted && (
+      <div className="daysToExpireItems largeOne">{displayTimer}</div>
+    )
+  );
 };
 
 export default GameTimer;

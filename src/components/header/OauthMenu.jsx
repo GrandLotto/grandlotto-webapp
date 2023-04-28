@@ -7,6 +7,7 @@ import {
   setMobileMenu,
   setRedeemWinningModal,
 } from "../../store/alert/alertSlice";
+import ClockTimer from "../blocks/ClockTimer";
 
 const OauthMenu = () => {
   const dispatch = useDispatch();
@@ -70,9 +71,7 @@ const OauthMenu = () => {
         </div>
         <div className="oauthMenuRight">
           {/* <p>12:00:59 AM</p> */}
-          <p>
-            {digitalDate} {getAMPM()}
-          </p>
+          <ClockTimer time={new Date()} timeStarted={true} />
         </div>
       </div>
 

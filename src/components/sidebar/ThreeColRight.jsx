@@ -81,7 +81,7 @@ const ThreeColRight = () => {
           <div className="countDownExpiry" id="countDownExpiry">
             <div className="daysToExpire">
               <div className="daysToExpireItems demacat">Starts In</div>
-
+              <div className="daysToExpireItems">Day : hour : min : sec</div>
               <GameTimer time={betTimer} timeStarted={betStarted} />
 
               {/* <div className="daysToExpireItems">

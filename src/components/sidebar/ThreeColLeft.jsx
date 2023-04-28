@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   checkIfGameHasExpired,
   formatAMPM,
+  getDayByName,
   groupBy2,
 } from "../../global/customFunctions";
 import {
@@ -72,7 +73,7 @@ const ThreeColLeft = () => {
 
   useEffect(() => {
     if (games) {
-      // console.log(groupBy2(games, "dayAvailable"));
+      console.log("games", groupBy2(games, "dayAvailable"));
     }
   }, [games]);
 
@@ -129,7 +130,7 @@ const ThreeColLeft = () => {
               groupBy2(games)?.map((item, index) => (
                 <div className="open_roles_grid_item" key={index}>
                   <div className={`open_roles_grid_item_header `}>
-                    <h5>{item?.date}</h5>
+                    <h5>{getDayByName(item?.date)}</h5>
                     <i className="fa fa-chevron-right"></i>
                   </div>
                   <div className={`open_roles_grid_item_body `}>
