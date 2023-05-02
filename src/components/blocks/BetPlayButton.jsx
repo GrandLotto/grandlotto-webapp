@@ -6,6 +6,7 @@ import { handlePOSTRequest } from "../../rest/apiRest";
 import {
   setAlertBetModal,
   setAlertPopUp,
+  setLoginModal,
   setPageLoading,
 } from "../../store/alert/alertSlice";
 import { setRefreshing } from "../../store/authSlice/authSlice";
@@ -251,8 +252,9 @@ const BetPlayButton = () => {
   ) : (
     <button
       type="button"
+      onClick={() => dispatch(setLoginModal(true))}
       className="grandLottoButton cardButton"
-      disabled={true}
+      disabled={false}
     >
       Login to place bet
     </button>

@@ -53,6 +53,7 @@ const RegisterModal = () => {
     setConfirmPasswordError("");
     setShowPassword(false);
     setShowConfirmPassword(false);
+    setAcceptTerms(false);
     setPassword("");
     setEmailError("");
     setResponseError("");
@@ -250,6 +251,35 @@ const RegisterModal = () => {
             </div>
             <form className="grandlotto_form mt-4" style={{ width: "100%" }}>
               <div className="row">
+                <div className="col-md-12 text-center mb-5">
+                  <p
+                    className="inputError text-center "
+                    style={{ color: "#f29b43", marginRight: 0, width: "100%" }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="10"
+                      height="10"
+                      viewBox="0 0 20 20"
+                      role="presentation"
+                      focusable="false"
+                      tabIndex="-1"
+                      fill="#f29b43"
+                    >
+                      <path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 11c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1 4H9v-2h2v2z"></path>
+                    </svg>
+                    <span className="ml-2">
+                      <b>NOTE: </b>
+                    </span>
+                    <span
+                      style={{ fontSize: 13 }}
+                      className="ml-2 d-block pr-2"
+                    >
+                      Your first name and last name must match with the name on
+                      your bank account name{" "}
+                    </span>
+                  </p>
+                </div>
                 <div className="col-md-6 mb-4">
                   <div className="form-group" style={{ width: "100%" }}>
                     <label htmlFor="">First Name (Legal name)</label>

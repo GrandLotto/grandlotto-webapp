@@ -560,12 +560,23 @@ const Fundwallet = () => {
                         style={{ columnGap: 15 }}
                       >
                         {time !== 0 ? (
+                          // <button
+                          //   type="button"
+                          //   onClick={() => handlePaid()}
+                          //   className="grandLottoButton cardButton"
+                          // >
+                          //   I have paid
+                          // </button>
                           <button
                             type="button"
-                            onClick={() => handlePaid()}
+                            onClick={() => {
+                              handleCancel();
+
+                              dispatch(setRefreshing(true));
+                            }}
                             className="grandLottoButton cardButton"
                           >
-                            I have paid
+                            Close
                           </button>
                         ) : (
                           <>

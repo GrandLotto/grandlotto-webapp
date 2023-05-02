@@ -119,15 +119,15 @@ const PlayLotto = () => {
           }
 
           if (selectedCoupons?.length === 3) {
-            filteredWith = "PERM3";
+            filteredWith = "PERM2";
           }
 
           if (selectedCoupons?.length === 4) {
-            filteredWith = "PERM4";
+            filteredWith = "PERM2";
           }
 
           if (selectedCoupons?.length === 5) {
-            filteredWith = "PERM5";
+            filteredWith = "PERM2";
           }
 
           let selectednewType = gameTypes?.find(

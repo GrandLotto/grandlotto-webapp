@@ -325,9 +325,7 @@ const CreateGameModal = () => {
                       }}
                       value={status}
                     >
-                      <option value="" disabled>
-                        Select status
-                      </option>
+                      <option value="">Select status</option>
 
                       {["OPEN", "CLOSE"]?.map((item, index) => (
                         <option key={index} value={item}>

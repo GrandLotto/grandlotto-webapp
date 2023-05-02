@@ -98,7 +98,7 @@ const walletSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(getAccountBalances.pending, (state, { payload }) => {
-      state.accountBalances = null;
+      // state.accountBalances = null;
       state.loading = true;
     });
 

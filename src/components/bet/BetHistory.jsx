@@ -80,6 +80,7 @@ const BetHistory = ({
                     {/* <td>{index < 10 ? "0" + (index + 1) : index}</td> */}
                     <td>{item?.gameTicket || item?.id}</td>
                     <td>{item?.numbersplayed}</td>
+                    <td>{item?.gameName}</td>
                     <td>{item?.gameTypeName}</td>
                     <td>
                       ₦{" "}

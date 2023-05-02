@@ -262,7 +262,7 @@ const Results = () => {
                                     <td>
                                       <div className="gameResults mb-3">
                                         <span className="mb-2 d-block">
-                                          WinningNumbers
+                                          Winning Numbers
                                         </span>
                                         <div className="lotto_results_right_coupons">
                                           {item?.winningNumbers
@@ -279,7 +279,7 @@ const Results = () => {
                                       </div>
                                       <div className="gameResults">
                                         <span className="mb-2 d-block">
-                                          machineNumber
+                                          Machine Number
                                         </span>
                                         <div className="lotto_results_right_coupons">
                                           {item?.machineNumber

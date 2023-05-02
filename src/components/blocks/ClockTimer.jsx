@@ -27,9 +27,7 @@ const ClockTimer = ({ time, timeStarted }) => {
         minutes = ("0" + minutes).slice(-2);
         hour = hour % 12 || 12;
 
-        setDisplayTimer(
-          addZero(hour) + ":" + addZero(minutes) + ":" + addZero(seconds)
-        );
+        setDisplayTimer(addZero(hour) + ":" + minutes + ":" + addZero(seconds));
       }, 1000);
     }
 

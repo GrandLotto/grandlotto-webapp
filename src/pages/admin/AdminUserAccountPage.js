@@ -48,6 +48,9 @@ const AdminUserAccountPage = () => {
       name: "Status",
     },
     {
+      name: "Submitted KYC",
+    },
+    {
       name: "Created on",
     },
 

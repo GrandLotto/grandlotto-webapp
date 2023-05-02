@@ -77,6 +77,7 @@ const UsersTable = ({
                         </span>
                       )}
                     </td>
+                    <td>{item?.kycverification === null ? "No" : "Yes"}</td>
                     <td>{formateDateAndTimeByName(item?.lastLogin)}</td>
                     <td>
                       <div

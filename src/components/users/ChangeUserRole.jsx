@@ -16,17 +16,17 @@ const ChangeUserRole = () => {
   const allRoles = useSelector((state) => state.oauth.allRoles);
 
   const [userDetails, setuserDetails] = useState(null);
-  const [selectedRole, setSelectedRole] = useState("");
+  const [selectedRole, setSelectedRole] = useState([]);
   const [searchText, setsearchText] = useState("");
   const [emptyFields, setEmptyFields] = useState(true);
 
   const [responseError, setResponseError] = useState("");
 
-  useEffect(() => {
-    if (user) {
-      setSelectedRole(user?.roles[0]);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     setSelectedRole(user?.roles[0]);
+  //   }
+  // }, [user]);
 
   useEffect(() => {
     return () => {
@@ -39,11 +39,23 @@ const ChangeUserRole = () => {
   }, [searchText]);
 
   useEffect(() => {
+    if (userDetails) {
+      setSelectedRole(userDetails?.roles);
+    }
+  }, [userDetails]);
+
+  // useEffect(() => {
+  //   if (selectedRole) {
+  //     console.log("selectedRole", selectedRole);
+  //   }
+  // }, [selectedRole]);
+
+  useEffect(() => {
     validateForm();
   }, [selectedRole, emptyFields]);
 
   const validateForm = () => {
-    if (!selectedRole) {
+    if (!selectedRole && selectedRole?.length <= 0) {
       setEmptyFields(true);
       return false;
     }
@@ -52,10 +64,39 @@ const ChangeUserRole = () => {
 
   const reset = () => {
     setsearchText("");
-    setSelectedRole("");
+    setSelectedRole([]);
     setResponseError("");
     setuserDetails(null);
     setEmptyFields(true);
+  };
+
+  const isSelected = (roleName) => {
+    let selected = selectedRole?.find(
+      (item) => item?.toUpperCase() === roleName?.toUpperCase()
+    );
+    return !!selected;
+  };
+
+  const handleSelectRole = (role) => {
+    if (selectedRole?.length) {
+      let addedRole = selectedRole?.find(
+        (addedR) => addedR?.toUpperCase() === role?.name?.toUpperCase()
+      );
+
+      if (addedRole) {
+        let removeRole = selectedRole?.filter(
+          (addedR) => addedR?.toUpperCase() !== addedRole?.toUpperCase()
+        );
+
+        if (removeRole) {
+          setSelectedRole(removeRole);
+        }
+      } else {
+        setSelectedRole([...selectedRole, role?.name]);
+      }
+    } else {
+      setSelectedRole([role?.name]);
+    }
   };
 
   const checkUser = () => {
@@ -81,7 +122,7 @@ const ChangeUserRole = () => {
     setResponseError("");
 
     const payload = {
-      email: searchText,
+      email: searchText?.trim(),
     };
 
     // console.log(payload);
@@ -259,15 +300,15 @@ const ChangeUserRole = () => {
                   {userDetails?.firstName + " " + userDetails?.lastName}
                 </h6>
                 <p>{userDetails?.email}</p>
-                <p>
+                {/* <p>
                   {" "}
                   <b>Roles:</b>{" "}
                   {userDetails?.roles?.map((role, index) =>
                     index !== 0 ? ", " + role : role
                   )}
-                </p>
+                </p> */}
 
-                <div className="form-group text-left mt-3">
+                {/* <div className="form-group text-left mt-3">
                   <label
                     htmlFor=""
                     className="text-left"
@@ -298,6 +339,98 @@ const ChangeUserRole = () => {
                           </option>
                         ))}
                   </select>
+                </div> */}
+                <br />
+
+                <div className="grandlotto_table text-center mt-3">
+                  <div className="table-responsive">
+                    <table className="table">
+                      <thead>
+                        <tr>
+                          <th>Role</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      {allRoles && allRoles?.length ? (
+                        <tbody>
+                          {allRoles
+                            ?.filter((item) => item?.name !== "")
+                            ?.map((item, index) => (
+                              <tr key={index}>
+                                <td>{item?.name}</td>
+
+                                <td>
+                                  <div className="checkboxDiv">
+                                    <div
+                                      className="form-check"
+                                      style={{
+                                        fontSize: 13,
+                                        fontStyle: "italic",
+                                      }}
+                                    >
+                                      <input
+                                        checked={
+                                          isSelected(item?.name) === true
+                                            ? true
+                                            : false
+                                        }
+                                        onChange={() => handleSelectRole(item)}
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        id="flexCheckDefault"
+                                      />
+                                      <label
+                                        className="form-check-label"
+                                        htmlFor="flexCheckDefault"
+                                      ></label>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))}
+                        </tbody>
+                      ) : (
+                        <tbody>
+                          <tr>
+                            <td colSpan={2}>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <div className="no_data_div">
+                                  <br />
+                                  <br />
+                                  <br />
+                                  <div
+                                    className="d-flex align-items-center justify-content-center"
+                                    style={{ flexDirection: "column" }}
+                                  >
+                                    <h4
+                                      className="mb-4"
+                                      style={{
+                                        fontSize: "18px",
+                                        fontWeight: 500,
+                                      }}
+                                    >
+                                      No Role available
+                                    </h4>
+                                  </div>
+
+                                  <br />
+                                  <br />
+                                  <br />
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      )}
+                    </table>
+                  </div>
                 </div>
 
                 <div className="mt-5 text-center mb-3">

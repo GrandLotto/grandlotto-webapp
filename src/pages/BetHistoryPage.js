@@ -55,6 +55,9 @@ const BetHistoryPage = () => {
       name: "Games Played",
     },
     {
+      name: "Games Name",
+    },
+    {
       name: "Games Type",
     },
     {
