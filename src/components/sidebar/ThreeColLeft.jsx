@@ -60,7 +60,7 @@ const ThreeColLeft = () => {
 
     dispatch(setSelectedGame(null));
     dispatch(setCalculatedGames(null));
-    dispatch(setSelectedGame(null));
+    dispatch(setExpiryDate(null));
     dispatch(setSelectedCoupons([]));
 
     setTimeout(() => {

@@ -35,9 +35,11 @@ import {
 import {
   setCalculatedGames,
   setExpiryDate,
+  setSelectedGame,
   setSelectedGametimer,
 } from "./store/betSlice/betSlice";
 import { persistor } from "./store/store";
+import { setSelectedCoupons } from "./store/wallet/walletSlice";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -172,6 +174,10 @@ const App = () => {
     dispatch(setLoginModal(false));
     dispatch(setRegisterModal(false));
     dispatch(setRedeemWinningModal(false));
+
+    dispatch(setSelectedGame(null));
+    dispatch(setSelectedCoupons([]));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
