@@ -4,12 +4,11 @@ import BetSlipsBox from "../blocks/BetSlipsBox";
 import GameTimer from "../blocks/GameTimer";
 import LottoNumberBox from "../blocks/LottoNumberBox";
 import TopSearch from "../blocks/TopSearch";
+import { checkIfGameHasStarted } from "../../global/customFunctions";
 
 const ThreeColRight = () => {
   const selectedCoupons = useSelector((state) => state.bets.selectedCoupons);
-  // const selectedGametimer = useSelector(
-  //   (state) => state.bets.selectedGametimer
-  // );
+  const selectedGame = useSelector((state) => state.bets.selectedGame);
   const expiryDate = useSelector((state) => state.bets.expiryDate);
   const [selectedAmount, setselectedAmount] = useState(0);
   const [betTimer, setBetTimer] = useState(null);
@@ -22,10 +21,14 @@ const ThreeColRight = () => {
   useEffect(() => {
     setBetStarted(false);
     if (expiryDate) {
-      let newDate = new Date(expiryDate);
-      let startedTime = newDate.getTime();
-      setBetTimer(startedTime);
-      setBetStarted(true);
+      if (checkIfGameHasStarted(expiryDate) === true) {
+        setBetStarted(false);
+      } else {
+        let newDate = new Date(expiryDate);
+        let startedTime = newDate.getTime();
+        setBetTimer(startedTime);
+        setBetStarted(true);
+      }
     } else {
       setBetTimer(null);
     }
@@ -77,12 +80,27 @@ const ThreeColRight = () => {
             </div>
           ) : null}
         </div>
-        {betStarted && (
+        {(selectedGame || expiryDate) && (
           <div className="countDownExpiry" id="countDownExpiry">
             <div className="daysToExpire">
-              <div className="daysToExpireItems demacat">Starts In</div>
+              <div className="daysToExpireItems demacat">
+                {checkIfGameHasStarted(selectedGame?.startTime) === true
+                  ? "Closes In"
+                  : betTimer
+                  ? "Starts In"
+                  : ""}
+              </div>
 
-              <GameTimer time={betTimer} timeStarted={betStarted} />
+              {checkIfGameHasStarted(selectedGame?.startTime) === true ? (
+                <GameTimer
+                  time={new Date(selectedGame?.endTime).getTime()}
+                  timeStarted={true}
+                />
+              ) : (
+                betStarted && (
+                  <GameTimer time={betTimer} timeStarted={betStarted} />
+                )
+              )}
 
               {/* <div className="daysToExpireItems">
                 Days hours minutes seconds

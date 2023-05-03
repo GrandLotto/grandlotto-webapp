@@ -160,6 +160,40 @@ export const checkIfGameHasExpired = (gameTime) => {
     hasExpired = true;
   }
 
+  // console.log(hasExpired);
+
+  return hasExpired;
+};
+
+export const checkIfGameHasStarted = (gameTime) => {
+  let hasExpired = false;
+  let newDateTime = new Date(gameTime).getTime();
+  let todaysTime = new Date().getTime();
+
+  if (newDateTime < todaysTime) {
+    hasExpired = true;
+  } else {
+    hasExpired = false;
+  }
+
+  // console.log(hasExpired);
+
+  return hasExpired;
+};
+
+export const checkIfGameHasEnded = (gameTime) => {
+  let hasExpired = false;
+  let newDateTime = new Date(gameTime).getTime();
+  let todaysTime = new Date().getTime();
+
+  if (newDateTime < todaysTime) {
+    hasExpired = true;
+  } else {
+    hasExpired = false;
+  }
+
+  // console.log(hasExpired);
+
   return hasExpired;
 };
 
@@ -414,6 +448,12 @@ export const groupBy2 = (arr) => {
 
   return sortArrayBy2(groupArrays, "date");
   // return groupArrays;
+};
+
+export const availableGamesToPlay = (arr) => {
+  return (
+    arr?.filter((game) => checkIfGameHasEnded(game?.endTime) === false) || []
+  );
 };
 
 export const addZero = (i) => {

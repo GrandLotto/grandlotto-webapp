@@ -3,7 +3,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
+  availableGamesToPlay,
   checkIfGameHasExpired,
+  checkIfGameHasStarted,
   formatAMPM,
   // getDayByName,
   groupBy2,
@@ -44,7 +46,7 @@ const ThreeColLeft = () => {
     dispatch(setExpiryDate(null));
     setTimeout(() => {
       if (item) {
-        dispatch(setExpiryDate(item?.endTime));
+        dispatch(setExpiryDate(item?.startTime));
       }
     }, 500);
   };
@@ -55,20 +57,43 @@ const ThreeColLeft = () => {
         return;
       }
     }
-    if (checkIfGameHasExpired(item?.endTime) === false) {
-      // console.log("selectedGame", item);
-      dispatch(setSelectedGame(item));
-      dispatch(setCalculatedGames(null));
-      handleTimer(item);
-      dispatch(setSelectedCoupons([]));
-    } else {
-      dispatch(
-        setAlertSmallPOPUP({
-          status: true,
-          message: "Game Expired",
-        })
-      );
-    }
+
+    dispatch(setSelectedGame(null));
+    dispatch(setCalculatedGames(null));
+    dispatch(setSelectedGame(null));
+    dispatch(setSelectedCoupons([]));
+
+    setTimeout(() => {
+      if (checkIfGameHasStarted(item?.startTime) === true) {
+        if (checkIfGameHasExpired(item?.endTime) === false) {
+          // console.log("selectedGame", item);
+          dispatch(setSelectedGame(item));
+          // dispatch(setCalculatedGames(null));
+          handleTimer(item);
+          // dispatch(setSelectedCoupons([]));
+        } else {
+          dispatch(
+            setAlertSmallPOPUP({
+              status: true,
+              message: "Game Expired",
+            })
+          );
+          dispatch(setExpiryDate(null));
+        }
+      } else {
+        handleTimer(item);
+        // dispatch(
+        //   setAlertSmallPOPUP({
+        //     status: true,
+        //     message: "Game is yet to start",
+        //   })
+        // );
+        dispatch(setSelectedGame(null));
+        // dispatch(setCalculatedGames(null));
+
+        // dispatch(setSelectedCoupons([]));
+      }
+    }, 500);
   };
 
   // useEffect(() => {
@@ -126,8 +151,9 @@ const ThreeColLeft = () => {
 
         <div className="open_roles">
           <div className="open_roles_grid">
-            {games && games?.length ? (
-              groupBy2(games)?.map((item, index) => (
+            {availableGamesToPlay(games) &&
+            availableGamesToPlay(games)?.length ? (
+              groupBy2(availableGamesToPlay(games))?.map((item, index) => (
                 <div className="open_roles_grid_item" key={index}>
                   <div className={`open_roles_grid_item_header `}>
                     {/* <h5>{getDayByName(item?.date)}</h5> */}
@@ -148,23 +174,49 @@ const ThreeColLeft = () => {
                         >
                           <div className="d-flex justify-content-between align-items-center">
                             <div className="open_body_contents_left">
-                              <div className="d-flex justify-content-between align-items-center">
+                              <div className="d-flex flex-column justify-content-between align-items-center">
                                 <h5>{newItem?.name}</h5>
+                                {checkIfGameHasStarted(newItem?.startTime) ===
+                                  true && (
+                                  <span
+                                    className="badge badge-success"
+                                    style={{ fontSize: 11 }}
+                                  >
+                                    Game started
+                                  </span>
+                                )}
                               </div>
                             </div>
-                            <div className="open_body_contents_right">
-                              <p>BETTING CLOSES</p>
-                              {checkIfGameHasExpired(newItem?.endTime) ===
-                              true ? (
-                                <h5>
-                                  <span className="badge badge-danger">
-                                    Expired
-                                  </span>
-                                </h5>
-                              ) : (
-                                <h5>{formatAMPM(newItem?.endTime)}</h5>
-                              )}
-                            </div>
+                            {checkIfGameHasStarted(newItem?.startTime) ===
+                            true ? (
+                              <div className="open_body_contents_right">
+                                <p>BETTING CLOSES</p>
+                                {checkIfGameHasExpired(newItem?.endTime) ===
+                                true ? (
+                                  <h5>
+                                    <span className="badge badge-danger">
+                                      Expired
+                                    </span>
+                                  </h5>
+                                ) : (
+                                  <h5>{formatAMPM(newItem?.endTime)}</h5>
+                                )}
+                              </div>
+                            ) : (
+                              <div className="open_body_contents_right">
+                                <p>BETTING STARTS</p>
+                                {checkIfGameHasExpired(newItem?.endTime) ===
+                                true ? (
+                                  <h5>
+                                    <span className="badge badge-danger">
+                                      Expired
+                                    </span>
+                                  </h5>
+                                ) : (
+                                  <h5>{formatAMPM(newItem?.startTime)}</h5>
+                                )}
+                              </div>
+                            )}
                           </div>
                         </div>
                       ))}
