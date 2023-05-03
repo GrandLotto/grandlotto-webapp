@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   checkIfGameHasExpired,
   formatAMPM,
-  getDayByName,
+  // getDayByName,
   groupBy2,
 } from "../../global/customFunctions";
 import {
@@ -44,7 +44,7 @@ const ThreeColLeft = () => {
     dispatch(setExpiryDate(null));
     setTimeout(() => {
       if (item) {
-        dispatch(setExpiryDate(item?.startTime));
+        dispatch(setExpiryDate(item?.endTime));
       }
     }, 500);
   };
@@ -55,7 +55,7 @@ const ThreeColLeft = () => {
         return;
       }
     }
-    if (checkIfGameHasExpired(item?.startTime) === false) {
+    if (checkIfGameHasExpired(item?.endTime) === false) {
       // console.log("selectedGame", item);
       dispatch(setSelectedGame(item));
       dispatch(setCalculatedGames(null));
@@ -130,7 +130,8 @@ const ThreeColLeft = () => {
               groupBy2(games)?.map((item, index) => (
                 <div className="open_roles_grid_item" key={index}>
                   <div className={`open_roles_grid_item_header `}>
-                    <h5>{getDayByName(item?.date)}</h5>
+                    {/* <h5>{getDayByName(item?.date)}</h5> */}
+                    <h5>{item?.date}</h5>
                     <i className="fa fa-chevron-right"></i>
                   </div>
                   <div className={`open_roles_grid_item_body `}>
@@ -153,7 +154,7 @@ const ThreeColLeft = () => {
                             </div>
                             <div className="open_body_contents_right">
                               <p>BETTING CLOSES</p>
-                              {checkIfGameHasExpired(newItem?.startTime) ===
+                              {checkIfGameHasExpired(newItem?.endTime) ===
                               true ? (
                                 <h5>
                                   <span className="badge badge-danger">
@@ -161,7 +162,7 @@ const ThreeColLeft = () => {
                                   </span>
                                 </h5>
                               ) : (
-                                <h5>{formatAMPM(newItem?.startTime)}</h5>
+                                <h5>{formatAMPM(newItem?.endTime)}</h5>
                               )}
                             </div>
                           </div>

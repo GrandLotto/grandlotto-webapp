@@ -391,11 +391,15 @@ export const groupBy = (arr, key) => {
 
 export const groupBy2 = (arr) => {
   const groups = arr.reduce((groups, game) => {
-    const date = game.startTime;
+    const date = game.dayAvailable;
+    // const dayAvailable = game.dayAvailable;
     if (!groups[date]) {
       groups[date] = [];
+      // groups[dayAvailable] = [];
     }
     groups[date].push(game);
+    // groups[dayAvailable].push(game);
+
     return groups;
   }, {});
 
@@ -559,7 +563,7 @@ export const sortArrayByname = (array) => {
 
 export const sortArrayBy2 = (array, key) => {
   return array.slice().sort(function (a, b) {
-    return b[key] > a[key] ? -1 : 1;
+    return b[key] < a[key] ? -1 : 1;
   });
 };
 
