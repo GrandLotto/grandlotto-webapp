@@ -286,7 +286,7 @@ const Results = () => {
                                             .split(",")
                                             ?.map((newItem, newIndex) => (
                                               <div
-                                                className="lotto_results_right_coupons_item"
+                                                className="lotto_results_right_coupons_item  lotto_results_right_coupons_itemMachine"
                                                 key={newIndex}
                                               >
                                                 {newItem}
