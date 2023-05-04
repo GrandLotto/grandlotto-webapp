@@ -90,27 +90,29 @@ const BetHistory = ({
                     </td>
                     <td>{formateDateAndTimeByName(item?.datePlayed)}</td>
                     <td>
-                      {item?.status?.toLowerCase() === "pending" && (
-                        <span
-                          className={`has_status ${[
-                            item?.status?.toLowerCase() === "pending"
-                              ? "isPending"
-                              : "",
-                          ]}`}
-                        >
-                          {item?.status}
+                      {["pending", "processing"].includes(
+                        item?.status?.toLowerCase()
+                      ) && (
+                        <span className="has_status isPending">
+                          {item?.status || "none"}
+                        </span>
+                      )}
+                      {["lost"].includes(item?.status?.toLowerCase()) && (
+                        <span className="has_status isLost">
+                          {item?.status || "none"}
                         </span>
                       )}
 
-                      {item?.status?.toLowerCase() === "lost" && (
-                        <span
-                          className={`has_status ${[
-                            item?.status?.toLowerCase() === "lost"
-                              ? "isLost"
-                              : "",
-                          ]}`}
-                        >
-                          {item?.status}
+                      {["success", "won"].includes(
+                        item?.status?.toLowerCase()
+                      ) && (
+                        <span className="has_status ">
+                          {item?.status || "none"}
+                        </span>
+                      )}
+                      {[null].includes(item?.status) && (
+                        <span className="has_status isPending">
+                          {item?.status || "Processing"}
                         </span>
                       )}
                     </td>
@@ -187,25 +189,27 @@ const BetHistory = ({
                   <h4 className="">
                     <b>Bet ID: {item?.gameTicket || item?.id}</b>
                   </h4>
-                  {item?.status?.toLowerCase() === "pending" && (
-                    <span
-                      className={`has_status ${[
-                        item?.status?.toLowerCase() === "pending"
-                          ? "isPending"
-                          : "",
-                      ]}`}
-                    >
-                      {item?.status}
+                  {["pending", "processing"].includes(
+                    item?.status?.toLowerCase()
+                  ) && (
+                    <span className="has_status isPending">
+                      {item?.status || "none"}
+                    </span>
+                  )}
+                  {["lost"].includes(item?.status?.toLowerCase()) && (
+                    <span className="has_status isLost">
+                      {item?.status || "none"}
                     </span>
                   )}
 
-                  {item?.status?.toLowerCase() === "lost" && (
-                    <span
-                      className={`has_status ${[
-                        item?.status?.toLowerCase() === "lost" ? "isLost" : "",
-                      ]}`}
-                    >
-                      {item?.status}
+                  {["success", "won"].includes(item?.status?.toLowerCase()) && (
+                    <span className="has_status ">
+                      {item?.status || "none"}
+                    </span>
+                  )}
+                  {[null].includes(item?.status) && (
+                    <span className="has_status isPending">
+                      {item?.status || "Processing"}
                     </span>
                   )}
                 </div>
