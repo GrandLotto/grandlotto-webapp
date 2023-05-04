@@ -1,18 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AdminLayout from "../layout/AdminLayout";
+
 import LoggedInLayout from "../layout/LoggedInLayout";
 import MainLayout from "../layout/MainLayout";
 import OAuthLayout from "../layout/OAuthLayout";
 import ThreeColLayout from "../layout/ThreeColLayout";
 import TwoColLayout from "../layout/TwoColLayout";
-import AdminCreateGames from "../pages/admin/AdminCreateGames";
-import AdminCreateGametypes from "../pages/admin/AdminCreateGametypes";
-import AdminDashboard from "../pages/admin/AdminDashboard";
-import AdminGameWinning from "../pages/admin/AdminGameWinning";
-import AdminTransactionsPage from "../pages/admin/AdminTransactionsPage";
-import AdminUserAccountPage from "../pages/admin/AdminUserAccountPage";
-import AdminVerifyKYCPage from "../pages/admin/AdminVerifyKYCPage";
+
 import BetHistoryPage from "../pages/BetHistoryPage";
 import BetSlip from "../pages/BetSlip";
 import Dashboard from "../pages/Dashboard";
@@ -28,7 +22,6 @@ import TransferPage from "../pages/TransferPage";
 import WithdrawalPage from "../pages/WithdrawalPage";
 import VerifyPaystack from "../pages/VerifyPaystack";
 import PaymentResponsePage from "../pages/PaymentResponsePage";
-import AdminValidateGames from "../pages/admin/AdminValidateGames";
 
 const MyRouter = () => {
   return (
@@ -40,7 +33,7 @@ const MyRouter = () => {
           </Route>
           <Route element={<LoggedInLayout />}>
             <Route path="/account/dashboard" element={<Dashboard />} />
-            <Route element={<AdminLayout />}>
+            {/* <Route element={<AdminLayout />}>
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
               <Route
                 path="/admin/transactions"
@@ -70,7 +63,7 @@ const MyRouter = () => {
                 path="/admin/games/winnings"
                 element={<AdminGameWinning />}
               />
-            </Route>
+            </Route> */}
             <Route path="/account/profile" element={<Profile />} />
             <Route path="/account/fund-wallet" element={<FundWalletPage />} />
             <Route path="/account/transfer" element={<TransferPage />} />

@@ -85,9 +85,9 @@ const ThreeColRight = () => {
             <div className="daysToExpire">
               <div className="daysToExpireItems demacat">
                 {checkIfGameHasStarted(selectedGame?.startTime) === true
-                  ? "Closes In"
+                  ? "CLOSES IN"
                   : betTimer
-                  ? "Starts In"
+                  ? "STARTS IN"
                   : ""}
               </div>
 

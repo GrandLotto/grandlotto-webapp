@@ -5,7 +5,6 @@ import "./sidebar.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setLogoutModal,
-  setNotiicationModal,
   setRedeemWinningModal,
   setSideBarMenu,
 } from "../../store/alert/alertSlice";
@@ -16,12 +15,12 @@ import ion_football from "../../assets/images/ion_football.png";
 import healthicons from "../../assets/images/healthicons.png";
 import carbon_result from "../../assets/images/carbon_result.png";
 import verifiedcheck from "../../assets/images/verifiedcheck.png";
-import { addComma, isUserAnAdmin } from "../../global/customFunctions";
+import { addComma } from "../../global/customFunctions";
 
 const SidebarMenuMobile = () => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
-  const user = useSelector((state) => state.oauth.user);
+  // const user = useSelector((state) => state.oauth.user);
   const accountBalances = useSelector((state) => state.wallet.accountBalances);
   const sideBarMenu = useSelector((state) => state.alert.sideBarMenu);
   const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
@@ -159,7 +158,7 @@ const SidebarMenuMobile = () => {
                 </div>
                 <i className="bx bx-chevron-right"></i>
               </NavLink>
-              <a
+              {/* <a
                 href="true"
                 className="sidebarLinkMenusItem"
                 onClick={(e) => {
@@ -173,9 +172,9 @@ const SidebarMenuMobile = () => {
                   <span>Notification</span>
                 </div>
                 <i className="bx bx-chevron-right"></i>
-              </a>
+              </a> */}
 
-              {user &&
+              {/* {user &&
                 user?.roles?.length &&
                 isUserAnAdmin(user?.roles) === true && (
                   <div className="sidebarLinkMenusDiv">
@@ -262,7 +261,7 @@ const SidebarMenuMobile = () => {
                       <i className="bx bx-chevron-right"></i>
                     </NavLink>
                   </div>
-                )}
+                )} */}
             </div>
           ) : (
             <div className="sidebarLinkMenus">
@@ -403,7 +402,7 @@ const SidebarMenuMobile = () => {
                 })
               );
             }}
-            className="sidebarLinkMenusItem mt-2"
+            className="sidebarLinkMenusItem "
           >
             <div className="sidebarLinkMenusItemLeft">
               <i className="bx bx-log-out"></i>

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LOGIN_URL } from "../../config/urlConfigs";
-import { isUserAnAdmin, validEmail } from "../../global/customFunctions";
+import { validEmail } from "../../global/customFunctions";
 import { handlePOSTRequest } from "../../rest/apiRest";
 import {
   setAlertPopUp,
@@ -11,7 +11,6 @@ import {
   setRegisterModal,
 } from "../../store/alert/alertSlice";
 import {
-  setIsAdmin,
   setIsToken,
   setIsUserLoggedIn,
   setRefreshing,
@@ -125,13 +124,13 @@ const LoginModal = () => {
             dispatch(setUserInfo(data));
             dispatch(setIsUserLoggedIn(true));
 
-            if (data?.roles?.length) {
-              if (isUserAnAdmin(data?.roles) === true) {
-                dispatch(setIsAdmin(true));
-              } else {
-                dispatch(setIsAdmin(false));
-              }
-            }
+            // if (data?.roles?.length) {
+            //   if (isUserAnAdmin(data?.roles) === true) {
+            //     dispatch(setIsAdmin(true));
+            //   } else {
+            //     dispatch(setIsAdmin(false));
+            //   }
+            // }
 
             dispatch(getUserInfo(data?.email));
             setTimeout(() => {

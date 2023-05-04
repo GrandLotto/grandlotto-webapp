@@ -6,11 +6,11 @@ import Logo from "../../assets/images/grandlotto.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogoutModal, setSideBarMenu } from "../../store/alert/alertSlice";
 import SidebarMenuMobile from "./SidebarMenuMobile";
-import { isUserAnAdmin } from "../../global/customFunctions";
+// import { isUserAnAdmin } from "../../global/customFunctions";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.oauth.user);
+  // const user = useSelector((state) => state.oauth.user);
   const sideBarMenu = useSelector((state) => state.alert.sideBarMenu);
 
   return (
@@ -92,7 +92,7 @@ const Sidebar = () => {
                 </NavLink>
               </li>
 
-              {user &&
+              {/* {user &&
                 user?.roles?.length &&
                 isUserAnAdmin(user?.roles) === true && (
                   <div className="mt-3">
@@ -162,7 +162,7 @@ const Sidebar = () => {
                       </NavLink>
                     </li>
                   </div>
-                )}
+                )} */}
             </ul>
           </div>
         </div>
