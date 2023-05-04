@@ -157,7 +157,7 @@ const BetPlayButton = () => {
       gametypeId: selectedType?.id,
       gameType: selectedType?.type,
       numbersPlay: String(selectedCoupons),
-      ammount: Number(betAmount),
+      ammount: Number(calculatedGames?.ammountTopay),
       playingTypeId: gamePlayingTypes?.find(
         (item) =>
           item?.name.toLowerCase() === selectedPlayingType?.toLowerCase()

@@ -20,6 +20,12 @@ import {
 import { getUserInfo } from "../../store/authSlice/actions";
 import ComponentLoading from "../blocks/ComponentLoading";
 import Reponsemessage from "../blocks/Reponsemessage";
+import { setSelectedCoupons } from "../../store/wallet/walletSlice";
+import {
+  setBetAmount,
+  setCalculatedGames,
+  setExpiryDate,
+} from "../../store/betSlice/betSlice";
 
 const LoginModal = () => {
   const dispatch = useDispatch();
@@ -130,6 +136,10 @@ const LoginModal = () => {
             dispatch(getUserInfo(data?.email));
             setTimeout(() => {
               dispatch(setRefreshing(true));
+              dispatch(setSelectedCoupons([]));
+              dispatch(setBetAmount(0));
+              dispatch(setCalculatedGames(null));
+              dispatch(setExpiryDate(null));
             }, 1000);
           } else {
             dispatch(
