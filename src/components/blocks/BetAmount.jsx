@@ -78,7 +78,7 @@ const BetAmount = () => {
 
     dispatch(setCalculatedGames(null));
     setcalculatedgameErrorMes("");
-    // console.log(payload);
+    console.log(selectedGame);
 
     if (amount < 50) {
       dispatch(setCalculatedGames(null));

@@ -7,6 +7,7 @@ import {
   checkIfGameHasExpired,
   checkIfGameHasStarted,
   formatAMPM,
+  formateDateAndTimeByName,
   // getDayByName,
   groupBy2,
 } from "../../global/customFunctions";
@@ -96,11 +97,12 @@ const ThreeColLeft = () => {
     }, 500);
   };
 
-  // useEffect(() => {
-  //   if (games) {
-  //     console.log("games", groupBy2(games, "dayAvailable"));
-  //   }
-  // }, [games]);
+  useEffect(() => {
+    if (games) {
+      console.log("unGroupedGames", games);
+      console.log("games", groupBy2(games, "dayAvailable"));
+    }
+  }, [games]);
 
   useEffect(() => {
     if (selectedGame && selectedPlayingType) {
@@ -174,16 +176,28 @@ const ThreeColLeft = () => {
                         >
                           <div className="d-flex justify-content-between align-items-center">
                             <div className="open_body_contents_left">
-                              <div className="d-flex flex-column justify-content-between align-items-center">
+                              <div
+                                className="d-flex flex-column "
+                                style={{
+                                  flexDirection: "column",
+                                  textAlign: "left",
+                                }}
+                              >
                                 <h5>{newItem?.name}</h5>
                                 {checkIfGameHasStarted(newItem?.startTime) ===
-                                  true && (
+                                true ? (
                                   <span
                                     className="badge badge-success"
                                     style={{ fontSize: 11 }}
                                   >
                                     Game started
                                   </span>
+                                ) : (
+                                  <p style={{ fontSize: 10 }}>
+                                    {formateDateAndTimeByName(
+                                      newItem?.startTime
+                                    )}
+                                  </p>
                                 )}
                               </div>
                             </div>

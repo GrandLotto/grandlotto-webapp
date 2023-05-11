@@ -1,8 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { addZero } from "../../global/customFunctions";
+import { setRefreshing } from "../../store/authSlice/authSlice";
+import { useDispatch } from "react-redux";
 
 const GameTimer = ({ time, timeStarted }) => {
+  const dispatch = useDispatch();
   const [displayTimer, setDisplayTimer] = useState(null);
 
   useEffect(() => {
@@ -50,6 +53,7 @@ const GameTimer = ({ time, timeStarted }) => {
     return () => {
       // setTimeleft(time);
       setDisplayTimer(null);
+      dispatch(setRefreshing(true));
       clearInterval(myInterval);
     };
   }, []);

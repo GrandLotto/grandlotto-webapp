@@ -446,8 +446,8 @@ export const groupBy2 = (arr) => {
     };
   });
 
-  return sortArrayBy2(groupArrays, "date");
-  // return groupArrays;
+  // return sortArrayBy2(groupArrays, "date");
+  return groupArrays;
 };
 
 export const availableGamesToPlay = (arr) => {

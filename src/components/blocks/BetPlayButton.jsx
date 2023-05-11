@@ -15,9 +15,11 @@ import {
   setCalculatedGames,
   setExpiryDate,
   setSelectedCoupons,
+  setSelectedGame,
   setSelectedPlayingType,
   setSelectedType,
 } from "../../store/betSlice/betSlice";
+import { checkIfGameHasEnded } from "../../global/customFunctions";
 
 const BetPlayButton = () => {
   const dispatch = useDispatch();
@@ -103,7 +105,7 @@ const BetPlayButton = () => {
     };
 
     dispatch(setCalculatedGames(null));
-    // console.log(payload);
+    // console.log(selectedGame);
 
     handlePOSTRequest(CALCULATE_WINNING_URL, payload)
       .then((response) => {
@@ -141,6 +143,26 @@ const BetPlayButton = () => {
   const handlePayGame = () => {
     if (!calculatedGames) {
       handleCalculateGame();
+
+      return;
+    }
+
+    if (checkIfGameHasEnded(selectedGame?.endTime) === true) {
+      dispatch(
+        setAlertPopUp({
+          status: true,
+          type: "ERROR",
+          title: "Game expired",
+          desc: "Sorry this game has expired",
+          payload: null,
+        })
+      );
+      dispatch(setRefreshing(true));
+      dispatch(setSelectedCoupons([]));
+      dispatch(setBetAmount(0));
+      dispatch(setCalculatedGames(null));
+      dispatch(setExpiryDate(null));
+      dispatch(setSelectedGame(null));
 
       return;
     }
