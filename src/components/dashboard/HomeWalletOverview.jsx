@@ -59,7 +59,7 @@ const HomeWalletOverview = () => {
 
   return (
     <>
-      <div className="homeWalletOverview hideOnMobile">
+      <div className="homeWalletOverview hideOnMobile animated preFadeInLeft fadeInLeft">
         {wallet &&
           wallet?.map((item, index) => (
             <div key={index} className="homeWalletOverviewItem">

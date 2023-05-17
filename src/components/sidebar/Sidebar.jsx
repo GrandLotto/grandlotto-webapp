@@ -80,6 +80,12 @@ const Sidebar = () => {
                 </NavLink>
               </li> */}
               <li className="sidebar_links">
+                <NavLink to="/account/referral">
+                  <i className="bx bxs-store"></i>
+                  <span>Referrals</span>
+                </NavLink>
+              </li>
+              <li className="sidebar_links">
                 <NavLink to="/account/withdraw-funds">
                   <i className="bx bx-import"></i>
                   <span>Withdraw Funds</span>

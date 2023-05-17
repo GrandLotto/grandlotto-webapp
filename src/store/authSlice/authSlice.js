@@ -3,6 +3,7 @@ import {
   getacceptedid,
   getAllroles,
   getkycpendingusers,
+  getReferralInfo,
   getUserInfo,
   getuserlist,
 } from "./actions";
@@ -37,6 +38,7 @@ const initialState = {
   pendingKYCusersPage: 1,
   pendingKYCusersTotalPages: 3,
   allRoles: null,
+  referrals: null,
 };
 
 const authSlice = createSlice({
@@ -163,6 +165,15 @@ const authSlice = createSlice({
         state.allRoles = payload;
       } else {
         state.allRoles = [];
+      }
+    });
+
+    builder.addCase(getReferralInfo.fulfilled, (state, { payload }) => {
+      // console.log("referrals", payload?.data);
+      if (payload && payload.data) {
+        state.referrals = payload?.data;
+      } else {
+        state.referrals = undefined;
       }
     });
   },

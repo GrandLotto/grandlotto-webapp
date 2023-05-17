@@ -21,6 +21,7 @@ const RegisterModal = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [middleName, setMiddleName] = useState("");
+  const [referrer, setReferrer] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -51,6 +52,7 @@ const RegisterModal = () => {
     setPhone("");
     setConfirmPassword("");
     setConfirmPasswordError("");
+    setReferrer("");
     setShowPassword(false);
     setShowConfirmPassword(false);
     setAcceptTerms(false);
@@ -79,6 +81,7 @@ const RegisterModal = () => {
     emailError,
     emptyFields,
     acceptTerms,
+    referrer,
   ]);
 
   const validateForm = () => {
@@ -148,7 +151,7 @@ const RegisterModal = () => {
 
       firstName: firstName,
       lastName: lastName,
-      referredBy: "",
+      referredBy: referrer,
       userName:
         firstName.substring(0, 3) +
         lastName.substring(0, 3) +
@@ -249,7 +252,7 @@ const RegisterModal = () => {
                 />
               ) : null}
             </div>
-            <form className="grandlotto_form mt-4" style={{ width: "100%" }}>
+            <form className="grandlotto_form mt-3" style={{ width: "100%" }}>
               <div className="row">
                 <div className="col-md-12 text-center mb-5">
                   <p
@@ -280,7 +283,7 @@ const RegisterModal = () => {
                     </span>
                   </p>
                 </div>
-                <div className="col-md-6 mb-4">
+                <div className="col-md-6 mb-3">
                   <div className="form-group" style={{ width: "100%" }}>
                     <label htmlFor="">First Name (Legal name)</label>
 
@@ -294,7 +297,7 @@ const RegisterModal = () => {
                     />
                   </div>
                 </div>
-                <div className="col-md-6 mb-4">
+                <div className="col-md-6 mb-3">
                   <div className="form-group" style={{ width: "100%" }}>
                     <label htmlFor="">Last Name (Legal name)</label>
 
@@ -308,7 +311,7 @@ const RegisterModal = () => {
                     />
                   </div>
                 </div>
-                <div className="col-md-6 mb-4">
+                <div className="col-md-6 mb-3">
                   <div className="form-group" style={{ width: "100%" }}>
                     <label htmlFor="">Middle Name (Optional)</label>
 
@@ -323,7 +326,7 @@ const RegisterModal = () => {
                   </div>
                 </div>
 
-                <div className="col-md-6 mb-4">
+                <div className="col-md-6 mb-3">
                   <div className="form-group" style={{ width: "100%" }}>
                     <label htmlFor="">Phone Number</label>
 
@@ -337,7 +340,7 @@ const RegisterModal = () => {
                     />
                   </div>
                 </div>
-                <div className="col-md-12 mb-4">
+                <div className="col-md-12 mb-3">
                   <div className="form-group" style={{ width: "100%" }}>
                     <label htmlFor="">Email</label>
 
@@ -369,8 +372,8 @@ const RegisterModal = () => {
                     )}
                   </div>
                 </div>
-                <div className="col-md-6 mb-4">
-                  <div className="form-group mb-4" style={{ width: "100%" }}>
+                <div className="col-md-6 mb-3">
+                  <div className="form-group mb-3" style={{ width: "100%" }}>
                     <label htmlFor="">Password</label>
 
                     <div className="password_input">
@@ -392,8 +395,8 @@ const RegisterModal = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-6 mb-4">
-                  <div className="form-group mb-4" style={{ width: "100%" }}>
+                <div className="col-md-6 mb-3">
+                  <div className="form-group mb-3" style={{ width: "100%" }}>
                     <label htmlFor="">Confirm password</label>
                     <div className="password_input">
                       <input
@@ -432,6 +435,20 @@ const RegisterModal = () => {
                         <span className="ml-2">{confirmPasswordError}</span>
                       </p>
                     )}
+                  </div>
+                </div>
+                <div className="col-md-12 mb-3">
+                  <div className="form-group" style={{ width: "100%" }}>
+                    <label htmlFor="">Referred By (Optional)</label>
+
+                    <input
+                      onChange={(e) => setReferrer(e.target.value)}
+                      value={referrer}
+                      className="form-control py-3"
+                      placeholder="Enter Referrer code"
+                      type="text"
+                      style={{ width: "100%" }}
+                    />
                   </div>
                 </div>
               </div>

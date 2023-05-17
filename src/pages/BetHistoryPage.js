@@ -448,38 +448,27 @@ const BetHistoryPage = () => {
                     </button>
                   </div>
                 </div>
-                <div className="card">
-                  <BetHistory
-                    columns={columns}
-                    data={userClosedBets}
-                    page={userCloseBetsPage}
-                    totalPages={userCloseBetsTotalPages}
-                    type="CLOSEBETS"
-                    isLoading={isLoading}
-                    nextP={nextPage}
-                    PrevP={previousPage}
-                    fetchByPage={fetchByPage}
-                  />
+                <div className="animated preFadeInLeft fadeInLeft">
+                  <div className="card ">
+                    <BetHistory
+                      columns={columns}
+                      data={userClosedBets}
+                      page={userCloseBetsPage}
+                      totalPages={userCloseBetsTotalPages}
+                      type="CLOSEBETS"
+                      isLoading={isLoading}
+                      nextP={nextPage}
+                      PrevP={previousPage}
+                      fetchByPage={fetchByPage}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="tab-pane" id="Bonus-tab">
-                <div className="card">
-                  <Transactions />
-                  {/* <div className="body">
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <p className="text-center">
-                  <b>Coming Soon</b>
-                </p>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-              </div> */}
+                <div className="animated preFadeInLeft fadeInLeft">
+                  <div className="card ">
+                    <Transactions />
+                  </div>
                 </div>
               </div>
             </div>

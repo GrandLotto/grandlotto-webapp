@@ -61,7 +61,7 @@ const BetHistory = ({
   return (
     <>
       {isLoading && <ComponentLoading inner={true} title="Please wait ..." />}
-      <div className="grandlotto_table">
+      <div className="grandlotto_table ">
         <div className="table-responsive">
           <table className="table">
             <thead>

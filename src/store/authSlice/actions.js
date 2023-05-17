@@ -5,6 +5,7 @@ import {
   GET_ACCEPTED_IDTYPE_URL,
   GET_ALL_ROLES_URL,
   GET_ALL_USERS_URL,
+  GET_REFERRAL_URL,
   GET_USERINFO_URL,
   PENDING_KYC_USERS_URL,
 } from "../../config/urlConfigs";
@@ -19,6 +20,26 @@ export const getUserInfo = createAsyncThunk(
     try {
       const result = axios
         .post(GET_USERINFO_URL, newPayload)
+        .then((response) => {
+          return response.data;
+        });
+
+      return result;
+    } catch (error) {
+      dispatch(logout());
+    }
+  }
+);
+
+export const getReferralInfo = createAsyncThunk(
+  "user/getReferralInfo",
+  async (payload, { dispatch }) => {
+    const newPayload = {
+      email: payload,
+    };
+    try {
+      const result = axios
+        .post(GET_REFERRAL_URL, newPayload)
         .then((response) => {
           return response.data;
         });

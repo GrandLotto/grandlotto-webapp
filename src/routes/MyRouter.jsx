@@ -22,6 +22,7 @@ import TransferPage from "../pages/TransferPage";
 import WithdrawalPage from "../pages/WithdrawalPage";
 import VerifyPaystack from "../pages/VerifyPaystack";
 import PaymentResponsePage from "../pages/PaymentResponsePage";
+import ReferralPage from "../pages/ReferralPage";
 
 const MyRouter = () => {
   return (
@@ -77,6 +78,7 @@ const MyRouter = () => {
               path="/account/withdraw-funds"
               element={<WithdrawalPage />}
             />
+            <Route path="/account/referral" element={<ReferralPage />} />
             <Route path="/account/settings" element={<SettingsPage />} />
             <Route path="/account/betslip" element={<BetSlip />} />
           </Route>

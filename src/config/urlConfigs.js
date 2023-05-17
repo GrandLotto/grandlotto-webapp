@@ -16,6 +16,7 @@ const APPROVE_USER_KYC_URL = "/v1.0/OAuth/approvekyc";
 const DECLINE_USER_KYC_URL = "/v1.0/OAuth/declinekyc";
 const GET_ALL_ROLES_URL = "/v1.0/OAuth/getallroles";
 const ADD_USER_TO_ROLES_URL = "/v1.0/OAuth/addusertorole";
+const GET_REFERRAL_URL = "/Referral/getReferralInfo";
 
 // WALLET
 const GET_ACCOUNT_BALANCES_URL = "/v1.0/Wallet/GetAccountBalances";
@@ -120,4 +121,5 @@ export {
   GET_ALL_ROLES_URL,
   ADD_USER_TO_ROLES_URL,
   VALIDATE_GAMES_URL,
+  GET_REFERRAL_URL,
 };

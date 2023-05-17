@@ -7,7 +7,7 @@ const ProfileComplete = ({ user }) => {
   return (
     <div className="hideOnMobile">
       {user && user?.percentageCompleted !== 100 ? (
-        <div className="profileComplete">
+        <div className="profileComplete animated preFadeInRight fadeInRight">
           <div className="profileCompleteFlex">
             <div className="profileCompleteFlexLeft">
               <h5>Complete your profile</h5>

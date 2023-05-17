@@ -4,6 +4,7 @@ import {
   getacceptedid,
   getAllroles,
   getkycpendingusers,
+  getReferralInfo,
   getUserInfo,
   getuserlist,
 } from "../store/authSlice/actions";
@@ -44,6 +45,7 @@ const AllApiCalls = () => {
       if (user) {
         // console.log(user);
         dispatch(getUserInfo(user?.email));
+        dispatch(getReferralInfo(user?.email));
         dispatch(getAccountBalances(user?.email));
         dispatch(getUserAccount(user?.email));
         dispatch(

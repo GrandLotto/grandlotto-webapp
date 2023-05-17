@@ -144,6 +144,13 @@ const SidebarMenuMobile = () => {
                 </div>
                 <i className="bx bx-chevron-right"></i>
               </NavLink>
+              <NavLink className="sidebarLinkMenusItem" to="/account/referral">
+                <div className="sidebarLinkMenusItemLeft">
+                  <i className="bx bxs-store"></i>
+                  <span>Referrals</span>
+                </div>
+                <i className="bx bx-chevron-right"></i>
+              </NavLink>
               <NavLink className="sidebarLinkMenusItem" to="/account/settings">
                 <div className="sidebarLinkMenusItemLeft">
                   <i className="bx bx-cog"></i>

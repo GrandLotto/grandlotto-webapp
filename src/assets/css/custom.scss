@@ -1099,6 +1099,10 @@ select.hasCapitalized,
     color: #fff;
   }
 
+  .referral_grid .card {
+    background: darken($color: $primaryNormal, $amount: 15%) !important;
+  }
+
   .pages_mobile_dark .site_title,
   .pages_mobile_dark .site_sub_title,
   .pages_mobile_dark label {
