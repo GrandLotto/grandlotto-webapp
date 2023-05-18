@@ -8,11 +8,26 @@ import franceLotto2 from "../../assets/images/france-lotto2.png";
 import "./banner.scss";
 import { useNavigate } from "react-router-dom";
 import { setRedeemWinningModal } from "../../store/alert/alertSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedGameGroup } from "../../store/betSlice/betSlice";
+import { getgames, getgamestype } from "../../store/betSlice/actions";
 
 const HomeBanner = () => {
+  const gamesgroup = useSelector((state) => state.bets.gamesgroup);
   const dispatch = useDispatch();
   const navigation = useNavigate();
+
+  const handleSelectGameGroup = () => {
+    if (gamesgroup) {
+      dispatch(setSelectedGameGroup(gamesgroup[0]));
+      dispatch(getgames(gamesgroup[0]?.id));
+      dispatch(getgamestype(gamesgroup[0]?.id));
+
+      setTimeout(() => {
+        navigation("/lotto");
+      }, 600);
+    }
+  };
 
   return (
     <div className="homeBanner">
@@ -39,7 +54,7 @@ const HomeBanner = () => {
           </button>
           <button
             className="grandLottoButton"
-            onClick={() => navigation("/lotto")}
+            onClick={() => handleSelectGameGroup()}
           >
             Play Now
           </button>

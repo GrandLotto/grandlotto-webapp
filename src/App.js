@@ -27,9 +27,10 @@ import {
 } from "./store/authSlice/authSlice";
 import {
   getallexistinggames,
-  getgames,
+  // getgames,
+  getgamesgroup,
   getgamesplayingtype,
-  getgamestype,
+  // getgamestype,
   Getgameswininglogs,
 } from "./store/betSlice/actions";
 import {
@@ -163,10 +164,11 @@ const App = () => {
     dispatch(setAddBankModal(false));
     dispatch(setComingSoonModal(false));
     dispatch(Getgameswininglogs());
-    dispatch(getgames());
 
+    dispatch(getgamesgroup());
     dispatch(getallexistinggames());
-    dispatch(getgamestype());
+    // dispatch(getgames());
+    // dispatch(getgamestype());
     dispatch(getgamesplayingtype());
     dispatch(setSelectedGametimer(null));
     dispatch(setCalculatedGames(null));

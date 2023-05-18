@@ -11,8 +11,11 @@ import { CALCULATE_WINNING_URL } from "../../config/urlConfigs";
 
 const BetAmount = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.oauth.user);
+  // const user = useSelector((state) => state.oauth.user);
   const betAmount = useSelector((state) => state.bets.betAmount);
+  const selectedGameGroup = useSelector(
+    (state) => state.bets.selectedGameGroup
+  );
   const selectedType = useSelector((state) => state.bets.selectedType);
   const selectedCoupons = useSelector((state) => state.bets.selectedCoupons);
   const selectedGame = useSelector((state) => state.bets.selectedGame);
@@ -64,7 +67,7 @@ const BetAmount = () => {
     // setIsDisabled(true);
 
     const payload = {
-      email: user?.email,
+      email: "",
       gameId: selectedGame?.id,
       gametypeId: selectedType?.id,
       gameType: selectedType?.type,
@@ -74,11 +77,12 @@ const BetAmount = () => {
         (item) =>
           item?.name.toLowerCase() === selectedPlayingType?.toLowerCase()
       )?.id,
+      gameGroupId: selectedGameGroup?.id,
     };
 
     dispatch(setCalculatedGames(null));
     setcalculatedgameErrorMes("");
-    console.log(selectedGame);
+    console.log(payload);
 
     if (amount < 50) {
       dispatch(setCalculatedGames(null));
@@ -95,7 +99,7 @@ const BetAmount = () => {
           // console.log(response);
           if (response?.data?.success) {
             let requestData = response?.data?.data;
-            // console.log(requestData);
+            console.log("handleCalculateGame", requestData);
             dispatch(setCalculatedGames(requestData));
             setcalculatedgameErrorMes("");
           } else {

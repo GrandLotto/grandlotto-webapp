@@ -10,15 +10,18 @@ import {
   getallexistinggames,
   getWinningLogs,
   getAllgames,
+  getgamesgroup,
 } from "./actions";
 
 const initialState = {
+  gamesgroup: null,
   allgames: null,
   games: null,
   allexistinggames: null,
   gameTypes: null,
   gamePlayingTypes: null,
   gameswininglogs: null,
+  selectedGameGroup: null,
   selectedCoupons: [],
   selectedPlayingType: undefined,
   selectedGame: undefined,
@@ -83,6 +86,10 @@ const betSlice = createSlice({
 
     setBetAmount: (state, { payload }) => {
       state.betAmount = payload;
+    },
+
+    setSelectedGameGroup: (state, { payload }) => {
+      state.selectedGameGroup = payload;
     },
 
     setUserOpenBets: (state, { payload }) => {
@@ -183,6 +190,17 @@ const betSlice = createSlice({
       }
     });
 
+    builder.addCase(getgamesgroup.fulfilled, (state, { payload }) => {
+      state.gamesgroup = null;
+
+      if (payload.data) {
+        state.gamesgroup = payload.data;
+        console.log("gamesgroup", payload.data);
+      } else {
+        state.gamesgroup = [];
+      }
+    });
+
     builder.addCase(getgames.fulfilled, (state, { payload }) => {
       state.games = null;
 
@@ -254,6 +272,7 @@ export const {
   setAllWinningLogs,
   setAllWinningLogsPage,
   setAllWinningLogsTotalPages,
+  setSelectedGameGroup,
 } = betSlice.actions;
 
 export default betSlice.reducer;

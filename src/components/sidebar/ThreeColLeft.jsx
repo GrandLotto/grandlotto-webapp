@@ -20,11 +20,18 @@ import {
   setExpiryDate,
   setSelectedCoupons,
   setSelectedGame,
+  setSelectedGameGroup,
   setSelectedPlayingType,
 } from "../../store/betSlice/betSlice";
+import { getgames, getgamestype } from "../../store/betSlice/actions";
 
 const ThreeColLeft = () => {
   const dispatch = useDispatch();
+  const gamesgroup = useSelector((state) => state.bets.gamesgroup);
+
+  const selectedGameGroup = useSelector(
+    (state) => state.bets.selectedGameGroup
+  );
   const selectDrawMenu = useSelector((state) => state.alert.selectDrawMenu);
   const games = useSelector((state) => state.bets.games);
   const gamePlayingTypes = useSelector((state) => state.bets.gamePlayingTypes);
@@ -35,6 +42,21 @@ const ThreeColLeft = () => {
 
   const closeMenu = () => {
     dispatch(setSelectDrawMenu(false));
+  };
+
+  const hanleSelectGameGroup = (item) => {
+    let slectedGrop = gamesgroup?.find((newItem) => newItem?.id === +item);
+
+    if (slectedGrop) {
+      dispatch(setSelectedGameGroup(slectedGrop));
+      dispatch(getgames(slectedGrop?.id));
+      dispatch(getgamestype(slectedGrop?.id));
+
+      dispatch(setSelectedGame(null));
+      dispatch(setCalculatedGames(null));
+      dispatch(setExpiryDate(null));
+      dispatch(setSelectedCoupons([]));
+    }
   };
 
   const isSelected = (item) => {
@@ -116,6 +138,38 @@ const ThreeColLeft = () => {
         <div className="threeColLeftWrapperClose" onClick={() => closeMenu()}>
           <i className="bx bx-x "></i>
         </div>
+        {gamesgroup && gamesgroup?.length ? (
+          <>
+            <div className="betSlips">
+              <div className="betSlipsMash mb-3">
+                <label htmlFor=" ">Lotto</label>
+                <select
+                  style={{ width: "100%" }}
+                  className="form-control largeInputFont"
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      dispatch(setCalculatedGames(null));
+                      hanleSelectGameGroup(e.target.value);
+                      // console.log("gamegroupselect", e.target.value);
+                    }
+
+                    //  setSelectedLotto(newItem)
+                  }}
+                  value={selectedGameGroup?.id}
+                >
+                  <option value="">Select...</option>
+                  {gamesgroup && gamesgroup?.length
+                    ? gamesgroup?.map((item, index) => (
+                        <option key={index} value={item?.id}>
+                          {item?.name}
+                        </option>
+                      ))
+                    : null}
+                </select>
+              </div>
+            </div>
+          </>
+        ) : null}
         {games && games?.length ? (
           <>
             <div className="betSlips">

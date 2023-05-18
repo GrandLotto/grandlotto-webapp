@@ -6,6 +6,7 @@ import {
   addComma,
   bodyScrollTop,
   generateLottoNumbers,
+  numbersFromOneTo10,
   numbersFromOneTo90,
 } from "../global/customFunctions";
 
@@ -17,6 +18,7 @@ import {
   setCalculatedGames,
   setSelectedCoupons,
   setSelectedGame,
+  setSelectedGameGroup,
   setSelectedPlayingType,
   setSelectedType,
 } from "../store/betSlice/betSlice";
@@ -26,10 +28,16 @@ import LottoNumberBox from "../components/blocks/LottoNumberBox";
 import BetAmount from "../components/blocks/BetAmount";
 import BetPlayButton from "../components/blocks/BetPlayButton";
 import GameSummary from "../components/blocks/GameSummary";
+import { getgames, getgamestype } from "../store/betSlice/actions";
 
 const PlayLotto = () => {
   const dispatch = useDispatch();
   let location = useLocation();
+  const gamesgroup = useSelector((state) => state.bets.gamesgroup);
+  const games = useSelector((state) => state.bets.games);
+  const selectedGameGroup = useSelector(
+    (state) => state.bets.selectedGameGroup
+  );
   const selectedCoupons = useSelector((state) => state.bets.selectedCoupons);
   const betAmount = useSelector((state) => state.bets.betAmount);
   const gameTypes = useSelector((state) => state.bets.gameTypes);
@@ -41,7 +49,7 @@ const PlayLotto = () => {
   const calculatedGames = useSelector((state) => state.bets.calculatedGames);
 
   const [selectedT, setselectedT] = useState(undefined);
-  const [allCoupons] = useState(numbersFromOneTo90());
+  const [allCoupons, setAllCoupons] = useState([]);
 
   // console.log(allCoupons);
 
@@ -83,11 +91,16 @@ const PlayLotto = () => {
   };
 
   const handleSelectItem = (item) => {
-    // console.log(item);
+    console.log(selectedType);
     if (selectedType) {
       handlePickItem(item);
     } else {
-      dispatch(setSelectedType(selectedType[0]));
+      if (selectedGameGroup?.code === "310") {
+        dispatch(setSelectedType(gameTypes[0]));
+      } else {
+        dispatch(setSelectedType(selectedType[0]));
+      }
+
       handlePickItem(item);
     }
   };
@@ -107,43 +120,53 @@ const PlayLotto = () => {
         // console.log("selectedCoupons?.length", selectedCoupons?.length);
         // console.log("maxNumbercount", maxNumbercount);
 
-        if (selectedType?.type === "BANKER") {
-          return;
-        }
-
-        if (selectedCoupons?.length >= maxNumbercount) {
-          let filteredWith = "NAP2";
-
-          if (selectedCoupons?.length === 2) {
-            filteredWith = "PERM2";
-          }
-
+        if (selectedGameGroup?.code === "310") {
           if (selectedCoupons?.length === 3) {
-            filteredWith = "PERM2";
+            return;
           }
 
-          if (selectedCoupons?.length === 4) {
-            filteredWith = "PERM2";
+          let newC = [...selectedCoupons, item];
+          // dispatch(setSelectedType(gameTypes[0]));
+          dispatch(setSelectedCoupons(newC));
+        } else {
+          if (selectedType?.type === "BANKER") {
+            return;
           }
 
-          if (selectedCoupons?.length === 5) {
-            filteredWith = "PERM2";
-          }
+          if (selectedCoupons?.length >= maxNumbercount) {
+            let filteredWith = "NAP2";
 
-          let selectednewType = gameTypes?.find(
-            (gameT) => gameT?.type === filteredWith
-          );
+            if (selectedCoupons?.length === 2) {
+              filteredWith = "PERM2";
+            }
 
-          if (selectednewType) {
-            if (maxNumbercount !== 10) {
-              dispatch(setSelectedType(selectednewType));
+            if (selectedCoupons?.length === 3) {
+              filteredWith = "PERM2";
+            }
+
+            if (selectedCoupons?.length === 4) {
+              filteredWith = "PERM2";
+            }
+
+            if (selectedCoupons?.length === 5) {
+              filteredWith = "PERM2";
+            }
+
+            let selectednewType = gameTypes?.find(
+              (gameT) => gameT?.type === filteredWith
+            );
+
+            if (selectednewType) {
+              if (maxNumbercount !== 10) {
+                dispatch(setSelectedType(selectednewType));
+              }
             }
           }
+
+          let newC = [...selectedCoupons, item];
+
+          dispatch(setSelectedCoupons(newC));
         }
-
-        let newC = [...selectedCoupons, item];
-
-        dispatch(setSelectedCoupons(newC));
       }
     } else {
       dispatch(setSelectedCoupons([item]));
@@ -153,27 +176,34 @@ const PlayLotto = () => {
 
   const randomPick = () => {
     let filteredWith = "PERM2";
-    dispatch(setSelectedCoupons(generateLottoNumbers(5, 1, 90)));
     dispatch(setCalculatedGames(null));
     dispatch(setSelectedType(null));
 
-    let selectednewType = gameTypes?.find(
-      (gameT) => gameT?.type === filteredWith
-    );
+    if (selectedGameGroup?.code === "310") {
+      dispatch(setSelectedCoupons(generateLottoNumbers(3, 1, 10)));
+      dispatch(setSelectedType(gameTypes[0]));
+    } else {
+      dispatch(setSelectedCoupons(generateLottoNumbers(5, 1, 90)));
+      let selectednewType = gameTypes?.find(
+        (gameT) => gameT?.type === filteredWith
+      );
 
-    if (selectednewType) {
-      dispatch(setSelectedType(selectednewType));
+      if (selectednewType) {
+        dispatch(setSelectedType(selectednewType));
+      }
     }
 
     // console.log(allNumbers);
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      // tabDropDown();
-      accordionTab();
-    }, 1500);
-  }, []);
+    if (games) {
+      setTimeout(() => {
+        // tabDropDown();
+        accordionTab();
+      }, 500);
+    }
+  }, [games]);
 
   useEffect(() => {
     return () => {
@@ -200,6 +230,35 @@ const PlayLotto = () => {
     bodyScrollTop();
   }, [location]);
 
+  useEffect(() => {
+    if (selectedGameGroup) {
+      if (selectedGameGroup?.code === "590") {
+        setAllCoupons(numbersFromOneTo90());
+      }
+
+      if (selectedGameGroup?.code === "790") {
+        setAllCoupons(numbersFromOneTo90());
+      }
+
+      if (selectedGameGroup?.code === "310") {
+        setAllCoupons(numbersFromOneTo10());
+      }
+    }
+  }, [selectedGameGroup]);
+
+  useEffect(() => {
+    if (selectedGameGroup) {
+      dispatch(getgames(selectedGameGroup?.id));
+      dispatch(getgamestype(selectedGameGroup?.id));
+    } else {
+      if (gamesgroup) {
+        dispatch(setSelectedGameGroup(gamesgroup[0]));
+        dispatch(getgames(gamesgroup[0]?.id));
+        dispatch(getgamestype(gamesgroup[0]?.id));
+      }
+    }
+  }, []);
+
   return (
     <>
       <div
@@ -213,15 +272,23 @@ const PlayLotto = () => {
           <LottoNumberBox />
         </div>
 
+        <div className="d-flex justify-content-between align-items-end main_center_wrapper_contentHeader">
+          <div>
+            <h5 className={selectedGame && "mb-3"}>
+              {selectedGameGroup?.name} Lotto
+            </h5>
+            {selectedGame ? <h5>{selectedGame?.name}</h5> : null}
+          </div>
+
+          {selectedPlayingType ? (
+            <div className="d-flex align-items-center">
+              <span>{selectedPlayingType}</span>
+              {/* <i className="bx bx-error-circle ml-2"></i> */}
+            </div>
+          ) : null}
+        </div>
         {selectedGame && selectedPlayingType ? (
           <div>
-            <div className="d-flex justify-content-between align-items-center main_center_wrapper_contentHeader">
-              <h5>{selectedGame?.name}</h5>
-              <div className="d-flex align-items-center">
-                <span>{selectedPlayingType}</span>
-                {/* <i className="bx bx-error-circle ml-2"></i> */}
-              </div>
-            </div>
             <div className="main_center_wrapper_content_top mt-5">
               <div className="d-flex justify-content-between align-items-center main_center_wrapper_middle">
                 <div className="selectDrawGame">
@@ -362,7 +429,7 @@ const PlayLotto = () => {
         ) : (
           <>
             <div className="noBetSlip darkBg">
-              <p>Please select draw and playing type</p>
+              <p>Please select draw </p>
               <br />
               <div className="selectDrawGame">
                 <button

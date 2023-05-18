@@ -11,9 +11,10 @@ import {
 import { setRefreshing } from "../store/authSlice/authSlice";
 import {
   getAllgames,
-  getgames,
+  // getgames,
+  getgamesgroup,
   getgamesplayingtype,
-  getgamestype,
+  // getgamestype,
   Getgameswininglogs,
   Getuserclosedgameplayed,
   Getuseropengameplayed,
@@ -129,8 +130,9 @@ const AllApiCalls = () => {
       }
 
       dispatch(Getgameswininglogs());
-      dispatch(getgames());
-      dispatch(getgamestype());
+      dispatch(getgamesgroup());
+      // dispatch(getgames());
+      // dispatch(getgamestype());
       dispatch(getgamesplayingtype());
 
       setTimeout(() => {

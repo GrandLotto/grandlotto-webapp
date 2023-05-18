@@ -43,6 +43,7 @@ const VERIFY_PAYSTACK_PAYMENT_URL = "/v1.0/Payment/verifypaystackpayment";
 const GET_OPEN_GAMES_URL = "/v1.0/Game/Getuseropengameplayed";
 const GET_CLOSED_GAMES_URL = "/v1.0/Game/Getuserclosedgameplayed";
 const GET_GAMES_URL = "/v1.0/Game/getgames";
+const GET_GAMES_GROUP_URL = "/v1.0/Game/getgamesgroup";
 const GET_ALL_GAMES_URL = "/v1.0/Game/getalgamesforadmin";
 const PLAY_GAME_URL = "/v1.0/Game/playgames";
 const GET_GAMES_TYPES_URL = "/v1.0/Game/getgamestype";
@@ -122,4 +123,5 @@ export {
   ADD_USER_TO_ROLES_URL,
   VALIDATE_GAMES_URL,
   GET_REFERRAL_URL,
+  GET_GAMES_GROUP_URL,
 };

@@ -24,6 +24,9 @@ import { checkIfGameHasEnded } from "../../global/customFunctions";
 const BetPlayButton = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.oauth.user);
+  const selectedGameGroup = useSelector(
+    (state) => state.bets.selectedGameGroup
+  );
   const gameTypes = useSelector((state) => state.bets.gameTypes);
   const gamePlayingTypes = useSelector((state) => state.bets.gamePlayingTypes);
   const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
@@ -184,6 +187,7 @@ const BetPlayButton = () => {
         (item) =>
           item?.name.toLowerCase() === selectedPlayingType?.toLowerCase()
       )?.id,
+      gameGroupId: selectedGameGroup?.id,
     };
 
     // console.log(payload);

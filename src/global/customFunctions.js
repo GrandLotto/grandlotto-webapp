@@ -367,6 +367,15 @@ export const numbersFromOneTo90 = () => {
   return numbers;
 };
 
+export const numbersFromOneTo10 = () => {
+  let numbers = [];
+  for (let i = 1; i <= 10; i++) {
+    numbers.push(i);
+  }
+
+  return numbers;
+};
+
 export const generate = (n) => {
   var add = 1,
     max = 12 - add; // 12 is the min safe number Math.random() can generate without it starting to pad the end with zeros.

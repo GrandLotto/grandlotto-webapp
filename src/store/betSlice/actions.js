@@ -5,6 +5,7 @@ import {
   EXISTING_GAME_URL,
   GET_ALL_GAMES_URL,
   GET_CLOSED_GAMES_URL,
+  GET_GAMES_GROUP_URL,
   GET_GAMES_PLAYING_TYPES_URL,
   GET_GAMES_TYPES_URL,
   GET_GAMES_URL,
@@ -13,13 +14,28 @@ import {
   GET_OPEN_GAMES_URL,
 } from "../../config/urlConfigs";
 
+export const getgamesgroup = createAsyncThunk(
+  "bets/getgamesgroup",
+  async (payload, { getState, dispatch }) => {
+    try {
+      const result = axios.get(GET_GAMES_GROUP_URL).then((response) => {
+        return response.data;
+      });
+
+      return result;
+    } catch (error) {}
+  }
+);
+
 export const getgames = createAsyncThunk(
   "bets/getgames",
   async (payload, { getState, dispatch }) => {
     try {
-      const result = axios.get(GET_GAMES_URL).then((response) => {
-        return response.data;
-      });
+      const result = axios
+        .get(GET_GAMES_URL + `?gamegroupId=${payload ? payload : 1}`)
+        .then((response) => {
+          return response.data;
+        });
 
       return result;
     } catch (error) {}
@@ -56,9 +72,11 @@ export const getgamestype = createAsyncThunk(
   "bets/getgamestype",
   async (payload, { getState, dispatch }) => {
     try {
-      const result = axios.get(GET_GAMES_TYPES_URL).then((response) => {
-        return response.data;
-      });
+      const result = axios
+        .get(GET_GAMES_TYPES_URL + `?gameGroupId=${payload ? payload : 1}`)
+        .then((response) => {
+          return response.data;
+        });
 
       return result;
     } catch (error) {}
