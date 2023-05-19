@@ -41,6 +41,8 @@ const OauthMenu = () => {
             href="true"
             onClick={(e) => {
               e.preventDefault();
+              // let windowPrompt = window.prompt("Are you sure?", "");
+              // console.log("windowPrompt", windowPrompt);
               dispatch(setComingSoonModal(true));
             }}
           >

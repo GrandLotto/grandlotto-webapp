@@ -28,7 +28,11 @@ import LottoNumberBox from "../components/blocks/LottoNumberBox";
 import BetAmount from "../components/blocks/BetAmount";
 import BetPlayButton from "../components/blocks/BetPlayButton";
 import GameSummary from "../components/blocks/GameSummary";
-import { getgames, getgamestype } from "../store/betSlice/actions";
+import {
+  getgames,
+  getgamesplayingtype,
+  getgamestype,
+} from "../store/betSlice/actions";
 
 const PlayLotto = () => {
   const dispatch = useDispatch();
@@ -250,11 +254,13 @@ const PlayLotto = () => {
     if (selectedGameGroup) {
       dispatch(getgames(selectedGameGroup?.id));
       dispatch(getgamestype(selectedGameGroup?.id));
+      dispatch(getgamesplayingtype(selectedGameGroup?.id));
     } else {
       if (gamesgroup) {
         dispatch(setSelectedGameGroup(gamesgroup[0]));
         dispatch(getgames(gamesgroup[0]?.id));
         dispatch(getgamestype(gamesgroup[0]?.id));
+        dispatch(getgamesplayingtype(gamesgroup[0]?.id));
       }
     }
   }, []);

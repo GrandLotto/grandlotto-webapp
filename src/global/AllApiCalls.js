@@ -133,7 +133,7 @@ const AllApiCalls = () => {
       dispatch(getgamesgroup());
       // dispatch(getgames());
       // dispatch(getgamestype());
-      dispatch(getgamesplayingtype());
+      // dispatch(getgamesplayingtype());
 
       setTimeout(() => {
         dispatch(setRefreshing(false));

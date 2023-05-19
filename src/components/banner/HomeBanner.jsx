@@ -10,7 +10,11 @@ import { useNavigate } from "react-router-dom";
 import { setRedeemWinningModal } from "../../store/alert/alertSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedGameGroup } from "../../store/betSlice/betSlice";
-import { getgames, getgamestype } from "../../store/betSlice/actions";
+import {
+  getgames,
+  getgamesplayingtype,
+  getgamestype,
+} from "../../store/betSlice/actions";
 
 const HomeBanner = () => {
   const gamesgroup = useSelector((state) => state.bets.gamesgroup);
@@ -22,6 +26,7 @@ const HomeBanner = () => {
       dispatch(setSelectedGameGroup(gamesgroup[0]));
       dispatch(getgames(gamesgroup[0]?.id));
       dispatch(getgamestype(gamesgroup[0]?.id));
+      dispatch(getgamesplayingtype(gamesgroup[0]?.id));
 
       setTimeout(() => {
         navigation("/lotto");

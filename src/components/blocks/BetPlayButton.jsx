@@ -67,6 +67,13 @@ const BetPlayButton = () => {
       // console.log("isDisabled", isDisabled);
       // console.log("calculatedGames", calculatedGames);
 
+      if (selectedGameGroup && selectedGameGroup?.code === "310") {
+        if (selectedCoupons?.length !== 3) {
+          setIsDisabled(true);
+          return;
+        }
+      }
+
       if (!calculatedGames) {
         setIsDisabled(true);
         return;

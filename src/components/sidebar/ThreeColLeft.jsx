@@ -23,7 +23,11 @@ import {
   setSelectedGameGroup,
   setSelectedPlayingType,
 } from "../../store/betSlice/betSlice";
-import { getgames, getgamestype } from "../../store/betSlice/actions";
+import {
+  getgames,
+  getgamesplayingtype,
+  getgamestype,
+} from "../../store/betSlice/actions";
 
 const ThreeColLeft = () => {
   const dispatch = useDispatch();
@@ -51,6 +55,7 @@ const ThreeColLeft = () => {
       dispatch(setSelectedGameGroup(slectedGrop));
       dispatch(getgames(slectedGrop?.id));
       dispatch(getgamestype(slectedGrop?.id));
+      dispatch(getgamesplayingtype(slectedGrop?.id));
 
       dispatch(setSelectedGame(null));
       dispatch(setCalculatedGames(null));

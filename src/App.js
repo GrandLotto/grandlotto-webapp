@@ -169,7 +169,7 @@ const App = () => {
     dispatch(getallexistinggames());
     // dispatch(getgames());
     // dispatch(getgamestype());
-    dispatch(getgamesplayingtype());
+    // dispatch(getgamesplayingtype());
     dispatch(setSelectedGametimer(null));
     dispatch(setCalculatedGames(null));
     dispatch(setExpiryDate(null));

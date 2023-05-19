@@ -5,7 +5,11 @@ import Lotto from "../../assets/images/lotto.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSelectedGameGroup } from "../../store/betSlice/betSlice";
-import { getgames, getgamestype } from "../../store/betSlice/actions";
+import {
+  getgames,
+  getgamesplayingtype,
+  getgamestype,
+} from "../../store/betSlice/actions";
 
 const PlayCategory = () => {
   const gamesgroup = useSelector((state) => state.bets.gamesgroup);
@@ -18,6 +22,7 @@ const PlayCategory = () => {
     dispatch(setSelectedGameGroup(game));
     dispatch(getgames(game?.id));
     dispatch(getgamestype(game?.id));
+    dispatch(getgamesplayingtype(game?.id));
 
     setTimeout(() => {
       navigation("/lotto");
