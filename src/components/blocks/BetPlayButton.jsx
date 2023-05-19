@@ -45,7 +45,13 @@ const BetPlayButton = () => {
 
   useEffect(() => {
     validateButton();
-  }, [selectedCoupons, selectedType, betAmount, calculatedGames]);
+  }, [
+    selectedCoupons,
+    selectedGameGroup,
+    selectedType,
+    betAmount,
+    calculatedGames,
+  ]);
 
   const validateButton = () => {
     if (selectedCoupons && selectedType) {
