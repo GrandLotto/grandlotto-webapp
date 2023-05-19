@@ -2,10 +2,18 @@
 import React, { useEffect, useState } from "react";
 import { addZero } from "../../global/customFunctions";
 import { setRefreshing } from "../../store/authSlice/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getgames,
+  getgamesplayingtype,
+  getgamestype,
+} from "../../store/betSlice/actions";
 
 const GameTimer = ({ time, timeStarted }) => {
   const dispatch = useDispatch();
+  const selectedGameGroup = useSelector(
+    (state) => state.bets.selectedGameGroup
+  );
   const [displayTimer, setDisplayTimer] = useState(null);
 
   useEffect(() => {
@@ -45,6 +53,12 @@ const GameTimer = ({ time, timeStarted }) => {
 
         if (distance < 0) {
           clearInterval(myInterval);
+          setDisplayTimer("Game started");
+          if (selectedGameGroup) {
+            dispatch(getgames(selectedGameGroup?.id));
+            dispatch(getgamestype(selectedGameGroup?.id));
+            dispatch(getgamesplayingtype(selectedGameGroup?.id));
+          }
           // console.log("expired");
         }
       }, 1000);
@@ -60,8 +74,16 @@ const GameTimer = ({ time, timeStarted }) => {
   return (
     timeStarted && (
       <>
-        <div className="daysToExpireItems">Day : hour : min : sec</div>
-        <div className="daysToExpireItems largeOne">{displayTimer}</div>
+        {" "}
+        {displayTimer === "Game started" ? (
+          <div className="daysToExpireItems largeOne">{displayTimer}</div>
+        ) : (
+          <>
+            {" "}
+            <div className="daysToExpireItems">Day : hour : min : sec</div>
+            <div className="daysToExpireItems largeOne">{displayTimer}</div>
+          </>
+        )}
       </>
     )
   );

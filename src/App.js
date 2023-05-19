@@ -29,7 +29,7 @@ import {
   getallexistinggames,
   // getgames,
   getgamesgroup,
-  getgamesplayingtype,
+  // getgamesplayingtype,
   // getgamestype,
   Getgameswininglogs,
 } from "./store/betSlice/actions";

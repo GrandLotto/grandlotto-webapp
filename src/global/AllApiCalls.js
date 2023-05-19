@@ -13,7 +13,7 @@ import {
   getAllgames,
   // getgames,
   getgamesgroup,
-  getgamesplayingtype,
+  // getgamesplayingtype,
   // getgamestype,
   Getgameswininglogs,
   Getuserclosedgameplayed,
