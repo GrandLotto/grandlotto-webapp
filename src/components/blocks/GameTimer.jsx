@@ -53,7 +53,7 @@ const GameTimer = ({ time, timeStarted }) => {
 
         if (distance < 0) {
           clearInterval(myInterval);
-          setDisplayTimer("Game started");
+          setDisplayTimer("");
           if (selectedGameGroup) {
             dispatch(getgames(selectedGameGroup?.id));
             dispatch(getgamestype(selectedGameGroup?.id));
@@ -75,7 +75,7 @@ const GameTimer = ({ time, timeStarted }) => {
     timeStarted && (
       <>
         {" "}
-        {displayTimer === "Game started" ? (
+        {!displayTimer ? (
           <div className="daysToExpireItems largeOne">{displayTimer}</div>
         ) : (
           <>
