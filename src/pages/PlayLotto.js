@@ -236,16 +236,18 @@ const PlayLotto = () => {
 
   useEffect(() => {
     if (selectedGameGroup) {
-      if (selectedGameGroup?.code === "590") {
-        setAllCoupons(numbersFromOneTo90());
-      }
+      // if (selectedGameGroup?.code === "590") {
+      //   setAllCoupons(numbersFromOneTo90());
+      // }
 
-      if (selectedGameGroup?.code === "790") {
-        setAllCoupons(numbersFromOneTo90());
-      }
+      // if (selectedGameGroup?.code === "790") {
+      //   setAllCoupons(numbersFromOneTo90());
+      // }
 
       if (selectedGameGroup?.code === "310") {
         setAllCoupons(numbersFromOneTo10());
+      } else {
+        setAllCoupons(numbersFromOneTo90());
       }
     }
   }, [selectedGameGroup]);
