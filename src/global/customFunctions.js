@@ -455,8 +455,8 @@ export const groupBy2 = (arr) => {
     };
   });
 
-  // return sortArrayBy2(groupArrays, "date");
-  return groupArrays;
+  return sortArrayByDayOfWeek(groupArrays);
+  // return groupArrays;
 };
 
 export const availableGamesToPlay = (arr) => {
@@ -620,6 +620,26 @@ export const sortArrayBy = (array, key) => {
   return array.slice().sort(function (a, b) {
     return a[key] < b[key] ? -1 : 1;
   });
+};
+
+export const sortArrayByDayOfWeek = (array) => {
+  const sorter = {
+    monday: 1,
+    tuesday: 2,
+    wednesday: 3,
+    thursday: 4,
+    friday: 5,
+    saturday: 6,
+    sunday: 7,
+  };
+
+  let newArray = array.sort(function sortByDay(a, b) {
+    let day1 = a.date.toLowerCase();
+    let day2 = b.date.toLowerCase();
+    return sorter[day1] - sorter[day2];
+  });
+
+  return newArray;
 };
 
 export const isUserAnAdmin = (array) => {

@@ -107,6 +107,13 @@ const ThreeColLeft = () => {
             })
           );
           dispatch(setExpiryDate(null));
+
+          if (selectedGameGroup) {
+            dispatch(setSelectedGameGroup(selectedGameGroup));
+            dispatch(getgames(selectedGameGroup?.id));
+            dispatch(getgamestype(selectedGameGroup?.id));
+            dispatch(getgamesplayingtype(selectedGameGroup?.id));
+          }
         }
       } else {
         handleTimer(item);
