@@ -195,7 +195,7 @@ const betSlice = createSlice({
 
       if (payload.data) {
         state.gamesgroup = payload.data;
-        console.log("gamesgroup", payload.data);
+        // console.log("gamesgroup", payload.data);
       } else {
         state.gamesgroup = [];
       }

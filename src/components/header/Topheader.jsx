@@ -53,7 +53,7 @@ const Topheader = () => {
       </NavLink>
       <div className="topHeaderRight ">
         <div className="topHeaderRightLeft d-flex align-items-center topHeaderRightLeftNoScroll">
-          <a
+          {/* <a
             className="top_link"
             href="true"
             onClick={(e) => {
@@ -62,8 +62,8 @@ const Topheader = () => {
             }}
           >
             How to play
-          </a>
-          <a
+          </a> */}
+          {/* <a
             className="top_link"
             href="true"
             onClick={(e) => {
@@ -72,8 +72,20 @@ const Topheader = () => {
             }}
           >
             Promotions
-          </a>
-          <a
+          </a> */}
+
+          <NavLink to="/how-to-play" className="top_link">
+            How to play
+          </NavLink>
+
+          <NavLink to="/promotions" className="top_link">
+            Promotions
+          </NavLink>
+          <NavLink to="/contact-us" className="top_link">
+            Contact Us
+          </NavLink>
+
+          {/* <a
             className="top_link"
             href="true"
             onClick={(e) => {
@@ -82,8 +94,8 @@ const Topheader = () => {
             }}
           >
             Contact Us
-          </a>
-          <a
+          </a> */}
+          {/* <a
             className="top_link"
             href="true"
             onClick={(e) => {
@@ -92,7 +104,7 @@ const Topheader = () => {
             }}
           >
             FirstBet
-          </a>
+          </a> */}
         </div>
         <div className="topHeaderRightLeft d-flex align-items-center topHeaderRightLefthasScroll">
           <NavLink to="/" className="top_link">

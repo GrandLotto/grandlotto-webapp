@@ -14,7 +14,7 @@ import {
 const PlayCategory = () => {
   const gamesgroup = useSelector((state) => state.bets.gamesgroup);
 
-  console.log("gamesgroup", gamesgroup);
+  // console.log("gamesgroup", gamesgroup);
   const dispatch = useDispatch();
   const navigation = useNavigate();
 

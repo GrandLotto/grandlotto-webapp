@@ -74,17 +74,17 @@ const Footer = () => {
         </div>
       </div>
       <div className="topHeaderRight " style={{ marginTop: 50 }}>
-        <NavLink to="/about" className="top_link">
+        <NavLink to="/how-to-play" className="top_link">
           How to play
         </NavLink>
-        <NavLink to="/about" className="top_link">
+        <NavLink to="/promotions" className="top_link">
           Promotions
         </NavLink>
-        <NavLink to="/about" className="top_link">
+        <NavLink to="/contact-us" className="top_link">
           Contact Us
         </NavLink>
-        <NavLink to="/about" className="top_link">
-          FirstBet
+        <NavLink to="/terms-and-conditions" className="top_link">
+          Terms and condition
         </NavLink>
       </div>
       <div className="footerImage">

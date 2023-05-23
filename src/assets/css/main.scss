@@ -99,6 +99,83 @@ input[type="checkbox"]:checked {
   gap: 25px 15px;
 }
 
+.oauthHasWeight {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.oauthHasWeight.hasPlayys p {
+  line-height: 30px;
+  font-size: 15px;
+}
+
+.oauthHasWeightCol {
+  background: #fff;
+  color: #000000;
+  padding: 40px;
+  border-radius: 5px;
+}
+
+.oauthHasWeightCol h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 24px;
+  margin-bottom: 15px;
+}
+
+.oauthHasWeightCol p.text-gray {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #5f6a6d;
+  margin-bottom: 10px;
+}
+
+.t_title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.t_Style_title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  margin-bottom: 35px;
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.t_Style_title span:first-child {
+  background: #034880;
+  color: #fff;
+  font-size: 13px;
+  padding: 3.5px 10px;
+  border-radius: 50px;
+}
+
+.p_para {
+  margin-top: 20px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 28px;
+}
+
+.p_para span:first-child {
+  margin-right: 20px;
+}
+
 @media screen and (max-width: 650px) {
   body {
     position: fixed !important;
@@ -115,5 +192,20 @@ input[type="checkbox"]:checked {
 
   .hideOnMobile {
     display: none !important;
+  }
+
+  .oauthHasWeightCol {
+    background: transparent;
+    color: #fff;
+  }
+
+  .oauthHasWeightCol th,
+  .oauthHasWeightCol td,
+  .oauthHasWeightCol p.text-gray {
+    color: #fff;
+  }
+
+  .oauthHasWeightCol th {
+    white-space: nowrap;
   }
 }

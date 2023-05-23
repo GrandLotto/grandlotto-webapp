@@ -131,12 +131,12 @@ const ThreeColLeft = () => {
     }, 500);
   };
 
-  useEffect(() => {
-    if (games) {
-      console.log("unGroupedGames", games);
-      console.log("games", groupBy2(games, "dayAvailable"));
-    }
-  }, [games]);
+  // useEffect(() => {
+  //   if (games) {
+  //     console.log("unGroupedGames", games);
+  //     console.log("games", groupBy2(games, "dayAvailable"));
+  //   }
+  // }, [games]);
 
   useEffect(() => {
     if (selectedGame && selectedPlayingType) {

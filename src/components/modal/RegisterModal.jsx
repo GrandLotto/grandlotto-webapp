@@ -138,6 +138,14 @@ const RegisterModal = () => {
     setEmptyFields(false);
   };
 
+  useEffect(() => {
+    if (modal) {
+      if (acceptTerms) {
+        localStorage.setItem("aTt", "yes");
+      }
+    }
+  }, [acceptTerms]);
+
   const proceed = () => {
     setIsLoading(true);
     setResponseError("");
@@ -460,7 +468,9 @@ const RegisterModal = () => {
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    onChange={() => setAcceptTerms(!acceptTerms)}
+                    onChange={() => {
+                      setAcceptTerms(!acceptTerms);
+                    }}
                     value={acceptTerms}
                     id="flexCheckDefault"
                   />
