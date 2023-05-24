@@ -95,7 +95,7 @@ const PlayLotto = () => {
   };
 
   const handleSelectItem = (item) => {
-    console.log(selectedType);
+    // console.log(selectedType);
     if (selectedType) {
       handlePickItem(item);
     } else {

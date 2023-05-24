@@ -82,7 +82,7 @@ const BetAmount = () => {
 
     dispatch(setCalculatedGames(null));
     setcalculatedgameErrorMes("");
-    console.log(payload);
+    // console.log(payload);
 
     if (amount < 50) {
       dispatch(setCalculatedGames(null));
@@ -99,7 +99,7 @@ const BetAmount = () => {
           // console.log(response);
           if (response?.data?.success) {
             let requestData = response?.data?.data;
-            console.log("handleCalculateGame", requestData);
+            // console.log("handleCalculateGame", requestData);
             dispatch(setCalculatedGames(requestData));
             setcalculatedgameErrorMes("");
           } else {
