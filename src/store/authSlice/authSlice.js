@@ -112,7 +112,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = payload.data;
         state.error = false;
-        // console.log(action.payload.data);
+        // console.log("getUserInfo", payload.data);
       } else {
         state.user = null;
         state.error = true;

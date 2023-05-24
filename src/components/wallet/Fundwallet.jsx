@@ -124,16 +124,6 @@ const Fundwallet = () => {
     setStep(1);
   };
 
-  const handlePaid = () => {
-    // handleCancel();
-
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setStep(4);
-    }, 800);
-  };
-
   const previousStep = () => {
     if (step === 2) {
       setStep(1);
@@ -228,10 +218,12 @@ const Fundwallet = () => {
 
     const payload = {
       email: user?.email,
-      amount: String(+amount * 100),
+      amount: String(
+        +amount * 100 + Number(user?.paystackCharge ? user?.paystackCharge : 0)
+      ),
     };
 
-    // console.log(payload);
+    console.log(payload);
 
     handlePOSTRequest(INITIATE_PAYSTACK_PAYMENT_URL, payload)
       .then((response) => {
@@ -533,8 +525,17 @@ const Fundwallet = () => {
                       {time !== 0 ? (
                         <>
                           <h5>
-                            Transfer <b>₦{addComma(amount)}</b> to the account
-                            details displayed below{" "}
+                            Transfer{" "}
+                            <b>
+                              ₦
+                              {addComma(
+                                user?.providusCharge
+                                  ? Number(amount) +
+                                      Number(user?.providusCharge)
+                                  : Number(amount) + 0
+                              )}
+                            </b>{" "}
+                            to the account details displayed below{" "}
                           </h5>
                           <div className="showAccountBox">
                             <h6>{providusAccount?.bankName}</h6>
