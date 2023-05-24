@@ -78,11 +78,7 @@ const AlertModalBet = () => {
                 <i className="bx bx-x"></i>
               )}
             </div>
-            <h4
-              className={`${
-                alertModal.type === "SUCCESS" ? "success" : "error"
-              }`}
-            >
+            <h4 className={`${alertModal.type === "SUCCESS" ? "success" : ""}`}>
               {alertModal.title}
             </h4>
 
@@ -152,7 +148,7 @@ const AlertModalBet = () => {
               </>
             ) : (
               <>
-                <p style={{ width: "100%" }}>
+                {/* <p style={{ width: "100%" }}>
                   <span>
                     Wallet Balance:{" "}
                     <span className="ml-3">
@@ -164,7 +160,7 @@ const AlertModalBet = () => {
                       </b>
                     </span>
                   </span>
-                </p>
+                </p> */}
               </>
             )}
 

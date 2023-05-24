@@ -203,7 +203,7 @@ const BetPlayButton = () => {
       gameGroupId: selectedGameGroup?.id,
     };
 
-    // console.log(payload);
+    console.log("handlePayGame", payload);
 
     handlePOSTRequest(PLAY_GAME_URL, payload)
       .then((response) => {
@@ -213,7 +213,7 @@ const BetPlayButton = () => {
             message: "",
           })
         );
-        // console.log(response);
+        console.log(response);
         if (response?.data?.success) {
           let requestData = response?.data?.data;
 
@@ -239,13 +239,17 @@ const BetPlayButton = () => {
             setAlertBetModal({
               status: true,
               type: "ERROR",
-              title: response?.data?.message,
+              title:
+                response?.data?.message ||
+                "An error occurred, please try again",
               betId: "",
               amountStake: 0,
               amountWinning: 0,
               payload: null,
-              buttonText: "Deposit Funds",
-              buttonURL: "DEPOSIT",
+              buttonText: "Close",
+              buttonURL: "",
+              // buttonText: "Deposit Funds",
+              // buttonURL: "DEPOSIT",
             })
           );
         }
