@@ -130,11 +130,11 @@ const BetAmount = () => {
 
   useEffect(() => {
     if (betAmount !== 0) {
-      if (selectedCoupons?.length && selectedType) {
+      if (selectedCoupons?.length && selectedType && selectedGame) {
         handleCalculateGame(betAmount);
       }
     }
-  }, [betAmount, selectedCoupons, selectedType]);
+  }, [betAmount, selectedCoupons, selectedType, selectedGame]);
 
   return (
     <>
