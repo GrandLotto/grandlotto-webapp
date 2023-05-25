@@ -53,7 +53,7 @@ const ThreeColRight = () => {
             <h4>BetSlip(2)</h4>
           </div> */}
 
-          {selectedCoupons && selectedCoupons?.length ? (
+          {selectedCoupons && selectedCoupons?.length && selectedGame ? (
             <div className="betSlipsBody">
               <BetSlipsBox
                 showAmount={true}
