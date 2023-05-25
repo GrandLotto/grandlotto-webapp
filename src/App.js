@@ -161,6 +161,8 @@ const App = () => {
         payload: null,
       })
     );
+    dispatch(setSelectedGame(null));
+    dispatch(setSelectedCoupons([]));
     dispatch(setAddBankModal(false));
     dispatch(setComingSoonModal(false));
     dispatch(Getgameswininglogs());
@@ -174,9 +176,6 @@ const App = () => {
     dispatch(setLoginModal(false));
     dispatch(setRegisterModal(false));
     dispatch(setRedeemWinningModal(false));
-
-    dispatch(setSelectedGame(null));
-    dispatch(setSelectedCoupons([]));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

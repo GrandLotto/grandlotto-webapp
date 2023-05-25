@@ -265,6 +265,9 @@ const PlayLotto = () => {
         dispatch(getgamesplayingtype(gamesgroup[0]?.id));
       }
     }
+
+    dispatch(setSelectedGame(null));
+    dispatch(setSelectedCoupons([]));
   }, []);
 
   return (
