@@ -304,6 +304,49 @@ export const formateDateByName = (newDate) => {
   return formatted;
 };
 
+export const formateDateAndTimeByDayName = (newDate) => {
+  const d = new Date(newDate);
+  const year = d.getFullYear(); // 2019
+  const date = d.getDate();
+  const days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
+
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  var hours = d.getHours();
+  var minutes = d.getMinutes();
+  var ampm = hours >= 12 ? "pm" : "am";
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  // date = date < 10 ? "0" + minutes : date;
+  var strTime = hours + ":" + minutes + " " + ampm;
+
+  const dayIndex = d.getDay();
+  const dayName = days[dayIndex];
+
+  const monthIndex = d.getMonth();
+  const monthName = months[monthIndex];
+  // ${dayName},
+  const formatted = `${dayName} ${
+    date < 10 ? "0" + date : date
+  } ${monthName} ${year}, ${strTime}`;
+
+  return formatted;
+};
+
 export const formateDateAndTimeByName = (newDate) => {
   const d = new Date(newDate);
   const year = d.getFullYear(); // 2019
@@ -433,30 +476,51 @@ export const groupBy = (arr, key) => {
 };
 
 export const groupBy2 = (arr) => {
-  const groups = arr.reduce((groups, game) => {
+  let newArry = sortArrayBy(arr, "startTime");
+
+  // console.log("newArry", newArry);
+  const groups = newArry.reduce((groups, game) => {
     const date = game.dayAvailable;
+    // const startTime = game.startTime;
     // const dayAvailable = game.dayAvailable;
     if (!groups[date]) {
       groups[date] = [];
       // groups[dayAvailable] = [];
     }
+    // // groups[startTime] = startTime;
     groups[date].push(game);
-    // groups[dayAvailable].push(game);
+
+    // console.log("gameSs", groups);
+    // groups[startTime].push(game);
 
     return groups;
   }, {});
 
   // Edit: to add it in the array format instead
   const groupArrays = Object.keys(groups).map((date) => {
+    // console.log("date", date);
+    // console.log("groups", groups);
     return {
       date,
-
+      // startTime,
       games: groups[date],
     };
   });
 
-  return sortArrayByDayOfWeek(groupArrays);
-  // return groupArrays;
+  // const merged = arr.reduce(
+  //   (r, { dayAvailable, startTime, endTime, ...rest }) => {
+  //     const key = `${dayAvailable}-${startTime}-${endTime}`;
+  //     r[key] = r[key] || { date: dayAvailable, startTime, endTime, games: [] };
+  //     r[key]["games"].push(rest);
+  //     return r;
+  //   },
+  //   {}
+  // );
+
+  // const groupArrays = Object.values(merged);
+
+  // return sortArrayByDayOfWeek(groupArrays);
+  return groupArrays;
 };
 
 export const availableGamesToPlay = (arr) => {
@@ -639,6 +703,7 @@ export const sortArrayByDayOfWeek = (array) => {
     return sorter[day1] - sorter[day2];
   });
 
+  // console.log("newArray", newArray);
   return newArray;
 };
 

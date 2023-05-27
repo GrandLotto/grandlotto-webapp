@@ -7,7 +7,8 @@ import {
   checkIfGameHasExpired,
   checkIfGameHasStarted,
   formatAMPM,
-  formateDateAndTimeByName,
+  formateDateAndTimeByDayName,
+  getDayByName,
   // getDayByName,
   groupBy2,
 } from "../../global/customFunctions";
@@ -224,8 +225,8 @@ const ThreeColLeft = () => {
               groupBy2(availableGamesToPlay(games))?.map((item, index) => (
                 <div className="open_roles_grid_item" key={index}>
                   <div className={`open_roles_grid_item_header `}>
-                    {/* <h5>{getDayByName(item?.date)}</h5> */}
-                    <h5>{item?.date}</h5>
+                    <h5>{getDayByName(item?.games[0]?.startTime)}</h5>
+                    {/* <h5>{item?.date}</h5> */}
                     <i className="fa fa-chevron-right"></i>
                   </div>
                   <div className={`open_roles_grid_item_body `}>
@@ -260,7 +261,7 @@ const ThreeColLeft = () => {
                                   </span>
                                 ) : (
                                   <p style={{ fontSize: 10 }}>
-                                    {formateDateAndTimeByName(
+                                    {formateDateAndTimeByDayName(
                                       newItem?.startTime
                                     )}
                                   </p>
