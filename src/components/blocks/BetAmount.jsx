@@ -84,7 +84,7 @@ const BetAmount = () => {
     setcalculatedgameErrorMes("");
     // console.log(payload);
 
-    if (amount < 50) {
+    if (amount < selectedType?.minAmmount) {
       dispatch(setCalculatedGames(null));
 
       return;
@@ -131,6 +131,8 @@ const BetAmount = () => {
   useEffect(() => {
     if (betAmount !== 0) {
       if (selectedCoupons?.length && selectedType && selectedGame) {
+        // console.log("here");
+        // console.log(betAmount);
         handleCalculateGame(betAmount);
       }
     }

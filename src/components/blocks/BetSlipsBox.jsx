@@ -67,11 +67,14 @@ const BetSlipsBox = ({
 
   useEffect(() => {
     if (selectedType) {
-      console.log(typeof selectedType?.maxAmmount);
+      // console.log(typeof selectedType?.maxAmmount);
       setStakeAmounts([
         {
           id: 1,
-          amount: selectedType && selectedType?.minAmmount === 50 ? 50 : 0,
+          amount:
+            selectedType && selectedType?.minAmmount <= 50
+              ? selectedType?.minAmmount
+              : 0,
         },
         {
           id: 2,
@@ -87,7 +90,7 @@ const BetSlipsBox = ({
         },
         {
           id: 5,
-          amount: selectedType && selectedType?.minAmmount !== 50 ? 1000 : 0,
+          amount: selectedType && selectedType?.minAmmount > 50 ? 1000 : 0,
         },
       ]);
     } else {

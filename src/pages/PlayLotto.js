@@ -182,6 +182,7 @@ const PlayLotto = () => {
     let filteredWith = "PERM2";
     dispatch(setCalculatedGames(null));
     dispatch(setSelectedType(null));
+    dispatch(setBetAmount(0));
 
     if (selectedGameGroup?.code === "310") {
       dispatch(setSelectedCoupons(generateLottoNumbers(3, 1, 10)));
