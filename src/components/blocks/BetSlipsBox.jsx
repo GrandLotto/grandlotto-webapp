@@ -90,7 +90,12 @@ const BetSlipsBox = ({
         },
         {
           id: 5,
-          amount: selectedType && selectedType?.minAmmount > 50 ? 1000 : 0,
+          amount:
+            selectedType &&
+            selectedType?.maxAmmount > 500 &&
+            selectedType?.maxAmmount === 1000
+              ? 1000
+              : 0,
         },
       ]);
     } else {
