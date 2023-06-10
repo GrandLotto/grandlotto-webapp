@@ -92,8 +92,9 @@ const BetSlipsBox = ({
           id: 5,
           amount:
             selectedType &&
-            selectedType?.maxAmmount > 500 &&
-            selectedType?.maxAmmount === 1000
+            (selectedType?.maxAmmount > 500 ||
+              selectedType?.maxAmmount === 0) &&
+            (selectedType?.maxAmmount >= 1000 || selectedType?.maxAmmount === 0)
               ? 1000
               : 0,
         },
