@@ -325,6 +325,7 @@ const PlayLotto = () => {
                     onChange={(e) => {
                       if (e.target.value) {
                         handlePlayType(e.target.value);
+                        dispatch(setBetAmount(0));
                         // console.log(JSON.stringify(e.target.value));
                       }
                     }}

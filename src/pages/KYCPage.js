@@ -100,6 +100,12 @@ const KYCPage = () => {
     fd.append("Idname", selectedIDType);
     fd.append("IdNumber", idNumber);
     fd.append("Idfile", selectedFile);
+    // console.log("kyc", {
+    //   Email: user?.email,
+    //   Idname: selectedIDType,
+    //   IdNumber: idNumber,
+    //   Idfile: selectedFile,
+    // });
 
     // console.log(selectedFile);
 

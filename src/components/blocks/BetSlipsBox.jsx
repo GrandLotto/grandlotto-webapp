@@ -7,6 +7,8 @@ import BetAmount from "./BetAmount";
 import BetPlayButton from "./BetPlayButton";
 import GameSummary from "./GameSummary";
 import { setBetAmount } from "../../store/betSlice/betSlice";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const BetSlipsBox = ({
   showAmount = true,
@@ -20,25 +22,28 @@ const BetSlipsBox = ({
   // const selectedCoupons = useSelector((state) => state.bets.selectedCoupons);
   const betAmount = useSelector((state) => state.bets.betAmount);
   const calculatedGames = useSelector((state) => state.bets.calculatedGames);
+  const selectedType = useSelector((state) => state.bets.selectedType);
 
-  const stakeAmounts = [
-    {
-      id: 1,
-      amount: 50,
-    },
-    {
-      id: 2,
-      amount: 100,
-    },
-    {
-      id: 3,
-      amount: 200,
-    },
-    {
-      id: 3,
-      amount: 500,
-    },
-  ];
+  const [stakeAmounts, setStakeAmounts] = useState([]);
+
+  // const stakeAmounts = [
+  //   {
+  //     id: 1,
+  //     amount: selectedType && selectedType?.maxAmmount === "50" ? 50 : 0,
+  //   },
+  //   {
+  //     id: 2,
+  //     amount: 100,
+  //   },
+  //   {
+  //     id: 3,
+  //     amount: 200,
+  //   },
+  //   {
+  //     id: 3,
+  //     amount: 500,
+  //   },
+  // ];
 
   // const handleAmount = (value) => {
   //   let minAmmount = selectedType?.minAmmount;
@@ -60,11 +65,52 @@ const BetSlipsBox = ({
   //   setselectedAmount(0);
   // };
 
-  // useEffect(() => {
-  //   if (selectedType) {
-  //     setselectedAmount(selectedType?.minAmmount);
-  //   }
-  // }, [selectedType]);
+  useEffect(() => {
+    if (selectedType) {
+      console.log(typeof selectedType?.maxAmmount);
+      setStakeAmounts([
+        {
+          id: 1,
+          amount: selectedType && selectedType?.minAmmount === 50 ? 50 : 0,
+        },
+        {
+          id: 2,
+          amount: 100,
+        },
+        {
+          id: 3,
+          amount: 200,
+        },
+        {
+          id: 4,
+          amount: 500,
+        },
+        {
+          id: 5,
+          amount: selectedType && selectedType?.minAmmount !== 50 ? 1000 : 0,
+        },
+      ]);
+    } else {
+      setStakeAmounts([
+        {
+          id: 2,
+          amount: 100,
+        },
+        {
+          id: 3,
+          amount: 200,
+        },
+        {
+          id: 4,
+          amount: 500,
+        },
+        {
+          id: 5,
+          amount: 1000,
+        },
+      ]);
+    }
+  }, [selectedType]);
 
   return (
     <>
@@ -196,17 +242,19 @@ const BetSlipsBox = ({
       <div className="allBetSlipItem pt-1">
         <div className="allBetSlipItemBody mt-0">
           <div className="allBetSlipItemBodyItemButtons mt-3">
-            {stakeAmounts?.map((item, index) => (
-              <div
-                key={index}
-                className={`allBetSlipItemBodyItemButtonsItems ${
-                  betAmount === item?.amount ? "buttonSelected" : ""
-                }`}
-                onClick={() => dispatch(setBetAmount(item?.amount))}
-              >
-                {item?.amount}
-              </div>
-            ))}
+            {stakeAmounts
+              ?.filter((newItem) => newItem?.amount !== 0)
+              ?.map((item, index) => (
+                <div
+                  key={index}
+                  className={`allBetSlipItemBodyItemButtonsItems ${
+                    betAmount === item?.amount ? "buttonSelected" : ""
+                  }`}
+                  onClick={() => dispatch(setBetAmount(item?.amount))}
+                >
+                  {item?.amount}
+                </div>
+              ))}
           </div>
 
           {showInput === true && (
