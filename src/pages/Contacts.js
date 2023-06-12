@@ -41,8 +41,10 @@ const Contacts = () => {
           <div className="mt-4">
             <a
               className="mb-4 d-flex align-items-center text-light"
-              href="https://web.facebook.com/grandlotto/about"
+              target="_blank"
+              href="https://www.facebook.com/grandlotto?mibextid=ZbWKwL"
               style={{ columnGap: 10 }}
+              rel="noreferrer"
             >
               <i
                 className="bx bxl-facebook-circle"
@@ -53,8 +55,10 @@ const Contacts = () => {
             </a>
             <a
               className="mb-4 d-flex align-items-center text-light"
-              href="https://twitter.com/_grandlotto?lang=en"
+              target="_blank"
+              href="https://twitter.com/_grandlotto?t=rKHX5y1EWsYAL-jv8-_BWQ&s=09"
               style={{ columnGap: 10 }}
+              rel="noreferrer"
             >
               <i
                 className="bx bxl-twitter"
@@ -64,14 +68,30 @@ const Contacts = () => {
             </a>
             <a
               className="mb-4 d-flex align-items-center text-light"
-              href="https://www.instagram.com/grandlottogames/?hl=en"
+              target="_blank"
+              href="https://instagram.com/grandlotto.ng?igshid=MzNlNGNkZWQ4Mg=="
               style={{ columnGap: 10 }}
+              rel="noreferrer"
             >
               <i
                 className="bx bxl-instagram"
                 style={{ fontSize: 39, color: "#CB2E97" }}
               ></i>
               <span>@grandlottogames</span>
+            </a>
+            <a
+              className="mb-4 d-flex align-items-center text-light"
+              target="_blank"
+              href="https://www.youtube.com/channel/UCtdwh4Y2M-Tbd3uJsutxrHw"
+              style={{ columnGap: 10 }}
+              rel="noreferrer"
+            >
+              <i
+                className="bx bxl-youtube"
+                style={{ fontSize: 39, color: "red" }}
+              ></i>
+
+              <span>YouTube</span>
             </a>
           </div>
         </div>
