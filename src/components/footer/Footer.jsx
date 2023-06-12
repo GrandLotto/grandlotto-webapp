@@ -17,16 +17,32 @@ const Footer = () => {
           <img src={Logo} alt="grand-logo" />
 
           <div className="footer_social">
-            <a href="true" onClick={(e) => e.preventDefault()}>
+            <a
+              href="https://www.facebook.com/grandlotto?mibextid=ZbWKwL"
+              target="_blank"
+              rel="noreferrer"
+            >
               <i className="bx bxl-facebook"></i>
             </a>
-            <a href="true" onClick={(e) => e.preventDefault()}>
+            <a
+              href="https://instagram.com/grandlotto.ng?igshid=MzNlNGNkZWQ4Mg=="
+              target="_blank"
+              rel="noreferrer"
+            >
               <i className="bx bxl-instagram"></i>
             </a>
-            <a href="true" onClick={(e) => e.preventDefault()}>
+            <a
+              href="https://twitter.com/_grandlotto?t=rKHX5y1EWsYAL-jv8-_BWQ&s=09"
+              target="_blank"
+              rel="noreferrer"
+            >
               <i className="bx bxl-twitter"></i>
             </a>
-            <a href="true" onClick={(e) => e.preventDefault()}>
+            <a
+              href="https://www.youtube.com/channel/UCtdwh4Y2M-Tbd3uJsutxrHw"
+              target="_blank"
+              rel="noreferrer"
+            >
               <i className="bx bxl-youtube"></i>
             </a>
           </div>
@@ -61,14 +77,14 @@ const Footer = () => {
                 <p>0800000000</p>
                 <p>Calls only</p>
               </div>
-              <div className="d-flex" style={{ columnGap: 10 }}>
+              {/* <div className="d-flex" style={{ columnGap: 10 }}>
                 <p>0800000000</p>
                 <p>Calls only</p>
               </div>
               <div className="d-flex" style={{ columnGap: 10 }}>
                 <p>0800000000</p>
                 <p>Calls only</p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
