@@ -47,6 +47,34 @@ const ThreeColRight = () => {
         <div className="headerTopMiddle">
           <TopSearch />
         </div>
+        {(selectedGame || expiryDate) && (
+          <div className="countDownExpiry" id="countDownExpiry">
+            <div className="daysToExpire">
+              <div className="daysToExpireItems demacat">
+                {checkIfGameHasStarted(selectedGame?.startTime) === true
+                  ? "CLOSES IN"
+                  : betTimer
+                  ? "STARTS IN"
+                  : ""}
+              </div>
+
+              {checkIfGameHasStarted(selectedGame?.startTime) === true ? (
+                <GameTimer
+                  time={new Date(selectedGame?.endTime).getTime()}
+                  timeStarted={true}
+                />
+              ) : (
+                betStarted && (
+                  <GameTimer time={betTimer} timeStarted={betStarted} />
+                )
+              )}
+
+              {/* <div className="daysToExpireItems">
+                Days hours minutes seconds
+              </div> */}
+            </div>
+          </div>
+        )}
         <LottoNumberBox />
         <div className="betSlips">
           {/* <div className="betSlipsHeader">
@@ -80,34 +108,6 @@ const ThreeColRight = () => {
             </div>
           ) : null}
         </div>
-        {(selectedGame || expiryDate) && (
-          <div className="countDownExpiry" id="countDownExpiry">
-            <div className="daysToExpire">
-              <div className="daysToExpireItems demacat">
-                {checkIfGameHasStarted(selectedGame?.startTime) === true
-                  ? "CLOSES IN"
-                  : betTimer
-                  ? "STARTS IN"
-                  : ""}
-              </div>
-
-              {checkIfGameHasStarted(selectedGame?.startTime) === true ? (
-                <GameTimer
-                  time={new Date(selectedGame?.endTime).getTime()}
-                  timeStarted={true}
-                />
-              ) : (
-                betStarted && (
-                  <GameTimer time={betTimer} timeStarted={betStarted} />
-                )
-              )}
-
-              {/* <div className="daysToExpireItems">
-                Days hours minutes seconds
-              </div> */}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
