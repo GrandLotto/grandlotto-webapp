@@ -68,6 +68,12 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li className="sidebar_links">
+                <NavLink to="/lotto">
+                  <i className="bx bxs-bowling-ball"></i>
+                  <span>Play Lotto</span>
+                </NavLink>
+              </li>
+              <li className="sidebar_links">
                 <NavLink to="/account/kyc-documentation">
                   <i className="bx bx-food-menu"></i>
                   <span>KYC documentation</span>

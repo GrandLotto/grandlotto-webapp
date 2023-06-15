@@ -250,7 +250,9 @@ const BetSlipsBox = ({
 
       <div className="allBetSlipItem pt-1">
         <div className="allBetSlipItemBody mt-0">
-          <div className="allBetSlipItemBodyItemButtons mt-3">
+          {calculatedGames && <GameSummary calculatedGames={calculatedGames} />}
+
+          <div className="allBetSlipItemBodyItemButtons mt-5">
             {stakeAmounts
               ?.filter((newItem) => newItem?.amount !== 0)
               ?.map((item, index) => (
@@ -285,7 +287,6 @@ const BetSlipsBox = ({
             </div>
           )}
 
-          {calculatedGames && <GameSummary calculatedGames={calculatedGames} />}
           {showInput === true && (
             <div
               className="d-flex justify-content-end align-items-start mt-3 border-top pt-3"

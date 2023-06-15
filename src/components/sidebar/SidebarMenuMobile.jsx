@@ -134,6 +134,13 @@ const SidebarMenuMobile = () => {
                 </div>
                 <i className="bx bx-chevron-right"></i>
               </NavLink>
+              <NavLink className="sidebarLinkMenusItem" to="/lotto">
+                <div className="sidebarLinkMenusItemLeft">
+                  <i className="bx bxs-bowling-ball"></i>
+                  <span>Play Lotto</span>
+                </div>
+                <i className="bx bx-chevron-right"></i>
+              </NavLink>
               <NavLink
                 className="sidebarLinkMenusItem"
                 to="/account/kyc-documentation"
