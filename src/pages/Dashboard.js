@@ -44,6 +44,8 @@ const Dashboard = () => {
       if (allTransactions?.length <= 0) {
         let newTrans = [...userWithdrawal];
         setAllTransactions(newTrans);
+
+        console.log(newTrans);
       }
     }
   }, [userWithdrawal, userDeposits]);
