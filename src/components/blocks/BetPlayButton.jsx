@@ -138,13 +138,15 @@ const BetPlayButton = () => {
             setAlertBetModal({
               status: true,
               type: "ERROR",
-              title: response?.data?.message,
+              title:
+                response?.data?.message ||
+                "Error ocuured while trying to play this game",
               betId: "",
               amountStake: 0,
               amountWinning: 0,
               payload: null,
-              buttonText: "Deposit Funds",
-              buttonURL: "DEPOSIT",
+              buttonText: "",
+              buttonURL: "",
             })
           );
         }
