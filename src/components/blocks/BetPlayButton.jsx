@@ -123,7 +123,7 @@ const BetPlayButton = () => {
       gameGroupId: selectedGameGroup?.id,
     };
 
-    console.log("handleCalculateGame", payload);
+    // console.log("handleCalculateGame", payload);
 
     dispatch(setCalculatedGames(null));
     // console.log(selectedGame);
@@ -133,7 +133,7 @@ const BetPlayButton = () => {
         setIsCalculatingGames(false);
         setIsDisabled(false);
 
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           let requestData = response?.data?.data;
           // console.log(requestData);
@@ -165,7 +165,7 @@ const BetPlayButton = () => {
   };
 
   const handlePayGame = (requestData) => {
-    console.log("calculatedGames", calculatedGames);
+    // console.log("calculatedGames", calculatedGames);
     if (!calculatedGames && !requestData) {
       handleCalculateGame();
 
@@ -214,7 +214,7 @@ const BetPlayButton = () => {
       gameGroupId: selectedGameGroup?.id,
     };
 
-    console.log("handlePayGame", payload);
+    // console.log("handlePayGame", payload);
 
     handlePOSTRequest(PLAY_GAME_URL, payload)
       .then((response) => {
@@ -224,7 +224,7 @@ const BetPlayButton = () => {
             message: "",
           })
         );
-        console.log(response);
+        // console.log(response);
         if (response?.data?.success) {
           let requestData = response?.data?.data;
 

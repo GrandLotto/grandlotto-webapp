@@ -31,7 +31,7 @@ const BetAmount = () => {
     // let minAmmount = selectedType?.minAmmount;
     let maxAmmount = selectedType?.maxAmmount;
 
-    console.log("selectedType", selectedType);
+    // console.log("selectedType", selectedType);
     let newValue = Number(value);
 
     if (maxAmmount !== 0) {
