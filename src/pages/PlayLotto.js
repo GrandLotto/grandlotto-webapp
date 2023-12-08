@@ -299,6 +299,7 @@ const PlayLotto = () => {
             </div>
           ) : null}
         </div>
+
         {selectedGame && selectedPlayingType ? (
           <div>
             <div className="main_center_wrapper_content_top mt-5">
@@ -444,6 +445,7 @@ const PlayLotto = () => {
             <div className="noBetSlip darkBg">
               <p>Please select draw </p>
               <br />
+
               <div className="selectDrawGame">
                 <button
                   className="grandLottoButton grandLottoButtonLightGreen"

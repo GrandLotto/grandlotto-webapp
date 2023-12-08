@@ -43,6 +43,8 @@ const BetPlayButton = () => {
 
   const [isCalculatingGames, setIsCalculatingGames] = useState(false);
 
+  useEffect(() => {}, [calculatedGames]);
+
   useEffect(() => {
     validateButton();
   }, [
@@ -118,7 +120,10 @@ const BetPlayButton = () => {
         (item) =>
           item?.name.toLowerCase() === selectedPlayingType?.toLowerCase()
       )?.id,
+      gameGroupId: selectedGameGroup?.id,
     };
+
+    console.log("handleCalculateGame", payload);
 
     dispatch(setCalculatedGames(null));
     // console.log(selectedGame);
@@ -128,10 +133,11 @@ const BetPlayButton = () => {
         setIsCalculatingGames(false);
         setIsDisabled(false);
 
-        // console.log(response);
+        console.log(response);
         if (response?.data?.success) {
           let requestData = response?.data?.data;
           // console.log(requestData);
+          handlePayGame(requestData);
           dispatch(setCalculatedGames(requestData));
         } else {
           dispatch(
@@ -158,8 +164,9 @@ const BetPlayButton = () => {
       });
   };
 
-  const handlePayGame = () => {
-    if (!calculatedGames) {
+  const handlePayGame = (requestData) => {
+    console.log("calculatedGames", calculatedGames);
+    if (!calculatedGames && !requestData) {
       handleCalculateGame();
 
       return;
@@ -197,7 +204,9 @@ const BetPlayButton = () => {
       gametypeId: selectedType?.id,
       gameType: selectedType?.type,
       numbersPlay: String(selectedCoupons),
-      ammount: Number(calculatedGames?.ammountTopay),
+      ammount: Number(
+        calculatedGames?.ammountTopay || requestData?.ammountTopay
+      ),
       playingTypeId: gamePlayingTypes?.find(
         (item) =>
           item?.name.toLowerCase() === selectedPlayingType?.toLowerCase()
@@ -244,12 +253,15 @@ const BetPlayButton = () => {
               title:
                 response?.data?.message ||
                 "An error occurred, please try again",
+              // title: response?.data?.message || payload?.email,
               betId: "",
               amountStake: 0,
               amountWinning: 0,
-              payload: null,
+              payload: payload,
               buttonText: "Close",
+              // buttonText: payload?.email || "nothing",
               buttonURL: "",
+
               // buttonText: "Deposit Funds",
               // buttonURL: "DEPOSIT",
             })

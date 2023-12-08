@@ -87,6 +87,11 @@ const initialState = {
     type: "",
     payload: null,
   },
+
+  responseError: {
+    request: null,
+    response: null,
+  },
 };
 
 const alertSlice = createSlice({
@@ -188,6 +193,10 @@ const alertSlice = createSlice({
     setSearchCouponCodeModal: (state, { payload }) => {
       state.searchCouponCodeModal = payload;
     },
+
+    setResponseError: (state, { payload }) => {
+      state.responseError = payload;
+    },
   },
 
   extraReducers: {},
@@ -216,6 +225,7 @@ export const {
   setSearchCouponCodeModal,
   setCreategameTypeModal,
   setCreateGameModal,
+  setResponseError,
 } = alertSlice.actions;
 
 export default alertSlice.reducer;

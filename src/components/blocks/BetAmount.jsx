@@ -84,7 +84,6 @@ const BetAmount = () => {
 
     dispatch(setCalculatedGames(null));
     setcalculatedgameErrorMes("");
-    // console.log(payload);
 
     if (amount < selectedType?.minAmmount) {
       dispatch(setCalculatedGames(null));
