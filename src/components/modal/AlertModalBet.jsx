@@ -169,7 +169,7 @@ const AlertModalBet = () => {
                 onClick={() => handleClose()}
                 className="grandLottoButton cardButton"
               >
-                {alertModal?.buttonText || "Ok"}
+                {alertModal?.buttonText || "Close"}
               </button>
             </div>
           </div>
