@@ -9,6 +9,7 @@ const PaginationBlock = ({
 }) => {
   const [displablePrev, setdisplablePrev] = useState(false);
   const [displableNext, setdisplableNext] = useState(false);
+  const [currentPage, setcurrentPage] = useState(1);
   const [totalDisplayPages, setTotalDisplayPages] = useState([]);
 
   const previous = () => {
@@ -55,6 +56,7 @@ const PaginationBlock = ({
     }
 
     setTotalDisplayPages(newPages);
+    setcurrentPage(page);
   }, [page, totalPages]);
 
   return (
@@ -77,7 +79,8 @@ const PaginationBlock = ({
             </a>
           </li>
 
-          {totalDisplayPages &&
+          {page < 8 ? (
+            totalDisplayPages &&
             totalDisplayPages?.slice(0, 8)?.map((newPage, index) => (
               <li
                 key={index}
@@ -92,6 +95,96 @@ const PaginationBlock = ({
                   onClick={(e) => e.preventDefault()}
                 >
                   {index + 1}
+                  {/* {newPage} */}
+                </a>
+              </li>
+            ))
+          ) : (
+            <>
+              <li
+                className={`page-item smallPagi  `}
+                onClick={() => fetchByPage(1)}
+              >
+                <a
+                  className="page-link"
+                  href="true"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  1
+                </a>
+              </li>
+              <li
+                className={`page-item smallPagi  `}
+                onClick={() => fetchByPage(2)}
+              >
+                <a
+                  className="page-link"
+                  href="true"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  2
+                </a>
+              </li>
+              <li
+                className={`page-item smallPagi  `}
+                onClick={() => fetchByPage(3)}
+              >
+                <a
+                  className="page-link"
+                  href="true"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  3
+                </a>
+              </li>
+              <li
+                className={`page-item smallPagi  `}
+                onClick={() => fetchByPage(page - 1)}
+              >
+                <a
+                  className="page-link"
+                  href="true"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  --
+                </a>
+              </li>
+            </>
+          )}
+
+          {page >= 8 &&
+            totalDisplayPages &&
+            totalDisplayPages?.slice(0, 1)?.map((newPage, index) => (
+              <li
+                key={index}
+                className={`page-item smallPagi active  `}
+                onClick={() => fetchByPage(page)}
+              >
+                <a
+                  className="page-link"
+                  href="true"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  {page}
+                  {/* {newPage} */}
+                </a>
+              </li>
+            ))}
+          {page >= 8 &&
+            page < totalDisplayPages?.length &&
+            totalDisplayPages &&
+            totalDisplayPages?.slice(0, 1)?.map((newPage, index) => (
+              <li
+                key={index}
+                className={`page-item smallPagi  `}
+                onClick={() => fetchByPage(page + 1)}
+              >
+                <a
+                  className="page-link"
+                  href="true"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  {page + 1}
                   {/* {newPage} */}
                 </a>
               </li>
