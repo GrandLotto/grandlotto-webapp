@@ -165,13 +165,13 @@ const SidebarMenuMobile = () => {
                 </div>
                 <i className="bx bx-chevron-right"></i>
               </NavLink>
-              <NavLink className="sidebarLinkMenusItem" to="/account/referal">
+              {/* <NavLink className="sidebarLinkMenusItem" to="/account/referal">
                 <div className="sidebarLinkMenusItemLeft">
                   <i className="bx bx-share-alt"></i>
                   <span>Refer & Earn</span>
                 </div>
                 <i className="bx bx-chevron-right"></i>
-              </NavLink>
+              </NavLink> */}
               {/* <a
                 href="true"
                 className="sidebarLinkMenusItem"
