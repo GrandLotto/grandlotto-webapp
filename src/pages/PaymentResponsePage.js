@@ -3,11 +3,14 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import ConfirmBlock from "../components/blocks/ConfirmBlock";
 import { useSearchParams } from "react-router-dom";
 import useNavigateSearch from "../global/customHooks/useNavigateSearch";
+import { useDispatch, useSelector } from "react-redux";
+import { setRefreshing } from "../store/authSlice/authSlice";
 
 const PaymentResponsePage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigateSearch();
-
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.oauth.user);
   const [paymentSttats, setpaymentSttats] = useState(false);
 
   let ref = searchParams.get("ref");
@@ -38,6 +41,12 @@ const PaymentResponsePage = () => {
   }, []);
 
   const handleNavigation = () => {
+    if (user) {
+      if (user?.isDisable === true) {
+      } else {
+        dispatch(setRefreshing(true));
+      }
+    }
     navigate("/account/dashboard");
   };
 
