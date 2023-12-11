@@ -45,7 +45,7 @@ const Dashboard = () => {
         let newTrans = [...userWithdrawal];
         setAllTransactions(newTrans);
 
-        console.log(newTrans);
+        // console.log(newTrans);
       }
     }
   }, [userWithdrawal, userDeposits]);
