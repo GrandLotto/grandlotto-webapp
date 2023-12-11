@@ -223,7 +223,9 @@ const Fundwallet = () => {
       ),
     };
 
-    console.log(payload);
+    // console.log(payload);
+
+    // console.log("is crome", window.navigator.userAgent);
 
     handlePOSTRequest(INITIATE_PAYSTACK_PAYMENT_URL, payload)
       .then((response) => {
@@ -232,11 +234,15 @@ const Fundwallet = () => {
         // console.log(response);
         if (response?.data?.success) {
           // setPaystackAccount(response?.data?.data);
-          setStep(3);
-          window.open(
-            response?.data?.data?.datareturn?.authorization_url,
-            "_blank"
+
+          window.location.replace(
+            response?.data?.data?.datareturn?.authorization_url
           );
+          setStep(3);
+          // window.open(
+          //   response?.data?.data?.datareturn?.authorization_url,
+          //   "_blank"
+          // );
         } else {
           // setPaystackAccount(null);
           dispatch(
