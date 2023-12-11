@@ -9,7 +9,7 @@ const PaginationBlock = ({
 }) => {
   const [displablePrev, setdisplablePrev] = useState(false);
   const [displableNext, setdisplableNext] = useState(false);
-  const [currentPage, setcurrentPage] = useState(1);
+  // const [currentPage, setcurrentPage] = useState(1);
   const [totalDisplayPages, setTotalDisplayPages] = useState([]);
 
   const previous = () => {
@@ -56,7 +56,7 @@ const PaginationBlock = ({
     }
 
     setTotalDisplayPages(newPages);
-    setcurrentPage(page);
+    // setcurrentPage(page);
   }, [page, totalPages]);
 
   return (
