@@ -212,7 +212,9 @@ const App = () => {
 
   const handleInactivity = () => {
     var t,
-      timeout = 3000000;
+      timeout = 200000;
+    // var t,
+    //   timeout = 3000000;
 
     function resetTimer() {
       // console.log("reset: " + new Date().toLocaleString());
