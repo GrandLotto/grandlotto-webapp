@@ -235,10 +235,14 @@ const Fundwallet = () => {
         if (response?.data?.success) {
           // setPaystackAccount(response?.data?.data);
 
+          setTimeout(() => {
+            setStep(3);
+          }, 1000);
+
           window.location.replace(
             response?.data?.data?.datareturn?.authorization_url
           );
-          setStep(3);
+
           // window.open(
           //   response?.data?.data?.datareturn?.authorization_url,
           //   "_blank"
