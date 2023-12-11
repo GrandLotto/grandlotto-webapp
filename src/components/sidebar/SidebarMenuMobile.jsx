@@ -17,13 +17,17 @@ import carbon_result from "../../assets/images/carbon_result.png";
 import verifiedcheck from "../../assets/images/verifiedcheck.png";
 import { addComma } from "../../global/customFunctions";
 
+import person from "../../assets/images/default.png";
+
 const SidebarMenuMobile = () => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
-  // const user = useSelector((state) => state.oauth.user);
+  const user = useSelector((state) => state.oauth.user);
   const accountBalances = useSelector((state) => state.wallet.accountBalances);
   const sideBarMenu = useSelector((state) => state.alert.sideBarMenu);
   const isUserLoggedIn = useSelector((state) => state.oauth.isUserLoggedIn);
+
+  // console.log(user);
 
   return (
     <>
@@ -37,9 +41,29 @@ const SidebarMenuMobile = () => {
             <>
               <div className="sidebarMobleHeader">
                 {/* <img src={person} alt="grand-logo" style={{ width: 70 }} /> */}
-                <div className="imageInitial">D</div>
-                <h4 className="">Welcome, David</h4>
-                <p className="">ID: 3542453995</p>
+
+                {user && user?.photo ? (
+                  <img
+                    src={user?.photo}
+                    onError={(e) => {
+                      e.currentTarget.src = person;
+                    }}
+                    style={{
+                      width: "80px",
+                      height: "80px",
+                      objectFit: "cover",
+                      borderRadius: "50%",
+                    }}
+                    alt={user?.firstName}
+                  />
+                ) : (
+                  <div className="imageInitial">
+                    {user && user?.firstName?.charAt(0)}
+                  </div>
+                )}
+
+                <h4 className="">Welcome{", " + user?.firstName || " "}</h4>
+                {user?.code && <p className="">ID: 3542453995</p>}
               </div>
               <div className="sidebarMobleHeaderTopBalance">
                 <h4 className="">Wallet Balance</h4>
