@@ -8,6 +8,12 @@ import {
   getgamesplayingtype,
   getgamestype,
 } from "../../store/betSlice/actions";
+import {
+  setBetAmount,
+  setCalculatedGames,
+  setSelectedType,
+} from "../../store/betSlice/betSlice";
+import { setSelectedCoupons } from "../../store/wallet/walletSlice";
 
 const GameTimer = ({ time, timeStarted }) => {
   const dispatch = useDispatch();
@@ -58,6 +64,9 @@ const GameTimer = ({ time, timeStarted }) => {
             dispatch(getgames(selectedGameGroup?.id));
             dispatch(getgamestype(selectedGameGroup?.id));
             dispatch(getgamesplayingtype(selectedGameGroup?.id));
+            dispatch(setCalculatedGames(null));
+            dispatch(setBetAmount(0));
+            dispatch(setSelectedCoupons([]));
           }
           // console.log("expired");
         }
